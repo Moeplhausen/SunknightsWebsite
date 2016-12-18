@@ -9,6 +9,7 @@ from .models.point_submission import PointSubmission
 from .models.clan_user import ClanUser
 from .models.discord_server import DiscordServer
 from .models.clan_user_roles import ClanUserRoles
+from .models.points_proof import PointsProof
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.contrib.auth.models import Group
@@ -109,3 +110,4 @@ admin.site.register(FightParticipation)
 admin.site.register(PointsInfo)
 admin.site.register(PointSubmission)
 admin.site.register(ClanUserRoles)
+admin.site.register(PointsProof)
