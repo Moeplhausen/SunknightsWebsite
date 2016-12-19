@@ -1,38 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Yeah, noobs</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.deep_orange-yellow.min.css"/>
+<script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Nunito+Sans|Roboto" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.rawgit.com/rjt-rockx/c3b72acf32a83565488ab8fad955772e/raw/af370473e7e75e653c4ddde013f23d0a4df897f4/skcustom.css"></script>
+<title>Sun Knights</title>
 </head>
 <body>
-
-    <div class="main">
-        {% if user.is_authenticated %}
-            <h2 class="heading">You are now signed in!</h2>
-        {% else %}
-        {% for provider in allaccess_providers %}
-                <a class="button zocial {{ provider.name|lower }}" href="{% url 'allaccess-login' provider.name %}">
-                    Sign in with {{ provider.name|title }}
-                </a>
-            {% endfor %}
-        {% endif %}
+<div class="demo-layout-transparent mdl-layout mdl-js-layout">
+  <header class="mdl-layout__header mdl-layout__header--transparent">
+    <div class="mdl-layout__header-row">
+      <span class="mdl-layout-title"><font face="Nunito Sans">Sun Knights</font></span>
+      <div class="mdl-layout-spacer"></div>
+      <nav class="mdl-navigation">
+		<a class="mdl-navigation__link" href="">
+			<button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect">
+				<i class="material-icons white">supervisor_account</i>
+			</button>
+		</a>
+      </nav>
     </div>
-
-
-<h1>{{noobs.count}} Noobs</h1>
-    <ul>
-    {% for noob in noobs %}
-        <li>
-            {{ noob.discord_nickname}}: currentpoints: {{noob.pointsinfo.currentpoints}}
-
-            <br>
-            {% for role in noob.roles.all%}
-                {{role}}
-            {% endfor %}
-
-        </li>
-    {% endfor %}
-    </ul>
-
+  </header>
+  <main class="mdl-layout__content">
+	<center>
+	<div class="alignv">
+	<div class="bottompad25px">
+	<div class="demo-card-wide mdl-card mdl-shadow--2dp">
+	  <div class="mdl-card__title">
+		<h2 class="mdl-card__title-text"><font face="Nunito Sans" class="opacity95">Welcome</font></h2>
+	  </div>
+	  <div class="mdl-card__supporting-text">
+	  <font face="Nunito Sans" color="#212121">
+		Sun Knights is a competitive clan based on the <a href="http://diep.io" style="text-decoration:none"><font color="#212121">diep.io</font></a> game. Join us to enhance your skills, play with experienced players, take part in events, complete daily quests and unravel the gamer in you!
+	  </font>
+	  </div>
+	  <a href="https://discord.gg/j7JcTr7" style="text-decoration:none" class="mdl-js-ripple-effect">
+	  <div class="mdl-card__actions mdl-card--border mdl-js-ripple-effect blurple lh3">
+	  <font face="Nunito Sans" color="white" size="4" class="lh1-5">Join us at</font>
+		<img src="https://discordapp.com/assets/93608abbd20d90c13004925014a9fd01.svg" class="scale20 lh1 bottompad5px"></img>
+	  </div>
+	  </a>
+	  <div class="mdl-card__menu">
+		<button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+		  <i class="material-icons md-18">share</i>
+		</button>
+	  </div>
+	</div>
+	</div>
+	</div>
 </body>
 </html>
