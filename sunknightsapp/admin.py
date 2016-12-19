@@ -9,7 +9,6 @@ from .models.point_submission import PointSubmission
 from .models.clan_user import ClanUser
 from .models.discord_server import DiscordServer
 from .models.clan_user_roles import ClanUserRoles
-from .models.points_proof import PointsProof
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.contrib.auth.models import Group
@@ -73,10 +72,10 @@ class UserAdmin(BaseUserAdmin):
     # The fields to be used in displaying the User model.
     # These override the definitions on the base UserAdmin
     # that reference specific fields on auth.User.
-    list_display = ('discord_id', 'discord_nickname', 'is_superuser')
+    list_display = ('discord_id','provider', 'discord_nickname', 'is_superuser')
     list_filter = ('is_superuser',)
     fieldsets = (
-        (None, {'fields': ('discord_id', 'password')}),
+        (None, {'fields': ('discord_id','provider', 'password')}),
         ('Personal info', {'fields': ('discord_nickname',)}),
         ('Permissions', {'fields': ('is_manager','is_superuser',)}),
     )
@@ -110,4 +109,3 @@ admin.site.register(FightParticipation)
 admin.site.register(PointsInfo)
 admin.site.register(PointSubmission)
 admin.site.register(ClanUserRoles)
-admin.site.register(PointsProof)

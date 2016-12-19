@@ -3,7 +3,7 @@ from .discord_roles import DiscordRole
 from .clan_user import ClanUser
 
 class ClanUserRoles(models.Model):
-    clan_user=models.ForeignKey(ClanUser,related_name='roles')
+    clan_user=models.ForeignKey(ClanUser,related_name='roles',on_delete=models.CASCADE)
     role=models.ForeignKey(DiscordRole)
 
     class Meta:

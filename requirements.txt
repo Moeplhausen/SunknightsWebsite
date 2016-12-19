@@ -1,0 +1,4 @@
+django
+djangorestframework
+djangorestframework-bulk
+django-all-access

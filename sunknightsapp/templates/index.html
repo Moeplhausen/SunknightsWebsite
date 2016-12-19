@@ -5,10 +5,32 @@
     <title>Yeah, noobs</title>
 </head>
 <body>
+
+    <div class="main">
+        {% if user.is_authenticated %}
+            <h2 class="heading">You are now signed in!</h2>
+        {% else %}
+        {% for provider in allaccess_providers %}
+                <a class="button zocial {{ provider.name|lower }}" href="{% url 'allaccess-login' provider.name %}">
+                    Sign in with {{ provider.name|title }}
+                </a>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+
 <h1>{{noobs.count}} Noobs</h1>
     <ul>
     {% for noob in noobs %}
-        <li>{{ noob.discord_nickname}}</li>
+        <li>
+            {{ noob.discord_nickname}}: currentpoints: {{noob.pointsinfo.currentpoints}}
+
+            <br>
+            {% for role in noob.roles.all%}
+                {{role}}
+            {% endfor %}
+
+        </li>
     {% endfor %}
     </ul>
 

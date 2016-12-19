@@ -22,9 +22,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '%(7&4wveamc9)$nd$@(07^ipwksd&1(k@ir#19yh+z#o9g8$0h'
 
-DISCORD_SECRET="yxEOVB3YVQSEzU9A4QPo11GF34qtqyMw"
-DISCORD_ID="259834785734721536"
-
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -44,7 +41,15 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework.authtoken',
+    'allaccess',
 ]
+
+AUTHENTICATION_BACKENDS = (
+    # Default backend
+    'django.contrib.auth.backends.ModelBackend',
+    # Additional backend
+    'allaccess.backends.AuthorizedServiceBackend',
+)
 
 
 REST_FRAMEWORK = {
@@ -83,6 +88,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'allaccess.context_processors.available_providers',
             ],
         },
     },
@@ -121,6 +127,30 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
+        },
+        'allaccess': {
+            'handlers': ['console', ],
+            'level': 'DEBUG',
+        },
+    },
+}
+
+
+
+
 AUTH_USER_MODEL = 'sunknightsapp.ClanUser'
 
 
@@ -142,3 +172,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+
+LOGIN_URL = '/'
+
+LOGIN_REDIRECT_URL = '/'

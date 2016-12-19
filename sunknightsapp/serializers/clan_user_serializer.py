@@ -10,6 +10,6 @@ class ClanUserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model=ClanUser
-        fields=('discord_id','discord_nickname','is_active','is_manager','roles')
+        fields=('id','discord_id','discord_nickname','is_active','is_manager','roles')
         list_serializer_class = BulkListSerializer
 

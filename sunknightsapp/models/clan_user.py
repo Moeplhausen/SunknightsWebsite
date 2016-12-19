@@ -12,9 +12,11 @@ from django.utils import timezone
 from ..managers.user_manager import UserManager
 
 class ClanUser(AbstractBaseUser):
-            discord_id=models.BigIntegerField(unique=True,default=0,primary_key=True,)
+            discord_id=models.BigIntegerField(unique=True,default=0,)
 
             discord_nickname=models.CharField(max_length=50,default='')
+
+            provider=models.CharField(max_length=20,default='Discord')
 
 
             is_active=models.BooleanField(default=True)
@@ -34,10 +36,10 @@ class ClanUser(AbstractBaseUser):
                 return self.discord_nickname
 
             def get_full_name(self):
-                return self.discord_id
+                return str(self.discord_id)
 
             def get_short_name(self):
-                return self.discord_id
+                return str(self.discord_id)
 
             def has_perm(self, perm, obj=None):
                return True
@@ -58,5 +60,8 @@ class ClanUser(AbstractBaseUser):
             def create_auth_token(sender, instance=None, created=False, **kwargs):
                 if created:
                     Token.objects.create(user=instance)
+
+
+
 
 
