@@ -1,10 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-Yeah, that is my home
-</body>
-</html>
+{% extends "base.html" %}
+{% block content %}
+Hello {{user.discord_nickname}},
+
+<p>You currently have {{user.pointsinfo.currentpoints}} points!</p>
+<p>
+    Your roles (only guilds are tracked for now):
+<ul>
+    {% for userrole in user.roles.all %}
+    <li> {{userrole.role.name}} (guild: {{userrole.role.is_clanguild}})</li>
+    {% endfor %}
+</ul>
+</p>
+
+<a href="leaderboard">Leaderboard</a>
+
+<a href="logout">Logout</a>
+
+{% endblock %}

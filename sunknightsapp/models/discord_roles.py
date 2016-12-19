@@ -9,8 +9,5 @@ class DiscordRole(models.Model):
     is_clanguild=models.BooleanField(default=False)
     discord_isDeleted=models.BooleanField(default=False)
 
-
-
-
     def __str__(self):
         return self.name

@@ -17,6 +17,7 @@ router.register(r'userroles',user_roles.UserRolesViewSet)
 urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^me',views.home,name='userview'),
+    url(r'^leaderboard', views.leaderboard, name='leaderboard'),
     url(r'^api/',include(router.urls)),
     url(r'^logout/$', logout_then_login, name='logout'),
 

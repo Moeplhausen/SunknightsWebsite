@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.deep_orange-yellow.min.css"/>
+
+    <script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans|Roboto" rel="stylesheet"/>
+    <link rel="stylesheet"
+          href="https://cdn.rawgit.com/rjt-rockx/c3b72acf32a83565488ab8fad955772e/raw/af370473e7e75e653c4ddde013f23d0a4df897f4/skcustom.css"/>
+
+    <title>{% block title %}Sun Knights{% endblock %}</title>
+</head>
+
+<body>
+<div class="demo-layout-transparent mdl-layout mdl-js-layout">
+    <header class="mdl-layout__header mdl-layout__header--transparent">
+        <div class="mdl-layout__header-row">
+            <span class="mdl-layout-title"><font face="Nunito Sans">Sun Knights</font></span>
+            <div class="mdl-layout-spacer"></div>
+            <nav class="mdl-navigation">
+                <a class="mdl-navigation__link" href="">
+                    <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect">
+                        <i class="material-icons white">supervisor_account</i>
+                    </button>
+                </a>
+            </nav>
+        </div>
+    </header>
+    <main class="mdl-layout__content">
+        <center>
+
+            <!--
+                Find a better space for the login (and look)
+            -->
+            <div class="login">
+                {% if user.is_authenticated %}
+                <h2 class="heading">You are now signed in!</h2>
+                {% else %}
+                {% for provider in allaccess_providers %}
+                <a class="button zocial {{ provider.name|lower }}" href="{% url 'allaccess-login' provider.name %}">
+                    Sign in with {{ provider.name|title }}
+                </a>
+                {% endfor %}
+                {% endif %}
+            </div>
+
+            <div id="content">
+                {% block content %}{% endblock %}
+
+
+            </div>
+        </center>
+    </main>
+</div>
+</body>
+</html>
+
+

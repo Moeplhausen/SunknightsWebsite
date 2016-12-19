@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+    <ul>
+    {% for pointinfo in userpoints %}
+        <li>
+            {{ pointinfo.user.discord_nickname}}: currentpoints: {{pointinfo.currentpoints}}
+        </li>
+    {% endfor %}
+    </ul>
+{% endblock %}
