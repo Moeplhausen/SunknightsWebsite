@@ -10,9 +10,10 @@ from django.utils import timezone
 
 
 from ..managers.user_manager import UserManager
+from .discord_roles import DiscordRole
 
 class ClanUser(AbstractBaseUser):
-            discord_id=models.BigIntegerField(unique=True,default=0,)
+            discord_id=models.PositiveIntegerField(unique=True,default=0,)
 
             discord_nickname=models.CharField(max_length=50,default='')
 
@@ -21,7 +22,7 @@ class ClanUser(AbstractBaseUser):
 
             is_active=models.BooleanField(default=True)
             is_superuser=models.BooleanField(default=False)
-            is_manager=models.BooleanField(default=False)
+
 
 
             objects=UserManager()
@@ -52,7 +53,22 @@ class ClanUser(AbstractBaseUser):
             @property
             def is_staff(self):
                 "Is the user a member of staff?"
-                return self.is_manager or self.is_superuser
+                return self.is_superuser
+
+            @property
+            def is_points_manager(self):
+                clan_user_roles= ClanUserRoles.objects.filter(clan_user=self).filter(role__can_manage_points=True)
+                if clan_user_roles.exists() or self.is_staff:
+                    return True
+                return False
+
+
+            @property
+            def is_war_manager(self):
+                clan_user_roles= ClanUserRoles.objects.filter(clan_user=self).filter(role__can_manage_wars=True)
+                if clan_user_roles.exists() or self.is_staff:
+                    return True
+                return False
 
 
 
@@ -63,5 +79,15 @@ class ClanUser(AbstractBaseUser):
 
 
 
+class ClanUserRoles(models.Model):
+    clan_user=models.ForeignKey(ClanUser,related_name='roles',on_delete=models.CASCADE)
+    role=models.ForeignKey(DiscordRole)
 
+
+    class Meta:
+        unique_together=('clan_user','role')
+
+
+    def __str__(self):
+        return self.clan_user.discord_nickname+': '+self.role.name
 

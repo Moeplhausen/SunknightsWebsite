@@ -1,18 +1,17 @@
-from django.contrib import admin
 from django import forms
-
-from .models.discord_roles import DiscordRole
-from .models.fight import Fight
-from .models.fight_participation import FightParticipation
-from .models.points_info import PointsInfo
-from .models.point_submission import PointSubmission
-from .models.clan_user import ClanUser
-from .models.discord_server import DiscordServer
-from .models.clan_user_roles import ClanUserRoles
+from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.contrib.auth.models import Group
 
+from .models.clan_user import ClanUser, ClanUserRoles
+from .models.discord_roles import DiscordRole
+from .models.discord_server import DiscordServer
+from .models.fight import Fight
+from .models.fight_participation import FightParticipation
+from .models.point_submission import PointSubmission
+from .models.points_info import PointsInfo
+from .models.tournament import Tournament
 
 
 # Register your models here.
@@ -55,7 +54,7 @@ class UserChangeForm(forms.ModelForm):
 
     class Meta:
         model = ClanUser
-        fields = ('discord_id', 'password', 'discord_nickname', 'is_active', 'is_manager','is_manager', 'is_superuser')
+        fields = ('discord_id', 'password', 'discord_nickname', 'is_active', 'is_superuser')
 
     def clean_password(self):
         # Regardless of what the user provides, return the initial value.
@@ -72,12 +71,12 @@ class UserAdmin(BaseUserAdmin):
     # The fields to be used in displaying the User model.
     # These override the definitions on the base UserAdmin
     # that reference specific fields on auth.User.
-    list_display = ('discord_id','provider', 'discord_nickname', 'is_superuser')
+    list_display = ('discord_id', 'provider', 'discord_nickname', 'is_superuser')
     list_filter = ('is_superuser',)
     fieldsets = (
-        (None, {'fields': ('discord_id','provider', 'password')}),
+        (None, {'fields': ('discord_id', 'provider', 'password')}),
         ('Personal info', {'fields': ('discord_nickname',)}),
-        ('Permissions', {'fields': ('is_manager','is_superuser',)}),
+        ('Permissions', {'fields': ('is_superuser',)}),
     )
     # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
     # overrides get_fieldsets to use this attribute when creating a user.
@@ -85,22 +84,18 @@ class UserAdmin(BaseUserAdmin):
         (None, {
             'classes': ('wide',),
             'fields': ('discord_id', 'discord_nickname', 'password1', 'password2')}
-        ),
+         ),
     )
     search_fields = ('discord_id',)
     ordering = ('discord_id',)
     filter_horizontal = ()
+
 
 # Now register the new UserAdmin...
 admin.site.register(ClanUser, UserAdmin)
 # ... and, since we're not using Django's built-in permissions,
 # unregister the Group model from admin.
 admin.site.unregister(Group)
-
-
-
-
-
 
 admin.site.register(DiscordServer)
 admin.site.register(DiscordRole)
@@ -109,3 +104,4 @@ admin.site.register(FightParticipation)
 admin.site.register(PointsInfo)
 admin.site.register(PointSubmission)
 admin.site.register(ClanUserRoles)
+admin.site.register(Tournament)

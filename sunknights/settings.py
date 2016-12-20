@@ -64,6 +64,9 @@ REST_FRAMEWORK = {
     )
 }
 
+REST_FRAMEWORK = {
+    'PAGE_SIZE': 10
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

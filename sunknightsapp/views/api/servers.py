@@ -7,3 +7,6 @@ class ServersViewSet(BulkModelViewSet):
     serializer_class = DiscordServerSerializer
     queryset = DiscordServer.objects.all()
     lookup_field = 'discord_id'
+
+
+
