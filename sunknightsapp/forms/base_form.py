@@ -21,6 +21,9 @@ class BaseForm(ModelForm):
     def handle(self,request):
         raise NotImplementedError("Please Implement this method")
 
+    def noPermission(self):
+        return self.response(False,"You do not have sufficient Permissions for this action")
+
 
     def response(self,noErrors=True,message=""):
         return JsonResponse({'status':'success' if noErrors else 'failure','message':message})

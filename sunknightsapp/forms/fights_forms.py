@@ -32,6 +32,10 @@ class CreateTournamentForm(BaseForm):
 
 
     def handle(self,request):
+        
+        if not request.user.is_war_manager:
+            return self.noPermission()
+            
         try:
             tour=self.save()
         except:
@@ -46,12 +50,17 @@ class CreateTournamentForm(BaseForm):
 
 
 class EditTournamentForm(BaseForm):
+    
+    
+    
     pk_id=forms.IntegerField(min_value=0,widget=forms.HiddenInput(),required=True)
 
     def __init__(self,*args, **kwargs):
         super(EditTournamentForm, self).__init__(AjaxAction.EDITTOURNAMENT, *args, **kwargs)
 
     def handle(self, request):
+        if not request.user.is_war_manager:
+            return self.noPermission()
         try:
             tour = Tournament.objects.get(pk=int(self.cleaned_data['pk_id']))
             tour.name=self.cleaned_data['name']
@@ -77,6 +86,8 @@ class DeleteTournamentForm(BaseForm):
 
 
     def handle(self,request):
+        if not request.user.is_war_manager:
+            return self.noPermission()
         try:
             tour=Tournament.objects.get(pk=int(self.cleaned_data['pk_id']))
             tour.delete()
