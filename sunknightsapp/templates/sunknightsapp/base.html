@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
+    <script
+            src="https://code.jquery.com/jquery-3.1.1.js"
+            integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
+            crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+
+
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.deep_orange-yellow.min.css"/>
 
@@ -9,6 +18,11 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans|Roboto" rel="stylesheet"/>
     <link rel="stylesheet"
           href="https://cdn.rawgit.com/rjt-rockx/c3b72acf32a83565488ab8fad955772e/raw/af370473e7e75e653c4ddde013f23d0a4df897f4/skcustom.css"/>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'sunknightsapp/css/style.css' %}"/>
+
+    <script src="{% static 'sunknightsapp/js/simple.js' %}"></script>
+
 
     <title>{% block title %}Sun Knights{% endblock %}</title>
 </head>

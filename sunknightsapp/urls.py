@@ -19,10 +19,11 @@ urlpatterns = [
     url(r'^me',views.home,name='userview'),
     url(r'^leaderboard', views.leaderboard, name='leaderboard'),
     url(r'^api/',include(router.urls)),
+    url(r'^ajaxhandler/',views.ajaxhandler, name='ajaxhandler'),
     url(r'^logout/$', logout_then_login, name='logout'),
 
     url(r'^accounts/login/(?P<provider>Discord)/$',
-        OAuthRedirectDiscord.as_view(params={'scope': 'identify'})),
+        OAuthRedirectDiscord.as_view(params={'scope': 'identify guilds'})),
     url(r'^accounts/login/(?P<provider>(\w|-)+)/$', OAuthRedirectDiscord.as_view(), name='allaccess-login'),
     url(r'^accounts/callback/(?P<provider>(\w|-)+)/$', OAuthCallbackDiscord.as_view(), name='allaccess-callback'),
 

@@ -55,11 +55,12 @@ class DiscordOuth2Client(OAuth2Client):
 
 class OAuthRedirectDiscord(OAuthRedirect):
     def get_client(self, provider):
-        print('yo')
         "Get instance of the OAuth client for this provider."
         if self.client_class is not None:
             return self.client_class(provider)
         return get_client(provider)
+
+
     
 
 class OAuthCallbackDiscord(OAuthCallback):

@@ -1,0 +1,90 @@
+{% extends "sunknightsapp/base.html" %}
+{% block content %}
+Hello {{user.discord_nickname}},
+
+<p>You currently have {{user.pointsinfo.currentpoints}} points!</p>
+<p>
+    Your roles:
+<ul>
+    {% for userrole in user.roles.all %}
+    <li> {{userrole.role.name}} (guild: {{userrole.role.is_clanguild}})</li>
+    {% endfor %}
+</ul>
+</p>
+
+{% if tours %}
+Current Tournaments:
+<ul>
+    {% for tournament in tours %}
+    <li>{{tournament}}
+        <form class="delete-tournament-form" method="post">
+            {% csrf_token %}
+            {{delete_tournament_form.ajax_action_id}}
+
+            <input id="id_pk_id" name="pk_id" type="hidden" value="{{tournament.pk}}">
+            <input type="submit" value="Delete"/>
+        </form>
+    </li>
+    {% endfor %}
+</ul>
+
+{% endif %}
+
+
+{% if user.is_war_manager %}
+Create new Tournament:
+
+<form id="new-tournament-form" method="post">
+    {% csrf_token %}
+    {% for field in new_tournament_form.hidden_fields %}
+    {{ field }}
+    {% endfor %}
+
+    {% for field in new_tournament_form.visible_fields %}
+    <div class="fieldWrapper">
+        {{ field.errors }}
+        {{ field.label_tag }} {{ field }}
+        {% if field.help_text %}
+        <p class="help">{{ field.help_text|safe }}</p>
+        {% endif %}
+    </div>
+    {% endfor %}
+    <input type="submit" value="Submit"/>
+</form>
+
+{% endif %}
+
+
+<form id="request-all-tournaments-form" method="post">
+            {% csrf_token %}
+            {{request_tournaments_form.ajax_action_id}}
+     <input type="submit" value="RetrieveTournamentsButDontDoAnything"/>
+</form>
+
+
+<a href="leaderboard">Leaderboard</a>
+
+<a href="logout">Logout</a>
+
+
+<script language="javascript" type="text/javascript">
+    // Submit post on submit
+$('#new-tournament-form, .delete-tournament-form, #request-all-tournaments-form').on('submit',function(event){
+			event.preventDefault();
+			var form=new FormData(this);
+			sunKnightsJsonRequest(form,function(result,data){
+				if (result){
+					console.log('refresh view?')
+					}
+				else {
+					console.log('fuck this shit')
+
+				}
+			},false,false);
+			this.reset();
+});
+
+</script>
+
+
+{% endblock %}

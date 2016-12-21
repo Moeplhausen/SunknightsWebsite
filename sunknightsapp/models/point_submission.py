@@ -10,6 +10,10 @@ class PointSubmission(models.Model):
     accepted=models.BooleanField(default=False)
     decided=models.BooleanField(default=False)
 
+    submitterText=models.TextField(max_length=200,default="")
+    managerText=models.TextField(max_length=200,default="")
+
+
     date=models.DateTimeField()
 
 
