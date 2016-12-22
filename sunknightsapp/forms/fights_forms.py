@@ -3,7 +3,7 @@ from ..models.tournament import Tournament
 from ..enums.AjaxActions import AjaxAction
 from django import forms
 from django.core import serializers
-from ..serializers.clan_user_roles_serializer import ClanUserRolesSerializer,ClanUserRoles
+from ..serializers.tournament_serializer import TournamentSerializer
 
 
 class RequestTournamentsForm(BaseForm):
@@ -13,11 +13,13 @@ class RequestTournamentsForm(BaseForm):
 
     def handle(self,request):
         try:
-            tours=serializers.serialize('json',Tournament.objects.all())
-        except:
-            return self.response(False,'Something went wrong')#TODO better exception
+            tours=Tournament.objects.all()
+            serializer=TournamentSerializer(tours,many=True)
+        except BaseException as e:
+            return self.response(False,'Something went wrong: '+str(e))
         else:
-            return self.response(True,{'data':tours})
+
+            return self.response(True,{'data':(serializer.data)})
 
 
     class Meta:
@@ -41,7 +43,8 @@ class CreateTournamentForm(BaseForm):
         except:
             return self.response(False,'Something went wrong')#TODO better exception
         else:
-            return self.response(True,{'data':{'name':tour.name,'description':tour.description}})
+            serializer=TournamentSerializer(tour)
+            return self.response(True,{'data':(serializer.data)})
 
 
     class Meta:
@@ -70,7 +73,8 @@ class EditTournamentForm(BaseForm):
 
         else:
 
-            return self.response(True, {'data': {'name': tour.name,'description':tour.description, 'action': 'deleted'}})
+            serializer=TournamentSerializer(tour)
+            return self.response(True,{'data':(serializer.data)})
 
     class Meta:
         model=Tournament
@@ -96,7 +100,8 @@ class DeleteTournamentForm(BaseForm):
         
         else:
             
-            return self.response(True,{'data':{'name':tour.name,'action':'deleted'}})
+            serializer=TournamentSerializer(tour)
+            return self.response(True,{'data':(serializer.data)})
 
     class Meta:
         model=Tournament

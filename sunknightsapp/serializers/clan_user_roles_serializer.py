@@ -1,9 +1,9 @@
 from rest_framework import serializers
-from rest_framework_bulk import BulkListSerializer
+from rest_framework_bulk import BulkListSerializer,BulkSerializerMixin
 from ..models.clan_user import ClanUserRoles
 
 
-class ClanUserRolesSerializer(serializers.ModelSerializer):
+class ClanUserRolesSerializer(BulkSerializerMixin,serializers.ModelSerializer):
 
 
 

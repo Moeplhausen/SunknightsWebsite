@@ -3,8 +3,7 @@ from ..enums.AjaxActions import AjaxAction
 from django import forms
 
 from django.http import JsonResponse
-from django.core import serializers
-import json
+from rest_framework.renderers import JSONRenderer
 
 class BaseForm(ModelForm):
 
