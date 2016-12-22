@@ -7,11 +7,11 @@ from django.contrib.auth.models import Group
 from .models.clan_user import ClanUser, ClanUserRoles
 from .models.discord_roles import DiscordRole
 from .models.discord_server import DiscordServer
-from .models.fight import Fight
-from .models.fight_participation import FightParticipation
-from .models.point_submission import PointSubmission
+from .models.guildfight import GuildFight
+from .models.guildfight import GuildFightParticipation
+from .models.point_submission import BasicUserPointSubmission,OneOnOneFightSubmission
 from .models.points_info import PointsInfo
-from .models.tournament import Tournament
+from .models.tournament import Tournament,TournamentFightConnector
 
 
 # Register your models here.
@@ -99,9 +99,11 @@ admin.site.unregister(Group)
 
 admin.site.register(DiscordServer)
 admin.site.register(DiscordRole)
-admin.site.register(Fight)
-admin.site.register(FightParticipation)
+admin.site.register(GuildFight)
+admin.site.register(GuildFightParticipation)
 admin.site.register(PointsInfo)
-admin.site.register(PointSubmission)
+admin.site.register(BasicUserPointSubmission)
+admin.site.register(OneOnOneFightSubmission)
 admin.site.register(ClanUserRoles)
 admin.site.register(Tournament)
+admin.site.register(TournamentFightConnector)

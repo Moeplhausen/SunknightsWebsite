@@ -11,3 +11,5 @@ class ClanUserRolesSerializer(BulkSerializerMixin,serializers.ModelSerializer):
         model=ClanUserRoles
         fields='__all__'
         list_serializer_class = BulkListSerializer
+
+

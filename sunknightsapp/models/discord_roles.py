@@ -11,5 +11,11 @@ class DiscordRole(models.Model):
     can_manage_wars=models.BooleanField(default=False)
     discord_isDeleted=models.BooleanField(default=False)
 
+
     def __str__(self):
         return self.name
+
+class SunKnightsGuild(DiscordRole):
+    @property
+    def getGuildLeader(self):
+        pass

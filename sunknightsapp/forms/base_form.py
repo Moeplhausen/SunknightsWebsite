@@ -9,7 +9,7 @@ class BaseForm(ModelForm):
     ajax_action_id = forms.IntegerField(min_value=0, widget=forms.HiddenInput(), required=True)
     id_value=0
 
-    def __init__(self, id: AjaxAction, *args, **kwargs):
+    def __init__(self, id, *args, **kwargs):
         super(BaseForm, self).__init__(*args, **kwargs)
         self.fields['ajax_action_id'].widget.attrs['value'] = id.value
         self.id_value=id.value
