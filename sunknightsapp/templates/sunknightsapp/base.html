@@ -39,15 +39,15 @@
             <span class="mdl-layout-title"><font face="Nunito Sans">Sun Knights</font></span>
             <div class="mdl-layout-spacer"></div>
             <nav class="mdl-navigation">
-				{% if user.is_authenticated %}
-					{% for provider in allaccess_providers %}
-					<a class="mdl-navigation__link" href="{% url 'allaccess-login' provider.name %}">
+				{% if not user.is_authenticated %}{#  If we are not logged in, we want a login link #}
+					{% for provider in allaccess_providers %}{# Goes through all login providers - hopefully only Discord #}
+					<a class="mdl-navigation__link" href="{% url 'allaccess-login' provider.name %}"> {# Puts the login link #}
 						<button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect">
 							<i class="material-icons white">supervisor_account</i><!-- login -->
 						</button>
 					</a>
 					{% endfor %}
-				{% else %}
+				{% else %} {# We are logged in => We gotta logout now! #}
 					<a class="mdl-navigation__link" href="{% url 'logout' %}">
 						<button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect">
 							<i class="material-icons white">open_in_browser</i><!-- logout -->

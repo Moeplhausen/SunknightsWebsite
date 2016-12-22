@@ -5,9 +5,6 @@ from ..models.discord_roles import SunKnightsGuild, DiscordRole
 
 class DiscordRolesSerializer(BulkSerializerMixin,serializers.ModelSerializer):
 
-
-
-
     class Meta:
         model=DiscordRole
         fields='__all__'
