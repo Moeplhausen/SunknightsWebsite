@@ -91,6 +91,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'allaccess.context_processors.available_providers',
+                'sunknightsapp.processors.context_processors.ajaxactions'
             ],
         },
     },

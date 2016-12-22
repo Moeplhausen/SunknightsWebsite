@@ -24,6 +24,11 @@
     <script src="{% static 'sunknightsapp/js/simple.js' %}"></script>
 
 
+    <script>
+        var ajaxactions=JSON.parse('{{ajaxactions|safe}}')
+    </script>
+
+
     <title>{% block title %}Sun Knights{% endblock %}</title>
 </head>
 

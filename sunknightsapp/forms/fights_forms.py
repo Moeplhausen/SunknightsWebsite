@@ -1,8 +1,8 @@
-from .base_form import *
-from ..models.tournament import Tournament
-from ..enums.AjaxActions import AjaxAction
 from django import forms
-from django.core import serializers
+
+from .base_form import *
+from ..enums.AjaxActions import AjaxAction
+from ..models.tournament import Tournament
 from ..serializers.tournament_serializer import TournamentSerializer
 
 
@@ -94,13 +94,12 @@ class DeleteTournamentForm(BaseForm):
             return self.noPermission()
         try:
             tour=Tournament.objects.get(pk=int(self.cleaned_data['pk_id']))
+            serializer = TournamentSerializer(tour)
             tour.delete()
         except BaseException as e:
             return self.response(False, 'Something went wrong: '+str(e))  # TODO better exception
         
         else:
-            
-            serializer=TournamentSerializer(tour)
             return self.response(True,{'data':(serializer.data)})
 
     class Meta:
