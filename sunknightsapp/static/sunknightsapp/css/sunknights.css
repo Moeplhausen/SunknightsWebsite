@@ -1,0 +1,73 @@
+.demo-layout-transparent {
+  background-color:rgba(0, 0, 0, 0);
+  height:100vh;
+}
+.demo-layout-transparent .mdl-layout__header,
+.demo-layout-transparent .mdl-layout__drawer-button {
+  color: white;
+}
+font-family: 'Nunito Sans', sans-serif;
+font-family: 'Roboto', sans-serif;
+.semi-transparent {
+	color:rgba(0, 0, 0, 0.5);
+}
+.md-18 { font-size: 18px; }
+.md-24 { font-size: 24px; }
+.md-36 { font-size: 36px; }
+.md-48 { font-size: 48px; }
+.redbg
+{
+	background-color:#dd0000
+}
+.white
+{
+	color:white
+}
+.opacity95 {
+    opacity: 0.95;
+}
+.scale50 {
+  max-width:50%;
+  height:auto;
+}
+.scale20 {
+  max-width:20%;
+  height:auto;
+}
+.demo-card-wide.mdl-card {
+  width: 512px;
+}
+.demo-card-wide > .mdl-card__title {
+  color: #fff;
+  height: 176px;
+  background: url('http://www.pptback.com/uploads/earth-and-sun-backgrounds-powerpoint.jpg') center / cover;
+}
+.demo-card-wide > .mdl-card__menu {
+  color: #fff;
+}
+.alignv {
+  position: relative;
+  top: 40%;
+  transform: perspective(1px) translateY(35%);
+}
+.blurple {
+background-color: #7289DA
+}	
+.lh3 {
+line-height: 3.0;
+}
+.lh1-5 {
+line-height: 1.5;
+}
+.lh2 {
+line-height: 2.0;
+}
+.lh1 {
+line-height: 1.0;
+}
+.bottompad5px {
+padding-bottom: 5px;
+}
+.bottompad25px {
+padding-bottom: 25px;
+}
