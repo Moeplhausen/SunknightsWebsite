@@ -40,15 +40,11 @@ Create new Tournament:
     {{ field }}
     {% endfor %}
 
-    {% for field in new_tournament_form.visible_fields %}
-    <div class="fieldWrapper">
-        {{ field.errors }}
-        {{ field.label_tag }} {{ field }}
-        {% if field.help_text %}
-        <p class="help">{{ field.help_text|safe }}</p>
-        {% endif %}
+    <div class="mdl-textfield mdl-js-textfield">
+        <input class="mdl-textfield__input" type="text" id="sample1">
+        <label class="mdl-textfield__label" for="sample1">Text...</label>
     </div>
-    {% endfor %}
+
     <input type="submit" value="Submit"/>
 </form>
 
