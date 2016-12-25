@@ -54,5 +54,19 @@
       "is_active": true,
       "is_superuser": true
     }
+  },
+  ,
+  {
+    "model": "sunknightsapp.clanuser",
+    "pk": 3,
+    "fields": {
+      "password": "pbkdf2_sha256$30000$0aEfYzxTFEQh$PuMQqACCqkNQt26eEiw6my/+gtjrQ77gJ9VABrjrMOs=",
+      "last_login": null,
+      "discord_id": 239110748180054017,
+      "discord_nickname": "Ikusabae",
+      "provider": "Discord",
+      "is_active": true,
+      "is_superuser": true
+    }
   }
 ]
