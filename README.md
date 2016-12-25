@@ -7,6 +7,7 @@ Coded by moeplhausen, rjt-rockx and Mikusaba
 
   1. pip3 install -r requirements.txt --user
   2. python manage.py migrate
+  3. python manage.py loaddata fixture.json
   
   
 ## Run it (dev)
