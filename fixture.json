@@ -55,7 +55,6 @@
       "is_superuser": true
     }
   },
-  ,
   {
     "model": "sunknightsapp.clanuser",
     "pk": 3,
