@@ -1,6 +1,8 @@
 {% extends "sunknightsapp/base.html" %}
 {% block content %}
-Hello {{user.discord_nickname}},
+    {% load widget_tweaks %}
+
+    Hello {{user.discord_nickname}},
 
 <p>You currently have {{user.pointsinfo.currentpoints}} points!</p>
 <p>
@@ -40,12 +42,11 @@ Create new Tournament:
     {{ field }}
     {% endfor %}
 
-    <div class="mdl-textfield mdl-js-textfield">
-        <input class="mdl-textfield__input" type="text" id="sample1">
-        <label class="mdl-textfield__label" for="sample1">Text...</label>
-    </div>
-
-    <input type="submit" value="Submit"/>
+    {% render_field new_tournament_form.name class+="mdl-textfield__input" %}
+    {% render_field new_tournament_form.description class+="mdl-textfield__input" %}
+    <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+        <i class="material-icons right">send</i>
+    </button>
 </form>
 
 {% endif %}
