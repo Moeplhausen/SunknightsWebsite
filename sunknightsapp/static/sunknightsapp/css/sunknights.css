@@ -52,7 +52,7 @@ font-family: 'Roboto', sans-serif;
 }
 .blurple {
 background-color: #7289DA
-}	
+}
 .lh3 {
 line-height: 3.0;
 }
@@ -70,4 +70,8 @@ padding-bottom: 5px;
 }
 .bottompad25px {
 padding-bottom: 25px;
+}
+img.leaderpoint-avatar{
+  width:32px;
+  height:32px;
 }

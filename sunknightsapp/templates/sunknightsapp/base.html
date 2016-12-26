@@ -12,14 +12,19 @@
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.deep_orange-yellow.min.css"/>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/dataTables.material.min.css"/>
+
 
     <script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans|Roboto" rel="stylesheet"/>
     <link rel="stylesheet" type="text/css" href="{% static 'sunknightsapp/css/sunknights.css' %}"/>
-	<link rel="stylesheet" type="text/css" href="{% static 'sunknightsapp/css/starbg.css' %}"/>
+{#	<link rel="stylesheet" type="text/css" href="{% static 'sunknightsapp/css/starbg.css' %}"/>#}
 
     <script src="{% static 'sunknightsapp/js/simple.js' %}"></script>
 
+
+<script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.13/js/dataTables.material.min.js"></script>
 
     <script>
         var ajaxactions=JSON.parse('{{ajaxactions|safe}}')
@@ -67,5 +72,13 @@
         </center>
     </main>
 </div>
+
+<script>
+    $(document).ready( function () {
+        {% block scripts %}{% endblock %}
+    } );
+</script>
+
+
 </body>
 </html>

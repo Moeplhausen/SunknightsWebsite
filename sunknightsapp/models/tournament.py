@@ -1,11 +1,14 @@
 from django.db import models
 from .guildfight import GuildFight
+from .clan_user import ClanUser
 
 
 class Tournament(models.Model):
     name=models.CharField(max_length=20)
     description=models.TextField(max_length=500)
     finished=models.BooleanField(default=False)
+
+    creator=models.ForeignKey(ClanUser)
 
 
     def __str__(self):

@@ -2,7 +2,7 @@
 {% block content %}
     {% load widget_tweaks %}
 
-    Hello {{user.discord_nickname}},
+    Hello {{user.discord_nickname}} <img src="{{ user.avatar_url }}">,
 
 <p>You currently have {{user.pointsinfo.currentpoints}} points!</p>
 <p>

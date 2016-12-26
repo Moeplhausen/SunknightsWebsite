@@ -23,6 +23,8 @@ class ClanUser(AbstractBaseUser):
             is_active=models.BooleanField(default=True)
             is_superuser=models.BooleanField(default=False)
 
+            avatar=models.CharField(max_length=150,default='')
+
 
 
             objects=UserManager()
@@ -35,6 +37,7 @@ class ClanUser(AbstractBaseUser):
 
             def __str__(self):  # __unicode__ on Python 2
                 return self.discord_nickname
+
 
             def get_full_name(self):
                 return str(self.discord_id)
@@ -61,6 +64,13 @@ class ClanUser(AbstractBaseUser):
                 if clan_user_roles.exists() or self.is_staff:
                     return True
                 return False
+
+            @property
+            def avatar_url(self):
+                if self.avatar is "":
+                    return "https://discordapp.com/assets/322c936a8c8be1b803cd94861bdfa868.png"
+                else:
+                    return "https://cdn.discordapp.com/avatars/"+str(self.discord_id)+"/"+self.avatar
 
 
             @property

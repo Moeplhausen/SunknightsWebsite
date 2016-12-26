@@ -1,10 +1,35 @@
+
+
 {% extends "sunknightsapp/base.html" %}
 {% block content %}
-    <ul>
-    {% for pointinfo in userpoints %}
-        <li>
-            {{ pointinfo.user.discord_nickname}}: currentpoints: {{pointinfo.currentpoints}}
-        </li>
-    {% endfor %}
-    </ul>
+<table id="points_leaderboard" class="display datatables-table" width="100%">
+
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Points</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for pointinfo in userpoints %}
+            <tr>
+                <td><img class="leaderpoint-avatar" src="{{ pointinfo.user.avatar_url }}">{{pointinfo.user.discord_nickname}}</td>
+                <td>{{pointinfo.currentpoints}}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+
+
+</table>
+
+{% endblock %}
+
+
+{% block scripts %}
+    $('#points_leaderboard').DataTable( {
+    "order": [[ 1, "desc" ]]
+    } );
+
+
 {% endblock %}

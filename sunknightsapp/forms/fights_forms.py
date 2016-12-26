@@ -39,7 +39,9 @@ class CreateTournamentForm(BaseForm):
             return self.noPermission()
             
         try:
-            tour=self.save()
+            tour=self.save(commit=False)
+            tour.creator=request.user
+            tour.save()
         except:
             return self.response(False,'Something went wrong')#TODO better exception
         else:
