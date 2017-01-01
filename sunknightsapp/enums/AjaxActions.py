@@ -6,3 +6,4 @@ class AjaxAction(IntEnum):
     CREATETOURNAMENT=2
     EDITTOURNAMENT=3
     DELETETOURNAMENT=4
+

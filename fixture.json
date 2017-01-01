@@ -11,61 +11,844 @@
       "consumer_secret": "y_K8zWVHcwNraYKRZUgs-LAs79-AkwCI"
     }
   },
-  {
+
+{
     "model": "sunknightsapp.discordserver",
+    "pk": 1,
     "fields": {
-      "discord_id": 252525368865456130,
-      "name": "SK server"
+        "discord_id": 252525368865456130,
+        "name": "SK server"
     }
-  },
-  {
+}, {
     "model": "sunknightsapp.discordrole",
+    "pk": 1,
     "fields": {
-      "name": "Aurora",
-      "discord_server": 1,
-      "discord_id": 256500228461428746,
-      "discord_color": 0,
-      "is_clanguild": true,
-      "discord_isDeleted": false
+        "name": "Aurora",
+        "discord_server": 1,
+        "discord_id": 256500228461428746,
+        "discord_color": 0,
+        "can_manage_points": false,
+        "can_manage_wars": false,
+        "discord_isDeleted": false,
+        "guild_leader_role": false,
+        "is_clan_guild": true
     }
-  },
-  {
+}, {
+    "model": "sunknightsapp.discordrole",
+    "pk": 2,
+    "fields": {
+        "name": "pandas",
+        "discord_server": 1,
+        "discord_id": 256245385649979392,
+        "discord_color": 0,
+        "can_manage_points": false,
+        "can_manage_wars": false,
+        "discord_isDeleted": false,
+        "guild_leader_role": false,
+        "is_clan_guild": true
+    }
+}, {
+    "model": "sunknightsapp.discordrole",
+    "pk": 3,
+    "fields": {
+        "name": "guild leader",
+        "discord_server": 1,
+        "discord_id": 256218440816132096,
+        "discord_color": 0,
+        "can_manage_points": false,
+        "can_manage_wars": false,
+        "discord_isDeleted": false,
+        "guild_leader_role": true,
+        "is_clan_guild": false
+    }
+}, {
     "model": "sunknightsapp.clanuser",
     "pk": 1,
     "fields": {
-      "password": "pbkdf2_sha256$30000$55rmy6loRfAE$ATWmqtTqYkhK3k6s06T6xIkYcM3UBqDhvI09P+mYn28=",
-      "last_login": "2016-12-19T17:14:55.668Z",
-      "discord_id": 243345778922225665,
-      "discord_nickname": "Schatterhand",
-      "provider": "Discord",
-      "is_active": true,
-      "is_superuser": true
+        "password": "pbkdf2_sha256$30000$55rmy6loRfAE$ATWmqtTqYkhK3k6s06T6xIkYcM3UBqDhvI09P+mYn28=",
+        "last_login": "2016-12-31T19:39:01.671Z",
+        "discord_id": 243345778922225665,
+        "discord_nickname": "Schatterhand",
+        "provider": "Discord",
+        "is_active": true,
+        "is_superuser": true,
+        "avatar": ""
     }
-  },
-  {
+}, {
     "model": "sunknightsapp.clanuser",
     "pk": 2,
     "fields": {
-      "password": "pbkdf2_sha256$30000$0aEfYzxTFEQh$PuMQqACCqkNQt26eEiw6my/+gtjrQ77gJ9VABrjrMOs=",
-      "last_login": null,
-      "discord_id": 192060404501839872,
-      "discord_nickname": "rjt",
-      "provider": "Discord",
-      "is_active": true,
-      "is_superuser": true
+        "password": "pbkdf2_sha256$30000$0aEfYzxTFEQh$PuMQqACCqkNQt26eEiw6my/+gtjrQ77gJ9VABrjrMOs=",
+        "last_login": null,
+        "discord_id": 192060404501839872,
+        "discord_nickname": "rjt",
+        "provider": "Discord",
+        "is_active": true,
+        "is_superuser": true,
+        "avatar": ""
     }
-  },
-  {
+}, {
     "model": "sunknightsapp.clanuser",
     "pk": 3,
     "fields": {
-      "password": "pbkdf2_sha256$30000$0aEfYzxTFEQh$PuMQqACCqkNQt26eEiw6my/+gtjrQ77gJ9VABrjrMOs=",
-      "last_login": null,
-      "discord_id": 239110748180054017,
-      "discord_nickname": "Ikusabae",
-      "provider": "Discord",
-      "is_active": true,
-      "is_superuser": true
+        "password": "pbkdf2_sha256$30000$0aEfYzxTFEQh$PuMQqACCqkNQt26eEiw6my/+gtjrQ77gJ9VABrjrMOs=",
+        "last_login": null,
+        "discord_id": 239110748180054017,
+        "discord_nickname": "Ikusabae",
+        "provider": "Discord",
+        "is_active": true,
+        "is_superuser": true,
+        "avatar": ""
     }
-  }
+}, {
+    "model": "sunknightsapp.dieptank",
+    "pk": 1,
+    "fields": {
+        "name": "Basic Tank",
+        "diep_isDeleted": false,
+        "multiplier": "2.00",
+        "tier": 1
+    }
+}, {
+    "model": "sunknightsapp.dieptank",
+    "pk": 2,
+    "fields": {
+        "name": "Annihilator",
+        "diep_isDeleted": false,
+        "multiplier": "1.00",
+        "tier": 4
+    }
+}, {
+    "model": "sunknightsapp.dieptank",
+    "pk": 3,
+    "fields": {
+        "name": "Assassin",
+        "diep_isDeleted": false,
+        "multiplier": "2.00",
+        "tier": 3
+    }
+}, {
+    "model": "sunknightsapp.dieptank",
+    "pk": 4,
+    "fields": {
+        "name": "Auto 3",
+        "diep_isDeleted": false,
+        "multiplier": "3.00",
+        "tier": 3
+    }
+}, {
+    "model": "sunknightsapp.dieptank",
+    "pk": 5,
+    "fields": {
+        "name": "Auto 5",
+        "diep_isDeleted": false,
+        "multiplier": "1.00",
+        "tier": 4
+    }
+}, {
+    "model": "sunknightsapp.dieptank",
+    "pk": 6,
+    "fields": {
+        "name": "Auto Gunner",
+        "diep_isDeleted": false,
+        "multiplier": "1.00",
+        "tier": 4
+    }
+}, {
+    "model": "sunknightsapp.dieptank",
+    "pk": 7,
+    "fields": {
+        "name": "Auto Smasher",
+        "diep_isDeleted": false,
+        "multiplier": "2.00",
+        "tier": 4
+    }
+}, {
+    "model": "sunknightsapp.dieptank",
+    "pk": 8,
+    "fields": {
+        "name": "Auto Trapper",
+        "diep_isDeleted": false,
+        "multiplier": "2.00",
+        "tier": 4
+    }
+}, {
+    "model": "sunknightsapp.dieptank",
+    "pk": 9,
+    "fields": {
+        "name": "Battleship",
+        "diep_isDeleted": false,
+        "multiplier": "3.00",
+        "tier": 4
+    }
+}, {
+    "model": "sunknightsapp.dieptank",
+    "pk": 10,
+    "fields": {
+        "name": "Booster",
+        "diep_isDeleted": false,
+        "multiplier": "1.00",
+        "tier": 4
+    }
+}, {
+    "model": "sunknightsapp.dieptank",
+    "pk": 11,
+    "fields": {
+        "name": "Destroyer",
+        "diep_isDeleted": false,
+        "multiplier": "1.00",
+        "tier": 3
+    }
+}, {
+    "model": "sunknightsapp.dieptank",
+    "pk": 12,
+    "fields": {
+        "name": "Factory",
+        "diep_isDeleted": false,
+        "multiplier": "1.00",
+        "tier": 4
+    }
+}, {
+    "model": "sunknightsapp.dieptank",
+    "pk": 13,
+    "fields": {
+        "name": "Fighter",
+        "diep_isDeleted": false,
+        "multiplier": "1.00",
+        "tier": 4
+    }
+}, {
+    "model": "sunknightsapp.dieptank",
+    "pk": 14,
+    "fields": {
+        "name": "Flank Guard",
+        "diep_isDeleted": false,
+        "multiplier": "2.00",
+        "tier": 2
+    }
+}, {
+    "model": "sunknightsapp.dieptank",
+    "pk": 15,
+    "fields": {
+        "name": "Gunner",
+        "diep_isDeleted": false,
+        "multiplier": "2.00",
+        "tier": 3
+    }
+}, {
+    "model": "sunknightsapp.dieptank",
+    "pk": 16,
+    "fields": {
+        "name": "Gunner Trapper",
+        "diep_isDeleted": false,
+        "multiplier": "2.00",
+        "tier": 4
+    }
+}, {
+    "model": "sunknightsapp.dieptank",
+    "pk": 17,
+    "fields": {
+        "name": "Hunter",
+        "diep_isDeleted": false,
+        "multiplier": "2.00",
+        "tier": 3
+    }
+}, {
+    "model": "sunknightsapp.dieptank",
+    "pk": 18,
+    "fields": {
+        "name": "Hybrid",
+        "diep_isDeleted": false,
+        "multiplier": "1.00",
+        "tier": 4
+    }
+}, {
+    "model": "sunknightsapp.dieptank",
+    "pk": 19,
+    "fields": {
+        "name": "Landmine",
+        "diep_isDeleted": false,
+        "multiplier": "2.00",
+        "tier": 4
+    }
+}, {
+    "model": "sunknightsapp.dieptank",
+    "pk": 20,
+    "fields": {
+        "name": "Machine Gun",
+        "diep_isDeleted": false,
+        "multiplier": "2.00",
+        "tier": 2
+    }
+}, {
+    "model": "sunknightsapp.dieptank",
+    "pk": 21,
+    "fields": {
+        "name": "Manager",
+        "diep_isDeleted": false,
+        "multiplier": "1.00",
+        "tier": 4
+    }
+}, {
+    "model": "sunknightsapp.dieptank",
+    "pk": 22,
+    "fields": {
+        "name": "Mega Trapper",
+        "diep_isDeleted": false,
+        "multiplier": "3.00",
+        "tier": 4
+    }
+}, {
+    "model": "sunknightsapp.dieptank",
+    "pk": 23,
+    "fields": {
+        "name": "Necromancer",
+        "diep_isDeleted": false,
+        "multiplier": "1.00",
+        "tier": 4
+    }
+}, {
+    "model": "sunknightsapp.dieptank",
+    "pk": 24,
+    "fields": {
+        "name": "Octo Tank",
+        "diep_isDeleted": false,
+        "multiplier": "1.00",
+        "tier": 4
+    }
+}, {
+    "model": "sunknightsapp.dieptank",
+    "pk": 25,
+    "fields": {
+        "name": "Overlord",
+        "diep_isDeleted": false,
+        "multiplier": "1.00",
+        "tier": 4
+    }
+}, {
+    "model": "sunknightsapp.dieptank",
+    "pk": 26,
+    "fields": {
+        "name": "Overseer",
+        "diep_isDeleted": false,
+        "multiplier": "2.00",
+        "tier": 3
+    }
+}, {
+    "model": "sunknightsapp.dieptank",
+    "pk": 27,
+    "fields": {
+        "name": "Overtrapper",
+        "diep_isDeleted": false,
+        "multiplier": "3.00",
+        "tier": 4
+    }
+}, {
+    "model": "sunknightsapp.dieptank",
+    "pk": 28,
+    "fields": {
+        "name": "Penta Shot",
+        "diep_isDeleted": false,
+        "multiplier": "1.00",
+        "tier": 4
+    }
+}, {
+    "model": "sunknightsapp.dieptank",
+    "pk": 29,
+    "fields": {
+        "name": "Predator",
+        "diep_isDeleted": false,
+        "multiplier": "1.00",
+        "tier": 4
+    }
+}, {
+    "model": "sunknightsapp.dieptank",
+    "pk": 30,
+    "fields": {
+        "name": "Quad Tank",
+        "diep_isDeleted": false,
+        "multiplier": "2.00",
+        "tier": 3
+    }
+}, {
+    "model": "sunknightsapp.dieptank",
+    "pk": 31,
+    "fields": {
+        "name": "Ranger",
+        "diep_isDeleted": false,
+        "multiplier": "1.00",
+        "tier": 4
+    }
+}, {
+    "model": "sunknightsapp.dieptank",
+    "pk": 32,
+    "fields": {
+        "name": "Smasher",
+        "diep_isDeleted": false,
+        "multiplier": "2.00",
+        "tier": 3
+    }
+}, {
+    "model": "sunknightsapp.dieptank",
+    "pk": 33,
+    "fields": {
+        "name": "Sniper",
+        "diep_isDeleted": false,
+        "multiplier": "2.00",
+        "tier": 2
+    }
+}, {
+    "model": "sunknightsapp.dieptank",
+    "pk": 34,
+    "fields": {
+        "name": "Sprayer",
+        "diep_isDeleted": false,
+        "multiplier": "1.00",
+        "tier": 4
+    }
+}, {
+    "model": "sunknightsapp.dieptank",
+    "pk": 35,
+    "fields": {
+        "name": "Spread Shot",
+        "diep_isDeleted": false,
+        "multiplier": "1.00",
+        "tier": 4
+    }
+}, {
+    "model": "sunknightsapp.dieptank",
+    "pk": 36,
+    "fields": {
+        "name": "Stalker",
+        "diep_isDeleted": false,
+        "multiplier": "2.00",
+        "tier": 4
+    }
+}, {
+    "model": "sunknightsapp.dieptank",
+    "pk": 37,
+    "fields": {
+        "name": "Steamliner",
+        "diep_isDeleted": false,
+        "multiplier": "2.00",
+        "tier": 4
+    }
+}, {
+    "model": "sunknightsapp.dieptank",
+    "pk": 38,
+    "fields": {
+        "name": "Trapper",
+        "diep_isDeleted": false,
+        "multiplier": "3.00",
+        "tier": 3
+    }
+}, {
+    "model": "sunknightsapp.dieptank",
+    "pk": 39,
+    "fields": {
+        "name": "Tri-Angle",
+        "diep_isDeleted": false,
+        "multiplier": "2.00",
+        "tier": 3
+    }
+}, {
+    "model": "sunknightsapp.dieptank",
+    "pk": 40,
+    "fields": {
+        "name": "Tri-Trapper",
+        "diep_isDeleted": false,
+        "multiplier": "3.00",
+        "tier": 4
+    }
+}, {
+    "model": "sunknightsapp.dieptank",
+    "pk": 41,
+    "fields": {
+        "name": "Triple Shot",
+        "diep_isDeleted": false,
+        "multiplier": "2.00",
+        "tier": 3
+    }
+}, {
+    "model": "sunknightsapp.dieptank",
+    "pk": 42,
+    "fields": {
+        "name": "Triple Twin",
+        "diep_isDeleted": false,
+        "multiplier": "1.00",
+        "tier": 4
+    }
+}, {
+    "model": "sunknightsapp.dieptank",
+    "pk": 43,
+    "fields": {
+        "name": "Twin",
+        "diep_isDeleted": false,
+        "multiplier": "1.00",
+        "tier": 2
+    }
+}, {
+    "model": "sunknightsapp.dieptank",
+    "pk": 44,
+    "fields": {
+        "name": "Twin Flank",
+        "diep_isDeleted": false,
+        "multiplier": "2.00",
+        "tier": 3
+    }
+}, {
+    "model": "sunknightsapp.dieptank",
+    "pk": 45,
+    "fields": {
+        "name": "Spike",
+        "diep_isDeleted": false,
+        "multiplier": "1.00",
+        "tier": 4
+    }
+}, {
+    "model": "sunknightsapp.dieptank",
+    "pk": 46,
+    "fields": {
+        "name": "Triplet",
+        "diep_isDeleted": false,
+        "multiplier": "1.00",
+        "tier": 4
+    }
+}, {
+    "model": "sunknightsapp.dieptankinheritance",
+    "pk": 1,
+    "fields": {
+        "parent": null,
+        "me": 1
+    }
+}, {
+    "model": "sunknightsapp.dieptankinheritance",
+    "pk": 2,
+    "fields": {
+        "parent": 11,
+        "me": 2
+    }
+}, {
+    "model": "sunknightsapp.dieptankinheritance",
+    "pk": 3,
+    "fields": {
+        "parent": 33,
+        "me": 3
+    }
+}, {
+    "model": "sunknightsapp.dieptankinheritance",
+    "pk": 4,
+    "fields": {
+        "parent": 14,
+        "me": 4
+    }
+},{
+    "model": "sunknightsapp.dieptankinheritance",
+    "pk": 5,
+    "fields": {
+        "parent": 1,
+        "me": 20
+    }
+}, {
+    "model": "sunknightsapp.dieptankinheritance",
+    "pk": 6,
+    "fields": {
+        "parent": 4,
+        "me": 5
+    }
+}, {
+    "model": "sunknightsapp.dieptankinheritance",
+    "pk": 7,
+    "fields": {
+        "parent": 15,
+        "me": 6
+    }
+}, {
+    "model": "sunknightsapp.dieptankinheritance",
+    "pk": 9,
+    "fields": {
+        "parent": 32,
+        "me": 7
+    }
+}, {
+    "model": "sunknightsapp.dieptankinheritance",
+    "pk": 10,
+    "fields": {
+        "parent": 38,
+        "me": 8
+    }
+}, {
+    "model": "sunknightsapp.dieptankinheritance",
+    "pk": 11,
+    "fields": {
+        "parent": 26,
+        "me": 9
+    }
+}, {
+    "model": "sunknightsapp.dieptankinheritance",
+    "pk": 13,
+    "fields": {
+        "parent": 39,
+        "me": 10
+    }
+}, {
+    "model": "sunknightsapp.dieptankinheritance",
+    "pk": 14,
+    "fields": {
+        "parent": 20,
+        "me": 11
+    }
+}, {
+    "model": "sunknightsapp.dieptankinheritance",
+    "pk": 15,
+    "fields": {
+        "parent": 26,
+        "me": 12
+    }
+}, {
+    "model": "sunknightsapp.dieptankinheritance",
+    "pk": 16,
+    "fields": {
+        "parent": 39,
+        "me": 13
+    }
+}, {
+    "model": "sunknightsapp.dieptankinheritance",
+    "pk": 17,
+    "fields": {
+        "parent": 1,
+        "me": 14
+    }
+}, {
+    "model": "sunknightsapp.dieptankinheritance",
+    "pk": 18,
+    "fields": {
+        "parent": 20,
+        "me": 15
+    }
+}, {
+    "model": "sunknightsapp.dieptankinheritance",
+    "pk": 20,
+    "fields": {
+        "parent": 15,
+        "me": 16
+    }
+}, {
+    "model": "sunknightsapp.dieptankinheritance",
+    "pk": 21,
+    "fields": {
+        "parent": 33,
+        "me": 17
+    }
+}, {
+    "model": "sunknightsapp.dieptankinheritance",
+    "pk": 22,
+    "fields": {
+        "parent": 11,
+        "me": 18
+    }
+}, {
+    "model": "sunknightsapp.dieptankinheritance",
+    "pk": 23,
+    "fields": {
+        "parent": 32,
+        "me": 19
+    }
+}, {
+    "model": "sunknightsapp.dieptankinheritance",
+    "pk": 24,
+    "fields": {
+        "parent": 26,
+        "me": 21
+    }
+}, {
+    "model": "sunknightsapp.dieptankinheritance",
+    "pk": 25,
+    "fields": {
+        "parent": 38,
+        "me": 22
+    }
+}, {
+    "model": "sunknightsapp.dieptankinheritance",
+    "pk": 26,
+    "fields": {
+        "parent": 26,
+        "me": 23
+    }
+}, {
+    "model": "sunknightsapp.dieptankinheritance",
+    "pk": 27,
+    "fields": {
+        "parent": 30,
+        "me": 24
+    }
+}, {
+    "model": "sunknightsapp.dieptankinheritance",
+    "pk": 28,
+    "fields": {
+        "parent": 26,
+        "me": 25
+    }
+}, {
+    "model": "sunknightsapp.dieptankinheritance",
+    "pk": 29,
+    "fields": {
+        "parent": 33,
+        "me": 26
+    }
+}, {
+    "model": "sunknightsapp.dieptankinheritance",
+    "pk": 31,
+    "fields": {
+        "parent": 38,
+        "me": 27
+    }
+}, {
+    "model": "sunknightsapp.dieptankinheritance",
+    "pk": 32,
+    "fields": {
+        "parent": 41,
+        "me": 28
+    }
+}, {
+    "model": "sunknightsapp.dieptankinheritance",
+    "pk": 33,
+    "fields": {
+        "parent": 17,
+        "me": 29
+    }
+}, {
+    "model": "sunknightsapp.dieptankinheritance",
+    "pk": 34,
+    "fields": {
+        "parent": 43,
+        "me": 30
+    }
+}, {
+    "model": "sunknightsapp.dieptankinheritance",
+    "pk": 35,
+    "fields": {
+        "parent": 14,
+        "me": 30
+    }
+}, {
+    "model": "sunknightsapp.dieptankinheritance",
+    "pk": 36,
+    "fields": {
+        "parent": 3,
+        "me": 31
+    }
+}, {
+    "model": "sunknightsapp.dieptankinheritance",
+    "pk": 37,
+    "fields": {
+        "parent": 1,
+        "me": 32
+    }
+}, {
+    "model": "sunknightsapp.dieptankinheritance",
+    "pk": 38,
+    "fields": {
+        "parent": 1,
+        "me": 33
+    }
+}, {
+    "model": "sunknightsapp.dieptankinheritance",
+    "pk": 39,
+    "fields": {
+        "parent": 20,
+        "me": 34
+    }
+}, {
+    "model": "sunknightsapp.dieptankinheritance",
+    "pk": 40,
+    "fields": {
+        "parent": 41,
+        "me": 35
+    }
+}, {
+    "model": "sunknightsapp.dieptankinheritance",
+    "pk": 41,
+    "fields": {
+        "parent": 3,
+        "me": 36
+    }
+}, {
+    "model": "sunknightsapp.dieptankinheritance",
+    "pk": 42,
+    "fields": {
+        "parent": 15,
+        "me": 37
+    }
+}, {
+    "model": "sunknightsapp.dieptankinheritance",
+    "pk": 44,
+    "fields": {
+        "parent": 33,
+        "me": 38
+    }
+}, {
+    "model": "sunknightsapp.dieptankinheritance",
+    "pk": 45,
+    "fields": {
+        "parent": 14,
+        "me": 39
+    }
+}, {
+    "model": "sunknightsapp.dieptankinheritance",
+    "pk": 46,
+    "fields": {
+        "parent": 38,
+        "me": 40
+    }
+}, {
+    "model": "sunknightsapp.dieptankinheritance",
+    "pk": 47,
+    "fields": {
+        "parent": 43,
+        "me": 41
+    }
+}, {
+    "model": "sunknightsapp.dieptankinheritance",
+    "pk": 48,
+    "fields": {
+        "parent": 44,
+        "me": 42
+    }
+}, {
+    "model": "sunknightsapp.dieptankinheritance",
+    "pk": 49,
+    "fields": {
+        "parent": 1,
+        "me": 43
+    }
+}, {
+    "model": "sunknightsapp.dieptankinheritance",
+    "pk": 50,
+    "fields": {
+        "parent": 43,
+        "me": 44
+    }
+}, {
+    "model": "sunknightsapp.dieptankinheritance",
+    "pk": 51,
+    "fields": {
+        "parent": 14,
+        "me": 44
+    }
+}, {
+    "model": "sunknightsapp.dieptankinheritance",
+    "pk": 52,
+    "fields": {
+        "parent": 32,
+        "me": 45
+    }
+}, {
+    "model": "sunknightsapp.dieptankinheritance",
+    "pk": 53,
+    "fields": {
+        "parent": 41,
+        "me": 46
+    }
+}
 ]

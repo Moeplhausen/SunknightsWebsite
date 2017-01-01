@@ -1,0 +1,55 @@
+
+
+{% extends "sunknightsapp/base.html" %}
+{% block content %}
+    <div class="card-group">
+
+        {% for guild in guilds %}
+            <div class="card">
+
+                <div class="card-block">
+                    <h4 class="card-title">{{ guild.name }}</h4>
+
+                    <p class="card-text">
+                    <p>Leader: <a
+                            href="/user/{{ guild.guild_leader.discord_id }}">{{ guild.guild_leader.discord_nickname }}</a>
+                    </p>
+                    Members ({{ guild.members.count }}):
+                    <table class="display datatables-table guilds-members-table">
+
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Leaderboard Place</th>
+                            <th>Points</th>
+                            <th>Number of fought Guild wars</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        {% for member in guild.members.all %}
+                            <tr>
+                                <td><a href="/user/{{ member.discord_id }}">{{ member.discord_nickname }}</a></td>
+                                <td>{{ member.leaderboard_place }}</td>
+                                <td>{{ member.total_points }}</td>
+                                <td>{{ member.finished_fights.count }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    </p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}
+
+
+{% block scripts %}
+    $('.guilds-members-table').DataTable( {
+    "order": [[ 0, "asc" ]]
+    } );
+
+
+{% endblock %}

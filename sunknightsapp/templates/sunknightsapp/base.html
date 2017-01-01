@@ -2,81 +2,64 @@
 <html lang="en">
 <head>
     {% load static %}
-    <script
-            src="https://code.jquery.com/jquery-3.1.1.js"
-            integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
-            crossorigin="anonymous">
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 
-
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.deep_orange-yellow.min.css"/>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/dataTables.material.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css"
+          integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
 
 
-    <script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans|Roboto" rel="stylesheet"/>
+
     <link rel="stylesheet" type="text/css" href="{% static 'sunknightsapp/css/sunknights.css' %}"/>
-{#	<link rel="stylesheet" type="text/css" href="{% static 'sunknightsapp/css/starbg.css' %}"/>#}
-
-    <script src="{% static 'sunknightsapp/js/simple.js' %}"></script>
+{#    <link rel="stylesheet" type="text/css" href="{% static 'sunknightsapp/css/bootstrap.css' %}"/>#}
 
 
-<script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.13/js/dataTables.material.min.js"></script>
+    {% block header %}{% endblock %}
 
-    <script>
-        var ajaxactions=JSON.parse('{{ajaxactions|safe}}')
-    </script>
-
-
-    <title>{% block title %}Sun Knights{% endblock %}</title>
-</head>
 
 <body>
-<div id='stars'></div>
-<div id='stars2'></div>
-<div id='stars3'></div>
-<div class="demo-layout-transparent mdl-layout mdl-layout--fixed-header mdl-js-layout">
-    <header class="mdl-layout__header mdl-layout__header--transparent">
-        <div class="mdl-layout__header-row">
-            <span class="mdl-layout-title"><font face="Nunito Sans">Sun Knights</font></span>
-            <div class="mdl-layout-spacer"></div>
-            <nav class="mdl-navigation">
-				{% if not user.is_authenticated %}{#  If we are not logged in, we want a login link #}
-					{% for provider in allaccess_providers %}{# Goes through all login providers - hopefully only Discord #}
-					<a class="mdl-navigation__link" href="{% url 'allaccess-login' provider.name %}"> {# Puts the login link #}
-						<button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect">
-							<i class="material-icons white">supervisor_account</i><!-- login -->
-						</button>
-					</a>
-					{% endfor %}
-				{% else %} {# We are logged in => We gotta logout now! #}
-					<a class="mdl-navigation__link" href="{% url 'logout' %}">
-						<button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect">
-							<i class="material-icons white">open_in_browser</i><!-- logout -->
-						</button>
-					</a>
-				{% endif %}
-            </nav>
+
+<div class="container">
+    <nav class="navbar navbar-light bg-faded">
+        <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#navbar-header" aria-controls="navbar-header" aria-expanded="false" aria-label="Toggle navigation"></button>
+        <div class="collapse navbar-toggleable-xs" id="navbar-header">
+            <a class="navbar-brand" href="#">SK</a>
+            <ul class="nav navbar-nav">
+                {% block navigationlinks %}
+
+                {% endblock %}
+            </ul>
         </div>
-    </header>
-    <main class="mdl-layout__content">
-        <center>
-            <div id="content">
-                {% block content %}{% endblock %}
+    </nav> <!-- /navbar -->
+
+    <!-- Main component for a primary marketing message or call to action -->
+    <div class="jumbotron">
+        {% block content %} {% endblock %}
+    </div>
+
+</div> <!-- /container -->
 
 
-            </div>
-        </center>
-    </main>
-</div>
+<script
+        src="https://code.jquery.com/jquery-3.1.1.js"
+        integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
+        crossorigin="anonymous">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+<script src="{% static 'sunknightsapp/js/simple.js' %}"></script>
+{#<script src="{% static 'sunknightsapp/js/bootstrap.js' %}"></script>#}
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js"
+        integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js"
+        integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK"
+        crossorigin="anonymous"></script>
+
+{% block scriptload %}{% endblock %}
 <script>
-    $(document).ready( function () {
+    $(document).ready(function () {
         {% block scripts %}{% endblock %}
-    } );
+    });
 </script>
 
 

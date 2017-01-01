@@ -46,6 +46,7 @@ class CreateTournamentForm(BaseForm):
             return self.response(False,'Something went wrong')#TODO better exception
         else:
             serializer=TournamentSerializer(tour)
+            print(serializer.data)
             return self.response(True,{'data':(serializer.data)})
 
 

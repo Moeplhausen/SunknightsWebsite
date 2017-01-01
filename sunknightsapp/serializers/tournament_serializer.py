@@ -21,10 +21,11 @@ class TournamentFightConnectorSerializer(BulkSerializerMixin,serializers.ModelSe
 
 class TournamentSerializer(BulkSerializerMixin,serializers.ModelSerializer):
 
-    fight_connectors=TournamentFightConnectorSerializer(many=True,read_only=True)
-
+    all_registered_fights=GuildFightSerializer(many=True, read_only=True)
+    unfinished_registered_fights=GuildFightSerializer(many=True, read_only=True)
+    finished_registered_fights=GuildFightSerializer(many=True, read_only=True)
 
     class Meta:
         model=Tournament
-        fields=('id','name','description', 'finished','fight_connectors','registered_fights','finished_fights')
+        fields=('id','name','description', 'finished','num_registered_fights','num_finished_fights','all_registered_fights','unfinished_registered_fights','finished_registered_fights')
         list_serializer_class = BulkListSerializer

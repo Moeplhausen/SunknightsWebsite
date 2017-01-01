@@ -5,13 +5,17 @@ from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.contrib.auth.models import Group
 
 from .models.clan_user import ClanUser, ClanUserRoles
-from .models.discord_roles import DiscordRole
+from .models.discord_roles import DiscordRole,SunKnightsGuild
 from .models.discord_server import DiscordServer
 from .models.guildfight import GuildFight
 from .models.guildfight import GuildFightParticipation
-from .models.point_submission import BasicUserPointSubmission,OneOnOneFightSubmission
+from .models.point_submission import PointsManagerAction,OneOnOneFightSubmission,BasicUserPointSubmission
 from .models.points_info import PointsInfo
 from .models.tournament import Tournament,TournamentFightConnector
+from .models.diep_tank import DiepTank,DiepTankInheritance
+from .models.mastery import Mastery
+from .models.diep_gamemode import DiepGamemode
+from .models.daily_quest import DailyQuest
 
 
 # Register your models here.
@@ -71,7 +75,7 @@ class UserAdmin(BaseUserAdmin):
     # The fields to be used in displaying the User model.
     # These override the definitions on the base UserAdmin
     # that reference specific fields on auth.User.
-    list_display = ('discord_id', 'provider', 'discord_nickname', 'is_superuser')
+    list_display = ('discord_id', 'provider', 'discord_nickname', 'is_superuser','is_active')
     list_filter = ('is_superuser',)
     fieldsets = (
         (None, {'fields': ('discord_id', 'provider', 'password')}),
@@ -99,11 +103,18 @@ admin.site.unregister(Group)
 
 admin.site.register(DiscordServer)
 admin.site.register(DiscordRole)
+admin.site.register(SunKnightsGuild)
 admin.site.register(GuildFight)
 admin.site.register(GuildFightParticipation)
 admin.site.register(PointsInfo)
-admin.site.register(BasicUserPointSubmission)
+admin.site.register(PointsManagerAction)
 admin.site.register(OneOnOneFightSubmission)
 admin.site.register(ClanUserRoles)
 admin.site.register(Tournament)
 admin.site.register(TournamentFightConnector)
+admin.site.register(DiepTank)
+admin.site.register(DiepTankInheritance)
+admin.site.register(Mastery)
+admin.site.register(BasicUserPointSubmission)
+admin.site.register(DiepGamemode)
+admin.site.register(DailyQuest)

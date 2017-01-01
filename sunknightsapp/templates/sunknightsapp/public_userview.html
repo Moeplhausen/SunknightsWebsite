@@ -1,0 +1,30 @@
+{% extends "sunknightsapp/base.html" %}
+{% block content %}
+
+    {{ lookuser.discord_nickname }}
+
+    <p>Show Points{{ lookuser.total_points }}</p>
+    <p>Show Leaderboard_place {{ lookuser.leaderboard_place }}</p>
+    <p>Show Masteries
+    <ul>
+
+        {% for mastery in lookuser.masteries.all %}
+
+         <li>   {{ mastery.tank.name }} {{ mastery.tier }}</li>
+
+        {% endfor %}
+
+    </ul>
+    </p>
+    <p>Show last submissions
+
+    {% for submission in lookuser.last_accepted_submissions.all %}
+        {{ submission.date }}
+
+    {% endfor %}
+
+
+    </p>
+
+
+{% endblock %}

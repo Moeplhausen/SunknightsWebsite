@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
+import sys
+
+TESTING = sys.argv[1:2] == ['test']
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -27,6 +31,10 @@ SECRET_KEY = '%(7&4wveamc9)$nd$@(07^ipwksd&1(k@ir#19yh+z#o9g8$0h'
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
+
+POINTSWEBHOOK='https://discordapp.com/api/webhooks/262365691024244746/_dELR1aNqN-2wwgyW9N2vENjaDgLrvi7vx4TeK4yhyxmwuWdssMT8ruqrMHf94bafZiZ'
+
 
 
 # Application definition
@@ -177,6 +185,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-LOGIN_URL = '/'
+LOGIN_URL = '/accounts/login/Discord/'
 
 LOGIN_REDIRECT_URL = '/me'

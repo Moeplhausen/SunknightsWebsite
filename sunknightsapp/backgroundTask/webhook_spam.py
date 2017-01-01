@@ -1,0 +1,181 @@
+from background_task import background
+from django.conf import settings
+import requests
+
+
+redcolor=16711680
+greencolor=65280
+yellowcolor=16776960
+
+def post_to_discord(dictdata):
+    url = settings.POINTSWEBHOOK
+    data = dictdata
+    if not settings.TESTING:
+        r = requests.post(url, json=data)
+    else:
+        pass
+        #print(data)
+
+
+def post_new_guild_fight(fight):
+    data = {'embeds':
+        [
+            {
+                'color':yellowcolor,
+                'fields':
+                [
+                    {'name': 'New GuildFight (id={})'.format(fight.id), 'value': fight.name, 'inline': True},
+                    {'name': 'Date', 'value': str(fight.date), 'inline': True},
+                    {'name': 'Guild 1', 'value': '<@{}>'.format(fight.team1.discord_id), 'inline': True},
+                    {'name': 'Guild 2', 'value': '<@{}>'.format(fight.team2.discord_id), 'inline': True},
+                ]
+            }
+        ]
+    }
+    post_to_discord(data)
+
+
+def post_guild_fight_results(fight):
+    data = {'embeds':
+        [
+            {
+                'color':greencolor,
+                'fields':
+                    [
+                        {'name': 'GuildFight results (id={})'.format(fight.id), 'value': fight.name, 'inline': True},
+                        {'name': 'Date', 'value': str(fight.date), 'inline': True},
+                        {'name': 'winner', 'value': '<@{}>'.format(fight.winner.discord_id), 'inline': True},
+                        {'name': 'loser', 'value': '<@{}>'.format(fight.loser.discord_id), 'inline': True},
+                    ]
+            }
+        ]
+    }
+    post_to_discord(data)
+
+
+
+def post_new_user_point_submission(submission, accepted, decided):
+    data={}
+    if not decided:
+        data = {'embeds':
+            [
+                {
+                    'color':yellowcolor,
+                    'title':'New Point Submission ({})'.format(submission.id),
+                    'fields':
+                    [
+                        {'name': 'From', 'value': submission.pointsinfo.user.discord_nickname, 'inline': True},
+                        {'name': 'Points', 'value': str(submission.points), 'inline': True},
+                        {'name': 'Tank', 'value': submission.tank.name, 'inline': True},
+                        {'name': 'Gamemode', 'value': submission.gamemode.name, 'inline': True},
+                        {'name': 'Proof', 'value': submission.proof, 'inline': True},
+                        {'name': 'Note', 'value': submission.submitterText, 'inline': True},
+                    ]
+                }
+            ]
+        }
+    else:
+        data = {'embeds':
+            [
+                {
+                    'color':greencolor if accepted else redcolor,
+                    'title':'Submission ({})'.format(submission.id),
+                    'fields':
+                        [
+                            {'name': 'From', 'value': submission.pointsinfo.user.discord_nickname, 'inline': True},
+                            {'name': 'Action', 'value': 'Approved' if accepted else 'Rejected', 'inline': True},
+                            {'name': 'Manager', 'value': submission.manager.discord_nickname, 'inline': True},
+                            {'name': 'Manager Note', 'value': submission.managerText, 'inline': True},
+                        ]
+                }
+            ]
+        }
+    post_to_discord(data)
+
+def post_new_manager_submission(submission, accepted):
+    if accepted:
+        data = {'embeds':
+            [
+                {
+                    'color':greencolor,
+                    'title':'Custom Points action ({})'.format(submission.id),
+                    'fields':
+                        [
+                            {'name': 'Member', 'value': submission.pointsinfo.user.discord_nickname, 'inline': True},
+                            {'name': 'Action', 'value': 'Addition' if submission.points>=0 else 'Subtraction', 'inline': True},
+                            {'name': 'Points', 'value': str(submission.points), 'inline': True},
+                            {'name': 'Manager Note', 'value': submission.managerText, 'inline': True},
+                        ]
+                }
+            ]
+        }
+    else:
+        data = {'embeds':
+            [
+                {
+                    'color':redcolor,
+                    'title':'Custom Points action ({})'.format(submission.id),
+                    'fields':
+                        [
+                            {'name': 'Member', 'value': submission.pointsinfo.user.discord_nickname, 'inline': True},
+                            {'name': 'Action', 'value': 'Reverted', 'inline': True},
+                        ]
+                }
+            ]
+        }
+    post_to_discord(data)
+
+
+def post_new_guildfight_points(submission, accepted):
+    data={}
+    if accepted:
+        data = {'embeds':
+            [
+                {
+                    'color':greencolor,
+                    'title':'Guild fight points ({})'.format(submission.id),
+                    'fields':
+                        [
+                            {'name': 'Member', 'value': submission.pointsinfo.user.discord_nickname, 'inline': True},
+                            {'name': 'Action', 'value': 'Addition' if submission.points>=0 else 'Subtraction', 'inline': True},
+                            {'name': 'Points', 'value': str(submission.points), 'inline': True},
+                            {'name': 'Manager Note', 'value': submission.managerText, 'inline': True},
+                        ]
+                }
+            ]
+        }
+    else:
+        data = {'embeds':
+            [
+                {
+                    'color':redcolor,
+                    'title':'Custom Points action ({})'.format(submission.id),
+                    'fields':
+                        [
+                            {'name': 'Member', 'value': submission.pointsinfo.user.discord_nickname, 'inline': True},
+                            {'name': 'Action', 'value': 'Reverted', 'inline': True},
+                        ]
+                }
+            ]
+        }
+    post_to_discord(data)
+
+
+def mastery_unlock(mastery):
+    data = {'embeds':
+        [
+            {
+                'color':greencolor,
+                'title':'Mastery Unlock',
+                'fields':
+                    [
+                        {'name': 'Member', 'value': mastery.pointsinfo.user.discord_nickname, 'inline': True},
+                        {'name': 'Tank', 'value': mastery.tank.name, 'inline': True},
+                        {'name': 'Tier', 'value': str(mastery.tier), 'inline': True},
+                        {'name': 'Manager', 'value': mastery.manager.discord_nickname, 'inline': True},
+                    ]
+            }
+        ]
+    }
+
+    post_to_discord(data)

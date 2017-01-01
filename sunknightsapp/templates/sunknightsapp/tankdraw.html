@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+<head>
+    <title>Network | Basic usage</title>
+
+    <head>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.17.0/vis.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.17.0/vis.min.css"/>
+
+    </head>
+
+    <style type="text/css">
+        #mynetwork {
+            width: 1920px;
+            height: 800px;
+            border: 1px solid lightgray;
+        }
+    </style>
+</head>
+<body>
+
+<p>
+    SK Guild Fight Tank Relations
+</p>
+
+<div id="mynetwork"></div>
+
+<script type="text/javascript">
+    // create an array with nodes
+    var nodes = new vis.DataSet([
+        {% for tank in tanks %}
+            { id:{{ tank.id }},label:'{{ tank.name }}',level:({{ tank.tier}}-1) },
+        {% endfor %}
+    ]);
+
+    // create an array with edges
+    var edges = new vis.DataSet([
+
+        {% for t in inheritance %}
+            {% if  t.parent.name %}{from: {{t.parent.id }}, to:{{ t.me.id}} },{% endif %}
+        {% endfor %}
+    ]);
+
+    // create a network
+    var container = document.getElementById('mynetwork');
+    var data = {
+        nodes: nodes,
+        edges: edges
+    };
+    var options = {
+        layout: {
+            hierarchical: {
+                direction: "UD"
+            }
+        },
+        physics: {
+            enabled: false
+        },
+    };
+    var network = new vis.Network(container, data, options);
+</script>
+</body>
+</html>
+

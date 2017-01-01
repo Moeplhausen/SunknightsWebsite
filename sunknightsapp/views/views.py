@@ -4,10 +4,12 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from ..views.oauth.views import get_client
 from ..models.clan_user import ClanUser
+from ..models.discord_roles import DiscordRole
 from ..models.points_info import PointsInfo
-from ..forms.fights_forms import CreateTournamentForm,DeleteTournamentForm,RequestTournamentsForm
+from ..forms.tournaments_forms import CreateTournamentForm,DeleteTournamentForm,RequestTournamentsForm
 from ..models.tournament import Tournament
 from ..enums.AjaxActions import AjaxAction
+from ..models.diep_tank import DiepTankInheritance,DiepTank
 
 
 def index(request):
@@ -56,12 +58,48 @@ def home(request):
 
 
 @login_required
+def user(request,id):
+    try:
+        user=ClanUser.objects.get(discord_id=id)
+    except ClanUser.DoesNotExist:
+        return render(request, 'sunknightsapp/index.html')
+    else:
+        context={}
+        context['lookuser']=user
+        return render(request, 'sunknightsapp/public_userview.html',context)
+
+
+
+
+@login_required
 def leaderboard(request):
     context = {}
-    userpoints = PointsInfo.objects.all().order_by(
+    userpoints = PointsInfo.objects.filter(user__is_active=True).order_by(
         '-currentpoints')  # the '-' is for reversing the order (so the one who has most points will be on top
     context['userpoints'] = userpoints
     return render(request, 'sunknightsapp/leaderboard.html', context)
+
+@login_required
+def guilds(request):
+    context = {}
+    guilds = DiscordRole.objects.filter(is_clan_guild=True,discord_isDeleted=False).order_by('name')
+    context['guilds'] = guilds
+    return render(request, 'sunknightsapp/guilds.html', context)
+
+
+@login_required
+def guild(request,id):
+    return render(request, 'sunknightsapp/index.html')
+
+
+@login_required
+def tankboard(request):
+    context={}
+    inheritance=DiepTankInheritance.objects.all()
+    tanks=DiepTank.objects.all()
+    context['inheritance']=inheritance
+    context['tanks']=tanks
+    return render(request, 'sunknightsapp/tankdraw.html',context)
 
 
 @login_required
