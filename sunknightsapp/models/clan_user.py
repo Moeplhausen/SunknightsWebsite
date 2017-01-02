@@ -13,7 +13,7 @@ from ..managers.user_manager import UserManager
 from .discord_roles import DiscordRole
 
 class ClanUser(AbstractBaseUser):
-            discord_id=models.PositiveIntegerField(unique=True,default=0,)
+            discord_id=models.BigIntegerField(unique=True,default=0,)
 
             discord_nickname=models.CharField(max_length=50,default='')
 

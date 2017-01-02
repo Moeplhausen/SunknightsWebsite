@@ -5,7 +5,7 @@ from .discord_server import DiscordServer
 class DiscordRole(models.Model):
     name = models.CharField(max_length=30)
     discord_server = models.ForeignKey(DiscordServer, on_delete=models.CASCADE)
-    discord_id = models.PositiveIntegerField(default=0, unique=True)
+    discord_id = models.BigIntegerField(default=0, unique=True)
     discord_color = models.IntegerField(default=0)
     can_manage_points = models.BooleanField(default=False)
     can_manage_wars = models.BooleanField(default=False)

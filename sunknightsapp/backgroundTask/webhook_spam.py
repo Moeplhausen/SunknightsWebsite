@@ -1,4 +1,3 @@
-from background_task import background
 from django.conf import settings
 import requests
 
