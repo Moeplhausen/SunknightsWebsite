@@ -36,12 +36,12 @@ class ClanUserSerializer(BulkSerializerMixin,serializers.ModelSerializer):
     roles=ClanUserRolesSerializer(many=True,read_only=True)
     masteries=MasterySerializer(many=True,read_only=True)
 
-    # open_fights=SmallGuildFightSerializer(many=True,read_only=True)
+    open_fights=SmallGuildFightSerializer(many=True,read_only=True)
     # finished_fights=SmallGuildFightSerializer(many=True,read_only=True)
 
     class Meta:
         model=ClanUser
-        fields=('id','leaderboard_place','avatar','discord_id','discord_nickname','is_active','is_points_manager','is_war_manager','roles','total_points','masteries')
+        fields=('id','leaderboard_place','avatar','discord_id','discord_nickname','is_active','is_points_manager','is_war_manager','roles','total_points','masteries','open_fights')
         list_serializer_class = BulkListSerializer
 
 

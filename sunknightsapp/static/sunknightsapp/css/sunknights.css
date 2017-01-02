@@ -1,77 +1,58 @@
-.demo-layout-transparent {
-  background-color:rgba(0, 0, 0, 0);
-  height:100vh;
+html,body {
+    background-image: url("https://cdn.discordapp.com/attachments/262523059481608192/263270322462130176/PicsArt_12-26-10.12.57.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
 }
-.demo-layout-transparent .mdl-layout__header,
-.demo-layout-transparent .mdl-layout__drawer-button {
-  color: white;
+
+#sun-navbar{
+    background:
+            linear-gradient(
+                    rgba(0, 0, 0, 0.5),
+                    rgba(0, 0, 0, 0.5)
+            )
 }
-font-family: 'Nunito Sans', sans-serif;
-font-family: 'Roboto', sans-serif;
-.semi-transparent {
-	color:rgba(0, 0, 0, 0.5);
+
+
+.card{
+    background-color:transparent;
+    background: linear-gradient(
+            rgba(0, 0, 0, 0.15),
+            rgba(0, 0, 0, 0.15)
+    )
 }
-.md-18 { font-size: 18px; }
-.md-24 { font-size: 24px; }
-.md-36 { font-size: 36px; }
-.md-48 { font-size: 48px; }
-.redbg
-{
-	background-color:#dd0000
+
+#sun-navbar a{
+    color:white;
+    padding:5px;
 }
-.white
-{
-	color:white
+
+#user-nav-bar{
+    margin-bottom: 3em;
+    padding:0.5em;
 }
-.opacity95 {
-    opacity: 0.95;
+
+
+#sk-logo{
+    width:37px;
+    height:37px;
 }
-.scale50 {
-  max-width:50%;
-  height:auto;
+
+
+img.discord-img{
+    width: 200px;
 }
-.scale20 {
-  max-width:20%;
-  height:auto;
-}
-.demo-card-wide.mdl-card {
-  width: 512px;
-}
-.demo-card-wide > .mdl-card__title {
-  color: #fff;
-  height: 176px;
-  background: url('http://www.pptback.com/uploads/earth-and-sun-backgrounds-powerpoint.jpg') center / cover;
-}
-.demo-card-wide > .mdl-card__menu {
-  color: #fff;
-}
-.alignv {
-  position: relative;
-  top: 40%;
-  transform: perspective(1px) translateY(35%);
-}
-.blurple {
-background-color: #7289DA
-}
-.lh3 {
-line-height: 3.0;
-}
-.lh1-5 {
-line-height: 1.5;
-}
-.lh2 {
-line-height: 2.0;
-}
-.lh1 {
-line-height: 1.0;
-}
-.bottompad5px {
-padding-bottom: 5px;
-}
-.bottompad25px {
-padding-bottom: 25px;
-}
+
+
 img.leaderpoint-avatar{
   width:32px;
   height:32px;
+}
+
+#jumbotron-content{
+    background-color:transparent;
+    background:
+            linear-gradient(
+                    rgba(0, 0, 0, 0.1),
+                    rgba(0, 0, 0, 0.1)
+            )
 }

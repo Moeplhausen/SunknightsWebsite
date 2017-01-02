@@ -1,9 +1,71 @@
 {% extends "sunknightsapp/base.html" %}
+
+
 {% block content %}
+
+    <ul id="user-nav-bar" class="nav nav-tabs">
+            <button role="presentation" class="nav-item btn"><a href="#">Submit Score</a></button>
+            <button role="presentation" class="nav-item btn"><a href="#">Submit 1vs1</a></button>
+            <button role="presentation" class="nav-item btn"><a href="#">Open Submissions</a></button>
+            <button role="presentation" class="nav-item btn"><a href="#">Accepted Submissions</a></button>
+    </ul>
+
     {% load widget_tweaks %}
 
-    Hello {{user.discord_nickname}} <img src="{{ user.avatar_url }}">,
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-4">
+                <img src="{{ user.avatar_url }}">
+            </div>
 
+            <div class="col-xs-12 col-sm-8">
+                <p>Leaderboard Place: {{ user.leaderboard_place }}</p>
+                <p>Points: {{ user.total_points }}</p>
+
+                <p>Next Fights you registered to:</p>
+                {% if user.open_fights.all.count != 0 %}
+
+                    <ul>
+                    {% for fight in user.open_fights %}
+                        <li>
+                            {{ fight.date }}:{{ fight.name }}
+                        </li>
+                    {% endfor %}
+
+
+
+                    </ul>
+                {% else %}
+                    None
+                {% endif %}
+
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-1">
+                Masteries:
+            </div>
+            <div class="col-xs-12 col-sm-11">
+
+                {% if user.masteries.all.count < 1 %}
+                    You don't have any masteries unlocked yet :(
+                {% endif %}
+
+                {% for mastery in user.masteries.all %}
+
+                    <div class="{{ mastery.tank.name }} tier-{{ mastery.tier }}">{{ mastery.tank.name }}</div>
+
+                {% endfor %}
+
+            </div>
+
+
+        </div>
+
+    </div>
+    {% comment %}
 <p>You currently have {{user.pointsinfo.currentpoints}} points!</p>
 <p>
     Your roles:
@@ -61,27 +123,25 @@ Create new Tournament:
 
 <a href="leaderboard">Leaderboard</a>
 
-<a href="logout">Logout</a>
-
-
-<script language="javascript" type="text/javascript">
-    // Submit post on submit
-$('#new-tournament-form, .delete-tournament-form, #request-all-tournaments-form').on('submit',function(event){
-			event.preventDefault();
-			var form=new FormData(this);
-			sunKnightsJsonRequest(form,function(result,data){
-				if (result){
-					console.log('refresh view?')
-					}
-				else {
-					console.log('fuck this shit')
-
-				}
-			},false,false);
-			this.reset();
-});
-
-</script>
-
-
+<a href="logout">Logout</a>{% endcomment %}
 {% endblock %}
+
+{% block scripts %}
+    // Submit post on submit
+    $('#new-tournament-form, .delete-tournament-form, #request-all-tournaments-form').on('submit',function(event){
+    event.preventDefault();
+    var form=new FormData(this);
+    sunKnightsJsonRequest(form,function(result,data){
+    if (result){
+    console.log('refresh view?')
+    }
+    else {
+    console.log('fuck this shit')
+
+    }
+    },false,false);
+    this.reset();
+    });
+{% endblock %}
+
+

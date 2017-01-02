@@ -1,5 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_http_methods
+from django.contrib.auth.views import logout
+from django.shortcuts import redirect
 from django.shortcuts import render
 from django.http import JsonResponse
 from ..views.oauth.views import get_client
@@ -13,48 +15,19 @@ from ..models.diep_tank import DiepTankInheritance,DiepTank
 
 
 def index(request):
+
+    if request.user.is_authenticated():
+        return render(request, 'sunknightsapp/userview.html', {})
+
     context = {}
-    # if request.user.is_authenticated():
-    #     try:
-    #         access = request.user.accountaccess_set.all()[0]
-    #     except IndexError:
-    #         access = None
-    #     else:
-    #         client = get_client(access.provider,access.access_token or '')
-    #         context['info'] = client.get_profile_info(raw_token=access.access_token)
+
     return render(request, 'sunknightsapp/index.html', context)
 
 
-@login_required
-def home(request):
-    if request.method=='POST':
-        print(request.POST)
+def logoutview(request):
+    logout(request)
+    return redirect('index')
 
-        ajax_id=request.POST['ajax_action_id']
-        print(ajax_id)
-
-
-        form=CreateTournamentForm(request.POST)
-        if (form.is_valid()):
-            form.save()
-        else:
-            print('inavalid')
-            print('---')
-            print(form.non_field_errors())
-            field_errors = [ (field.label, field.errors) for field in form]
-            print(field_errors)
-            print('---')
-
-
-
-
-    tours=Tournament.objects.filter(finished=False).order_by('name')
-    context = {'new_tournament_form':CreateTournamentForm(),
-               'delete_tournament_form':DeleteTournamentForm,
-               'request_tournaments_form':RequestTournamentsForm,
-               'tours':tours
-               }  # user object is always stored in the context automatically
-    return render(request, 'sunknightsapp/userview.html', context)
 
 
 @login_required

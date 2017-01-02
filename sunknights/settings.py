@@ -187,4 +187,4 @@ STATIC_URL = '/static/'
 
 LOGIN_URL = '/accounts/login/Discord/'
 
-LOGIN_REDIRECT_URL = '/me'
+LOGIN_REDIRECT_URL = '/'

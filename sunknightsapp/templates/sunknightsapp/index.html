@@ -1,38 +1,40 @@
 {% extends "sunknightsapp/base.html" %}
 {% block content %}
-<div class="alignv">
-    <div class="bottompad25px">
-        <div class="demo-card-wide mdl-card mdl-shadow--2dp">
-            <div class="mdl-card__title">
-                <h2 class="mdl-card__title-text"><font face="Nunito Sans"
-                                                       class="opacity95">Welcome</font>
-                </h2>
-            </div>
-            <div class="mdl-card__supporting-text">
-                <font face="Nunito Sans" color="#212121">
-                    Sun Knights is a competitive clan based on the <a href="http://diep.io"
-                                                                      style="text-decoration:none"><font
-                        color="#212121">diep.io</font></a> game. Join us to enhance your skills, play
-                    with
-                    experienced players, take part in events, complete daily quests and unravel the
-                    gamer in
-                    you!
-                </font>
-            </div>
-            <a href="https://discord.gg/j7JcTr7" style="text-decoration:none"
-               class="mdl-js-ripple-effect">
-                <div class="mdl-card__actions mdl-card--border mdl-js-ripple-effect blurple lh3">
-                    <font face="Nunito Sans" color="white" size="4" class="lh1-5">Join us at</font>
-                    <img src="https://discordapp.com/assets/93608abbd20d90c13004925014a9fd01.svg"
-                         class="scale20 lh1 bottompad5px"></img>
+
+    <div class="row">
+        <div class="col-sm-6 offset-sm-3">
+            {% if errors %}
+                <div class="alert alert-danger" role="alert">
+                    <ul>
+                    {% for error in errors %}
+                    <li>    <p>{{ error }}</p></li>
+                    {% endfor %}
+                    </ul>
                 </div>
-            </a>
-            <div class="mdl-card__menu">
-                <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-                    <i class="material-icons md-18">share</i>
-                </button>
+            {% endif %}
+            <div id="card-sk-description" class="card sk-description">
+                <div class="card-block">
+                    <h4 class="card-title">Sun Knights</h4>
+                    <p class="card-text">
+                        Sun Knights is a competitive clan based on the <a href="http://diep.io"></a> game. Join us to
+                        enhance
+                        your
+                        skills,
+                        play with experienced players, take part in events, complete daily quests and unravel the gamer
+                        in you!
+                    </p>
+                    <div class="discord-lini">
+                        <a href="https://discord.gg/j7JcTr7">
+                            <img src="https://discordapp.com/assets/07714cff6af26f83c1f74b89bc7dd48b.svg"
+                                 class="discord-img">
+                            </img>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
+
+
+
 {% endblock %}

@@ -26,7 +26,6 @@ router.register(r'mastery',mastery.MasteriesViewSet)
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
-    url(r'^me',views.home,name='userview'),
     url(r'^user/(?P<id>[0-9]+)',views.user),
     url(r'^guilds',views.guilds,name='guilds'),
     url(r'^guilds/(?P<id>[0-9]+)',views.guild),
@@ -34,7 +33,7 @@ urlpatterns = [
     url(r'^tankdraw', views.tankboard, name='tankboard'),
     url(r'^api/',include(router.urls)),
     url(r'^ajaxhandler/',views.ajaxhandler, name='ajaxhandler'),
-    url(r'^logout/$', logout_then_login, name='logout'),
+    url(r'^logout/$', views.logoutview, name='logout'),
 
     url(r'^accounts/login/(?P<provider>Discord)/$',
         OAuthRedirectDiscord.as_view(params={'scope': 'identify guilds'})),

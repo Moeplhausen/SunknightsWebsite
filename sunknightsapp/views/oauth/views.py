@@ -7,6 +7,9 @@ from django.shortcuts import redirect
 from ...models.clan_user import ClanUser
 from allaccess.models import AccountAccess
 from django.contrib.auth import authenticate, login
+from django.contrib.messages import error
+from django.shortcuts import render,render_to_response
+
 
 
 
@@ -75,7 +78,7 @@ class OAuthCallbackDiscord(OAuthCallback):
             
             user=self.get_or_create_user(provider,access,info)
             if user is None:
-                return redirect('/',error='Unkown User')#TODO redirect
+                return render_to_response('sunknightsapp/index.html',{'errors':['You are not in the SK Clan']})
             access.user = user
             AccountAccess.objects.filter(pk=access.pk).update(user=user)
             user = authenticate(provider=access.provider, identifier=access.identifier)
