@@ -1,5 +1,5 @@
 from rest_framework import viewsets
-from ...serializers.TankSerializer import DiepTankSerializer,DiepTankInheritanceSerializer
+from ...serializers.tank_serializer import DiepTankSerializer,DiepTankInheritanceSerializer
 from ...models.diep_tank import DiepTank,DiepTankInheritance
 
 

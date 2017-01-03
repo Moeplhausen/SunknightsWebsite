@@ -3,7 +3,7 @@ from django.contrib.auth.views import logout_then_login
 
 
 from .views import views
-from .views.api import roles,servers,users,user_roles,tournaments,fights,discord_roles,points_manager_action,diep_tanks,mastery
+from .views.api import roles,servers,users,user_roles,tournaments,fights,discord_roles,points_submissions,diep_tanks,mastery
 from rest_framework_bulk.routes import BulkRouter
 from .views.oauth.views import OAuthCallbackDiscord,OAuthRedirectDiscord
 
@@ -13,7 +13,8 @@ router.register(r'roles',roles.RolesViewSet)
 router.register(r'servers',servers.ServersViewSet)
 router.register(r'users',users.ClanUsersViewSet)
 router.register(r'pointsinfo',users.ClanUserPointsInfoViewSet)
-router.register(r'managerpointsaction',points_manager_action.PointsManagerActionViewSet)
+router.register(r'userpointssubmission', points_submissions.BasicUserPointSubmissionViewSet)
+router.register(r'managerpointsaction', points_submissions.PointsManagerActionViewSet)
 router.register(r'userroles',user_roles.UserRolesViewSet)
 router.register(r'tournaments',tournaments.TournamentsViewSet)
 router.register(r'tournamentsfightsconnectors',tournaments.TournamentsFightsConnectorViewSet)
@@ -31,6 +32,7 @@ urlpatterns = [
     url(r'^guilds/(?P<id>[0-9]+)',views.guild),
     url(r'^leaderboard', views.leaderboard, name='leaderboard'),
     url(r'^tankdraw', views.tankboard, name='tankboard'),
+    url(r'^managesubmissions', views.manage_submissions, name='managesubmissions'),
     url(r'^api/',include(router.urls)),
     url(r'^ajaxhandler/',views.ajaxhandler, name='ajaxhandler'),
     url(r'^logout/$', views.logoutview, name='logout'),

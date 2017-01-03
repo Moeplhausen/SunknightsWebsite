@@ -2,138 +2,66 @@
 
 
 {% block content %}
-
-    <ul id="user-nav-bar" class="nav nav-tabs">
-            <button role="presentation" class="nav-item btn"><a href="#">Submit Score</a></button>
-            <button role="presentation" class="nav-item btn"><a href="#">Submit 1vs1</a></button>
-            <button role="presentation" class="nav-item btn"><a href="#">Open Submissions</a></button>
-            <button role="presentation" class="nav-item btn"><a href="#">Accepted Submissions</a></button>
-    </ul>
-
     {% load widget_tweaks %}
 
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12 col-sm-4">
-                <img src="{{ user.avatar_url }}">
-            </div>
 
-            <div class="col-xs-12 col-sm-8">
-                <p>Leaderboard Place: {{ user.leaderboard_place }}</p>
-                <p>Points: {{ user.total_points }}</p>
-
-                <p>Next Fights you registered to:</p>
-                {% if user.open_fights.all.count != 0 %}
-
-                    <ul>
-                    {% for fight in user.open_fights %}
-                        <li>
-                            {{ fight.date }}:{{ fight.name }}
-                        </li>
-                    {% endfor %}
+    <ul class="nav nav-tabs">
+        <li class="nav-item active"><a href="#overview" class="nav-link" data-toggle="tab">Overview</a></li>
+        <li class="nav-item"><a href="#submit-pts" class="nav-link" data-toggle="tab">Submit Score</a></li>
+        <li class="nav-item"><a href="#open-submissions" class="nav-link" data-toggle="tab">Open Submission</a></li>
+        <li class="nav-item"><a href="#decided-submissions" class="nav-link" data-toggle="tab">Decided Submission</a>
+        </li>
+    </ul>
 
 
-
-                    </ul>
-                {% else %}
-                    None
-                {% endif %}
-
-
-            </div>
+    <div class="tab-content clearfix">
+        <div class="tab-pane active" id="overview">
+            {% include "sunknightsapp/snippets/useroverview.html" %}
         </div>
-
-        <div class="row">
-            <div class="col-xs-12 col-sm-1">
-                Masteries:
-            </div>
-            <div class="col-xs-12 col-sm-11">
-
-                {% if user.masteries.all.count < 1 %}
-                    You don't have any masteries unlocked yet :(
-                {% endif %}
-
-                {% for mastery in user.masteries.all %}
-
-                    <div class="{{ mastery.tank.name }} tier-{{ mastery.tier }}">{{ mastery.tank.name }}</div>
-
-                {% endfor %}
-
-            </div>
-
-
+        <div class="tab-pane" id="submit-pts">
+            {% include "sunknightsapp/snippets/pointssubmitform.html" %}
+        </div>
+        <div class="tab-pane" id="open-submissions">
+            {% include "sunknightsapp/snippets/opensubmissions.html" %}
+        </div>
+        <div class="tab-pane" id="decided-submissions">
+            {% include "sunknightsapp/snippets/decidedsubmissions.html" %}
         </div>
 
     </div>
-    {% comment %}
-<p>You currently have {{user.pointsinfo.currentpoints}} points!</p>
-<p>
-    Your roles:
-<ul>
-    {% for userrole in user.roles.all %}
-    <li> {{userrole.role.name}} (guild: {{userrole.role.is_clanguild}})</li>
-    {% endfor %}
-</ul>
-</p>
 
-{% if tours %}
-Current Tournaments:
-<ul>
-    {% for tournament in tours %}
-    <li>{{tournament}}
-        <form class="delete-tournament-form" method="post">
-            {% csrf_token %}
-            {{delete_tournament_form.ajax_action_id}}
-
-            <input id="id_pk_id" name="pk_id" type="hidden" value="{{tournament.pk}}">
-            <input type="submit" value="Delete"/>
-        </form>
-    </li>
-    {% endfor %}
-</ul>
-
-{% endif %}
-
-
-{% if user.is_war_manager %}
-Create new Tournament:
-
-<form id="new-tournament-form" method="post">
-    {% csrf_token %}
-    {% for field in new_tournament_form.hidden_fields %}
-    {{ field }}
-    {% endfor %}
-
-    {% render_field new_tournament_form.name class+="mdl-textfield__input" %}
-    {% render_field new_tournament_form.description class+="mdl-textfield__input" %}
-    <button class="btn waves-effect waves-light" type="submit" name="action">Submit
-        <i class="material-icons right">send</i>
-    </button>
-</form>
-
-{% endif %}
-
-
-<form id="request-all-tournaments-form" method="post">
-            {% csrf_token %}
-            {{request_tournaments_form.ajax_action_id}}
-     <input type="submit" value="RetrieveTournamentsButDontDoAnything"/>
-</form>
-
-
-<a href="leaderboard">Leaderboard</a>
-
-<a href="logout">Logout</a>{% endcomment %}
 {% endblock %}
 
 {% block scripts %}
-    // Submit post on submit
-    $('#new-tournament-form, .delete-tournament-form, #request-all-tournaments-form').on('submit',function(event){
+    var datatableopensubmissions = $('#open-submissions-table').DataTable();
+
+
+    $('#recordsubmit').on('submit',function(event){
     event.preventDefault();
+
+    //set default note if nothing was set
+
+    var note=$('#submitterspam').val()
+    if (note=="")
+    $('#submitterspam').val('None')
+
+
+
+
     var form=new FormData(this);
+
+
+    $('#sbmrecord').modal('hide')
     sunKnightsJsonRequest(form,function(result,data){
     if (result){
-    console.log('refresh view?')
+    submission=data['message']['data']
+    datatableopensubmissions.row.add([
+        submission['id'],
+        submission['tank']['name'],
+        submission['gamemode']['name'],
+        submission['points'],
+        "<a href=\""+submission['proof']+"\">Prooflink</a>"
+    ]).draw(false)
     }
     else {
     console.log('fuck this shit')
@@ -142,6 +70,7 @@ Create new Tournament:
     },false,false);
     this.reset();
     });
+
 {% endblock %}
 
 

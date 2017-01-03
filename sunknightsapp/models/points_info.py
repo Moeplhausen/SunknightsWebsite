@@ -21,7 +21,7 @@ class PointsInfo(models.Model):
 
     @property
     def leaderboard_place(self):
-        aggregate = PointsInfo.objects.filter(user__is_active=True).filter(totalpoints__lt=self.totalpoints).aggregate(ranking=Count('totalpoints'))
+        aggregate = PointsInfo.objects.filter(user__is_active=True).filter(totalpoints__gt=self.totalpoints).aggregate(ranking=Count('totalpoints'))
         return aggregate['ranking'] + 1
 
 

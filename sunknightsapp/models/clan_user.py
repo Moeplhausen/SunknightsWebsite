@@ -13,7 +13,7 @@ from ..managers.user_manager import UserManager
 from .discord_roles import DiscordRole
 
 class ClanUser(AbstractBaseUser):
-            discord_id=models.BigIntegerField(unique=True,default=0,)
+            discord_id=models.CharField(max_length=20,unique=True,default=0,)
 
             discord_nickname=models.CharField(max_length=50,default='')
 
@@ -111,6 +111,17 @@ class ClanUser(AbstractBaseUser):
             def last_accepted_submissions(self):
                 from .point_submission import BasicPointSubmission
                 return BasicPointSubmission.objects.filter(pointsinfo=self.pointsinfo,decided=True,accepted=True)
+
+
+            @property
+            def last_decided_userpoint_submissions(self):
+                from .point_submission import BasicUserPointSubmission
+                return BasicUserPointSubmission.objects.filter(pointsinfo=self.pointsinfo,decided=True)
+
+            @property
+            def last_open_submissions(self):
+                from .point_submission import BasicUserPointSubmission
+                return BasicUserPointSubmission.objects.filter(pointsinfo=self.pointsinfo,decided=False)
 
 
 

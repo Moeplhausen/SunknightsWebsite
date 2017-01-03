@@ -30,14 +30,7 @@ class Mastery(models.Model):
         # https://web.archive.org/web/20120715042306/http://codeblogging.net/blogs/1/14
 
 
-@receiver(post_save, sender=Mastery)
-def update_points_on_save(sender, instance, created=False, **kwargs):
-    """This is an extremly lazy (not efficient) method to always keep currentpoints up to date -
-    regardless if a submission was accepted, unaccapted, created, deleted, whatever.
-    A better method would be to just add/subtract points on specific actions"""
-
-    mastery = instance
-    tier = mastery.tier
+def getPointsByMasteryTier(tier:int):
     points = 0
 
     if tier is 1:
@@ -46,6 +39,20 @@ def update_points_on_save(sender, instance, created=False, **kwargs):
         points = 15
     elif tier is 3:
         points = 30
+
+    return points
+
+
+
+@receiver(post_save, sender=Mastery)
+def update_points_on_save(sender, instance, created=False, **kwargs):
+    """This is an extremly lazy (not efficient) method to always keep currentpoints up to date -
+    regardless if a submission was accepted, unaccapted, created, deleted, whatever.
+    A better method would be to just add/subtract points on specific actions"""
+
+    mastery = instance
+    tier = mastery.tier
+    points = getPointsByMasteryTier(tier)
     if (mastery.points != points) or created:
         mastery.points = points
         mastery.save()
@@ -84,6 +91,9 @@ def update_submission_points_on_save(sender, instance, created=False, **kwargs):
     manager = submission.manager
 
     if submission.accepted and tier > 0:  # check if another mastery can be granted
+
+        print(submission)
+
         try:
             mastery = Mastery.objects.get(tank=tank, pointsinfo=pointsinfo)
         except Mastery.DoesNotExist:
@@ -92,6 +102,10 @@ def update_submission_points_on_save(sender, instance, created=False, **kwargs):
         else:
             if mastery.fromSubmission is False:
                 mastery.fromSubmission = True
+                #old masteries have their points in oldpoints. We have to subtract those points
+                mastery.pointsinfo.oldpoints=mastery.pointsinfo.oldpoints-getPointsByMasteryTier(mastery.tier)#TODO add unit test
+                mastery.pointsinfo.save()
+
                 mastery.save()
 
             if mastery.tier < tier:

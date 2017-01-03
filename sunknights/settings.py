@@ -15,6 +15,10 @@ import sys
 
 TESTING = sys.argv[1:2] == ['test']
 
+INTERNAL_IPS = (
+    '127.0.0.1',
+)
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -30,7 +34,7 @@ SECRET_KEY = '%(7&4wveamc9)$nd$@(07^ipwksd&1(k@ir#19yh+z#o9g8$0h'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['sunknights.moepl.eu']
+ALLOWED_HOSTS = ['sunknights.moepl.eu','127.0.0.1']
 
 
 POINTSWEBHOOK='https://discordapp.com/api/webhooks/262365691024244746/_dELR1aNqN-2wwgyW9N2vENjaDgLrvi7vx4TeK4yhyxmwuWdssMT8ruqrMHf94bafZiZ'
@@ -84,6 +88,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'sunknightsapp.middleware.StrictAuthentication.StrictAuthentication',
 ]
 
 ROOT_URLCONF = 'sunknights.urls'

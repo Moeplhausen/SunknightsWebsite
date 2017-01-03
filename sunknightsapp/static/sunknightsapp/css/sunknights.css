@@ -1,8 +1,12 @@
 html,body {
-    background-image: url("https://cdn.discordapp.com/attachments/262523059481608192/263270322462130176/PicsArt_12-26-10.12.57.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
+    background: -webkit-linear-gradient(90deg, #FBC926 10%, #C3922E 90%); /* Chrome 10+, Saf5.1+ */
+    background: -moz-linear-gradient(90deg, #FBC926 10%, #C3922E 90%); /* FF3.6+ */
+    background: -ms-linear-gradient(90deg, #FBC926 10%, #C3922E 90%); /* IE10 */
+    background: -o-linear-gradient(90deg, #FBC926 10%, #C3922E 90%); /* Opera 11.10+ */
+    background: linear-gradient(90deg, #FBC926 10%, #C3922E 90%); /* W3C */
 }
+
+
 
 #sun-navbar{
     background:
@@ -37,10 +41,16 @@ html,body {
     height:37px;
 }
 
+#masteries-user-row{
+    margin-top: 1em;
+}
+
 
 img.discord-img{
     width: 200px;
 }
+
+
 
 
 img.leaderpoint-avatar{
@@ -55,4 +65,21 @@ img.leaderpoint-avatar{
                     rgba(0, 0, 0, 0.1),
                     rgba(0, 0, 0, 0.1)
             )
+}
+
+.dropdown-toggle {
+    border: 1px solid rgba(0, 0, 0, 0.14902) !important;
+    text-shadow: none !important;
+    color: black !important;
+    font-weight: normal !important;
+
+}
+
+#submit-tank-picker{
+    margin-bottom: 2em !important;
+}
+
+/* make the images on the record submit select a bit more to the right */
+.dropdown-menu li {
+    padding: 0px 15px 1px !important;
 }

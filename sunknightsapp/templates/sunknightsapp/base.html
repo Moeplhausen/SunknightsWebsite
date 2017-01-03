@@ -1,18 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Required meta tags always come first -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+<head>
     {% load static %}
 
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/dataTables.material.min.css"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css"
           integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap4.min.css"/>
-    <link rel="stylesheet" type="text/css"
-          href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.5/css/bootstrap.css"/>
+{#    <link rel="stylesheet" type="text/css"#}
+{#          href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.5/css/bootstrap.css"/>#}
 
 
-    <link rel="stylesheet" type="text/css" href="{% static 'sunknightsapp/css/sunknights.css' %}"/>
-    {#    <link rel="stylesheet" type="text/css" href="{% static 'sunknightsapp/css/bootstrap.css' %}"/>#}
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/css/bootstrap-select.min.css">
+
+    {% if debug %}{# prevent caching of css files #}
+        <link rel="stylesheet" type="text/css" href="{% static 'sunknightsapp/css/sunknights.css' %}?{% now "U" %}"/>
+        <link rel="stylesheet" type="text/css" href="{% static 'sunknightsapp/css/bootstrap.css' %}?{% now "U" %}"/>
+        <link rel="stylesheet" type="text/css" href="{% static 'sunknightsapp/css/tanks.css' %}?{% now "U" %}"/>
+
+        {% else %}
+
+        <link rel="stylesheet" type="text/css" href="{% static 'sunknightsapp/css/sunknights.css' %}"/>
+        <link rel="stylesheet" type="text/css" href="{% static 'sunknightsapp/css/bootstrap.css' %}"/>
+        <link rel="stylesheet" type="text/css" href="{% static 'sunknightsapp/css/tanks.css' %}"/>
+
+    {% endif %}
+
+
+
 
 
     {% block header %}{% endblock %}
@@ -29,7 +50,7 @@
                 <a href="{% url 'index' %}">
                     <img id="sk-logo"
                          src="https://cdn.discordapp.com/attachments/262523059481608192/263270322462130176/PicsArt_12-26-10.12.57.jpg"></img>
-                    Home
+                    SK Clan
                 </a>
             </span>
 
@@ -48,7 +69,7 @@
             {% endif %}
             {% if user.is_points_manager %}
 
-                <a href="">
+                <a href="{% url 'managesubmissions' %}">
                     Manage Submissions
                 </a>
 
@@ -68,15 +89,13 @@
 
             {% endblock %}
 
-            <span class="float-xs-right">
 
                     {% if user.is_authenticated %}
-                        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                        <a class="float-xs-right" href="{% url 'logout' %}">Logout</a>
                     {% else %}
-                        <a class="nav-link" href="/accounts/login/Discord">Login</a>
+                        <a class="float-xs-right" href="/accounts/login/Discord">Login</a>
                     {% endif %}
 
-            </span>
         </div>
     </nav> <!-- /navbar -->
 
@@ -95,25 +114,30 @@
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 <script src="{% static 'sunknightsapp/js/simple.js' %}"></script>
-{#<script src="{% static 'sunknightsapp/js/bootstrap.js' %}"></script>#}
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js"
         integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB"
         crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js"
-        integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK"
-        crossorigin="anonymous"></script>
+{#<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js"#}
+{#        integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK"#}
+{#        crossorigin="anonymous"></script>#}
+<script src="{% static 'sunknightsapp/js/bootstrap.js' %}"></script>
+
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap4.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/js/bootstrap-select.min.js"></script>
 
 
 {% block scriptload %}{% endblock %}
 <script>
+    var csrftoken = $.cookie('csrftoken');
     $(document).ready(function () {
         {% block scripts %}{% endblock %}
     });
 </script>
+{% block scriptself %}{% endblock %}
 
 
 </body>

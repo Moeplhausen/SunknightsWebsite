@@ -1,0 +1,27 @@
+<table id="open-submissions-table" class="display" cellspacing="0" width="100%">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Tank</th>
+        <th>Gamemode</th>
+        <th>Expected Points</th>
+        <th>Proof</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for submission in user.last_open_submissions %}
+        <tr>
+
+            <td>{{ submission.id }}</td>
+            <td>{{ submission.tank.name }}</td>
+            <td>{{ submission.gamemode.name }}</td>
+            <td>{{ submission.points }}</td>
+            <td><a href="{{ submission.proof }}">Prooflink</a></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+
+
+

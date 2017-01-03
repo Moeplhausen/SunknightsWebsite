@@ -1,23 +1,29 @@
 from django.contrib.auth.decorators import login_required
-from django.views.decorators.http import require_http_methods
+from ..decorators.login_decorators import points_manager_required
 from django.contrib.auth.views import logout
+from django.http import JsonResponse
 from django.shortcuts import redirect
 from django.shortcuts import render
-from django.http import JsonResponse
-from ..views.oauth.views import get_client
+from django.views.decorators.http import require_http_methods
+
+from ..enums.AjaxActions import AjaxAction
+from ..forms.tournaments_forms import CreateTournamentForm,DeleteTournamentForm,RequestTournamentsForm
+from ..forms.points_forms import SubmitPointsForm,RetriveUserSubmissionsPointsForm,DecideUserPointSubmissionForm
 from ..models.clan_user import ClanUser
+from ..models.diep_tank import DiepTankInheritance,DiepTank
 from ..models.discord_roles import DiscordRole
 from ..models.points_info import PointsInfo
-from ..forms.tournaments_forms import CreateTournamentForm,DeleteTournamentForm,RequestTournamentsForm
-from ..models.tournament import Tournament
-from ..enums.AjaxActions import AjaxAction
-from ..models.diep_tank import DiepTankInheritance,DiepTank
+from ..models.diep_gamemode import DiepGamemode
 
 
 def index(request):
 
     if request.user.is_authenticated():
-        return render(request, 'sunknightsapp/userview.html', {})
+        tanks=DiepTank.objects.all()
+        gamemodes=DiepGamemode.objects.all()
+        context={'tanks':tanks,'gamemodes':gamemodes,'submitform':SubmitPointsForm}
+
+        return render(request, 'sunknightsapp/userview.html', context)
 
     context = {}
 
@@ -33,6 +39,8 @@ def logoutview(request):
 @login_required
 def user(request,id):
     try:
+        print("id")
+        print(id)
         user=ClanUser.objects.get(discord_id=id)
     except ClanUser.DoesNotExist:
         return render(request, 'sunknightsapp/index.html')
@@ -64,6 +72,11 @@ def guilds(request):
 def guild(request,id):
     return render(request, 'sunknightsapp/index.html')
 
+@points_manager_required
+def manage_submissions(request):
+    context={'retrieveusersform':RetriveUserSubmissionsPointsForm,'decideuserpointsubmissionid':AjaxAction.DECIDEUSERPOINTUSUBMISSION.value,'retrieveusersubmissionsid':AjaxAction.RETRIEVEUSERSUBMISSIONS.value}
+    return render(request,'sunknightsapp/managesubmissions.html',context)
+
 
 @login_required
 def tankboard(request):
@@ -94,6 +107,12 @@ def ajaxhandler(request):
         form=DeleteTournamentForm(request.POST)
     elif actionid is AjaxAction.GETTOURNAMENTS.value:
         form=RequestTournamentsForm(request.POST)
+    elif actionid is AjaxAction.SUBMITPOINTS.value:
+        form=SubmitPointsForm(request.POST)
+    elif actionid is AjaxAction.RETRIEVEUSERSUBMISSIONS.value:
+        form=RetriveUserSubmissionsPointsForm(request.POST)
+    elif actionid is AjaxAction.DECIDEUSERPOINTUSUBMISSION.value:
+        form=DecideUserPointSubmissionForm(request.POST)
 
 
     if form is None:

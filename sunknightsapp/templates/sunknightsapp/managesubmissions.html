@@ -1,0 +1,143 @@
+
+
+{% extends "sunknightsapp/base.html" %}
+{% block content %}
+    <h3>Score Submissions</h3>
+
+    <form action="{% url 'ajaxhandler' %}" id="recordsubmit" method="POST">
+        {% csrf_token %}
+        {{ retrieveusersform.ajax_action_id }}
+    </form>
+    <div class="table-responsive">
+        <table id="points-submissions-table" class="display" cellspacing="0" width="100%">
+            <thead>
+            <tr>
+                <th>User</th>
+                <th>Tank</th>
+{#                <th>Gamemode</th>#}
+                <th>Score</th>
+                <th>Proof</th>
+{#                <th>Date</th>#}
+                <th>Submitter Note</th>
+                <th>Manager Note</th>
+                <th>Points</th>
+                <th>action</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+
+{% endblock %}
+
+
+{% block scriptself %}
+    <script>
+        $(document).ready(function () {
+            function decideSubmission() {
+                $('.decisionbtnfucker').click(function () {
+                    var id = $(this).val();
+                    var element = $(this);
+                    var points = $("#points-manager-"+id).val()
+                    var managerText=$("#manager-note-"+id).val()
+                    if (managerText=="")
+                        managerText="None"
+
+
+                    var accepted=$(this).hasClass("approve-submission")
+
+                    element.closest("tr").find('input,button').attr('disabled','true');
+
+                    $.ajax({
+                        type: 'POST',
+                        url: "{% url 'ajaxhandler' %}",
+                        data: {csrfmiddlewaretoken: csrftoken,ajax_action_id:{{ decideuserpointsubmissionid }},pk_id:id,managerText:managerText, accepted: accepted, points: points},
+                        success: function (data, textStatus, xhr) {
+                            console.log(data);
+                            console.log(xhr);
+                            if (xhr.status == '200') {
+                                //table.row(element.closest("tr")).remove().draw(false)
+                                element.closest("tr").remove();
+                                $('#alertsContainer').append("<div class=\"alert alert-success alert-dismissible fade in\" role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>" + data['msg'] + "<strong></div>")
+                            }
+                            else {
+                                $('#alertsContainer').append("<div class=\"alert alert-danger alert-dismissible fade in\" role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>" + data['msg'] + "<strong></div>")
+                            }
+                        }
+                    });
+                })
+            }
+            var table=$('#points-submissions-table').DataTable({
+                "fnDrawCallback": function (oSettings) {
+                    decideSubmission()
+                },
+                "ajax": {
+                    "url": "{% url 'ajaxhandler' %}",
+                    "dataSrc": function (json) {
+{#                        console.log(json)#}
+                        var data = json['message']['data']
+                        var return_data = new Array();
+                        for (var i = 0; i < data.length; i++) {
+                            var action = '<span style="white-space:nowrap"> \
+                                    <button class="btn btn-success btn-xs btn-detail decisionbtnfucker approve-submission" \
+                                            value="' + data[i].id + '">Approve \
+                                    </button> \
+                                    <button class="btn btn-danger btn-xs btn-delete decisionbtnfucker deny-submission" \
+                                            value="' + data[i].id + '">Deny \
+                                    </button></span>';
+
+                            var username = data[i].pointsinfo.user.discord_nickname
+                            var discorduserid = data[i].pointsinfo.user.discord_id
+                            var user = '<a href="/user/' + discorduserid + '">' + username + '</a>';
+
+                            var managertext = '<textarea class="form-control" id="manager-note-' + data[i].id + '" rows="3"></textarea>'
+                            var points = '<input class="form-control" type="number" value="'+data[i].points+'" id="points-manager-' + data[i].id + '">'
+
+
+                            return_data.push({
+                                'user': user,
+                                'tank': data[i].tank,
+                                'gamemode': data[i].gamemode,
+                                'score': data[i].score,
+                                'date': data[i].date,
+                                'points':points,
+                                'submitter-note': data[i].submitterText,
+                                'manager-note': managertext,
+                                'proof': '<a href="' + data[i].proof + '">Prooflink</a>',
+                                'action': action
+                            })
+                        }
+                        return return_data;
+                    },
+                    "type": "POST",
+                    "data": function (d) {
+                        d.csrfmiddlewaretoken = csrftoken
+                        d.ajax_action_id = $('#id_ajax_action_id').val()
+                    }
+                },
+                "columns": [
+                    {"data": "user"},
+                    {"data": "tank.name"},
+{#                    {"data": "gamemode.name"},#}
+                    {"data": "score"},
+                    {"data": "proof"},
+{#                    {"data": "date"},#}
+                    {"data": "submitter-note"},
+                    {"data": "manager-note"},
+                    {"data": "points"},
+                    {"data": "action"}
+
+                ]
+            });
+            setInterval( function () {
+                table.ajax.reload();
+            }, 1000*60*10 );
+        });
+
+
+
+
+
+
+
+    </script>
+{% endblock %}

@@ -9,6 +9,10 @@ MASTERY_TIER_POINTS = (
     (3, 'Tier 3', 500000, 30),
 )
 
+def getPointsByScore(score:int):
+    return round(score/100000.0,1)
+
+
 
 def getMasteryRankByPoints(points):
     if (points >= MASTERY_TIER_POINTS[2][2]):

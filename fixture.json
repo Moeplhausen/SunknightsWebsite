@@ -19,7 +19,31 @@
         "discord_id": 252525368865456130,
         "name": "SK server"
     }
+},{
+    "model": "sunknightsapp.diepgamemode",
+    "pk": 1,
+    "fields": {
+        "name": "FFA"
+    }
 }, {
+    "model": "sunknightsapp.diepgamemode",
+    "pk": 2,
+    "fields": {
+        "name": "2-TDM"
+    }
+},{
+    "model": "sunknightsapp.diepgamemode",
+    "pk": 3,
+    "fields": {
+        "name": "4-TDM"
+    }
+},{
+    "model": "sunknightsapp.diepgamemode",
+    "pk": 4,
+    "fields": {
+        "name": "Maze"
+    }
+},{
     "model": "sunknightsapp.discordrole",
     "pk": 1,
     "fields": {
@@ -428,7 +452,7 @@
     "model": "sunknightsapp.dieptank",
     "pk": 37,
     "fields": {
-        "name": "Steamliner",
+        "name": "Streamliner",
         "diep_isDeleted": false,
         "multiplier": "2.00",
         "tier": 4
