@@ -1,6 +1,6 @@
 <form action="{% url 'ajaxhandler' %}" id="recordsubmit" method="POST">
     {% csrf_token %}
-    {{ submitform.ajax_action_id }}
+    {{ submitpointsform.ajax_action_id }}
     <div class="form-group">
         <label for="selectgamemode">The gamemode you played</label>
         <select default="1" class="custom-select form-control" name="gamemode"

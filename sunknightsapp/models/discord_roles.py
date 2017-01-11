@@ -29,7 +29,7 @@ class DiscordRole(models.Model):
         from .clan_user import ClanUser
         user = None
         try:
-            user = ClanUser.objects.filter(roles__role__clan_leader=True).get(roles__role=self)
+            user = ClanUser.objects.filter(roles__role__guild_leader_role=True).get(roles__role=self)
         except ClanUser.DoesNotExist:
             return None
         return user

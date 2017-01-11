@@ -5,38 +5,41 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-<head>
-    {% load static %}
+    <head>
+        {% load static %}
 
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/dataTables.material.min.css"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css"
-          integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap4.min.css"/>
-{#    <link rel="stylesheet" type="text/css"#}
-{#          href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.5/css/bootstrap.css"/>#}
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css"
+              integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi"
+              crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css"
+              href="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap4.min.css"/>
+        <link rel="stylesheet" type="text/css"
+              href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.4/css/selectize.bootstrap3.min.css"/>
 
 
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/css/bootstrap-select.min.css">
 
-    {% if debug %}{# prevent caching of css files #}
-        <link rel="stylesheet" type="text/css" href="{% static 'sunknightsapp/css/sunknights.css' %}?{% now "U" %}"/>
-        <link rel="stylesheet" type="text/css" href="{% static 'sunknightsapp/css/bootstrap.css' %}?{% now "U" %}"/>
-        <link rel="stylesheet" type="text/css" href="{% static 'sunknightsapp/css/tanks.css' %}?{% now "U" %}"/>
+
+
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/css/bootstrap-select.min.css">
+
+        {% if debug %}{# prevent caching of css files #}
+            <link rel="stylesheet" type="text/css"
+                  href="{% static 'sunknightsapp/css/sunknights.css' %}?{% now "U" %}"/>
+            <link rel="stylesheet" type="text/css" href="{% static 'sunknightsapp/css/bootstrap.css' %}?{% now "U" %}"/>
+            <link rel="stylesheet" type="text/css" href="{% static 'sunknightsapp/css/tanks.css' %}?{% now "U" %}"/>
 
         {% else %}
 
-        <link rel="stylesheet" type="text/css" href="{% static 'sunknightsapp/css/sunknights.css' %}"/>
-        <link rel="stylesheet" type="text/css" href="{% static 'sunknightsapp/css/bootstrap.css' %}"/>
-        <link rel="stylesheet" type="text/css" href="{% static 'sunknightsapp/css/tanks.css' %}"/>
+            <link rel="stylesheet" type="text/css" href="{% static 'sunknightsapp/css/sunknights.css' %}"/>
+            <link rel="stylesheet" type="text/css" href="{% static 'sunknightsapp/css/bootstrap.css' %}"/>
+            <link rel="stylesheet" type="text/css" href="{% static 'sunknightsapp/css/tanks.css' %}"/>
 
-    {% endif %}
-
-
+        {% endif %}
 
 
-
-    {% block header %}{% endblock %}
+        {% block header %}{% endblock %}
 
 
 <body>
@@ -59,9 +62,9 @@
                 <a href="{% url 'leaderboard' %}">
                     Leaderboard
                 </a>
-                <a href="#">
+                {% comment %}                <a href="#">
                     Tournaments
-                </a>
+                </a>{% endcomment %}
                 <a href="{% url 'guilds' %}">
                     Guilds
                 </a>
@@ -77,10 +80,10 @@
 
 
             {% if user.is_war_manager %}
-
+                {% comment %}
                 <a href="">
                     Manage Guild Fights
-                </a>
+                </a>{% endcomment %}
 
             {% endif %}
 
@@ -90,11 +93,11 @@
             {% endblock %}
 
 
-                    {% if user.is_authenticated %}
-                        <a class="float-xs-right" href="{% url 'logout' %}">Logout</a>
-                    {% else %}
-                        <a class="float-xs-right" href="/accounts/login/Discord">Login</a>
-                    {% endif %}
+            {% if user.is_authenticated %}
+                <a class="float-xs-right" href="{% url 'logout' %}">Logout</a>
+            {% else %}
+                <a class="float-xs-right" href="/accounts/login/Discord">Login</a>
+            {% endif %}
 
         </div>
     </nav> <!-- /navbar -->
@@ -113,6 +116,8 @@
         crossorigin="anonymous">
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.4/js/standalone/selectize.js"></script>
+
 <script src="{% static 'sunknightsapp/js/simple.js' %}"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js"

@@ -174,7 +174,7 @@ class GuildFightParticipation(models.Model):
         role=clanuserrole.role#discord_role
         user=clanuserrole.clan_user#clan_user
 
-        if role.is_clanguild:
+        if role.is_clan_guild:
             GuildFightParticipation.objects.filter(fight__status=1,user=user,guild=role).delete()
 
 

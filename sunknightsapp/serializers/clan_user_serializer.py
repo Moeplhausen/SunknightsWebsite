@@ -41,7 +41,7 @@ class ClanUserSerializer(BulkSerializerMixin,serializers.ModelSerializer):
 
     class Meta:
         model=ClanUser
-        fields=('id','leaderboard_place','avatar','discord_id','discord_nickname','is_active','is_points_manager','is_war_manager','roles','total_points','masteries','open_fights')
+        fields=('id','leaderboard_place','avatar','discord_id','discord_nickname','is_active','is_points_manager','is_war_manager','roles','total_points','masteries','open_fights','discord_discriminator')
         list_serializer_class = BulkListSerializer
 
 

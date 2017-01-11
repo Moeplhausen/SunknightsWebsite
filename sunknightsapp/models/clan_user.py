@@ -17,6 +17,8 @@ class ClanUser(AbstractBaseUser):
 
             discord_nickname=models.CharField(max_length=50,default='')
 
+            discord_discriminator=models.PositiveIntegerField(default=0)
+
             provider=models.CharField(max_length=20,default='Discord')
 
 
@@ -119,9 +121,22 @@ class ClanUser(AbstractBaseUser):
                 return BasicUserPointSubmission.objects.filter(pointsinfo=self.pointsinfo,decided=True)
 
             @property
-            def last_open_submissions(self):
+            def last_decided_fights_submissions(self):
+                from .point_submission import OneOnOneFightSubmission
+                from django.db.models import Q
+                return OneOnOneFightSubmission.objects.filter(Q(pointsinfo=self.pointsinfo)|Q(pointsinfoloser=self.pointsinfo)).filter(decided=True)
+
+
+            @property
+            def last_open_score_submissions(self):
                 from .point_submission import BasicUserPointSubmission
                 return BasicUserPointSubmission.objects.filter(pointsinfo=self.pointsinfo,decided=False)
+
+            @property
+            def last_open_fights_submissions(self):
+                from .point_submission import OneOnOneFightSubmission
+                from django.db.models import Q
+                return OneOnOneFightSubmission.objects.filter(Q(pointsinfo=self.pointsinfo)|Q(pointsinfoloser=self.pointsinfo)).filter(decided=False)
 
 
 

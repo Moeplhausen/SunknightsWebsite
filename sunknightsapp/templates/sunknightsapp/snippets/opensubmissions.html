@@ -1,4 +1,6 @@
-<table id="open-submissions-table" class="display" cellspacing="0" width="100%">
+<h3>Score Submissions</h3>
+
+<table id="open-submissions-score-table" class="display" cellspacing="0" width="100%">
     <thead>
     <tr>
         <th>Id</th>
@@ -9,7 +11,7 @@
     </tr>
     </thead>
     <tbody>
-    {% for submission in user.last_open_submissions %}
+    {% for submission in user.last_open_score_submissions %}
         <tr>
 
             <td>{{ submission.id }}</td>
@@ -22,6 +24,33 @@
     </tbody>
 </table>
 
+<h3>Fight Submissions</h3>
+
+<table id="open-submissions-fights-table" class="display" cellspacing="0" width="100%">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Expected Points</th>
+        <th>Proof</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for submission in user.last_open_fights_submissions %}
+        <tr>
+
+            <td>{{ submission.id }}</td>
+
+            {% if submission.pointsinfo.id == user.pointsinfo.id %}
+                <td>{{ submission.points }}</td>
+            {% else %}
+                <td>{{ submission.pointsloser }}</td>
+            {% endif %}
+
+            <td><a href="{{ submission.proof }}">Prooflink</a></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
 
 
 

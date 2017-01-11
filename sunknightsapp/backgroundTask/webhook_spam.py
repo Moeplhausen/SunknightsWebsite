@@ -10,7 +10,8 @@ def post_to_discord(dictdata):
     url = settings.POINTSWEBHOOK
     data = dictdata
     if not settings.TESTING:
-        r = requests.post(url, json=data)
+        pass
+        #r = requests.post(url, json=data)
     else:
         pass
         #print(data)

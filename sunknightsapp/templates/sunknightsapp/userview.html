@@ -8,6 +8,7 @@
     <ul class="nav nav-tabs">
         <li class="nav-item active"><a href="#overview" class="nav-link" data-toggle="tab">Overview</a></li>
         <li class="nav-item"><a href="#submit-pts" class="nav-link" data-toggle="tab">Submit Score</a></li>
+        <li class="nav-item"><a href="#submit-1vs1" class="nav-link" data-toggle="tab">Submit Fight Result</a></li>
         <li class="nav-item"><a href="#open-submissions" class="nav-link" data-toggle="tab">Open Submission</a></li>
         <li class="nav-item"><a href="#decided-submissions" class="nav-link" data-toggle="tab">Decided Submission</a>
         </li>
@@ -21,6 +22,9 @@
         <div class="tab-pane" id="submit-pts">
             {% include "sunknightsapp/snippets/pointssubmitform.html" %}
         </div>
+        <div class="tab-pane" id="submit-1vs1">
+            {% include "sunknightsapp/snippets/fightssubmitform.html" %}
+        </div>
         <div class="tab-pane" id="open-submissions">
             {% include "sunknightsapp/snippets/opensubmissions.html" %}
         </div>
@@ -32,45 +36,85 @@
 
 {% endblock %}
 
-{% block scripts %}
-    var datatableopensubmissions = $('#open-submissions-table').DataTable();
+{% block scriptself %}
+    <script>
+        $(document).ready(function () {
+            var datatableopenscoresubmissions = $('#open-submissions-score-table').DataTable();
+            var datatableopenfightssubmissions = $('#open-submissions-fights-table').DataTable();
+            $('#decided-submissions-score-table').DataTable();
+            $('#decided-submissions-fights-table').DataTable();
 
 
-    $('#recordsubmit').on('submit',function(event){
-    event.preventDefault();
+            $('#recordsubmit').on('submit', function (event) {
+                event.preventDefault();
 
-    //set default note if nothing was set
+                //set default note if nothing was set
 
-    var note=$('#submitterspam').val()
-    if (note=="")
-    $('#submitterspam').val('None')
+                var note = $('#submitterspam').val()
+                if (note == "")
+                    $('#submitterspam').val('None')
+                var form = new FormData(this);
+                $('#sbmrecord').modal('hide')
+                sunKnightsJsonRequest(form, function (result, data) {
+                    if (result) {
+                        submission = data['message']['data']
+                        datatableopenscoresubmissions.row.add([
+                            submission['id'],
+                            submission['tank']['name'],
+                            submission['gamemode']['name'],
+                            submission['points'],
+                            "<a href=\"" + submission['proof'] + "\">Prooflink</a>"
+                        ]).draw(false)
+                    }
+                    else {
+                        console.log('fuck this shit')
+
+                    }
+                }, false, false);
+                this.reset();
+            });
+
+            $('#fightsubmit').on('submit', function (event) {
+                event.preventDefault();
+
+                //set default note if nothing was set
+
+                var note = $('#submitterspam').val()
+                if (note == "")
+                    $('#submitterspam').val('None')
+
+                var form = new FormData(this);
+                $('#sbmrecord').modal('hide')
+                sunKnightsJsonRequest(form, function (result, data) {
+                    if (result) {
+                        submission = data['message']['data']
+
+                        var points=submission['pointsinfo']['id']=={{ user.pointsinfo.id }}?submission['points']:submission['pointsloser']
+
+                        datatableopenfightssubmissions.row.add([
+                            submission['id'],
+                            points,
+                            "<a href=\"" + submission['proof'] + "\">Prooflink</a>"
+                        ]).draw(false)
+                    }
+                    else {
+                        console.log('fuck this shit')
+
+                    }
+                }, false, false);
+                this.reset();
+            });
 
 
-
-
-    var form=new FormData(this);
-
-
-    $('#sbmrecord').modal('hide')
-    sunKnightsJsonRequest(form,function(result,data){
-    if (result){
-    submission=data['message']['data']
-    datatableopensubmissions.row.add([
-        submission['id'],
-        submission['tank']['name'],
-        submission['gamemode']['name'],
-        submission['points'],
-        "<a href=\""+submission['proof']+"\">Prooflink</a>"
-    ]).draw(false)
-    }
-    else {
-    console.log('fuck this shit')
-
-    }
-    },false,false);
-    this.reset();
-    });
-
+            $('#select-beast').selectize({
+                create: false,
+                sortField: {
+                    field: 'text',
+                    direction: 'asc'
+                },
+            });
+        });
+    </script>
 {% endblock %}
 
 

@@ -8,6 +8,7 @@
         <tr>
             <th>Name</th>
             <th>Points</th>
+            <th>1vs1 Skill</th>
         </tr>
     </thead>
 
@@ -16,6 +17,14 @@
             <tr>
                 <td><img class="leaderpoint-avatar" src="{{ pointinfo.user.avatar_url }}">{{pointinfo.user.discord_nickname}}</td>
                 <td>{{pointinfo.totalpoints}}</td>
+
+                {% if pointinfo.elo < 800%}
+                    <td><800</td>
+                {% else %}
+                    <td>{{pointinfo.elo}}</td>
+                {% endif %}
+
+
             </tr>
         {% endfor %}
     </tbody>

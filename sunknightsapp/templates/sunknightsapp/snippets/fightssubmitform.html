@@ -1,0 +1,41 @@
+<form action="{% url 'ajaxhandler' %}" id="fightsubmit" method="POST">
+    {% csrf_token %}
+    {{ submitfightsform.ajax_action_id }}
+
+
+    <div class="form-group">
+        <label for="select-beast">User you fought against:</label>
+        <select id="select-beast" name="pointsinfoloser" class="form-control" placeholder="Select a person...">
+            <option value="">Select a person...</option>
+            {% for user in users %}
+                <option value="{{ user.id }}">{{ user.discord_nickname }}#{{ user.discord_discriminator }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+
+    <div class="form-group">
+        <label for="whowonbox">Did you win?</label>
+        <select  name="whowon" class="form-control" placeholder="Select an Option" required>
+            <option value="1">Yes</option>
+            <option value="0">No</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="proof">Proof of your score</label>
+        <input type="url" class="form-control" name="proof" id="proof" required
+               placeholder="http://imgur.com/a/euVO7"
+               aria-describedby="urlHelpBlock">
+        <p id="urlHelpBlock" class="form-text text-muted">
+            Your proof must be a <strong>direct
+            link</strong> to an <strong>uncropped</strong> image (or link to youtube.com or just an
+            imgur-link). This
+            means <strong>for images the link must end in .jpg, .png or .webm</strong> (Exception:
+            Imgur-links)
+            <br>Only the following hosts are allowed: youtube, i.redd.it, imgur, discordapp, zippy.gfycat, i.gyazo.com
+            or sX.postimg.
+        </p>
+    </div>
+    <button type="submit" id="fightsubmitbtn" class="btn btn-primary">Submit</button>
+</form>

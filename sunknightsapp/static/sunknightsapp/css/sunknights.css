@@ -50,7 +50,9 @@ img.discord-img{
     width: 200px;
 }
 
-
+.hidden{
+    visibility: hidden;
+}
 
 
 img.leaderpoint-avatar{

@@ -8,11 +8,12 @@ from django.views.decorators.http import require_http_methods
 
 from ..enums.AjaxActions import AjaxAction
 from ..forms.tournaments_forms import CreateTournamentForm,DeleteTournamentForm,RequestTournamentsForm
-from ..forms.points_forms import SubmitPointsForm,RetriveUserSubmissionsPointsForm,DecideUserPointSubmissionForm
+from ..forms.points_forms import SubmitPointsForm,RetriveUserSubmissionsPointsForm,DecideUserPointSubmissionForm,SubmitFightsForm,RetrieveFightsSubmissionsForm,DecideFightsSubmissionForm
 from ..models.clan_user import ClanUser
 from ..models.diep_tank import DiepTankInheritance,DiepTank
 from ..models.discord_roles import DiscordRole
 from ..models.points_info import PointsInfo
+from ..models.clan_user import ClanUser
 from ..models.diep_gamemode import DiepGamemode
 
 
@@ -21,7 +22,11 @@ def index(request):
     if request.user.is_authenticated():
         tanks=DiepTank.objects.all()
         gamemodes=DiepGamemode.objects.all()
-        context={'tanks':tanks,'gamemodes':gamemodes,'submitform':SubmitPointsForm}
+
+        users = ClanUser.objects.filter(is_active=True).exclude(id=request.user.id).order_by(
+            '-discord_nickname')
+
+        context={'tanks':tanks,'gamemodes':gamemodes,'submitpointsform':SubmitPointsForm,'submitfightsform':SubmitFightsForm,'users':users}
 
         return render(request, 'sunknightsapp/userview.html', context)
 
@@ -74,7 +79,7 @@ def guild(request,id):
 
 @points_manager_required
 def manage_submissions(request):
-    context={'retrieveusersform':RetriveUserSubmissionsPointsForm,'decideuserpointsubmissionid':AjaxAction.DECIDEUSERPOINTUSUBMISSION.value,'retrieveusersubmissionsid':AjaxAction.RETRIEVEUSERSUBMISSIONS.value}
+    context={'retrieveuserspointssubmissionsid':AjaxAction.RETRIEVEUSERSUBMISSIONS.value,'decideuserpointsubmissionid':AjaxAction.DECIDEUSERPOINTUSUBMISSION.value,'decidefightsubmissionid':AjaxAction.DECIDEFIGHTSSUBMISSION.value,'retrieveuserfightssubmissionsid':AjaxAction.RETRIEVEFIGHTSSUBMISSIONS.value}
     return render(request,'sunknightsapp/managesubmissions.html',context)
 
 
@@ -113,6 +118,12 @@ def ajaxhandler(request):
         form=RetriveUserSubmissionsPointsForm(request.POST)
     elif actionid is AjaxAction.DECIDEUSERPOINTUSUBMISSION.value:
         form=DecideUserPointSubmissionForm(request.POST)
+    elif actionid is AjaxAction.RETRIEVEFIGHTSSUBMISSIONS.value:
+        form=RetrieveFightsSubmissionsForm(request.POST)
+    elif actionid is AjaxAction.SUBMITFIGHTS.value:
+        form=SubmitFightsForm(request.POST)
+    elif actionid is AjaxAction.DECIDEFIGHTSSUBMISSION.value:
+        form=DecideFightsSubmissionForm(request.POST)
 
 
     if form is None:

@@ -13,6 +13,12 @@ def getPointsByScore(score:int):
     return round(score/100000.0,1)
 
 
+def getPointsByFight(won:bool):
+    if won:
+        return 5
+    return 3
+
+
 
 def getMasteryRankByPoints(points):
     if (points >= MASTERY_TIER_POINTS[2][2]):
