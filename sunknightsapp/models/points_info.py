@@ -4,6 +4,7 @@ from django.conf import settings
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.db.models import Count
+from .utility.little_things import ELO_DEFAULT
 import decimal
 
 
@@ -14,7 +15,7 @@ class PointsInfo(models.Model):
     masterypoints = models.DecimalField(decimal_places=2, max_digits=19, default=0, db_index=True)
     totalpoints = models.DecimalField(decimal_places=2, max_digits=19, default=0, db_index=True)
 
-    elo = models.PositiveIntegerField(default=1000)
+    elo = models.PositiveIntegerField(default=ELO_DEFAULT)
 
     @property
     def leaderboard_place(self):

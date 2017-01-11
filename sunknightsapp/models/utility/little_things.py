@@ -9,6 +9,10 @@ MASTERY_TIER_POINTS = (
     (3, 'Tier 3', 500000, 30),
 )
 
+ELO_K=40
+ELO_DEFAULT=1000
+
+
 def getPointsByScore(score:int):
     return round(score/100000.0,1)
 
@@ -18,6 +22,27 @@ def getPointsByFight(won:bool):
         return 5
     return 3
 
+
+def manageElo(winner,loser):
+
+    def expected_elo(player,otherPlayer):
+        return 1.0/(1+10**((otherPlayer.elo-player.elo)/400))
+
+
+    cur_winner_elo=winner.elo
+    cur_loser_elo=loser.elo
+
+    expect_winner=expected_elo(winner,loser)
+    expect_loser=expected_elo(loser,winner)
+
+    winner.elo=cur_winner_elo+ELO_K*(1-expect_winner)
+    loser.elo=cur_loser_elo+ELO_K*(0-expect_loser)
+
+    winner.save()
+    loser.save()
+
+
+    pass
 
 
 def getMasteryRankByPoints(points):

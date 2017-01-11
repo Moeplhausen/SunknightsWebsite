@@ -4,7 +4,7 @@ from ..models.point_submission import BasicUserPointSubmission, BasicPointSubmis
 from ..serializers.pointsubmissions_serializer import BasicUserPointSubmissionSerializer, \
     BasicPointsSubmissionSerializer,OneOnOneFightSubmissionSerializer
 from django import forms
-from ..models.utility.little_things import getPointsByScore,getPointsByFight
+from ..models.utility.little_things import getPointsByScore,getPointsByFight,manageElo
 
 
 class SubmitPointsForm(BaseForm):
@@ -164,6 +164,12 @@ class DecideFightsSubmissionForm(BaseForm):
             submission.decided=True
             print('saved')
             submission.save()
+
+            if submission.accepted:
+                manageElo(submission.pointsinfo,submission.pointsinfoloser)
+
+
+
             serializer = OneOnOneFightSubmissionSerializer(submission)
             return self.response(True, {'data': (serializer.data)})
 
@@ -171,3 +177,4 @@ class DecideFightsSubmissionForm(BaseForm):
     class Meta:
         model = BasicPointSubmission
         fields = ('pk_id', 'accepted', 'managerText')
+

@@ -34,8 +34,8 @@
                 <th>Manager Note</th>
 
                 {#                <th>Date</th>#}
-                <th>Points User 1</th>
-                <th>Points User 2</th>
+                <th>Points Winner</th>
+                <th>Points Loser</th>
                 <th>action</th>
             </tr>
             </thead>
@@ -213,7 +213,7 @@
 
                             var managertext = '<textarea class="form-control" id="manager-note-' + data[i].id + '" rows="3"></textarea>'
                             var pointswinner = '<input class="form-control" type="number" value="'+data[i].points+'" id="points-manager-' + data[i].id + '">'
-                            var pointsloser = '<input class="form-control" type="number" value="'+data[i].points+'" id="points-manager-' + data[i].id + '">'
+                            var pointsloser = '<input class="form-control" type="number" value="'+data[i].pointsloser+'" id="points-manager-' + data[i].id + '">'
 
                             return_data.push({
                                 'winner': winner,
