@@ -42,6 +42,10 @@ class SubmitFightsForm(BaseForm):
 
         try:
             submission = self.save(commit=False)
+
+            if submission.pointsinfo.id==submission.pointsinfoloser.id:#something fishy is happenening...
+                return self.noPermission()
+
             submission.points=getPointsByFight(True)
             submission.pointsloser=getPointsByFight(False)
             if self.cleaned_data['whowon']=='1':
