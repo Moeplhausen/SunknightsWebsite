@@ -52,7 +52,7 @@ def user(request,id):
         return render(request, 'sunknightsapp/index.html')
     else:
         context={}
-        context['lookuser']=user
+        context['user']=user
         context['revertsubmissionid']=AjaxAction.REVERTSUBMISSION.value
         return render(request, 'sunknightsapp/public_userview.html',context)
 
