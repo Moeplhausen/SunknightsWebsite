@@ -48,12 +48,12 @@ def user(request,id):
     try:
         print("id")
         print(id)
-        user=ClanUser.objects.get(discord_id=id)
+        fuser=ClanUser.objects.get(discord_id=id)
     except ClanUser.DoesNotExist:
         return render(request, 'sunknightsapp/index.html')
     else:
         context={}
-        context['lookuser']=user
+        context['lookuser']=fuser
         context['revertsubmissionid']=AjaxAction.REVERTSUBMISSION.value
         return render(request, 'sunknightsapp/public_userview.html',context)
 

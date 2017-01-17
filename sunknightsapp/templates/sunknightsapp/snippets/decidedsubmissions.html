@@ -16,7 +16,7 @@
 
             <td>
                 {% if user.is_points_manager%}
-                    <input class="button-x-corner" type="button" submission_id="{{ submission.id }}" value="X">
+                    <input class="button-x-corner" type="button" submission_id={{ submission.id }} value="X">
                 {% endif %}
                 {{ submission.id }}
             </td>
@@ -46,7 +46,7 @@
         <tr>
             <td>
                 {% if user.is_points_manager%}
-                    <input class="button-x-corner" type="button" submission_id="{{ submission.id }}" value="X">
+                    <input class="button-x-corner" type="button" submission_id={{ submission.id }} value="X">
                 {% endif %}
                 {{ submission.id }}
             </td>
@@ -76,7 +76,7 @@
             <td>
 
                 {% if user.is_points_manager%}
-                    <input class="button-x-corner" type="button" submission_id="{{ submission.id }}" value="X">
+                    <input class="button-x-corner" type="button" submission_id={{ submission.id }} value="X">
                 {% endif %}
 
 
