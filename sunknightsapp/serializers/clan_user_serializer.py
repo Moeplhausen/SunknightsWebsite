@@ -2,7 +2,7 @@ from rest_framework import serializers
 from ..models.clan_user import ClanUser
 from ..models.points_info import PointsInfo
 from rest_framework_bulk import BulkListSerializer
-from .clan_user_roles_serializer import ClanUserRolesSerializer,BulkSerializerMixin
+from .clan_user_roles_serializer import ClanUserRolesSerializer,BulkSerializerMixin,ClanUserRolesDetailedSerializer
 from .mastery_serializer import MasterySerializer
 from ..models.guildfight import GuildFight
 
@@ -53,6 +53,25 @@ class PointsInfoSerializer(BulkSerializerMixin,serializers.ModelSerializer):
     class Meta:
         model=PointsInfo
         fields=('id','oldpoints','currentpoints','totalpoints','leaderboard_place','masterypoints','user','masteries')
+        list_serializer_class = BulkListSerializer
+
+
+class ClanUserFasterSerializer(BulkSerializerMixin,serializers.ModelSerializer):
+
+    class PointsInfoFasterSerializer(BulkSerializerMixin,serializers.ModelSerializer):
+        class Meta:
+            model=PointsInfo
+            fields=('id','totalpoints')
+            list_serializer_class = BulkListSerializer
+
+
+    roles=ClanUserRolesDetailedSerializer(many=True,read_only=True)
+    pointsinfo=PointsInfoFasterSerializer(many=False,read_only=True)
+
+
+    class Meta:
+        model=ClanUser
+        fields=('id','avatar','discord_id','discord_nickname','is_active','roles','discord_discriminator','pointsinfo')
         list_serializer_class = BulkListSerializer
 
 
