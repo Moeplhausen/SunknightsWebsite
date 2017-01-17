@@ -1,17 +1,17 @@
 <div class="row">
     <div class="col-xs-12 col-sm-4">
-        <img src="{{ user.avatar_url }}">
+        <img src="{{ lookuser.avatar_url }}">
     </div>
 
     <div class="col-xs-12 col-sm-8">
-        <h5>Leaderboard Place: <strong>{{ user.leaderboard_place }}</strong></h5>
-        <h5>Points: <strong>{{ user.total_points }}</strong></h5>
+        <h5>Leaderboard Place: <strong>{{ lookuser.leaderboard_place }}</strong></h5>
+        <h5>Points: <strong>{{ lookuser.total_points }}</strong></h5>
 
         <h5>Next Fights registered to:</h5>
-        {% if user.open_fights.all.count != 0 %}
+        {% if lookuser.open_fights.all.count != 0 %}
 
             <ul>
-                {% for fight in user.open_fights %}
+                {% for fight in lookuser.open_fights %}
                     <li>
                         {{ fight.date }}:{{ fight.name }}
                     </li>
@@ -33,7 +33,7 @@
     </div>
     <div class="col-xs-12 col-sm-10">
 
-        {% if user.masteries.all.count < 1 %}
+        {% if lookuser.masteries.all.count < 1 %}
             No masteries unlocked yet :(
         {% else %}
 
@@ -50,21 +50,21 @@
                     <tr>
                         <td>
 
-                            {% for mastery in user.masteries.all %}
+                            {% for mastery in lookuser.masteries.all %}
                                 {% if mastery.tier >= 1 %}
                                     <div class="{{ mastery.tank.name|slugify }} tier-{{ mastery.tier }}"></div>
                                 {% endif %}
                             {% endfor %}
                         </td>
                         <td>
-                            {% for mastery in user.masteries.all %}
+                            {% for mastery in lookuser.masteries.all %}
                                 {% if mastery.tier >= 2 %}
                                     <div class="{{ mastery.tank.name|slugify }} tier-{{ mastery.tier }}"></div>
                                 {% endif %}
                             {% endfor %}
                         </td>
                         <td>
-                            {% for mastery in user.masteries.all %}
+                            {% for mastery in lookuser.masteries.all %}
                                 {% if mastery.tier == 3 %}
                                     <div class="{{ mastery.tank.name|slugify }} tier-{{ mastery.tier }}"></div>
                                 {% endif %}
