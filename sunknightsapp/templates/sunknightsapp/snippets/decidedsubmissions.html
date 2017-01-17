@@ -11,7 +11,7 @@
     </tr>
     </thead>
     <tbody>
-    {% for submission in user.last_decided_userpoint_submissions %}
+    {% for submission in lookuser.last_decided_userpoint_submissions %}
         <tr>
 
             <td>
@@ -42,7 +42,7 @@
     </tr>
     </thead>
     <tbody>
-    {% for submission in user.last_decided_fights_submissions %}
+    {% for submission in lookuser.last_decided_fights_submissions %}
         <tr>
             <td>
                 {% if user.is_points_manager%}
@@ -71,7 +71,7 @@
     </tr>
     </thead>
     <tbody>
-    {% for submission in user.last_decided_custom_submissions %}
+    {% for submission in lookuser.last_decided_custom_submissions %}
         <tr>
             <td>
 

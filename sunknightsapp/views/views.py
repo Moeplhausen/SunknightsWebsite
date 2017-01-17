@@ -28,6 +28,7 @@ def index(request):
 
         context={'tanks':tanks,'gamemodes':gamemodes,'submitpointsform':SubmitPointsForm,'submitfightsform':SubmitFightsForm,'users':users}
         context['revertsubmissionid']=AjaxAction.REVERTSUBMISSION.value
+        context['lookuser']=request.user
 
         return render(request, 'sunknightsapp/userview.html', context)
 
