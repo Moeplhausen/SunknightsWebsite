@@ -71,7 +71,7 @@ class ClanUserFasterSerializer(BulkSerializerMixin,serializers.ModelSerializer):
 
     class Meta:
         model=ClanUser
-        fields=('id','avatar','discord_id','discord_nickname','is_active','roles','discord_discriminator','pointsinfo')
+        fields=('id','avatar','discord_id','discord_nickname','is_active','roles','discord_discriminator','pointsinfo','is_superuser')
         list_serializer_class = BulkListSerializer
 
 
