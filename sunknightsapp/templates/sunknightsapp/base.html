@@ -17,26 +17,14 @@
               href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.4/css/selectize.bootstrap3.min.css"/>
 
 
-
-
-
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet"
               href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/css/bootstrap-select.min.css">
 
-        {% if debug %}{# prevent caching of css files #}
-            <link rel="stylesheet" type="text/css"
-                  href="{% static 'sunknightsapp/css/sunknights.css' %}?{% now "U" %}"/>
-            <link rel="stylesheet" type="text/css" href="{% static 'sunknightsapp/css/bootstrap.css' %}?{% now "U" %}"/>
-            <link rel="stylesheet" type="text/css" href="{% static 'sunknightsapp/css/tanks.css' %}?{% now "U" %}"/>
-
-        {% else %}
-
-            <link rel="stylesheet" type="text/css" href="{% static 'sunknightsapp/css/sunknights.css' %}"/>
-            <link rel="stylesheet" type="text/css" href="{% static 'sunknightsapp/css/bootstrap.css' %}"/>
-            <link rel="stylesheet" type="text/css" href="{% static 'sunknightsapp/css/tanks.css' %}"/>
-
-        {% endif %}
+        <link rel="stylesheet" type="text/css"
+              href="{% static 'sunknightsapp/css/sunknights.css' %}?{% now "U" %}"/>
+        <link rel="stylesheet" type="text/css" href="{% static 'sunknightsapp/css/bootstrap.css' %}?{% now "U" %}"/>
+        <link rel="stylesheet" type="text/css" href="{% static 'sunknightsapp/css/tanks.css' %}?{% now "U" %}"/>
 
 
         {% block header %}{% endblock %}
