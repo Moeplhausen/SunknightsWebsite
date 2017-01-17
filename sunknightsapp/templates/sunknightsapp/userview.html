@@ -15,7 +15,7 @@
     </ul>
 
 
-    <div class="tab-content clearfix">
+    <div id="userview-tab-content" class="tab-content clearfix">
         <div class="tab-pane active" id="overview">
             {% include "sunknightsapp/snippets/useroverview.html" %}
         </div>
@@ -37,13 +37,13 @@
 {% endblock %}
 
 {% block scriptself %}
+    {% include "sunknightsapp/snippets/revertSubmissionScript.html" %}
+
     <script>
+
         $(document).ready(function () {
             var datatableopenscoresubmissions = $('#open-submissions-score-table').DataTable();
             var datatableopenfightssubmissions = $('#open-submissions-fights-table').DataTable();
-            $('#decided-submissions-score-table').DataTable();
-            $('#decided-submissions-fights-table').DataTable();
-
 
             $('#recordsubmit').on('submit', function (event) {
                 event.preventDefault();

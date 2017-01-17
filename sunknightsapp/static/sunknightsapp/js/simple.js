@@ -40,3 +40,4 @@ function sunKnightsJsonRequest(param, handler, contentType, processData) {
 		}
 	});
 }
+

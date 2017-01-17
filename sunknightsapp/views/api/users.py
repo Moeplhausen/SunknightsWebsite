@@ -12,7 +12,7 @@ class ClanUsersViewSet(viewsets.ModelViewSet):
 
 class ClanUsersShortSet(viewsets.ModelViewSet):
     serializer_class = ClanUserFasterSerializer
-    queryset = ClanUser.objects.filter(provider='Discord').prefetch_related('pointsinfo','roles')
+    queryset = ClanUser.objects.all()
     lookup_field = 'discord_id'
 
 class ClanUserPointsInfoViewSet(viewsets.ModelViewSet):

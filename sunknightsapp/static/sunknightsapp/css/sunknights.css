@@ -6,6 +6,14 @@ html,body {
     background: linear-gradient(90deg, #FBC926 10%, #C3922E 90%); /* W3C */
 }
 
+#userview-tab-content{
+    margin-top: 1em;
+}
+
+.card-group{
+    width:100%;
+    height:auto;
+}
 
 
 #sun-navbar{
@@ -17,13 +25,25 @@ html,body {
 }
 
 
-.card{
-    background-color:transparent;
+.card,.guild-card-group-item{
+    background-color:transparent !important;
     background: linear-gradient(
             rgba(0, 0, 0, 0.15),
             rgba(0, 0, 0, 0.15)
     )
 }
+
+.button-x-corner{
+    display:inline;
+    float:right;
+    top:0;
+    right:0;
+
+    color:red;
+    background-color: transparent;
+    border-color: transparent;
+}
+
 
 #sun-navbar a{
     color:white;

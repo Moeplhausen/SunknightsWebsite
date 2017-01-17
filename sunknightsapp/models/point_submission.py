@@ -11,7 +11,7 @@ from .guildfight import GuildFightParticipation, GuildFight
 from django.dispatch import receiver
 from ..backgroundTask.webhook_spam import post_new_guild_fight, post_new_user_point_submission, \
     post_new_manager_submission, \
-    post_new_guildfight_points, post_guild_fight_results
+    post_new_guildfight_points, post_guild_fight_results,post_new_OneOnOne_submission,post_new_submission,post_submission_reverted
 
 
 class BasicPointSubmission(models.Model):
@@ -22,6 +22,7 @@ class BasicPointSubmission(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     pointsinfo = models.ForeignKey(PointsInfo, on_delete=models.CASCADE)
     points = models.DecimalField(decimal_places=2, max_digits=6, default=0, db_index=True)
+    reverted=models.BooleanField(default=False)
 
 
     @property
@@ -41,7 +42,7 @@ class BasicPointSubmission(models.Model):
 
 class BasicUserPointSubmission(BasicPointSubmission):
     submitterText = models.TextField(max_length=200, default="")
-    proof = models.CharField(max_length=200, unique=True)
+    proof = models.CharField(max_length=200)
     gamemode = models.ForeignKey(DiepGamemode)
     tank = models.ForeignKey(DiepTank)
     score = models.PositiveIntegerField(default=0)
@@ -53,7 +54,7 @@ class PointsManagerAction(BasicPointSubmission):
 
 class OneOnOneFightSubmission(BasicPointSubmission):
     pointsinfoloser = models.ForeignKey(PointsInfo, related_name="loser")
-    proof = models.CharField(max_length=200, unique=True)
+    proof = models.CharField(max_length=200)
     pointsloser = models.DecimalField(decimal_places=2, max_digits=6, default=3, db_index=True)
 
 
@@ -72,13 +73,19 @@ def update_submission_points_on_save(sender, instance, created=False, **kwargs):
 
     decided = instance.decided
     accepted = instance.accepted
-
-    if isinstance(instance, BasicUserPointSubmission):
+    reverted=instance.reverted
+    if reverted:
+        post_submission_reverted(instance)
+    elif isinstance(instance, BasicUserPointSubmission):
         post_new_user_point_submission(instance, accepted, decided)
     elif isinstance(instance, GuildFightPointsAction):
         post_new_guildfight_points(instance, accepted)
     elif isinstance(instance, PointsManagerAction):
         post_new_manager_submission(instance, accepted)
+    elif isinstance(instance,OneOnOneFightSubmission):
+        post_new_OneOnOne_submission(instance,accepted,decided)
+    elif isinstance(instance,BasicPointSubmission):
+        post_new_submission(instance,accepted)
 
 
         # https://web.archive.org/web/20120715042306/http://codeblogging.net/blogs/1/14

@@ -8,7 +8,7 @@ from django.views.decorators.http import require_http_methods
 
 from ..enums.AjaxActions import AjaxAction
 from ..forms.tournaments_forms import CreateTournamentForm,DeleteTournamentForm,RequestTournamentsForm
-from ..forms.points_forms import SubmitPointsForm,RetriveUserSubmissionsPointsForm,DecideUserPointSubmissionForm,SubmitFightsForm,RetrieveFightsSubmissionsForm,DecideFightsSubmissionForm
+from ..forms.points_forms import SubmitPointsForm,RetriveUserSubmissionsPointsForm,DecideUserPointSubmissionForm,SubmitFightsForm,RetrieveFightsSubmissionsForm,DecideFightsSubmissionForm,RevertSubmissionForm
 from ..models.clan_user import ClanUser
 from ..models.diep_tank import DiepTankInheritance,DiepTank
 from ..models.discord_roles import DiscordRole
@@ -27,6 +27,7 @@ def index(request):
             '-discord_nickname')
 
         context={'tanks':tanks,'gamemodes':gamemodes,'submitpointsform':SubmitPointsForm,'submitfightsform':SubmitFightsForm,'users':users}
+        context['revertsubmissionid']=AjaxAction.REVERTSUBMISSION.value
 
         return render(request, 'sunknightsapp/userview.html', context)
 
@@ -52,6 +53,7 @@ def user(request,id):
     else:
         context={}
         context['lookuser']=user
+        context['revertsubmissionid']=AjaxAction.REVERTSUBMISSION.value
         return render(request, 'sunknightsapp/public_userview.html',context)
 
 
@@ -124,6 +126,8 @@ def ajaxhandler(request):
         form=SubmitFightsForm(request.POST)
     elif actionid is AjaxAction.DECIDEFIGHTSSUBMISSION.value:
         form=DecideFightsSubmissionForm(request.POST)
+    elif actionid is AjaxAction.REVERTSUBMISSION.value:
+        form=RevertSubmissionForm(request.POST)
 
 
     if form is None:

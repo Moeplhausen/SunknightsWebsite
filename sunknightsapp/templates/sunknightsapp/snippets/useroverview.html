@@ -4,8 +4,8 @@
     </div>
 
     <div class="col-xs-12 col-sm-8">
-        <h5>Leaderboard Place: {{ user.leaderboard_place }}</h5>
-        <h5>Points: {{ user.total_points }}</h5>
+        <h5>Leaderboard Place: <strong>{{ user.leaderboard_place }}</strong></h5>
+        <h5>Points: <strong>{{ user.total_points }}</strong></h5>
 
         <h5>Next Fights registered to:</h5>
         {% if user.open_fights.all.count != 0 %}
@@ -34,7 +34,7 @@
     <div class="col-xs-12 col-sm-10">
 
         {% if user.masteries.all.count < 1 %}
-            You don't have any masteries unlocked yet :(
+            No masteries unlocked yet :(
         {% else %}
 
 

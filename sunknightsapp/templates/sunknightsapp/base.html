@@ -104,6 +104,11 @@
 
     <!-- Main component for a primary marketing message or call to action -->
     <div id="jumbotron-content" class="jumbotron">
+
+        <div id="alertsContainer">
+
+        </div>
+
         {% block content %} {% endblock %}
     </div>
 
@@ -139,6 +144,10 @@
 <script>
     var csrftoken = $.cookie('csrftoken');
     $(document).ready(function () {
+
+
+
+
         {% block scripts %}{% endblock %}
     });
 </script>

@@ -15,7 +15,7 @@
     <tbody>
         {% for pointinfo in userpoints %}
             <tr>
-                <td><img class="leaderpoint-avatar" src="{{ pointinfo.user.avatar_url }}">{{pointinfo.user.discord_nickname}}</td>
+                <td><img class="leaderpoint-avatar" src="{{ pointinfo.user.avatar_url }}"><a href="/user/{{ pointinfo.user.discord_id }}">{{pointinfo.user.discord_nickname}}</a></td>
                 <td>{{pointinfo.totalpoints}}</td>
 
                 {% if pointinfo.elo < 800%}

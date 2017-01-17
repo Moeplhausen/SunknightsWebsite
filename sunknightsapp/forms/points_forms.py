@@ -1,6 +1,6 @@
 from .base_form import BaseForm
 from ..enums.AjaxActions import AjaxAction
-from ..models.point_submission import BasicUserPointSubmission, BasicPointSubmission,OneOnOneFightSubmission
+from ..models.point_submission import BasicUserPointSubmission, BasicPointSubmission,OneOnOneFightSubmission,PointsManagerAction
 from ..serializers.pointsubmissions_serializer import BasicUserPointSubmissionSerializer, \
     BasicPointsSubmissionSerializer,OneOnOneFightSubmissionSerializer
 from django import forms
@@ -33,8 +33,6 @@ class SubmitPointsForm(BaseForm):
 class SubmitFightsForm(BaseForm):
     whowon = forms.CharField(required=True)
 
-
-
     def __init__(self, *args, **kwargs):
         super(SubmitFightsForm, self).__init__(AjaxAction.SUBMITFIGHTS, *args, **kwargs)
 
@@ -43,7 +41,7 @@ class SubmitFightsForm(BaseForm):
         try:
             submission = self.save(commit=False)
 
-            if submission.pointsinfo.id==submission.pointsinfoloser.id:#something fishy is happenening...
+            if request.user.pointsinfo.id==submission.pointsinfoloser.id:#something fishy is happenening...
                 return self.noPermission()
 
             submission.points=getPointsByFight(True)
@@ -64,6 +62,10 @@ class SubmitFightsForm(BaseForm):
     class Meta:
         model = OneOnOneFightSubmission
         fields = ('proof', 'pointsinfoloser','whowon')
+
+
+
+
 
 
 
@@ -111,6 +113,53 @@ class RetrieveFightsSubmissionsForm(BaseForm):
         fields = ()
 
 
+class RevertSubmissionForm(BaseForm):
+    pk_id = forms.IntegerField(min_value=0, widget=forms.HiddenInput(), required=True)
+
+
+    def __init__(self, *args, **kwargs):
+        super(RevertSubmissionForm, self).__init__(AjaxAction.REVERTSUBMISSION, *args, **kwargs)
+
+
+    def handle(self, request):
+        if not request.user.is_points_manager:
+            return self.noPermission()
+        try:
+            submission = BasicPointSubmission.objects.get(pk=int(self.cleaned_data['pk_id']))
+
+        except BaseException as e:
+            return self.response(False, 'Something went wrong: ' + str(e))  # TODO better exception
+        else:
+
+            submission.accepted = False
+            submission.manager=request.user
+            submission.decided=False
+            submission.reverted=True
+
+            try:
+                x = PointsManagerAction.objects.get(pk=int(self.cleaned_data['pk_id']))
+            except PointsManagerAction.DoesNotExist:
+                pass
+            else:
+                x.decided=False
+
+            print('saved')
+            submission.save()
+            serializer = BasicPointsSubmissionSerializer(submission)
+            return self.response(True, {'data': (serializer.data)})
+
+
+    class Meta:
+        model = BasicPointSubmission
+        fields = ('pk_id',)
+
+
+
+
+
+
+
+
 
 class DecideUserPointSubmissionForm(BaseForm):
     pk_id = forms.IntegerField(min_value=0, widget=forms.HiddenInput(), required=True)
@@ -134,6 +183,7 @@ class DecideUserPointSubmissionForm(BaseForm):
             submission.managerText = self.cleaned_data['managerText']
             submission.manager=request.user
             submission.decided=True
+            submission.reverted=False
             print('saved')
             submission.save()
             serializer = BasicPointsSubmissionSerializer(submission)
@@ -166,6 +216,7 @@ class DecideFightsSubmissionForm(BaseForm):
             submission.managerText = self.cleaned_data['managerText']
             submission.manager=request.user
             submission.decided=True
+            submission.reverted=False
             print('saved')
             submission.save()
 

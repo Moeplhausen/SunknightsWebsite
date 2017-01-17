@@ -1,30 +1,30 @@
 {% extends "sunknightsapp/base.html" %}
+
+
 {% block content %}
+    {% load widget_tweaks %}
 
-    {{ lookuser.discord_nickname }}
 
-    <p>Show Points{{ lookuser.total_points }}</p>
-    <p>Show Leaderboard_place {{ lookuser.leaderboard_place }}</p>
-    <p>Show Masteries
-    <ul>
-
-        {% for mastery in lookuser.masteries.all %}
-
-         <li>   {{ mastery.tank.name }} {{ mastery.tier }}</li>
-
-        {% endfor %}
-
+    <ul class="nav nav-tabs">
+        <li class="nav-item active"><a href="#overview" class="nav-link" data-toggle="tab">Overview</a></li>
+        <li class="nav-item"><a href="#decided-submissions" class="nav-link" data-toggle="tab">Decided Submission</a></li>
     </ul>
-    </p>
-    <p>Show last submissions
-
-    {% for submission in lookuser.last_accepted_submissions.all %}
-        {{ submission.date }}
-
-    {% endfor %}
 
 
-    </p>
+    <div id="userview-tab-content" class="tab-content clearfix">
+        <div class="tab-pane active" id="overview">
+            {% include "sunknightsapp/snippets/useroverview.html" %}
+        </div>
+        <div class="tab-pane" id="decided-submissions">
+            {% include "sunknightsapp/snippets/decidedsubmissions.html" %}
+        </div>
 
+    </div>
 
 {% endblock %}
+
+{% block scriptself %}
+    {% include "sunknightsapp/snippets/revertSubmissionScript.html" %}
+{% endblock %}
+
+

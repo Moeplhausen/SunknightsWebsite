@@ -1,0 +1,49 @@
+<script>
+    $(document).ready(function () {
+        $('#decided-submissions-score-table').DataTable({
+            "fnDrawCallback": function (oSettings) {
+                revertSubmission()
+            }})
+        $('#decided-submissions-fights-table').DataTable({
+            "fnDrawCallback": function (oSettings) {
+                revertSubmission()
+            }})
+        $('#decided-submissions-custom-table').DataTable({
+            "fnDrawCallback": function (oSettings) {
+                revertSubmission()
+            }})
+
+
+
+        function revertSubmission() {
+            $(".button-x-corner").unbind('click');
+            $('.button-x-corner').click(function () {
+                var element = $(this);
+                $(this).attr('disabled','true');
+                var submission_id = $(this).attr('submission_id');
+
+                element.closest("tr").find('input,button').attr('disabled','true');
+
+                $.ajax({
+                    type: 'POST',
+                    url: "{% url 'ajaxhandler' %}",
+                    data: {csrfmiddlewaretoken: csrftoken,ajax_action_id:{{ revertsubmissionid }},pk_id:submission_id},
+                    success: function (data, textStatus, xhr) {
+                        console.log(data);
+                        console.log(xhr);
+                        if (xhr.status == '200') {
+                            //table.row(element.closest("tr")).remove().draw(false)
+                            element.closest("tr").remove();
+                            $('#alertsContainer').append("<div class=\"alert alert-success alert-dismissible fade in\" role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>Reverted Submission: " + data['message']['data']['id'] + "<strong></div>")
+                        }
+                    }
+                });
+            })
+        }
+
+
+
+
+
+    });
+</script>

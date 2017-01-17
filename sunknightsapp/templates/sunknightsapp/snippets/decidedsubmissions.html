@@ -1,12 +1,12 @@
-<h4>Score Submissions</h4>
+<h3>Score Submissions</h3>
 <table id="decided-submissions-score-table" class="display" cellspacing="0" width="100%">
     <thead>
     <tr>
         <th>Id</th>
         <th>Tank</th>
         <th>Gamemode</th>
-        <th>Accepted</th>
         <th>Points</th>
+        <th>Manager</th>
         <th>Proof</th>
     </tr>
     </thead>
@@ -14,39 +14,45 @@
     {% for submission in user.last_decided_userpoint_submissions %}
         <tr>
 
-            <td>{{ submission.id }}</td>
+            <td>
+                {% if user.is_points_manager%}
+                    <input class="button-x-corner" type="button" submission_id="{{ submission.id }}" value="X">
+                {% endif %}
+                {{ submission.id }}
+            </td>
             <td>{{ submission.tank.name }}</td>
             <td>{{ submission.gamemode.name }}</td>
-            <td>{{ submission.accepted }}</td>
             <td>{{ submission.points }}</td>
+            <td>{{ submission.manager.discord_nickname }}</td>
             <td><a href="{{ submission.proof }}">Prooflink</a></td>
         </tr>
     {% endfor %}
     </tbody>
 </table>
 
-<h4>Fight Submissions</h4>
+<h3>Fight Submissions</h3>
 <table id="decided-submissions-fights-table" class="display" cellspacing="0" width="100%">
     <thead>
     <tr>
         <th>Id</th>
         <th>Winner</th>
         <th>Loser</th>
-        <th>Pointswinner</th>
-        <th>Pointsloser</th>
-        <th>Accepted</th>
+        <th>Manager</th>
         <th>Proof</th>
     </tr>
     </thead>
     <tbody>
     {% for submission in user.last_decided_fights_submissions %}
         <tr>
-            <td>{{ submission.id }}</td>
+            <td>
+                {% if user.is_points_manager%}
+                    <input class="button-x-corner" type="button" submission_id="{{ submission.id }}" value="X">
+                {% endif %}
+                {{ submission.id }}
+            </td>
             <td>{{ submission.pointsinfo.user.discord_nickname }}</td>
             <td>{{ submission.pointsinfoloser.user.discord_nickname }}</td>
-            <td>{{ submission.points }}</td>
-            <td>{{ submission.pointsloser }}</td>
-            <td>{{ submission.accepted }}</td>
+            <td>{{ submission.manager.discord_nickname }}</td>
             <td><a href="{{ submission.proof }}">Prooflink</a></td>
         </tr>
     {% endfor %}
@@ -54,6 +60,34 @@
 </table>
 
 
+<h3>Other</h3>
+<table id="decided-submissions-custom-table" class="display" cellspacing="0" width="100%">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Points</th>
+        <th>Manager</th>
+        <th>Reason</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for submission in user.last_decided_custom_submissions %}
+        <tr>
+            <td>
 
+                {% if user.is_points_manager%}
+                    <input class="button-x-corner" type="button" submission_id="{{ submission.id }}" value="X">
+                {% endif %}
+
+
+                {{ submission.id }}
+            </td>
+            <td>{{ submission.points }}</td>
+            <td>{{ submission.manager.discord_nickname }}</td>
+            <td>{{ submission.managerText }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
 
 
