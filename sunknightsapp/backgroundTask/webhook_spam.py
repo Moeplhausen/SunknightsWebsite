@@ -160,7 +160,6 @@ def post_new_OneOnOne_submission(submission, accepted, decided):
                         [
                             {'name': 'Winner', 'value': submission.pointsinfo.user.discord_nickname, 'inline': True},
                             {'name': 'Loser', 'value': submission.pointsinfoloser.user.discord_nickname, 'inline': True},
-                            {'name': 'Action', 'value': 'Approved' if accepted else 'Rejected', 'inline': True},
                             {'name': 'Points Winner', 'value': str(submission.points), 'inline': True},
                             {'name': 'Points Loser', 'value': str(submission.pointsloser), 'inline': True},
                             {'name': 'Proof', 'value': submission.proof, 'inline': False},

@@ -14,10 +14,8 @@ class Mastery(models.Model):
     pointsinfo = models.ForeignKey(PointsInfo, on_delete=models.CASCADE, related_name='masteries')
     tier = models.PositiveSmallIntegerField(choices=MASTERY_TIER_OPTIONS)
     manager = models.ForeignKey(ClanUser)
-    fromSubmission = models.BooleanField(default=True)
+    fromSubmission = models.ForeignKey(BasicUserPointSubmission,default=None,null=True,blank=True)
     points = models.PositiveSmallIntegerField(default=0)  # will be modified after save by receiver
-
-    date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.tank.name
@@ -63,7 +61,7 @@ def update_points_on_save(sender, instance, created=False, **kwargs):
 
 
 def pointsupdater(pointsinfo):  # TODO add masteries points
-    sumPoints = Mastery.objects.filter(pointsinfo=pointsinfo).filter(fromSubmission=True).aggregate(models.Sum('points'))['points__sum'] or 0.0#mastery points from google docs document should already be included in old points
+    sumPoints = Mastery.objects.filter(pointsinfo=pointsinfo).exclude(fromSubmission = None).aggregate(models.Sum('points'))['points__sum'] or 0.0#mastery points from google docs document should already be included in old points
     pointsinfo.masterypoints = sumPoints
     pointsinfo.save()
 
@@ -92,16 +90,14 @@ def update_submission_points_on_save(sender, instance, created=False, **kwargs):
 
     if submission.accepted and tier > 0:  # check if another mastery can be granted
 
-        print(submission)
-
         try:
             mastery = Mastery.objects.get(tank=tank, pointsinfo=pointsinfo)
         except Mastery.DoesNotExist:
-            mastery=Mastery.objects.create(tank=tank, pointsinfo=pointsinfo, tier=tier, manager=manager)
+            mastery=Mastery.objects.create(tank=tank, pointsinfo=pointsinfo, tier=tier, manager=manager,fromSubmission=submission)
             mastery_unlock(mastery)
         else:
-            if mastery.fromSubmission is False:
-                mastery.fromSubmission = True
+            if not mastery.fromSubmission:
+                mastery.fromSubmission = submission
                 #old masteries have their points in oldpoints. We have to subtract those points
                 mastery.pointsinfo.oldpoints=mastery.pointsinfo.oldpoints-getPointsByMasteryTier(mastery.tier)#TODO add unit test
                 mastery.pointsinfo.save()
@@ -110,7 +106,14 @@ def update_submission_points_on_save(sender, instance, created=False, **kwargs):
 
             if mastery.tier < tier:
                 mastery.manager = manager
-                mastery.fromSubmission = True
+                mastery.fromSubmission = submission
                 mastery.tier = tier
                 mastery.save()
                 mastery_unlock(mastery)
+    elif not created and not submission.accepted and submission.decided and tier>0:
+        try:
+            mastery = Mastery.objects.get(fromSubmission=submission)
+        except Mastery.DoesNotExist:
+            pass
+        else:
+            mastery.delete()

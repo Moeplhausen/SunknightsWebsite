@@ -59,20 +59,21 @@ class PointsInfoSerializer(BulkSerializerMixin,serializers.ModelSerializer):
 class ClanUserFasterSerializer(BulkSerializerMixin,serializers.ModelSerializer):
 
     class PointsInfoFasterSerializer(BulkSerializerMixin,serializers.ModelSerializer):
+        masteries=MasterySerializer(many=True,read_only=True)
         class Meta:
             model=PointsInfo
-            fields=('id','totalpoints')
+            fields=('id','currentpoints','totalpoints','oldpoints','masterypoints','masteries')
             list_serializer_class = BulkListSerializer
 
 
     roles=ClanUserRolesDetailedSerializer(many=True,read_only=True)
     pointsinfo=PointsInfoFasterSerializer(many=False,read_only=True)
-    masteries=MasterySerializer(many=True,read_only=True)
+
 
 
     class Meta:
         model=ClanUser
-        fields=('id','avatar','discord_id','discord_nickname','is_active','roles','discord_discriminator','pointsinfo','is_superuser','masteries')
+        fields=('id','avatar','discord_id','discord_nickname','is_active','roles','discord_discriminator','pointsinfo','is_superuser',)
         list_serializer_class = BulkListSerializer
 
 

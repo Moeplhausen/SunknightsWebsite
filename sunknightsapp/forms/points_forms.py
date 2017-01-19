@@ -181,6 +181,7 @@ class DecideUserPointSubmissionForm(BaseForm):
         else:
             submission.accepted = self.cleaned_data['accepted']
             submission.managerText = self.cleaned_data['managerText']
+            submission.points = self.cleaned_data['points']
             submission.manager=request.user
             submission.decided=True
             submission.reverted=False
@@ -192,7 +193,7 @@ class DecideUserPointSubmissionForm(BaseForm):
 
     class Meta:
         model = BasicPointSubmission
-        fields = ('pk_id', 'accepted', 'managerText')
+        fields = ('pk_id', 'accepted', 'managerText', 'points')
 
 class DecideFightsSubmissionForm(BaseForm):
     pk_id = forms.IntegerField(min_value=0, widget=forms.HiddenInput(), required=True)
