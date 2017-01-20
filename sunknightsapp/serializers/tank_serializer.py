@@ -6,7 +6,7 @@ from ..models.diep_tank import DiepTank,DiepTankInheritance
 class DiepTankSimpleSerializer(BulkSerializerMixin,serializers.ModelSerializer):
     class Meta:
         model=DiepTank
-        fields=('id','name')
+        fields=('id','name','multiplier')
         list_serializer_class = BulkListSerializer
 
 

@@ -14,8 +14,9 @@ class SubmitPointsForm(BaseForm):
     def handle(self, request):
 
         try:
+            import decimal
             submission = self.save(commit=False)
-            submission.points=getPointsByScore(submission.score)
+            submission.points=getPointsByScore(submission.score)*decimal.Decimal(submission.tank.multiplier)
             submission.pointsinfo = request.user.pointsinfo
             submission.save()
         except BaseException as e:

@@ -104,12 +104,12 @@
                             var user = '<a href="/user/' + discorduserid + '">' + username + '</a>';
 
                             var managertext = '<textarea class="form-control" id="manager-note-' + data[i].id + '" rows="3"></textarea>'
-                            var points = '<input class="form-control" type="number" value="'+data[i].points+'" id="points-manager-' + data[i].id + '">'
+                            var points = '<input class="form-control " type="number" value="'+data[i].points+'" id="points-manager-' + data[i].id + '">'
 
 
                             return_data.push({
                                 'user': user,
-                                'tank': data[i].tank,
+                                'tank': data[i].tank.name+" (x"+data[i].tank.multiplier+")",
                                 'gamemode': data[i].gamemode,
                                 'score': data[i].score,
                                 'date': data[i].date,
@@ -130,7 +130,7 @@
                 },
                 "columns": [
                     {"data": "user"},
-                    {"data": "tank.name"},
+                    {"data": "tank"},
 {#                    {"data": "gamemode.name"},#}
                     {"data": "score"},
                     {"data": "proof"},
