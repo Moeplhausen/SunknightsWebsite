@@ -220,11 +220,11 @@ class DecideFightsSubmissionForm(BaseForm):
             submission.decided=True
             submission.reverted=False
             print('saved')
-            submission.save()
+
 
             if submission.accepted:
-                manageElo(submission.pointsinfo,submission.pointsinfoloser)
-
+                manageElo(submission)
+            submission.save()
 
 
             serializer = OneOnOneFightSubmissionSerializer(submission)

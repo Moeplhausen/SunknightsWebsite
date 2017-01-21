@@ -180,6 +180,7 @@ def post_new_OneOnOne_submission(submission, accepted, decided):
                             {'name': 'Manager', 'value': submission.manager.discord_nickname, 'inline': True},
                             {'name': 'Manager Note', 'value': submission.managerText, 'inline': True},
                             {'name': 'Action', 'value': 'Approved' if accepted else 'Rejected', 'inline': True},
+                            {'name': 'Expected outcome', 'value': str(submission.expected_outcome), 'inline': True},
                         ]
                 }
             ]

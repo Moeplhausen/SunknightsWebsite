@@ -58,6 +58,8 @@
                 sunKnightsJsonRequest(form, function (result, data) {
                     if (result) {
                         submission = data['message']['data']
+                        $('#alertsContainer').append("<div class=\"alert alert-success alert-dismissible fade in\" role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>Submitted<strong></div>")
+
                         datatableopenscoresubmissions.row.add([
                             submission['id'],
                             submission['tank']['name'],
@@ -68,6 +70,7 @@
                     }
                     else {
                         console.log('fuck this shit')
+                        $('#alertsContainer').append("<div class=\"alert alert-danger alert-dismissible fade in\" role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>Something went wrong :O<strong></div>")
 
                     }
                 }, false, false);
@@ -88,7 +91,7 @@
                 sunKnightsJsonRequest(form, function (result, data) {
                     if (result) {
                         submission = data['message']['data']
-
+                        $('#alertsContainer').append("<div class=\"alert alert-success alert-dismissible fade in\" role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>Submitted<strong></div>")
                         var points=submission['pointsinfo']['id']=={{ user.pointsinfo.id }}?submission['points']:submission['pointsloser']
 
                         datatableopenfightssubmissions.row.add([
@@ -99,7 +102,7 @@
                     }
                     else {
                         console.log('fuck this shit')
-
+                        $('#alertsContainer').append("<div class=\"alert alert-danger alert-dismissible fade in\" role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>Something went wrong :O<strong></div>")
                     }
                 }, false, false);
                 this.reset();

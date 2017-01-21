@@ -1,9 +1,13 @@
-html,body {
-    background: -webkit-linear-gradient(90deg, #FBC926 10%, #C3922E 90%); /* Chrome 10+, Saf5.1+ */
-    background: -moz-linear-gradient(90deg, #FBC926 10%, #C3922E 90%); /* FF3.6+ */
-    background: -ms-linear-gradient(90deg, #FBC926 10%, #C3922E 90%); /* IE10 */
-    background: -o-linear-gradient(90deg, #FBC926 10%, #C3922E 90%); /* Opera 11.10+ */
-    background: linear-gradient(90deg, #FBC926 10%, #C3922E 90%); /* W3C */
+/*html,body {*/
+    /*background: -webkit-linear-gradient(90deg, #FBC926 10%, #C3922E 90%); !* Chrome 10+, Saf5.1+ *!*/
+    /*background: -moz-linear-gradient(90deg, #FBC926 10%, #C3922E 90%); !* FF3.6+ *!*/
+    /*background: -ms-linear-gradient(90deg, #FBC926 10%, #C3922E 90%); !* IE10 *!*/
+    /*background: -o-linear-gradient(90deg, #FBC926 10%, #C3922E 90%); !* Opera 11.10+ *!*/
+    /*background: linear-gradient(90deg, #FBC926 10%, #C3922E 90%); !* W3C *!*/
+/*}*/
+
+body{
+    background-image: url("../image/background.jpg");
 }
 
 #userview-tab-content{

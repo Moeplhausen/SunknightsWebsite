@@ -24,7 +24,12 @@ def getPointsByFight(won:bool):
     return 3
 
 
-def manageElo(winner,loser):
+def manageElo(submission):
+    from decimal import getcontext, Decimal
+    # Set the precision.
+
+    winner=submission.pointsinfo
+    loser=submission.pointsinfoloser
 
     def expected_elo(player,otherPlayer):
         return 1.0/(1+10**((otherPlayer.elo-player.elo)/400))
@@ -38,6 +43,10 @@ def manageElo(winner,loser):
 
     winner.elo=cur_winner_elo+ELO_K*(1-expect_winner)
     loser.elo=cur_loser_elo+ELO_K*(0-expect_loser)
+
+    t=str((round(expect_winner,2)))
+
+    submission.expected_outcome=Decimal(t)
 
     winner.save()
     loser.save()

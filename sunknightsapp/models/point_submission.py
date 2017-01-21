@@ -56,6 +56,7 @@ class OneOnOneFightSubmission(BasicPointSubmission):
     pointsinfoloser = models.ForeignKey(PointsInfo, related_name="loser")
     proof = models.CharField(max_length=200)
     pointsloser = models.DecimalField(decimal_places=2, max_digits=6, default=3, db_index=True)
+    expected_outcome=models.DecimalField(decimal_places=2, max_digits=4, default=0.5, db_index=True)
 
 
 class GuildFightPointsAction(PointsManagerAction):
