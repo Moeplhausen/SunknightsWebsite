@@ -44,6 +44,15 @@ html,body {
     border-color: transparent;
 }
 
+.list-group-item{
+    background-color: transparent !important;
+    background:
+            linear-gradient(
+                    rgba(0, 0, 0, 0.1),
+                    rgba(0, 0, 0, 0.1)
+            );
+    border-color:black !important;
+}
 
 #sun-navbar a{
     color:white;

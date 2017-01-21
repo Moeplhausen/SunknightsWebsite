@@ -76,6 +76,11 @@ def guilds(request):
     return render(request, 'sunknightsapp/guilds.html', context)
 
 
+def about_us(request):
+    context = {}
+    return render(request, 'sunknightsapp/about_us.html', context)
+
+
 @login_required
 def guild(request,id):
     return render(request, 'sunknightsapp/index.html')

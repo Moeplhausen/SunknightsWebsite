@@ -33,6 +33,7 @@ urlpatterns = [
     url(r'^guilds',views.guilds,name='guilds'),
     url(r'^guilds/(?P<id>[0-9]+)',views.guild),
     url(r'^leaderboard', views.leaderboard, name='leaderboard'),
+    url(r'^aboutus', views.about_us, name='about'),
     url(r'^tankdraw', views.tankboard, name='tankboard'),
     url(r'^managesubmissions', views.manage_submissions, name='managesubmissions'),
     url(r'^api/',include(router.urls)),
