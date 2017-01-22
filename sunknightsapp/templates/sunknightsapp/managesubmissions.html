@@ -81,6 +81,7 @@
                 })
             }
             var tablescore=$('#points-submissions-table').DataTable({
+
                 "fnDrawCallback": function (oSettings) {
                     decideScoreSubmission()
                 },
@@ -103,8 +104,8 @@
                             var discorduserid = data[i].pointsinfo.user.discord_id
                             var user = '<a href="/user/' + discorduserid + '">' + username + '</a>';
 
-                            var managertext = '<textarea class="form-control" id="manager-note-' + data[i].id + '" rows="3"></textarea>'
-                            var points = '<input class="form-control " type="number" value="'+data[i].points+'" id="points-manager-' + data[i].id + '">'
+                            var managertext = '<textarea class="form-control" maxlength="200" id="manager-note-' + data[i].id + '" rows="3"></textarea>'
+                            var points = '<input class="form-control" style = "width:75px;"  type="number" value="'+data[i].points+'" id="points-manager-' + data[i].id + '">'
 
 
                             return_data.push({
@@ -205,9 +206,9 @@
                             var loser = '<a href="/user/' + discorduserid2 + '">' + username2 + '</a>';
 
 
-                            var managertext = '<textarea class="form-control" id="manager-note-' + data[i].id + '" rows="3"></textarea>'
-                            var pointswinner = '<input class="form-control" type="number" value="'+data[i].points+'" id="points-manager-' + data[i].id + '">'
-                            var pointsloser = '<input class="form-control" type="number" value="'+data[i].pointsloser+'" id="points-manager-' + data[i].id + '">'
+                            var managertext = '<textarea class="form-control" id="manager-note-' + data[i].id + '" rows="3" maxlength="200"></textarea>'
+                            var pointswinner = '<input class="form-control" style = "width:60px;" type="number" value="'+data[i].points+'" id="points-manager-' + data[i].id + '">'
+                            var pointsloser = '<input class="form-control" style = "width:60px;" type="number" value="'+data[i].pointsloser+'" id="points-manager-' + data[i].id + '">'
 
                             return_data.push({
                                 'winner': winner,
