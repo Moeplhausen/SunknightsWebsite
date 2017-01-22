@@ -63,10 +63,15 @@ def user(request,id):
 @login_required
 def leaderboard(request):
     context = {}
-    userpoints = PointsInfo.objects.filter(user__is_active=True).prefetch_related('user').order_by(
-        '-currentpoints')  # the '-' is for reversing the order (so the one who has most points will be on top
+    userpoints = PointsInfo.objects.filter(user__is_active=True).prefetch_related('user','masteries').order_by(
+        '-totalpoints')  # the '-' is for reversing the order (so the one who has most points will be on top
     context['userpoints'] = userpoints
-    return render(request, 'sunknightsapp/leaderboard.html', context)
+
+    t=render(request, 'sunknightsapp/leaderboard.html', context)
+
+
+
+    return t
 
 @login_required
 def guilds(request):
