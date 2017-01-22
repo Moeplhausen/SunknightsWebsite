@@ -1,82 +1,36 @@
+{% load static %}
 <div class="row">
-    <div class="col-xs-12 col-sm-4">
-        <img src="{{ lookuser.avatar_url }}">
+    <div class="col-sm-4">
+        <div class="card">
+            <img class="card-img-top" src="{{ lookuser.avatar_url }}">
+            <p class="card-text">Leaderboard Place: <strong>{{ lookuser.leaderboard_place }}</strong></p>
+            <p class="card-text">Points: <strong>{{ lookuser.total_points }}</strong></p>
+            <p class="card-text">Masteries: <strong>{{ lookuser.masteries.all.count }}</strong></p>
+        </div>
     </div>
-
-    <div class="col-xs-12 col-sm-8">
-        <h5>Leaderboard Place: <strong>{{ lookuser.leaderboard_place }}</strong></h5>
-        <h5>Points: <strong>{{ lookuser.total_points }}</strong></h5>
-
-        <h5>Next Fights registered to:</h5>
-        {% if lookuser.open_fights.all.count != 0 %}
-
-            <ul>
-                {% for fight in lookuser.open_fights %}
-                    <li>
-                        {{ fight.date }}:{{ fight.name }}
-                    </li>
+    <div class="col-sm-4">
+        <div class="card">
+            <div class="card-block">
+                <h4 class="card-title">Masteries</h4>
+                <p class="card-text"><strong>{{ lookuser.masteries.all.count }}</strong></p>
+                <p class="card-text">
+                    {% for mastery in lookuser.masteries.all %}
+                        <div class="{{ mastery.tank.name|slugify }}-tier{{ mastery.tier }}" data-toggle="tooltip" data-placement="top" title="{{ mastery.tank.name }} Tier {{ mastery.tier }}"></div>
                 {% endfor %}
-
-
-            </ul>
-        {% else %}
-            None
-        {% endif %}
-
-
-    </div>
-</div>
-
-<div id="masteries-user-row" class="masteries-row row">
-    <div class="col-xs-12 col-sm-2">
-        <h5>Masteries:</h5>
-    </div>
-    <div class="col-xs-12 col-sm-10">
-
-        {% if lookuser.masteries.all.count < 1 %}
-            No masteries unlocked yet :(
-        {% else %}
-
-
-            <div class="table-responsive">
-                <table class="table table-bordered table-hover table-striped" width="100%">
-                    <thead>
-                    <th>Tier 1</th>
-                    <th>Tier 2</th>
-                    <th>Tier 3</th>
-                    </thead>
-
-                    <tbody>
-                    <tr>
-                        <td>
-
-                            {% for mastery in lookuser.masteries.all %}
-                                {% if mastery.tier >= 1 %}
-                                    <div class="{{ mastery.tank.name|slugify }} tier-{{ mastery.tier }}"></div>
-                                {% endif %}
-                            {% endfor %}
-                        </td>
-                        <td>
-                            {% for mastery in lookuser.masteries.all %}
-                                {% if mastery.tier >= 2 %}
-                                    <div class="{{ mastery.tank.name|slugify }} tier-{{ mastery.tier }}"></div>
-                                {% endif %}
-                            {% endfor %}
-                        </td>
-                        <td>
-                            {% for mastery in lookuser.masteries.all %}
-                                {% if mastery.tier == 3 %}
-                                    <div class="{{ mastery.tank.name|slugify }} tier-{{ mastery.tier }}"></div>
-                                {% endif %}
-                            {% endfor %}
-                        </td>
-                    </tr>
-
-                    </tbody>
-
-
-                </table>
+                </p>
             </div>
-        {% endif %}
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="card">
+            <div class="card-block">
+                <h4 class="card-title">Badges</h4>
+                <p class="card-text">
+                    {% for badge in lookuser.badges.all %}
+                        <div class="{{ badge.tank.name|slugify }}" data-toggle="tooltip" data-placement="top" title="{{ badge.tank.name }}"></div>
+                    {% endfor %}
+                </p>
+            </div>
+        </div>
     </div>
 </div>

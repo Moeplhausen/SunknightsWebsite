@@ -28,6 +28,9 @@ class ClanUser(AbstractBaseUser):
             avatar=models.CharField(max_length=150,default='')
 
 
+            description=models.TextField(max_length=500, blank="", default="")
+
+
 
             objects=UserManager()
 
@@ -95,6 +98,10 @@ class ClanUser(AbstractBaseUser):
             @property
             def masteries(self):
                 return self.pointsinfo.masteries
+
+            @property
+            def badges(self):
+                return self.pointsinfo.badges
 
             @property
             def open_fights(self):

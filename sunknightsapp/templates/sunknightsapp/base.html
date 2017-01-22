@@ -15,7 +15,7 @@
               href="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap4.min.css"/>
         <link rel="stylesheet" type="text/css"
               href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.4/css/selectize.bootstrap3.min.css"/>
-        <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ubuntu:regular,bold&subset=Latin">
+        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Ubuntu:regular,bold&subset=Latin">
 
 
         <!-- Latest compiled and minified CSS -->
@@ -55,9 +55,9 @@
                 {% comment %}                <a href="#">
                     Tournaments
                 </a>{% endcomment %}
-                <a href="{% url 'guilds' %}">
+{% comment %}                <a href="{% url 'guilds' %}">
                     Guilds
-                </a>
+                </a>{% endcomment %}
 
             {% endif %}
             {% if user.is_points_manager %}
@@ -135,7 +135,9 @@
     var csrftoken = $.cookie('csrftoken');
     $(document).ready(function () {
 
-
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
 
 
         {% block scripts %}{% endblock %}
