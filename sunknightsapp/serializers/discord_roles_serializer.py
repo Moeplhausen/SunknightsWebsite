@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from rest_framework_bulk import BulkListSerializer,BulkSerializerMixin
-from ..models.discord_roles import SunKnightsGuild, DiscordRole
+from ..models.discord_roles import SunKnightsGuild, DiscordRole,SunKnightsBadgeRole
 
 
 class DiscordRolesSerializer(BulkSerializerMixin,serializers.ModelSerializer):
@@ -11,7 +11,12 @@ class DiscordRolesSerializer(BulkSerializerMixin,serializers.ModelSerializer):
         list_serializer_class = BulkListSerializer
 
 
+class SunKnightsBadgeRoleSerializer(BulkSerializerMixin,serializers.ModelSerializer):
 
+    class Meta:
+        model=SunKnightsBadgeRole
+        fields='__all__'
+        list_serializer_class = BulkListSerializer
 
 
 class GuildRolesSerializer(DiscordRolesSerializer):

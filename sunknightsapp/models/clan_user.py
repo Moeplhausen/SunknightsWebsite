@@ -101,7 +101,8 @@ class ClanUser(AbstractBaseUser):
 
             @property
             def badges(self):
-                return self.pointsinfo.badges
+                from .discord_roles import SunKnightsBadgeRole
+                return SunKnightsBadgeRole.objects.filter(clanuserroles__clan_user=self)
 
             @property
             def open_fights(self):

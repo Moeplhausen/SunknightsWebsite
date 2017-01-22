@@ -4,7 +4,6 @@ from ..models.points_info import PointsInfo
 from rest_framework_bulk import BulkListSerializer
 from .clan_user_roles_serializer import ClanUserRolesSerializer,BulkSerializerMixin,ClanUserRolesDetailedSerializer
 from .mastery_serializer import MasterySerializer
-from .badge_serializer import BadgeSerializer
 from ..models.guildfight import GuildFight
 
 
@@ -61,10 +60,9 @@ class ClanUserFasterSerializer(BulkSerializerMixin,serializers.ModelSerializer):
 
     class PointsInfoFasterSerializer(BulkSerializerMixin,serializers.ModelSerializer):
         masteries=MasterySerializer(many=True,read_only=True)
-        badges=BadgeSerializer(many=True,read_only=True)
         class Meta:
             model=PointsInfo
-            fields=('id','currentpoints','totalpoints','oldpoints','masterypoints','masteries','badges')
+            fields=('id','currentpoints','totalpoints','oldpoints','masterypoints','masteries')
             list_serializer_class = BulkListSerializer
 
 

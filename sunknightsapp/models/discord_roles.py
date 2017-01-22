@@ -42,3 +42,6 @@ class SunKnightsGuild(DiscordRole):
     pass
 
 
+class SunKnightsBadgeRole(SunKnightsGuild):
+    from .diep_tank import DiepTank
+    tank = models.ForeignKey(DiepTank, on_delete=models.CASCADE)

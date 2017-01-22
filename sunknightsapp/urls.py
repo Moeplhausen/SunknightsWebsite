@@ -3,13 +3,14 @@ from django.contrib.auth.views import logout_then_login
 
 
 from .views import views
-from .views.api import roles,servers,users,user_roles,tournaments,fights,discord_roles,points_submissions,diep_tanks,mastery,badge
+from .views.api import roles,servers,users,user_roles,tournaments,fights,discord_roles,points_submissions,diep_tanks,mastery
 from rest_framework_bulk.routes import BulkRouter
 from .views.oauth.views import OAuthCallbackDiscord,OAuthRedirectDiscord
 
 
 router = BulkRouter(trailing_slash=False)
 router.register(r'roles',roles.RolesViewSet)
+router.register(r'badgeroles',roles.SunKnightsBadgeRoleViewSet)
 router.register(r'servers',servers.ServersViewSet)
 router.register(r'users',users.ClanUsersViewSet)
 router.register(r'usersfast',users.ClanUsersShortSet)
@@ -25,7 +26,6 @@ router.register(r'discord_roles',discord_roles.DiscordRolesViewSet)
 router.register(r'dieptanks',diep_tanks.DiepTanksViewSet)
 router.register(r'dieptanksinheritance',diep_tanks.DiepTanksInheritanceViewSet)
 router.register(r'mastery',mastery.MasteriesViewSet)
-router.register(r'badge',badge.BadgesViewSet)
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
