@@ -20,7 +20,7 @@ class BasicPointSubmission(models.Model):
     decided = models.BooleanField(default=False)
     managerText = models.TextField(max_length=200, blank="", default="")
     date = models.DateTimeField(auto_now_add=True)
-    pointsinfo = models.ForeignKey(PointsInfo, on_delete=models.CASCADE)
+    pointsinfo = models.ForeignKey(PointsInfo, on_delete=models.CASCADE, db_index=True)
     points = models.DecimalField(decimal_places=2, max_digits=6, default=0, db_index=True)
     reverted=models.BooleanField(default=False)
 

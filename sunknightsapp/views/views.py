@@ -23,12 +23,12 @@ def index(request):
         tanks=DiepTank.objects.all()
         gamemodes=DiepGamemode.objects.all()
 
-        users = ClanUser.objects.filter(is_active=True).exclude(id=request.user.id).prefetch_related("pointsinfo",'pointsinfo__masteries').order_by(
+        users = ClanUser.objects.filter(is_active=True).exclude(id=request.user.id).order_by(
             '-discord_nickname')
 
         context={'tanks':tanks,'gamemodes':gamemodes,'submitpointsform':SubmitPointsForm,'submitfightsform':SubmitFightsForm,'users':users}
         context['revertsubmissionid']=AjaxAction.REVERTSUBMISSION.value
-        context['lookuser']=request.user
+        context['lookuser']=ClanUser.objects.prefetch_related('pointsinfo','pointsinfo__masteries').get(id=request.user.id)
 
         return render(request, 'sunknightsapp/userview.html', context)
 
@@ -48,7 +48,7 @@ def user(request,id):
     try:
         print("id")
         print(id)
-        fuser=ClanUser.objects.get(discord_id=id)
+        fuser=ClanUser.objects.prefetch_related('pointsinfo','pointsinfo__masteries').get(discord_id=id)
     except ClanUser.DoesNotExist:
         return render(request, 'sunknightsapp/index.html')
     else:
