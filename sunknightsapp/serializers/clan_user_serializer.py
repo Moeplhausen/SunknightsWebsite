@@ -55,6 +55,16 @@ class PointsInfoSerializer(BulkSerializerMixin,serializers.ModelSerializer):
         fields=('id','oldpoints','currentpoints','totalpoints','leaderboard_place','masterypoints','user','masteries','elo')
         list_serializer_class = BulkListSerializer
 
+class PointsInfoFastSerializer(BulkSerializerMixin,serializers.ModelSerializer):
+    user=ClanUserSerializerBasic(many=False,read_only=True)
+
+    masteries=MasterySerializer(many=True,read_only=True)
+
+    class Meta:
+        model=PointsInfo
+        fields=('id','oldpoints','currentpoints','totalpoints','masterypoints','user','masteries','elo')
+        list_serializer_class = BulkListSerializer
+
 
 class ClanUserFasterSerializer(BulkSerializerMixin,serializers.ModelSerializer):
 

@@ -28,7 +28,6 @@
                 "ajax": {
                     "url": "{% url 'ajaxhandler' %}",
                     "dataSrc": function (json) {
-                        console.log(json)
                         var data = json['message']['data']
                         var return_data = new Array();
                         for (var i = 0; i < data.length; i++) {
