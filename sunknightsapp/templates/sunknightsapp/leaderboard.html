@@ -2,49 +2,84 @@
 
 {% extends "sunknightsapp/base.html" %}
 {% block content %}
-<table id="points_leaderboard" class="display datatables-table" width="100%">
+    <div class="table-responsive">
+        <table id="points_leaderboard" class="display datatables-table" width="100%">
 
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Old Points</th>
-            <th>New Points</th>
-            <th>Total Points</th>
-            <th>Masteries</th>
-            <th>1vs1 Skill</th>
-        </tr>
-    </thead>
-
-    <tbody>
-        {% for pointinfo in userpoints %}
+            <thead>
             <tr>
-                <td><img class="leaderpoint-avatar" src="{{ pointinfo.user.avatar_url }}"><a href="/user/{{ pointinfo.user.discord_id }}">{{pointinfo.user.discord_nickname}}</a></td>
-                <td>{{pointinfo.oldpoints}}</td>
-                <td>{{pointinfo.currentpoints}}</td>
-                <td>{{pointinfo.totalpoints}}</td>
-                <td>{{pointinfo.masteries.all.count }}</td>
-
-                {% if pointinfo.elo < 800%}
-                    <td><800</td>
-                {% else %}
-                    <td>{{pointinfo.elo}}</td>
-                {% endif %}
-
-
+                <th>Name</th>
+                <th>Old Points</th>
+                <th>New Points</th>
+                <th>Total Points</th>
+                <th>Masteries</th>
+                <th>1vs1 Skill</th>
             </tr>
-        {% endfor %}
-    </tbody>
-
-
-</table>
-
+            </thead>
+        </table>
+    </div>
 {% endblock %}
 
 
-{% block scripts %}
-    $('#points_leaderboard').DataTable( {
-    "order": [[ 1, "desc" ]]
-    } );
+{% block scriptself %}
+    <script>
+        $(document).ready(function () {
+            $('#points_leaderboard').DataTable({
+                "order": [[1, "desc"]],
+                "ajax": {
+                    "url": "{% url 'ajaxhandler' %}",
+                    "dataSrc": function (json) {
+                        console.log(json)
+                        var data = json['message']['data']
+                        var return_data = new Array();
+                        for (var i = 0; i < data.length; i++) {
 
+                            var username=data[i].user.discord_nickname
+                            var userdiscordid=data[i].user.discord_id
+                            var avatarstr=data[i].user.avatar
+                            var avatarurl=""
+                            if (avatarstr==""){
+                                avatarurl="https://discordapp.com/assets/322c936a8c8be1b803cd94861bdfa868.png"
+                            }else{
+                                avatarurl="https://cdn.discordapp.com/avatars/"+userdiscordid+"/"+avatarstr
+                            }
 
+                            var usernametext="<img class='leaderpoint-avatar' src='"+avatarurl+"'><a href='/user/"+userdiscordid+"'>"+username+"</a>"
+
+                            var oldpoints=data[i].oldpoints
+                            var currentpoints=data[i].currentpoints
+                            var totalpoints=data[i].totalpoints
+                            var masteriessize=data[i].masteries.length
+                            var elo=data[i].elo
+
+                            console.log(oldpoints,currentpoints,totalpoints,masteriessize,elo)
+
+                            return_data.push({
+                                'user': usernametext,
+                                'oldpoints': oldpoints,
+                                'currentpoints': currentpoints,
+                                'totalpoints': totalpoints,
+                                'masteries':masteriessize,
+                                'elo': elo
+                            })
+                        }
+                        return return_data;
+                    },
+                        "type": "POST",
+                    "data": function (d) {
+                        d.csrfmiddlewaretoken = csrftoken
+                        d.ajax_action_id ={{ retrieveusers }}
+                    }
+                },
+                "columns": [
+                    {"data": "user"},
+                    {"data": "oldpoints"},
+                    {"data": "currentpoints"},
+                    {"data": "totalpoints"},
+                    {"data": "masteries"},
+                    {"data": "elo"}
+                ],
+            });
+        });
+
+    </script>
 {% endblock %}

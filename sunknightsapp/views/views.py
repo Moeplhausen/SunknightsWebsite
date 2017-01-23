@@ -8,7 +8,7 @@ from django.views.decorators.http import require_http_methods
 
 from ..enums.AjaxActions import AjaxAction
 from ..forms.tournaments_forms import CreateTournamentForm,DeleteTournamentForm,RequestTournamentsForm
-from ..forms.points_forms import SubmitPointsForm,RetriveUserSubmissionsPointsForm,DecideUserPointSubmissionForm,SubmitFightsForm,RetrieveFightsSubmissionsForm,DecideFightsSubmissionForm,RevertSubmissionForm
+from ..forms.points_forms import SubmitPointsForm,RetriveUserSubmissionsPointsForm,DecideUserPointSubmissionForm,SubmitFightsForm,RetrieveFightsSubmissionsForm,DecideFightsSubmissionForm,RevertSubmissionForm,RetrieveUsersLeaderPointForm
 from ..models.clan_user import ClanUser
 from ..models.diep_tank import DiepTankInheritance,DiepTank
 from ..models.discord_roles import DiscordRole
@@ -23,7 +23,7 @@ def index(request):
         tanks=DiepTank.objects.all()
         gamemodes=DiepGamemode.objects.all()
 
-        users = ClanUser.objects.filter(is_active=True).exclude(id=request.user.id).order_by(
+        users = ClanUser.objects.filter(is_active=True).exclude(id=request.user.id).prefetch_related("pointsinfo",'pointsinfo__masteries').order_by(
             '-discord_nickname')
 
         context={'tanks':tanks,'gamemodes':gamemodes,'submitpointsform':SubmitPointsForm,'submitfightsform':SubmitFightsForm,'users':users}
@@ -66,6 +66,7 @@ def leaderboard(request):
     userpoints = PointsInfo.objects.filter(user__is_active=True).prefetch_related('user','masteries').order_by(
         '-totalpoints')  # the '-' is for reversing the order (so the one who has most points will be on top
     context['userpoints'] = userpoints
+    context['retrieveusers']=AjaxAction.RETRIEVELEADERBOARD.value
 
     t=render(request, 'sunknightsapp/leaderboard.html', context)
 
@@ -139,6 +140,8 @@ def ajaxhandler(request):
         form=DecideFightsSubmissionForm(request.POST)
     elif actionid is AjaxAction.REVERTSUBMISSION.value:
         form=RevertSubmissionForm(request.POST)
+    elif actionid is AjaxAction.RETRIEVELEADERBOARD.value:
+        form=RetrieveUsersLeaderPointForm(request.POST)
 
 
     if form is None:

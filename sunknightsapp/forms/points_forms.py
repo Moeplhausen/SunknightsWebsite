@@ -3,8 +3,10 @@ from ..enums.AjaxActions import AjaxAction
 from ..models.point_submission import BasicUserPointSubmission, BasicPointSubmission,OneOnOneFightSubmission,PointsManagerAction
 from ..serializers.pointsubmissions_serializer import BasicUserPointSubmissionSerializer, \
     BasicPointsSubmissionSerializer,OneOnOneFightSubmissionSerializer
+from ..serializers.clan_user_serializer import PointsInfoSerializer
 from django import forms
 from ..models.utility.little_things import getPointsByScore,getPointsByFight,manageElo
+from ..models.points_info import PointsInfo
 
 
 class SubmitPointsForm(BaseForm):
@@ -66,10 +68,6 @@ class SubmitFightsForm(BaseForm):
 
 
 
-
-
-
-
 class RetriveUserSubmissionsPointsForm(BaseForm):
     def __init__(self, *args, **kwargs):
         super(RetriveUserSubmissionsPointsForm, self).__init__(AjaxAction.RETRIEVEUSERSUBMISSIONS, *args, **kwargs)
@@ -90,6 +88,29 @@ class RetriveUserSubmissionsPointsForm(BaseForm):
     class Meta:
         model = BasicUserPointSubmission
         fields = ()
+
+
+class RetrieveUsersLeaderPointForm(BaseForm):
+    def __init__(self, *args, **kwargs):
+        super(RetrieveUsersLeaderPointForm, self).__init__(AjaxAction.RETRIEVELEADERBOARD, *args, **kwargs)
+
+    def handle(self, request):
+
+        try:
+            userpoints = PointsInfo.objects.filter(user__is_active=True).prefetch_related('user','masteries').order_by(
+                '-totalpoints')  # the '-' is for reversing the order (so the one who has most points will be on top
+            serializer = PointsInfoSerializer(userpoints, many=True)
+        except BaseException as e:
+            return self.response(False, 'Something went wrong: ' + str(e))
+        else:
+
+            return self.response(True, {'data': (serializer.data)})
+
+    class Meta:
+        model = PointsInfo
+        fields = ()
+
+
 
 
 class RetrieveFightsSubmissionsForm(BaseForm):

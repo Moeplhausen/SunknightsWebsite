@@ -52,7 +52,7 @@ class PointsInfoSerializer(BulkSerializerMixin,serializers.ModelSerializer):
 
     class Meta:
         model=PointsInfo
-        fields=('id','oldpoints','currentpoints','totalpoints','leaderboard_place','masterypoints','user','masteries')
+        fields=('id','oldpoints','currentpoints','totalpoints','leaderboard_place','masterypoints','user','masteries','elo')
         list_serializer_class = BulkListSerializer
 
 
