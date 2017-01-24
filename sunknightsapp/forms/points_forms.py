@@ -118,15 +118,15 @@ class RetrieveUsersLeaderPointForm(BaseForm):
 
 
 
-            if ordercolumn==1:
+            if ordercolumn==0:
                 orderstr="user__discord_nickname"
-            elif ordercolumn==2:
+            elif ordercolumn==1:
                 orderstr="oldpoints"
-            elif ordercolumn==3:
+            elif ordercolumn==2:
                 orderstr="currentpoints"
-            elif ordercolumn==4 or ordercolumn==0:
+            elif ordercolumn==3:
                 orderstr="totalpoints"
-            elif ordercolumn==6:
+            elif ordercolumn==5:
                 orderstr="elo"
 
             if dir=='desc':

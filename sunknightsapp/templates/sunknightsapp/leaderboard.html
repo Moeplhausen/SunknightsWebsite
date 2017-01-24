@@ -7,7 +7,6 @@
 
             <thead>
             <tr>
-                <th>Place</th>
                 <th>Name</th>
                 <th>Old Points</th>
                 <th>New Points</th>
@@ -25,7 +24,7 @@
     <script>
         $(document).ready(function () {
             $('#points_leaderboard').DataTable({
-                "order": [[4, "desc"]],
+                "order": [[3, "desc"]],
                 "serverSide": true,
                 "columnDefs": [
                     { "orderable": false, "targets": [5] }
@@ -53,7 +52,6 @@
                             var usernametext="<img class='leaderpoint-avatar' src='"+avatarurl+"'><a href='/user/"+userdiscordid+"'>"+username+"</a>"
 
                             var oldpoints=data[i].oldpoints
-                            var leaderboard_place=data[i].leaderboard_place
                             var currentpoints=data[i].currentpoints
                             var totalpoints=data[i].totalpoints
                             var masteriessize=data[i].masteries.length
@@ -66,7 +64,6 @@
                                 'totalpoints': totalpoints,
                                 'masteries':masteriessize,
                                 'elo': elo,
-                                'place':leaderboard_place
                             })
                         }
                         return return_data;
@@ -78,7 +75,6 @@
                     }
                 },
                 "columns": [
-                    {"data": "place"},
                     {"data": "user"},
                     {"data": "oldpoints"},
                     {"data": "currentpoints"},
