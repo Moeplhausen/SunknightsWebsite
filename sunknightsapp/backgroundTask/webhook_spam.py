@@ -43,8 +43,8 @@ def post_submission_reverted(submission):
                 'title': 'Submission Reverted ({})'.format(submission.id),
                 'fields':
                     [
-                        {'name': 'From', 'value': submission.pointsinfo.user.discord_nickname, 'inline': True},
-                        {'name': 'Manager', 'value': str(submission.manager.discord_nickname), 'inline': True},
+                        {'name': 'From', 'value': '<@{}>'.format(submission.pointsinfo.user.discord_id), 'inline': True},
+                        {'name': 'Manager', 'value': '<@'+str(submission.manager.discord_id)+'>', 'inline': True},
                         {'name': 'Points', 'value': str(submission.points), 'inline': True},
                     ]
             }
@@ -83,7 +83,7 @@ def post_new_user_point_submission(submission, accepted, decided):
                     'title': 'New Point Submission ({})'.format(submission.id),
                     'fields':
                         [
-                            {'name': 'From', 'value': submission.pointsinfo.user.discord_nickname, 'inline': True},
+                            {'name': 'From', 'value': '<@{}>'.format(submission.pointsinfo.user.discord_id), 'inline': True},
                             {'name': 'Score', 'value': str(submission.score), 'inline': True},
                             {'name': 'Tank', 'value': submission.tank.name, 'inline': True},
                             {'name': 'Gamemode', 'value': submission.gamemode.name, 'inline': True},
@@ -101,10 +101,10 @@ def post_new_user_point_submission(submission, accepted, decided):
                     'title': 'Submission ({})'.format(submission.id),
                     'fields':
                         [
-                            {'name': 'From', 'value': submission.pointsinfo.user.discord_nickname, 'inline': True},
+                            {'name': 'From', 'value': '<@{}>'.format(submission.pointsinfo.user.discord_id), 'inline': True},
                             {'name': 'Submitter Note', 'value': submission.submitterText, 'inline': True},
                             {'name': 'Action', 'value': 'Approved' if accepted else 'Rejected', 'inline': True},
-                            {'name': 'Manager', 'value': submission.manager.discord_nickname, 'inline': True},
+                            {'name': 'Manager', 'value': '<@{}>'.format(submission.manager.discord_id), 'inline': True},
                             {'name': 'Manager Note', 'value': submission.managerText, 'inline': True},
                             {'name': 'Points', 'value': str(submission.points), 'inline': True},
                         ]
@@ -158,8 +158,8 @@ def post_new_OneOnOne_submission(submission, accepted, decided):
                     'title': 'New One on One Submission ({})'.format(submission.id),
                     'fields':
                         [
-                            {'name': 'Winner', 'value': submission.pointsinfo.user.discord_nickname, 'inline': True},
-                            {'name': 'Loser', 'value': submission.pointsinfoloser.user.discord_nickname, 'inline': True},
+                            {'name': 'Winner', 'value': '<@{}>'.format(submission.pointsinfo.user.discord_id), 'inline': True},
+                            {'name': 'Loser', 'value': '<@{}>'.format(submission.pointsinfoloser.user.discord_id), 'inline': True},
                             {'name': 'Points Winner', 'value': str(submission.points), 'inline': True},
                             {'name': 'Points Loser', 'value': str(submission.pointsloser), 'inline': True},
                             {'name': 'Proof', 'value': submission.proof, 'inline': False},
@@ -175,9 +175,9 @@ def post_new_OneOnOne_submission(submission, accepted, decided):
                     'title': 'One on One Fight Submission ({})'.format(submission.id),
                     'fields':
                         [
-                            {'name': 'Winner', 'value': submission.pointsinfo.user.discord_nickname, 'inline': True},
-                            {'name': 'Loser', 'value': submission.pointsinfoloser.user.discord_nickname, 'inline': True},
-                            {'name': 'Manager', 'value': submission.manager.discord_nickname, 'inline': True},
+                            {'name': 'Winner', 'value': '<@{}>'.format(submission.pointsinfo.user.discord_id), 'inline': True},
+                            {'name': 'Loser', 'value': '<@{}>'.format(submission.pointsinfoloser.user.discord_id), 'inline': True},
+                            {'name': 'Manager', 'value': '<@{}>'.format(submission.manager.discord_id), 'inline': True},
                             {'name': 'Manager Note', 'value': submission.managerText, 'inline': True},
                             {'name': 'Action', 'value': 'Approved' if accepted else 'Rejected', 'inline': True},
                             {'name': 'Expected outcome', 'value': str(submission.expected_outcome), 'inline': True},
@@ -198,12 +198,12 @@ def post_new_manager_submission(submission, accepted):
                     'title': 'Custom Points action ({})'.format(submission.id),
                     'fields':
                         [
-                            {'name': 'Member', 'value': submission.pointsinfo.user.discord_nickname, 'inline': True},
+                            {'name': 'Member', 'value': '<@{}>'.format(submission.pointsinfo.user.discord_id), 'inline': True},
                             {'name': 'Action', 'value': 'Addition' if submission.points >= 0 else 'Subtraction',
                              'inline': True},
                             {'name': 'Points', 'value': str(submission.points), 'inline': True},
                             {'name': 'Points Total', 'value': str(submission.pointsinfo.totalpoints), 'inline': True},
-                            {'name': 'Manager', 'value': str(submission.manager.discord_nickname), 'inline': True},
+                            {'name': 'Manager', 'value': '<@{}>'.format(submission.manager.discord_id), 'inline': True},
                             {'name': 'Manager Note', 'value': submission.managerText, 'inline': True},
                         ]
                 }
@@ -217,7 +217,7 @@ def post_new_manager_submission(submission, accepted):
                     'title': 'Custom Points action ({})'.format(submission.id),
                     'fields':
                         [
-                            {'name': 'Member', 'value': submission.pointsinfo.user.discord_nickname, 'inline': True},
+                            {'name': 'Member', 'value': '<@{}>'.format(submission.pointsinfo.user.discord_id), 'inline': True},
                             {'name': 'Action', 'value': 'Reverted', 'inline': True},
                         ]
                 }
@@ -236,7 +236,7 @@ def post_new_guildfight_points(submission, accepted):
                     'title': 'Guild fight points ({})'.format(submission.id),
                     'fields':
                         [
-                            {'name': 'Member', 'value': submission.pointsinfo.user.discord_nickname, 'inline': True},
+                            {'name': 'Member', 'value': '<@{}>'.format(submission.pointsinfo.user.discord_id), 'inline': True},
                             {'name': 'Action', 'value': 'Addition' if submission.points >= 0 else 'Subtraction',
                              'inline': True},
                             {'name': 'Points', 'value': str(submission.points), 'inline': True},
@@ -253,7 +253,7 @@ def post_new_guildfight_points(submission, accepted):
                     'title': 'Custom Points action ({})'.format(submission.id),
                     'fields':
                         [
-                            {'name': 'Member', 'value': submission.pointsinfo.user.discord_nickname, 'inline': True},
+                            {'name': 'Member', 'value': '<@{}>'.format(submission.pointsinfo.user.discord_id), 'inline': True},
                             {'name': 'Action', 'value': 'Reverted', 'inline': True},
                         ]
                 }
@@ -270,10 +270,10 @@ def mastery_unlock(mastery):
                 'title': 'Mastery Unlock',
                 'fields':
                     [
-                        {'name': 'Member', 'value': mastery.pointsinfo.user.discord_nickname, 'inline': True},
+                        {'name': 'Member', 'value': '<@{}>'.format(mastery.pointsinfo.user.discord_id), 'inline': True},
                         {'name': 'Tank', 'value': mastery.tank.name, 'inline': True},
                         {'name': 'Tier', 'value': str(mastery.tier), 'inline': True},
-                        {'name': 'Manager', 'value': mastery.manager.discord_nickname, 'inline': True},
+                        {'name': 'Manager', 'value': '<@{}>'.format(mastery.manager.discord_id), 'inline': True},
                     ]
             }
         ]
