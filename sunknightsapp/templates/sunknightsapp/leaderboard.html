@@ -7,6 +7,7 @@
 
             <thead>
             <tr>
+                <th>Place</th>
                 <th>Name</th>
                 <th>Old Points</th>
                 <th>New Points</th>
@@ -26,6 +27,8 @@
             $('#points_leaderboard').DataTable({
                 "order": [[1, "desc"]],
                 "serverSide": true,
+                "lengthMenu": [ 10, 15, 25, 50, 75, 100 ],
+                "pageLength": 15,
                 "ajax": {
                     "url": "{% url 'ajaxhandler' %}",
                     "dataSrc": function (json) {
@@ -47,6 +50,7 @@
                             var usernametext="<img class='leaderpoint-avatar' src='"+avatarurl+"'><a href='/user/"+userdiscordid+"'>"+username+"</a>"
 
                             var oldpoints=data[i].oldpoints
+                            var leaderboard_place=data[i].leaderboard_place
                             var currentpoints=data[i].currentpoints
                             var totalpoints=data[i].totalpoints
                             var masteriessize=data[i].masteries.length
@@ -58,7 +62,8 @@
                                 'currentpoints': currentpoints,
                                 'totalpoints': totalpoints,
                                 'masteries':masteriessize,
-                                'elo': elo
+                                'elo': elo,
+                                'place':leaderboard_place
                             })
                         }
                         return return_data;
@@ -70,6 +75,7 @@
                     }
                 },
                 "columns": [
+                    {"data": "place"},
                     {"data": "user"},
                     {"data": "oldpoints"},
                     {"data": "currentpoints"},

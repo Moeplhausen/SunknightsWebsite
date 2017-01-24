@@ -127,7 +127,7 @@ class RetrieveUsersLeaderPointForm(BaseForm):
 
 
 
-            serializer = PointsInfoFastSerializer(page.object_list, many=True)
+            serializer = PointsInfoSerializer(page.object_list, many=True)
         except BaseException as e:
             return self.response(False, 'Something went wrong: ' + str(e))
         else:
