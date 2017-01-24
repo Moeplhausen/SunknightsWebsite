@@ -25,8 +25,11 @@
     <script>
         $(document).ready(function () {
             $('#points_leaderboard').DataTable({
-                "order": [[1, "desc"]],
+                "order": [[4, "desc"]],
                 "serverSide": true,
+                "columnDefs": [
+                    { "orderable": false, "targets": [5] }
+                ],
                 "lengthMenu": [ 10, 15, 25, 50, 75, 100 ],
                 "pageLength": 15,
                 "ajax": {

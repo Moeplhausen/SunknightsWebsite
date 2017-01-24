@@ -105,18 +105,40 @@ class RetrieveUsersLeaderPointForm(BaseForm):
             lengthreq=self.cleaned_data['length']
             start=self.cleaned_data['start']
             searchstr=""
+
+            orderstr="totalpoints"
+            dir='desc'
+
             if 'search[value]' in request.POST:
                 searchstr=request.POST['search[value]']
+            if 'order[0][column]' in request.POST:
+                ordercolumn=int(request.POST['order[0][column]'])
+            if 'order[0][dir]' in request.POST:
+                dir=request.POST['order[0][dir]']
 
+
+
+            if ordercolumn==1:
+                orderstr="user__discord_nickname"
+            elif ordercolumn==2:
+                orderstr="oldpoints"
+            elif ordercolumn==3:
+                orderstr="currentpoints"
+            elif ordercolumn==4 or ordercolumn==0:
+                orderstr="totalpoints"
+            elif ordercolumn==6:
+                orderstr="elo"
+
+            if dir=='desc':
+                orderstr='-'+orderstr
 
 
             userpoints = PointsInfo.objects.filter(user__is_active=True).prefetch_related('user','masteries')
             allrecords=userpoints.count()
             if searchstr!="":
                 userpoints=userpoints.filter(user__discord_nickname__icontains=searchstr)
-
             userpoints=userpoints.order_by(
-                '-totalpoints')  # the '-' is for reversing the order (so the one who has most points will be on top
+                orderstr)  # the '-' is for reversing the order (so the one who has most points will be on top
             p = Paginator(userpoints, lengthreq)
 
             filtered=p.count
