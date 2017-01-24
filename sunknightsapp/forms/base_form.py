@@ -23,6 +23,9 @@ class BaseForm(ModelForm):
     def response(self, noErrors=True, message=""):
         return JsonResponse({'status': 'success' if noErrors else 'failure', 'message': message,'action':self.id_value})
 
+    def datatables_leaderboard_response(self,data):
+        return JsonResponse(data)
+
     class Meta:
         fields = ('ajax_action_id',)
         pass

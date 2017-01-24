@@ -25,10 +25,12 @@
         $(document).ready(function () {
             $('#points_leaderboard').DataTable({
                 "order": [[1, "desc"]],
+                "serverSide": true,
                 "ajax": {
                     "url": "{% url 'ajaxhandler' %}",
                     "dataSrc": function (json) {
-                        var data = json['message']['data']
+
+                        var data = json['data']
                         var return_data = new Array();
                         for (var i = 0; i < data.length; i++) {
 
@@ -49,8 +51,6 @@
                             var totalpoints=data[i].totalpoints
                             var masteriessize=data[i].masteries.length
                             var elo=data[i].elo
-
-                            console.log(oldpoints,currentpoints,totalpoints,masteriessize,elo)
 
                             return_data.push({
                                 'user': usernametext,

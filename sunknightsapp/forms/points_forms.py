@@ -7,7 +7,7 @@ from ..serializers.clan_user_serializer import PointsInfoSerializer,PointsInfoFa
 from django import forms
 from ..models.utility.little_things import getPointsByScore,getPointsByFight,manageElo
 from ..models.points_info import PointsInfo,ClanUser
-
+from django.core.paginator import Paginator
 
 class SubmitPointsForm(BaseForm):
     def __init__(self, *args, **kwargs):
@@ -91,24 +91,52 @@ class RetriveUserSubmissionsPointsForm(BaseForm):
 
 
 class RetrieveUsersLeaderPointForm(BaseForm):
+    draw = forms.IntegerField(min_value=0, widget=forms.HiddenInput(), required=True)
+    start = forms.IntegerField(min_value=0, widget=forms.HiddenInput(), required=True)
+    length = forms.IntegerField(min_value=0, widget=forms.HiddenInput(), required=True)
+
     def __init__(self, *args, **kwargs):
         super(RetrieveUsersLeaderPointForm, self).__init__(AjaxAction.RETRIEVELEADERBOARD, *args, **kwargs)
 
     def handle(self, request):
 
         try:
-            userpoints = PointsInfo.objects.filter(user__is_active=True).prefetch_related('user','masteries').order_by(
+            drawnr=self.cleaned_data['draw']
+            lengthreq=self.cleaned_data['length']
+            start=self.cleaned_data['start']
+            searchstr=""
+            if 'search[value]' in request.POST:
+                searchstr=request.POST['search[value]']
+
+
+
+            userpoints = PointsInfo.objects.filter(user__is_active=True).prefetch_related('user','masteries')
+
+            if searchstr!="":
+                userpoints=userpoints.filter(user__discord_nickname__icontains=searchstr)
+
+            userpoints=userpoints.order_by(
                 '-totalpoints')  # the '-' is for reversing the order (so the one who has most points will be on top
-            serializer = PointsInfoFastSerializer(userpoints, many=True)
+            p = Paginator(userpoints, lengthreq)
+
+            allrecords=p.count
+
+
+            page=p.page(start/lengthreq+1)
+
+
+
+
+            serializer = PointsInfoFastSerializer(page.object_list, many=True)
         except BaseException as e:
             return self.response(False, 'Something went wrong: ' + str(e))
         else:
 
-            return self.response(True, {'data': (serializer.data)})
+            return self.datatables_leaderboard_response({'draw':drawnr,'recordsTotal':allrecords,'recordsFiltered':allrecords,'data': (serializer.data)})
 
     class Meta:
         model = PointsInfo
-        fields = ()
+        fields = ('draw','start','length')
 
 
 
