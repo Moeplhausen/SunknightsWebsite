@@ -41,3 +41,40 @@ function sunKnightsJsonRequest(param, handler, contentType, processData) {
 	});
 }
 
+var ajaxusersearchoptions = {
+    ajax          : {
+        url     : ajaxretrieveuserurl,
+
+        type    : 'POST',
+        dataType: 'json',
+        headers: {
+            'X-CSRFToken': $.cookie('csrftoken')
+        },
+        // Use "{{{q}}}" as a placeholder and Ajax Bootstrap Select will
+        // automatically replace it with the value of the search query.
+        data    : {
+            searchusers: '{{{q}}}',
+            ajax_action_id:ajaxretrieveuserstofightagainstid.RETRIEVEUSERSTOFIGHTAGAINST
+        }
+    },
+    locale        : {
+        emptyTitle: 'Select and Begin Typing'
+    },
+    log           : 3,
+    preprocessData: function (data) {
+    	data=data['message']['data']
+        var i, l = data.length, array = [];
+        if (l) {
+            for (i = 0; i < l; i++) {
+                array.push($.extend(true, data[i], {
+                    text : data[i].discord_nickname+"#"+data[i].discord_discriminator,
+                    value: data[i].id,
+                }));
+            }
+        }
+        // You must always return a valid array when processing data. The
+        // data argument passed is a clone and cannot be modified directly.
+        return array;
+    }
+};
+

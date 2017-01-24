@@ -109,13 +109,15 @@
             });
 
 
-            $('#select-beast').selectize({
+
+            $('#select-users-one-on-one').selectpicker({
+                liveSearch: true,
                 create: false,
                 sortField: {
                     field: 'text',
                     direction: 'asc'
                 },
-            });
+            }).ajaxSelectPicker(ajaxusersearchoptions);
         });
     </script>
 {% endblock %}

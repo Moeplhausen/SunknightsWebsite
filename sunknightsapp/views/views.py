@@ -8,8 +8,8 @@ from django.views.decorators.http import require_http_methods
 
 from ..enums.AjaxActions import AjaxAction
 from ..forms.tournaments_forms import CreateTournamentForm,DeleteTournamentForm,RequestTournamentsForm
-from ..forms.points_forms import SubmitPointsForm,RetriveUserSubmissionsPointsForm,DecideUserPointSubmissionForm,SubmitFightsForm,RetrieveFightsSubmissionsForm,DecideFightsSubmissionForm,RevertSubmissionForm,RetrieveUsersLeaderPointForm
-from ..models.clan_user import ClanUser
+from ..forms.points_forms import SubmitPointsForm,RetriveUserSubmissionsPointsForm,DecideUserPointSubmissionForm,SubmitFightsForm,RetrieveFightsSubmissionsForm,DecideFightsSubmissionForm,RevertSubmissionForm,RetrieveUsersLeaderPointForm,RetrieveUsersToFightAgainstForm
+
 from ..models.diep_tank import DiepTankInheritance,DiepTank
 from ..models.discord_roles import DiscordRole
 from ..models.points_info import PointsInfo
@@ -23,10 +23,8 @@ def index(request):
         tanks=DiepTank.objects.all()
         gamemodes=DiepGamemode.objects.all()
 
-        users = ClanUser.objects.filter(is_active=True).exclude(id=request.user.id).order_by(
-            '-discord_nickname')
 
-        context={'tanks':tanks,'gamemodes':gamemodes,'submitpointsform':SubmitPointsForm,'submitfightsform':SubmitFightsForm,'users':users}
+        context={'tanks':tanks,'gamemodes':gamemodes,'submitpointsform':SubmitPointsForm,'submitfightsform':SubmitFightsForm}
         context['revertsubmissionid']=AjaxAction.REVERTSUBMISSION.value
         context['lookuser']=ClanUser.objects.prefetch_related('pointsinfo','pointsinfo__masteries').get(id=request.user.id)
 
@@ -142,7 +140,8 @@ def ajaxhandler(request):
         form=RevertSubmissionForm(request.POST)
     elif actionid is AjaxAction.RETRIEVELEADERBOARD.value:
         form=RetrieveUsersLeaderPointForm(request.POST)
-
+    elif actionid is AjaxAction.RETRIEVEUSERSTOFIGHTAGAINST.value:
+        form=RetrieveUsersToFightAgainstForm(request.POST)
 
     if form is None:
         return sendFailure(request,"No handler for this action installed.")

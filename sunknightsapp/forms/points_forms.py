@@ -3,10 +3,10 @@ from ..enums.AjaxActions import AjaxAction
 from ..models.point_submission import BasicUserPointSubmission, BasicPointSubmission,OneOnOneFightSubmission,PointsManagerAction
 from ..serializers.pointsubmissions_serializer import BasicUserPointSubmissionSerializer, \
     BasicPointsSubmissionSerializer,OneOnOneFightSubmissionSerializer
-from ..serializers.clan_user_serializer import PointsInfoSerializer,PointsInfoFastSerializer
+from ..serializers.clan_user_serializer import PointsInfoSerializer,PointsInfoFastSerializer,ClanUserSerializerBasic
 from django import forms
 from ..models.utility.little_things import getPointsByScore,getPointsByFight,manageElo
-from ..models.points_info import PointsInfo
+from ..models.points_info import PointsInfo,ClanUser
 
 
 class SubmitPointsForm(BaseForm):
@@ -110,6 +110,32 @@ class RetrieveUsersLeaderPointForm(BaseForm):
         model = PointsInfo
         fields = ()
 
+
+
+class RetrieveUsersToFightAgainstForm(BaseForm):
+    searchusers = forms.CharField()
+    def __init__(self, *args, **kwargs):
+        super(RetrieveUsersToFightAgainstForm, self).__init__(AjaxAction.RETRIEVEUSERSTOFIGHTAGAINST, *args, **kwargs)
+
+    def handle(self, request):
+
+        try:
+            searchstring=self.cleaned_data['searchusers']
+            print(searchstring)
+            users = ClanUser.objects.none()
+            if len(searchstring)>1:
+                users = ClanUser.objects.filter(is_active=True,discord_nickname__icontains=searchstring).exclude(id=request.user.id).order_by(
+                    '-discord_nickname')
+            serializer = ClanUserSerializerBasic(users, many=True)
+        except BaseException as e:
+            return self.response(False, 'Something went wrong: ' + str(e))
+        else:
+
+            return self.response(True, {'data': (serializer.data)})
+
+    class Meta:
+        model = ClanUser
+        fields = ('searchusers',)
 
 
 

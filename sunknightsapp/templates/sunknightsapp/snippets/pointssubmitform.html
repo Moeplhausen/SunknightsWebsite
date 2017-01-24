@@ -13,7 +13,7 @@
     <div id="submit-tank-picker" class="form-group">
         <label for="selectclass">The tank you used</label>
         <select class="custom-select form-control selectpicker" name="tank"
-                id="selectclass">
+                id="select-tank-submit">
             {% for tank in tanks %}
                 <option data-icon="{{ tank.name|slugify }}"
                         value="{{ tank.id }}">{{ tank.name }}</option>
