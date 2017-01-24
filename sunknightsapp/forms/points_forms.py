@@ -111,7 +111,7 @@ class RetrieveUsersLeaderPointForm(BaseForm):
 
 
             userpoints = PointsInfo.objects.filter(user__is_active=True).prefetch_related('user','masteries')
-
+            allrecords=userpoints.count()
             if searchstr!="":
                 userpoints=userpoints.filter(user__discord_nickname__icontains=searchstr)
 
@@ -119,7 +119,7 @@ class RetrieveUsersLeaderPointForm(BaseForm):
                 '-totalpoints')  # the '-' is for reversing the order (so the one who has most points will be on top
             p = Paginator(userpoints, lengthreq)
 
-            allrecords=p.count
+            filtered=p.count
 
 
             page=p.page(start/lengthreq+1)
@@ -132,7 +132,7 @@ class RetrieveUsersLeaderPointForm(BaseForm):
             return self.response(False, 'Something went wrong: ' + str(e))
         else:
 
-            return self.datatables_leaderboard_response({'draw':drawnr,'recordsTotal':allrecords,'recordsFiltered':allrecords,'data': (serializer.data)})
+            return self.datatables_leaderboard_response({'draw':drawnr,'recordsTotal':allrecords,'recordsFiltered':filtered,'data': (serializer.data)})
 
     class Meta:
         model = PointsInfo
