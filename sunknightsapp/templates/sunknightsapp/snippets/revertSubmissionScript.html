@@ -2,7 +2,7 @@
     $(document).ready(function () {
         $('#decided-submissions-score-table').DataTable({
             "columnDefs":[{
-                "targets": [ 3 ],
+                "targets": [ 2 ],
                 "visible": false,
                 "searchable": false}
             ],
@@ -11,7 +11,7 @@
             },
             "fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
                 // Bold the grade for all 'A' grade browsers
-                if ( aData[3] == "True" )
+                if ( aData[2] == "True" )
                 {
                     $(nRow).css('color','green')
                 }

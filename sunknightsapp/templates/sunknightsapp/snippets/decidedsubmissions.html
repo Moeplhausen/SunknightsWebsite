@@ -1,3 +1,4 @@
+{% load humanize %}
 <h3>Score Submissions</h3>
 <table id="decided-submissions-score-table" class="display" cellspacing="0" width="100%">
     <thead>
@@ -5,6 +6,7 @@
         <th>Id</th>
         <th>Tank</th>
         <th>Accepted</th>
+        <th>Score</th>
         <th>Points</th>
         <th>Manager</th>
         <th>Manager Note</th>
@@ -24,7 +26,8 @@
             </td>
             <td><div class="{{ submission.tank.name|slugify }}"></div>{{ submission.tank.name }}</td>
             <td>{{ submission.accepted }}</td>
-            <td>{{ submission.points }}</td>
+            <td>{{ submission.score|intcomma }}</td>
+            <td>{{ submission.points|intcomma }}</td>
             <td>{{ submission.manager.discord_nickname }}</td>
             <td>{{ submission.managerText }}</td> pu
 
