@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
+<head>
     <!-- Required meta tags always come first -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -8,11 +8,10 @@
 
     {% load static %}
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css"
-          integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi"
-          crossorigin="anonymous">
     <link rel="stylesheet" type="text/css"
           href="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap4.min.css"/>
+    <link rel="stylesheet" type="text/css"
+          href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" type="text/css"
           href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.4/css/selectize.bootstrap3.min.css"/>
     <link rel="stylesheet" type="text/css"
@@ -32,133 +31,147 @@
 
 
     {% block header %}{% endblock %}
-    </head>
+</head>
 
-    <body>
+<body>
 
 
-    <div class="container">
-        <h2 class="alert-danger">This version is just for testing. The database will be reset from time to time!
-            (Continue
-            to submit to points managers directly for now, please)</h2>
-        <nav id="sun-navbar" class="navbar navbar-light">
-            <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse"
-                    data-target="#navbar-header"
-                    aria-controls="navbar-header" aria-expanded="false" aria-label="Toggle navigation"></button>
-            <div class="collapse navbar-toggleable-xs clearfix" id="navbar-header">
+<div class="container">
+    <h2 class="alert-danger">This version is just for testing. The database will be reset from time to time!
+        (Continue
+        to submit to points managers directly for now, please)</h2>
+    <nav id="sun-navbar" class="navbar navbar-light">
+        <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse"
+                data-target="#navbar-header"
+                aria-controls="navbar-header" aria-expanded="false" aria-label="Toggle navigation"></button>
+        <div class="collapse navbar-toggleable-xs clearfix" id="navbar-header">
                 <span class="nav navbar-nav">
-                    <a href="{% url 'index' %}">
-                        <img id="sk-logo"
-                             src="https://cdn.discordapp.com/icons/252525368865456130/ae262cd29cc01ffeb863ae65b4e5b3fb.jpg"></img>
-                        SK Clan
-                    </a>
+                    <p>
+                        <a href="{% url 'index' %}">
+                            <img id="sk-logo"
+                                 src="https://cdn.discordapp.com/icons/252525368865456130/ae262cd29cc01ffeb863ae65b4e5b3fb.jpg"></img>
+                            <span class="sun-knights-logo-text lead h1">Sun Knights</span>
+                        </a>
+                    </p>
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'logout' %}" class="sk-navbar-link float-xs-right">
+                    <span class="fa fa-sign-out"></span>Logout
+                </a>
+                    {% else %}
+                        <a href="/accounts/login/Discord" class="sk-navbar-link float-xs-right">
+                    <span class="fa fa-sign-in"></span>Login
+                </a>
+                    {% endif %}
+
+
+
+                    {% if user.is_authenticated %}
+
+                        <a href="{% url 'index' %}" class="sk-navbar-link">
+                          <span class="fa fa-tachometer"></span> Dashboard
+                        </a>
+                    {% endif %}
+
                 </span>
 
 
-                {% if user.is_authenticated %}
-                    <a href="{% url 'leaderboard' %}">
-                        Leaderboard
-                    </a>
-                    {% comment %}                <a href="#">
+            {% if user.is_authenticated %}
+                <a href="{% url 'leaderboard' %}" class="sk-navbar-link">
+                    <span class="fa fa-trophy"></span> Leaderboard
+                </a>
+                {% comment %}                <a href="#">
                         Tournaments
                     </a>{% endcomment %}
-                    {% comment %}                <a href="{% url 'guilds' %}">
+                {% comment %}                <a href="{% url 'guilds' %}">
                         Guilds
                     </a>{% endcomment %}
 
-                {% endif %}
-                {% if user.is_points_manager %}
+            {% endif %}
+            {% if user.is_points_manager %}
+                <a href="{% url 'managesubmissions' %}" class="sk-navbar-link">
+                    <span class="fa fa-gavel"></span> Manage Submissions
+                </a>
 
-                    <a href="{% url 'managesubmissions' %}">
-                        Manage Submissions
-                    </a>
-
-                {% endif %}
+            {% endif %}
 
 
-                {% if user.is_war_manager %}
-                    {% comment %}
+            {% if user.is_war_manager %}
+                {% comment %}
                     <a href="">
                         Manage Guild Fights
                     </a>{% endcomment %}
 
-                {% endif %}
+            {% endif %}
 
 
-                {% block navigationlinks %}
+            {% block navigationlinks %}
 
-                {% endblock %}
+            {% endblock %}
 
 
-                {% if user.is_authenticated %}
-                    <a class="float-xs-right" href="{% url 'logout' %}">Logout</a>
-                {% else %}
-                    <a class="float-xs-right" href="/accounts/login/Discord">Login</a>
-                {% endif %}
+        </div>
+    </nav> <!-- /navbar -->
 
-            </div>
-        </nav> <!-- /navbar -->
+    <!-- Main component for a primary marketing message or call to action -->
+    <div id="jumbotron-content" class="jumbotron">
 
-        <!-- Main component for a primary marketing message or call to action -->
-        <div id="jumbotron-content" class="jumbotron">
+        <div id="alertsContainer">
 
-            <div id="alertsContainer">
-
-            </div>
-
-            {% block content %} {% endblock %}
         </div>
 
-    </div> <!-- /container -->
+        {% block content %} {% endblock %}
+    </div>
+
+</div> <!-- /container -->
 
 
-    <script
-            src="https://code.jquery.com/jquery-3.1.1.js"
-            integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
-            crossorigin="anonymous">
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.4/js/standalone/selectize.js"></script>
-    <script>
-        var ajaxretrieveuserurl = '{% url 'ajaxhandler' %}'
-        var ajaxretrieveuserstofightagainstid =
-        {{ ajaxactions|safe }}
-    </script>
-    <script src="{% static 'sunknightsapp/js/simple.js' %}"></script>
+<script
+        src="https://code.jquery.com/jquery-3.1.1.js"
+        integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
+        crossorigin="anonymous">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.4/js/standalone/selectize.js"></script>
+<script>
+    var ajaxretrieveuserurl = '{% url 'ajaxhandler' %}'
+    var ajaxretrieveuserstofightagainstid =
+    {{ ajaxactions|safe }}
+</script>
+<script src="{% static 'sunknightsapp/js/simple.js' %}"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js"
-            integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB"
-            crossorigin="anonymous"></script>
-    {#<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js"#}
-    {#        integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK"#}
-    {#        crossorigin="anonymous"></script>#}
-    <script src="{% static 'sunknightsapp/js/bootstrap.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js"
+        integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB"
+        crossorigin="anonymous"></script>
+{#<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js"#}
+{#        integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK"#}
+{#        crossorigin="anonymous"></script>#}
+<script src="{% static 'sunknightsapp/js/bootstrap.js' %}"></script>
 
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap4.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.js"></script>
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/js/bootstrap-select.min.js"></script>
-    <script src="{% static 'sunknightsapp/js/ajax-bootstrap-select.js' %}"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap4.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/js/bootstrap-select.min.js"></script>
+<script src="{% static 'sunknightsapp/js/ajax-bootstrap-select.js' %}"></script>
 
-    {% block scriptload %}{% endblock %}
-    <script>
-        var csrftoken = $.cookie('csrftoken');
+{% block scriptload %}{% endblock %}
+<script>
+    var csrftoken = $.cookie('csrftoken');
 
-        $(document).ready(function () {
+    $(document).ready(function () {
 
-            $(function () {
-                $('[data-toggle="tooltip"]').tooltip()
-            })
-
-
-            {% block scripts %}{% endblock %}
-        });
-    </script>
-    {% block scriptself %}
-
-    {% endblock %}
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
 
 
-    </body>
+        {% block scripts %}{% endblock %}
+    });
+</script>
+{% block scriptself %}
+
+{% endblock %}
+
+
+</body>
 </html>

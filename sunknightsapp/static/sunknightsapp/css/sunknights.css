@@ -39,7 +39,7 @@ body{
     );
     border-radius: 5px;
 }
-#user-stats{
+#user-stats,#navbar-header{
     text-align: center;
 }
 
@@ -102,7 +102,7 @@ img.discord-img{
 .hidden{
     visibility: hidden;
 }
-.img-circle {
+.img-circle,#sk-logo {
     border-radius: 50%;
 }
 
