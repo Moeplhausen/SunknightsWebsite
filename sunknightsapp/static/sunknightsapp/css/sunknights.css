@@ -47,6 +47,7 @@ body{
     margin: auto;
     padding-left: 1em;
     padding-right: 1em;
+    max-width: 170px;
 }
 #useroverview-name{
     text-shadow: 3px -1px 1px rgba(170, 170, 115, 1);

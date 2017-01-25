@@ -76,7 +76,8 @@ class SubmissionsTests(ModelTestCase):
                                                                   points=5,
                                                                   proof="proof",
                                                                   pointsinfoloser=self.basic_user2.pointsinfo,
-                                                                  pointsloser=3)
+                                                                  pointsloser=3,
+                                                                  manager=self.basic_admin)
 
             self.assertEqual(self.basic_user.total_points,0)
             self.assertEqual(self.basic_user2.total_points,0)
