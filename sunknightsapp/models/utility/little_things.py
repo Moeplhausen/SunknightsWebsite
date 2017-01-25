@@ -15,7 +15,8 @@ ELO_DEFAULT=1000
 
 def getPointsByScore(score:int):
     import decimal
-    return decimal.Decimal(round(score/100000.0,1))
+    import math
+    return 0.5*math.ceil(2.0*round(score/100000.0,1))
 
 
 def getPointsByFight(won:bool):

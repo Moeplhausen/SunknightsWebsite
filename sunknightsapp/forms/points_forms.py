@@ -18,7 +18,7 @@ class SubmitPointsForm(BaseForm):
         try:
             import decimal
             submission = self.save(commit=False)
-            submission.points=getPointsByScore(submission.score)*decimal.Decimal(submission.tank.multiplier)
+            submission.points=decimal.Decimal(getPointsByScore(submission.score))*decimal.Decimal(submission.tank.multiplier)
             submission.pointsinfo = request.user.pointsinfo
             submission.save()
         except BaseException as e:
@@ -173,9 +173,10 @@ class RetrieveUsersToFightAgainstForm(BaseForm):
             searchstring=self.cleaned_data['searchusers']
             print(searchstring)
             users = ClanUser.objects.none()
-            if len(searchstring)>1:
+            if len(searchstring)>0:
                 users = ClanUser.objects.filter(is_active=True,discord_nickname__icontains=searchstring).exclude(id=request.user.id).order_by(
                     '-discord_nickname')
+
             serializer = ClanUserSerializerBasic(users, many=True)
         except BaseException as e:
             return self.response(False, 'Something went wrong: ' + str(e))

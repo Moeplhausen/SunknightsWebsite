@@ -17,4 +17,4 @@ class ClanUsersShortSet(viewsets.ModelViewSet):
 
 class ClanUserPointsInfoViewSet(viewsets.ModelViewSet):
     serializer_class = PointsInfoSerializer
-    queryset = PointsInfo.objects.all()
+    queryset = PointsInfo.objects.prefetch_related('user','masteries').all()

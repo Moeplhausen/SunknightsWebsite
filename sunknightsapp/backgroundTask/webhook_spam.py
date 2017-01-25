@@ -86,7 +86,7 @@ def post_new_user_point_submission(submission, accepted, decided):
                             {'name': 'From', 'value': '<@{}>'.format(submission.pointsinfo.user.discord_id), 'inline': True},
                             {'name': 'Score', 'value': str(submission.score), 'inline': True},
                             {'name': 'Tank', 'value': submission.tank.name, 'inline': True},
-                            {'name': 'Gamemode', 'value': submission.gamemode.name, 'inline': True},
+                            {'name': 'Expected Points', 'value': str(submission.points), 'inline': True},
                             {'name': 'Proof', 'value': submission.proof, 'inline': True},
                             {'name': 'Note', 'value': submission.submitterText, 'inline': True},
                         ]

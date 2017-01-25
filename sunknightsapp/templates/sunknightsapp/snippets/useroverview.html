@@ -1,33 +1,34 @@
 {% load static %}
 <div class="row">
-    <div class="col-sm-4">
-        <div class="card">
-            <img class="card-img-top" src="{{ lookuser.avatar_url }}">
-            <p class="card-text">Leaderboard Place: <strong>{{ lookuser.leaderboard_place }}</strong></p>
-            <p class="card-text">Points: <strong>{{ lookuser.total_points }}</strong></p>
-            <p class="card-text">Masteries: <strong>{{ lookuser.masteries.all.count }}</strong></p>
-        </div>
+    <div id="user-stats">
+        <p id="useroverview-name"><strong>{{ lookuser.discord_nickname }}</strong></p>
+        <img id="card-img-top" class="img-circle" src="{{ lookuser.avatar_url }}">
+        <p>Rank: <strong>{{ lookuser.leaderboard_place }}</strong></p>
+        <p>Points: <strong>{{ lookuser.total_points }}</strong></p>
     </div>
-    <div class="col-sm-4">
+    <div class="col-sm-5">
         <div class="card">
             <div class="card-block">
                 <h4 class="card-title">Masteries</h4>
                 <p class="card-text"><strong>{{ lookuser.masteries.all.count }}</strong></p>
                 <p class="card-text">
                     {% for mastery in lookuser.masteries.all %}
-                        <div class="{{ mastery.tank.name|slugify }}-tier{{ mastery.tier }}" data-toggle="tooltip" data-placement="top" title="{{ mastery.tank.name }} Tier {{ mastery.tier }}"></div>
-                {% endfor %}
+                        <div class="{{ mastery.tank.name|slugify }}-tier{{ mastery.tier }}" data-toggle="tooltip"
+                             data-placement="top" title="{{ mastery.tank.name }} Tier {{ mastery.tier }}"></div>
+                    {% endfor %}
                 </p>
             </div>
         </div>
     </div>
-    <div class="col-sm-4">
+    <div class="col-sm-5">
         <div class="card">
             <div class="card-block">
                 <h4 class="card-title">Badges</h4>
+                <p class="card-text"><strong>{{ lookuser.badges.all.count }}</strong></p>
                 <p class="card-text">
                     {% for badge in lookuser.badges.all %}
-                        <div class="{{ badge.tank.name|slugify }}" data-toggle="tooltip" data-placement="top" title="{{ badge.tank.name }}"></div>
+                        <div class="{{ badge.tank.name|slugify }}" data-toggle="tooltip" data-placement="top"
+                             title="{{ badge.tank.name }}"></div>
                     {% endfor %}
                 </p>
             </div>

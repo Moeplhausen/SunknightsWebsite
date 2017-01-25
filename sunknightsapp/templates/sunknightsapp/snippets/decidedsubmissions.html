@@ -4,10 +4,11 @@
     <tr>
         <th>Id</th>
         <th>Tank</th>
-        <th>Gamemode</th>
         <th>Accepted</th>
         <th>Points</th>
         <th>Manager</th>
+        <th>Manager Note</th>
+
         <th>Proof</th>
     </tr>
     </thead>
@@ -21,11 +22,12 @@
                 {% endif %}
                 {{ submission.id }}
             </td>
-            <td>{{ submission.tank.name }}</td>
-            <td>{{ submission.gamemode.name }}</td>
+            <td><div class="{{ submission.tank.name|slugify }}"></div>{{ submission.tank.name }}</td>
             <td>{{ submission.accepted }}</td>
             <td>{{ submission.points }}</td>
             <td>{{ submission.manager.discord_nickname }}</td>
+            <td>{{ submission.managerText }}</td>
+
             <td><a href="{{ submission.proof }}">Prooflink</a></td>
         </tr>
     {% endfor %}

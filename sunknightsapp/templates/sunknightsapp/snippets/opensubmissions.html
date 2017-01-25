@@ -5,7 +5,7 @@
     <tr>
         <th>Id</th>
         <th>Tank</th>
-        <th>Gamemode</th>
+        <th>Note</th>
         <th>Expected Points</th>
         <th>Proof</th>
     </tr>
@@ -15,8 +15,8 @@
         <tr>
 
             <td>{{ submission.id }}</td>
-            <td>{{ submission.tank.name }}</td>
-            <td>{{ submission.gamemode.name }}</td>
+            <td><div class="{{ submission.tank.name|slugify }}"></div>{{ submission.tank.name }}</td>
+            <td>{{ submission.submitterText }}</td>
             <td>{{ submission.points }}</td>
             <td><a href="{{ submission.proof }}">Prooflink</a></td>
         </tr>
