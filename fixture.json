@@ -304,13 +304,12 @@
         "discord_id": 243345778922225665,
         "discord_nickname": "Schatterhand",
         "provider": "Discord",
-        "is_active": true
+        "is_superuser":true
     }
 }, {
     "model": "sunknightsapp.clanuser",
     "pk": 2,
     "fields": {
-        "password": "pbkdf2_sha256$30000$0aEfYzxTFEQh$PuMQqACCqkNQt26eEiw6my/+gtjrQ77gJ9VABrjrMOs=",
         "last_login": null,
         "discord_id": 192060404501839872,
         "discord_nickname": "rjt",
@@ -320,7 +319,6 @@
     "model": "sunknightsapp.clanuser",
     "pk": 3,
     "fields": {
-        "password": "pbkdf2_sha256$30000$0aEfYzxTFEQh$PuMQqACCqkNQt26eEiw6my/+gtjrQ77gJ9VABrjrMOs=",
         "last_login": null,
         "discord_id": 239110748180054017,
         "discord_nickname": "Ikusabae",
@@ -334,7 +332,7 @@
         "discord_id": 180813971853410305,
         "discord_nickname": "pg",
         "provider": "Discord",
-        "is_active": true
+        "is_superuser":true
     }
 }, {
     "model": "sunknightsapp.dieptank",
