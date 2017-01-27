@@ -1,0 +1,17 @@
+{% extends "sunknightsapp/base.html" %}
+{% block content %}
+
+<strong>Information</strong>
+<br />Links:<br />
+<ul class="squareul">
+  <li><a href="{% url 'rules' %}">Rules</a></li>
+  <li><a href="{% url 'newguide' %}">New Member's Guide</a></li>
+  <li><a href="{% url 'pointguide' %}">How to earn Points</a></li>
+  <li><a href="{% url 'ranks' %}">Ranks</a></li>
+  <li><a href="{% url 'commands' %}">Commands</a></li>
+  <li><a href="{% url 'faq' %}">FAQ</a></li>
+  <li><a href="{% url 'yt' %}">Youtubers</a></li>
+  <li><a href="{% url 'invites' %}">Important Invites</a></li>
+</ul>
+
+{% endblock %}

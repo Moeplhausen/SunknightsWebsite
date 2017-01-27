@@ -137,3 +137,42 @@ img.leaderpoint-avatar{
 .dropdown-menu li {
     padding: 0px 15px 1px !important;
 }
+
+/*Discord Mention*/
+.mention {
+    background-color: rgba(243, 245, 252, 0.4);
+    color: #7289da;
+    /*background: #f3f5fc;*/
+    font-weight: 600;
+}
+mention {
+    background-color: rgba(243, 245, 252, 0.4);
+    color: #7289da;
+    /*background: #f3f5fc;*/
+    font-weight: 600;
+}
+
+.blackc {
+    color: #000000 !important;
+}
+
+/*dropdown of information*/
+.infodrop {}
+.infodrop:hover {
+    text-decoration: underline !important;
+}
+.infodrop:active {
+    text-decoration: underline !important;
+}
+
+code {
+    background-color: rgba(245,245,245,1);
+}
+
+.squareul {
+    list-style-type: square;
+}
+
+.invisul {
+    list-style-type: none;
+}

@@ -84,6 +84,34 @@ def about_us(request):
     context = {}
     return render(request, 'sunknightsapp/about_us.html', context)
 
+def rules(request):
+    context = {}
+    return render(request, 'sunknightsapp/rules.html', context)
+
+def info(request):
+    context = {}
+    return render(request, 'sunknightsapp/info.html', context)
+
+def newguide(request):
+    return render(request, 'sunknightsapp/newguide.html', {})
+
+def pointguide(request):
+    return render(request, 'sunknightsapp/pointguide.html', {})
+
+def ranks(request):
+    return render(request, 'sunknightsapp/ranks.html', {})
+
+def commands(request):
+    return render(request, 'sunknightsapp/commands.html', {})
+
+def faq(request):
+    return render(request, 'sunknightsapp/faq.html', {})
+
+def yt(request):
+    return render(request, 'sunknightsapp/yt.html', {})
+
+def invites(request):
+    return render(request, 'sunknightsapp/invites.html', {})
 
 @login_required
 def guild(request,id):

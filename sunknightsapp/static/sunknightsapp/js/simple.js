@@ -35,7 +35,7 @@ function sunKnightsJsonRequest(param, handler, contentType, processData) {
 				console.log(data);
 				handler(false, data);
 			} else
-			    console.log(data)
+			    console.log(data);
 				handler(true, data);
 		}
 	});
@@ -62,7 +62,7 @@ var ajaxusersearchoptions = {
     },
     log           : 3,
     preprocessData: function (data) {
-    	data=data['message']['data']
+    	data=data['message']['data'];
         var i, l = data.length, array = [];
         if (l) {
             for (i = 0; i < l; i++) {
@@ -77,4 +77,10 @@ var ajaxusersearchoptions = {
         return array;
     }
 };
+
+function showhide(button, id){
+  var target = document.getElementById(id);
+  target.style.display = target.style.display=="none"?"block":"none";
+  button.innerHTML = button.innerHTML=="View"?"Hide":"View";
+}
 

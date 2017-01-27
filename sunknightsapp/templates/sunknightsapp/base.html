@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-
+    <title>Sun Knights</title>
     {% load static %}
 
     <link rel="stylesheet" type="text/css"
@@ -103,6 +103,33 @@
 
             {% endif %}
 
+            <div class="dropdown">
+              <a class="btn btn-secondary dropdown-toggle infodrop" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background: none;border: none !important;">
+                <span class="fa fa-life-ring"></span> Information
+              </a>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item blackc" href="{% url 'rules' %}">Rules</a>
+                <a class="dropdown-item blackc" href="{% url 'newguide' %}">New Member's Guide</a>
+                <a class="dropdown-item blackc" href="{% url 'pointguide' %}">How to earn Points</a>
+                <a class="dropdown-item blackc" href="{% url 'ranks' %}">Ranks</a>
+                <a class="dropdown-item blackc" href="{% url 'commands' %}">Commands</a>
+                <a class="dropdown-item blackc" href="{% url 'faq' %}">FAQ</a>
+                <a class="dropdown-item blackc" href="{% url 'yt' %}">Youtubers</a>
+                <a class="dropdown-item blackc" href="{% url 'invites' %}">Important Invites</a>
+              </div>
+              {% comment %}
+              <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="{% url 'rules' %}">Rules</a>
+                <a class="dropdown-item" href="{% url 'newguide' %}">New Member's Guide</a>
+                <a class="dropdown-item" href="{% url 'pointways' %}">How to earn Points</a>
+                <a class="dropdown-item" href="{% url 'ranks' %}">Ranks</a>
+                <a class="dropdown-item" href="{% url 'commands' %}">Commands</a>
+                <a class="dropdown-item" href="{% url 'faq' %}">FAQ</a>
+                <a class="dropdown-item" href="{% url 'yt' %}">Youtubers</a>
+                <a class="dropdown-item" href="{% url 'invites' %}">Important Invites</a>
+              </div> -->
+              {% endcomment %}
+            </div>
 
             {% block navigationlinks %}
 
