@@ -117,6 +117,18 @@ def invites(request):
 def guild(request,id):
     return render(request, 'sunknightsapp/index.html')
 
+
+@login_required
+def pointrole(request,id):
+    try:
+        role=DiscordRole.objects.get(discord_id=id)
+    except DiscordRole.DoesNotExist:
+        pass
+    else:
+        return render(request,'sunknightsapp/points_by_role.html',{'role':role})
+    return render(request, 'sunknightsapp/index.html')
+
+
 @points_manager_required
 def manage_submissions(request):
     context={'retrieveuserspointssubmissionsid':AjaxAction.RETRIEVEUSERSUBMISSIONS.value,'decideuserpointsubmissionid':AjaxAction.DECIDEUSERPOINTUSUBMISSION.value,'decidefightsubmissionid':AjaxAction.DECIDEFIGHTSSUBMISSION.value,'retrieveuserfightssubmissionsid':AjaxAction.RETRIEVEFIGHTSSUBMISSIONS.value}

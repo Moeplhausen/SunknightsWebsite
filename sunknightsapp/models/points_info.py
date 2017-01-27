@@ -28,7 +28,8 @@ class PointsInfo(models.Model):
 
     @receiver(post_save, sender=settings.AUTH_USER_MODEL)
     def create_postinfo(sender, instance=None, created=False, **kwargs):
-        if created: PointsInfo.objects.create(user=instance)
+        if created:
+            PointsInfo.objects.create(id=instance.id,user=instance)
 
 
 @receiver(post_save, sender=PointsInfo)

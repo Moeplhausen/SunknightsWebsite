@@ -32,6 +32,7 @@ urlpatterns = [
     url(r'^user/(?P<id>[0-9]+)',views.user),
     url(r'^guilds',views.guilds,name='guilds'),
     url(r'^guilds/(?P<id>[0-9]+)',views.guild),
+    url(r'^pointrole/(?P<id>[0-9]+)',views.pointrole),
     url(r'^leaderboard', views.leaderboard, name='leaderboard'),
     url(r'^aboutus', views.about_us, name='about'),
     url(r'^info/$', views.info, name='info'),

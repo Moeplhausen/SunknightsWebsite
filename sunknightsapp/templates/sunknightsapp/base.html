@@ -45,7 +45,7 @@
                 data-target="#navbar-header"
                 aria-controls="navbar-header" aria-expanded="false" aria-label="Toggle navigation"></button>
         <div class="collapse navbar-toggleable-xs clearfix" id="navbar-header">
-                <span class="nav navbar-nav">
+                <span class="nav navbar-nav ">
                     <p>
                         <a href="{% url 'index' %}">
                             <img id="sk-logo"
@@ -54,11 +54,11 @@
                         </a>
                     </p>
                     {% if user.is_authenticated %}
-                        <a href="{% url 'logout' %}" class="sk-navbar-link float-xs-right">
+                        <a href="{% url 'logout' %}" class="sk-navbar-link float-xs-right blackc">
                     <span class="fa fa-sign-out"></span>Logout
                 </a>
                     {% else %}
-                        <a href="/accounts/login/Discord" class="sk-navbar-link float-xs-right">
+                        <a href="/accounts/login/Discord" class="sk-navbar-link float-xs-right blackc">
                     <span class="fa fa-sign-in"></span>Login
                 </a>
                     {% endif %}
@@ -67,7 +67,7 @@
 
                     {% if user.is_authenticated %}
 
-                        <a href="{% url 'index' %}" class="sk-navbar-link">
+                        <a href="{% url 'index' %}" class="sk-navbar-link blackc">
                           <span class="fa fa-tachometer"></span> Dashboard
                         </a>
                     {% endif %}
@@ -76,7 +76,7 @@
 
 
             {% if user.is_authenticated %}
-                <a href="{% url 'leaderboard' %}" class="sk-navbar-link">
+                <a href="{% url 'leaderboard' %}" class="sk-navbar-link blackc">
                     <span class="fa fa-trophy"></span> Leaderboard
                 </a>
                 {% comment %}                <a href="#">
@@ -88,7 +88,7 @@
 
             {% endif %}
             {% if user.is_points_manager %}
-                <a href="{% url 'managesubmissions' %}" class="sk-navbar-link">
+                <a href="{% url 'managesubmissions' %}" class="sk-navbar-link blackc">
                     <span class="fa fa-gavel"></span> Manage Submissions
                 </a>
 
@@ -103,21 +103,23 @@
 
             {% endif %}
 
-            <div class="dropdown">
-              <a class="btn btn-secondary dropdown-toggle infodrop" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background: none;border: none !important;">
-                <span class="fa fa-life-ring"></span> Information
-              </a>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item blackc" href="{% url 'rules' %}">Rules</a>
-                <a class="dropdown-item blackc" href="{% url 'newguide' %}">New Member's Guide</a>
-                <a class="dropdown-item blackc" href="{% url 'pointguide' %}">How to earn Points</a>
-                <a class="dropdown-item blackc" href="{% url 'ranks' %}">Ranks</a>
-                <a class="dropdown-item blackc" href="{% url 'commands' %}">Commands</a>
-                <a class="dropdown-item blackc" href="{% url 'faq' %}">FAQ</a>
-                <a class="dropdown-item blackc" href="{% url 'yt' %}">Youtubers</a>
-                <a class="dropdown-item blackc" href="{% url 'invites' %}">Important Invites</a>
-              </div>
-              {% comment %}
+            <div class="btn-group dropdown">
+                <a class="btn btn-secondary dropdown-toggle infodrop" href="#" id="dropdownMenuLink"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                   style="background: none;border: none !important;">
+                    <span class="fa fa-life-ring"></span> Information
+                </a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <a class="dropdown-item blackc" href="{% url 'rules' %}">Rules</a>
+                    <a class="dropdown-item blackc" href="{% url 'newguide' %}">New Member's Guide</a>
+                    <a class="dropdown-item blackc" href="{% url 'pointguide' %}">How to earn Points</a>
+                    <a class="dropdown-item blackc" href="{% url 'ranks' %}">Ranks</a>
+                    <a class="dropdown-item blackc" href="{% url 'commands' %}">Commands</a>
+                    <a class="dropdown-item blackc" href="{% url 'faq' %}">FAQ</a>
+                    <a class="dropdown-item blackc" href="{% url 'yt' %}">Youtubers</a>
+                    <a class="dropdown-item blackc" href="{% url 'invites' %}">Important Invites</a>
+                </div>
+                {% comment %}
               <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                 <a class="dropdown-item" href="{% url 'rules' %}">Rules</a>
                 <a class="dropdown-item" href="{% url 'newguide' %}">New Member's Guide</a>

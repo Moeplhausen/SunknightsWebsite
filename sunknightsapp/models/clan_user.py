@@ -153,6 +153,26 @@ class ClanUser(AbstractBaseUser):
                 return OneOnOneFightSubmission.objects.filter(Q(pointsinfo=self.pointsinfo)|Q(pointsinfoloser=self.pointsinfo)).filter(decided=False)
 
 
+            @property
+            def points_cur_week(self):
+                return self.submitted_points()
+
+            @property
+            def points_week_1(self):
+                return self.submitted_points(1)
+
+
+            def submitted_points(self,week=0):
+                import datetime
+                from django.db.models import F,Sum
+                date = datetime.date.today()
+                date=date-datetime.timedelta(-7*week)
+                start_week = date - datetime.timedelta(date.weekday())
+                end_week = start_week + datetime.timedelta(7)
+                from .point_submission import BasicPointSubmission
+
+                return BasicPointSubmission.objects.filter(accepted=True,decided=True,date__range=[start_week,end_week],pointsinfo=self.pointsinfo).aggregate(sum=Sum('points'))['sum'] or 0
+
 
 
             @receiver(post_save, sender=settings.AUTH_USER_MODEL)

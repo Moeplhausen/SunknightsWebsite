@@ -14,15 +14,13 @@ ELO_DEFAULT=1000
 
 
 def getPointsByScore(score:int):
-    import decimal
-    import math
-    return 0.5*math.ceil(2.0*round(score/100000.0,1))
+    return round(score/100000.0,1)
 
 
 def getPointsByFight(won:bool):
     if won:
         return 5
-    return 3
+    return 2
 
 
 def manageElo(submission):

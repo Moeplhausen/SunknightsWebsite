@@ -16,6 +16,7 @@ from .models.diep_tank import DiepTank,DiepTankInheritance
 from .models.mastery import Mastery
 from .models.diep_gamemode import DiepGamemode
 from .models.daily_quest import DailyQuest
+from .models.discord_role_points import DiscordRolePoints
 
 
 # Register your models here.
@@ -118,3 +119,4 @@ admin.site.register(Mastery)
 admin.site.register(BasicUserPointSubmission)
 admin.site.register(DiepGamemode)
 admin.site.register(DailyQuest)
+admin.site.register(DiscordRolePoints)

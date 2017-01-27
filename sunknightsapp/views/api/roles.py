@@ -12,6 +12,7 @@ class RolesViewSet(viewsets.ModelViewSet):
 
 
 
+
 class SunKnightsBadgeRoleViewSet(BulkModelViewSet):
     serializer_class = SunKnightsBadgeRoleSerializer
     queryset = SunKnightsBadgeRole.objects.all()

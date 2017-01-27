@@ -1,0 +1,83 @@
+
+
+{% extends "sunknightsapp/base.html" %}
+{% block content %}
+    <h2>This week</h2>
+    {% if role %}
+        <div class="card">
+            <div class="card-block guild-card-block">
+                <h4 class="card-title">Role: {{ role.name }}</h4>
+
+                <p class="card-text guild-card-text">
+
+                    Members: {{ role.submitted_users_cur_week.count }}<br>
+                    Points: {{ role.submitted_points_cur_week }}
+                <table class="display datatables-table role-members-table">
+
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Leaderboard Place</th>
+                        <th>Submitted Points</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    {% for member in role.submitted_users_cur_week.all %}
+                        <tr>
+                            <td><a href="/user/{{ member.discord_id }}">{{ member.discord_nickname }}</a>
+                            </td>
+                            <td>{{ member.leaderboard_place }}</td>
+                            <td>{{ member.points_cur_week }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                </p>
+            </div>
+        </div>
+        <h2>Last week</h2>
+        <div class="card">
+            <div class="card-block guild-card-block">
+                <h4 class="card-title">Role: {{ role.name }}</h4>
+
+                <p class="card-text guild-card-text">
+
+                    Members: {{ role.submitted_users_week_1.count }}<br>
+                    Points: {{ role.submitted_points_week_1 }}
+                <table class="display datatables-table role-members-table">
+
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Leaderboard Place</th>
+                        <th>Submitted Points</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    {% for member in role.submitted_users_week_1.all %}
+                        <tr>
+                            <td><a href="/user/{{ member.discord_id }}">{{ member.discord_nickname }}</a>
+                            </td>
+                            <td>{{ member.leaderboard_place }}</td>
+                            <td>{{ member.points_week_1 }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                </p>
+            </div>
+        </div>
+    {% endif %}
+
+{% endblock %}
+
+
+{% block scripts %}
+    $('.role-members-table').DataTable( {
+    "order": [[ 0, "asc" ]]
+    } );
+
+
+{% endblock %}

@@ -85,6 +85,216 @@
         "guild_leader_role": true,
         "is_clan_guild": false
     }
+},{
+    "model": "sunknightsapp.discordrole",
+    "pk": 4,
+    "fields": {
+        "name": "in training",
+        "discord_server": 1,
+        "discord_id": 252531631468969984
+    }
+},{
+    "model": "sunknightsapp.discordrolepoints",
+    "fields": {
+        "discord_role": 4,
+        "points": 1
+    }
+},{
+    "model": "sunknightsapp.discordrole",
+    "pk": 5,
+    "fields": {
+        "name": "member",
+        "discord_server": 1,
+        "discord_id": 252533837165232128
+    }
+},{
+    "model": "sunknightsapp.discordrolepoints",
+    "fields": {
+        "discord_role": 5,
+        "points": 10
+    }
+},{
+    "model": "sunknightsapp.discordrole",
+    "pk": 6,
+    "fields": {
+        "name": "Professional",
+        "discord_server": 1,
+        "discord_id": 252539294768562181
+    }
+},{
+    "model": "sunknightsapp.discordrolepoints",
+    "fields": {
+        "discord_role": 6,
+        "points": 25
+    }
+},{
+    "model": "sunknightsapp.discordrole",
+    "pk": 7,
+    "fields": {
+        "name": "Elite",
+        "discord_server": 1,
+        "discord_id": 252539271032995842
+    }
+},{
+    "model": "sunknightsapp.discordrolepoints",
+    "fields": {
+        "discord_role": 7,
+        "points": 50
+    }
+},{
+    "model": "sunknightsapp.discordrole",
+    "pk": 8,
+    "fields": {
+        "name": "Warrior",
+        "discord_server": 1,
+        "discord_id": 252538362089570315
+    }
+},{
+    "model": "sunknightsapp.discordrolepoints",
+    "fields": {
+        "discord_role": 8,
+        "points": 75
+    }
+},{
+    "model": "sunknightsapp.discordrole",
+    "pk": 9,
+    "fields": {
+        "name": "Sentinel",
+        "discord_server": 1,
+        "discord_id": 252538350727069698
+    }
+},{
+    "model": "sunknightsapp.discordrolepoints",
+    "fields": {
+        "discord_role": 9,
+        "points": 100
+    }
+},{
+    "model": "sunknightsapp.discordrole",
+    "pk": 10,
+    "fields": {
+        "name": "Squire",
+        "discord_server": 1,
+        "discord_id": 252576165527552000
+    }
+},{
+    "model": "sunknightsapp.discordrolepoints",
+    "fields": {
+        "discord_role": 10,
+        "points": 150
+    }
+},{
+    "model": "sunknightsapp.discordrole",
+    "pk": 11,
+    "fields": {
+        "name": "Knight",
+        "discord_server": 1,
+        "discord_id": 252576302878425088
+    }
+},{
+    "model": "sunknightsapp.discordrolepoints",
+    "fields": {
+        "discord_role": 11,
+        "points": 300
+    }
+},{
+    "model": "sunknightsapp.discordrole",
+    "pk": 12,
+    "fields": {
+        "name": "Paladin",
+        "discord_server": 1,
+        "discord_id": 252576387817275392
+    }
+},{
+    "model": "sunknightsapp.discordrolepoints",
+    "fields": {
+        "discord_role": 12,
+        "points": 500
+    }
+},{
+    "model": "sunknightsapp.discordrole",
+    "pk": 13,
+    "fields": {
+        "name": "Marshal",
+        "discord_server": 1,
+        "discord_id": 252576513260650496
+    }
+},{
+    "model": "sunknightsapp.discordrolepoints",
+    "fields": {
+        "discord_role": 13,
+        "points": 750
+    }
+},{
+    "model": "sunknightsapp.discordrole",
+    "pk": 14,
+    "fields": {
+        "name": "Cavalier",
+        "discord_server": 1,
+        "discord_id": 252576606038523905
+    }
+},{
+    "model": "sunknightsapp.discordrolepoints",
+    "fields": {
+        "discord_role": 14,
+        "points": 1000
+    }
+},{
+    "model": "sunknightsapp.discordrole",
+    "pk": 15,
+    "fields": {
+        "name": "warden",
+        "discord_server": 1,
+        "discord_id": 252576943768207360
+    }
+},{
+    "model": "sunknightsapp.discordrolepoints",
+    "fields": {
+        "discord_role": 15,
+        "points": 1500
+    }
+},{
+    "model": "sunknightsapp.discordrole",
+    "pk": 16,
+    "fields": {
+        "name": "Sorcerer",
+        "discord_server": 1,
+        "discord_id": 261689569743732736
+    }
+},{
+    "model": "sunknightsapp.discordrolepoints",
+    "fields": {
+        "discord_role": 16,
+        "points": 2000
+    }
+},{
+    "model": "sunknightsapp.discordrole",
+    "pk": 17,
+    "fields": {
+        "name": "Warlock",
+        "discord_server": 1,
+        "discord_id": 261689707346264065
+    }
+},{
+    "model": "sunknightsapp.discordrolepoints",
+    "fields": {
+        "discord_role": 17,
+        "points": 3000
+    }
+},{
+    "model": "sunknightsapp.discordrole",
+    "pk": 18,
+    "fields": {
+        "name": "Prestige",
+        "discord_server": 1,
+        "discord_id": 261689825575305216
+    }
+},{
+    "model": "sunknightsapp.discordrolepoints",
+    "fields": {
+        "discord_role": 18,
+        "points": 5000
+    }
 }, {
     "model": "sunknightsapp.clanuser",
     "pk": 1,

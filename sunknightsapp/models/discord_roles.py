@@ -1,5 +1,7 @@
 from django.db import models
 from .discord_server import DiscordServer
+from rest_framework import serializers
+
 
 
 class DiscordRole(models.Model):
@@ -18,8 +20,6 @@ class DiscordRole(models.Model):
     def members(self):
         from .clan_user import ClanUser
 
-        print(ClanUser.objects.filter(roles__role=self))
-
         return ClanUser.objects.filter(roles__role=self)
 
     @property
@@ -34,6 +34,54 @@ class DiscordRole(models.Model):
             return None
         return user
 
+    def submitted_users(self,week=0):
+        import datetime
+        from django.db.models import F,Sum
+        date = datetime.date.today()
+        date=date-datetime.timedelta(7*week)
+        start_week = date - datetime.timedelta(date.weekday())
+        end_week = start_week + datetime.timedelta(7)
+        from .point_submission import BasicPointSubmission
+        from .clan_user import ClanUser
+
+        subsubs=BasicPointSubmission.objects.filter(accepted=True,decided=True,date__range=[start_week,end_week])
+
+        users=ClanUser.objects.filter(roles__role=self,pointsinfo__basicpointsubmission__in=subsubs)
+
+
+        return users
+
+    def submitted_points(self,week=0):
+        from .point_submission import BasicPointSubmission
+        from .clan_user import ClanUser
+        from django.db.models import F,Sum
+        import datetime
+        date = datetime.date.today()
+        date=date-datetime.timedelta(7*week)
+        start_week = date - datetime.timedelta(date.weekday())
+        end_week = start_week + datetime.timedelta(7)
+
+        users=ClanUser.objects.filter(roles__role=self)
+        sumpoints=BasicPointSubmission.objects.filter(pointsinfo__user__in=users,accepted=True,decided=True,date__range=[start_week,end_week]).aggregate(sum=Sum('points'))['sum'] or 0
+
+
+        return sumpoints
+
+    @property
+    def submitted_points_cur_week(self):
+        return self.submitted_points()
+
+    @property
+    def submitted_users_cur_week(self):
+        return self.submitted_users()
+
+    @property
+    def submitted_points_week_1(self):
+        return self.submitted_points(1)
+
+    @property
+    def submitted_users_week_1(self):
+        return self.submitted_users(1)
 
     def __str__(self):
         return self.name
