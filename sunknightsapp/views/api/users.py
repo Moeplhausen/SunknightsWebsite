@@ -6,7 +6,7 @@ from rest_framework import viewsets
 
 class ClanUsersViewSet(viewsets.ModelViewSet):
     serializer_class = ClanUserSerializer
-    queryset = ClanUser.objects.filter(provider='Discord').prefetch_related('pointsinfo')
+    queryset = ClanUser.objects.filter(provider='Discord').prefetch_related('pointsinfo','roles','pointsinfo__masteries')
     lookup_field = 'discord_id'
 
 
