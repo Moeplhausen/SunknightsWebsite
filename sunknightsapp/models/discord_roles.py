@@ -1,7 +1,6 @@
 from django.db import models
-from .discord_server import DiscordServer
-from rest_framework import serializers
 
+from .discord_server import DiscordServer
 
 
 class DiscordRole(models.Model):
@@ -36,7 +35,6 @@ class DiscordRole(models.Model):
 
     def submitted_users(self,week=0):
         import datetime
-        from django.db.models import F,Sum
         date = datetime.date.today()
         date=date-datetime.timedelta(7*week)
         start_week = date - datetime.timedelta(date.weekday())
@@ -47,14 +45,12 @@ class DiscordRole(models.Model):
         subsubs=BasicPointSubmission.objects.filter(accepted=True,decided=True,date__range=[start_week,end_week])
 
         users=ClanUser.objects.filter(roles__role=self,pointsinfo__basicpointsubmission__in=subsubs)
-
-
         return users
 
     def submitted_points(self,week=0):
         from .point_submission import BasicPointSubmission
         from .clan_user import ClanUser
-        from django.db.models import F,Sum
+        from django.db.models import Sum
         import datetime
         date = datetime.date.today()
         date=date-datetime.timedelta(7*week)

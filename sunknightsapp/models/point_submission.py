@@ -48,6 +48,9 @@ class BasicUserPointSubmission(BasicPointSubmission):
 class PointsManagerAction(BasicPointSubmission):
     pass
 
+class EventQuestSubmission(BasicPointSubmission):
+    proof=models.CharField(max_length=200)
+
 
 class OneOnOneFightSubmission(BasicPointSubmission):
     pointsinfoloser = models.ForeignKey(PointsInfo, related_name="loser")

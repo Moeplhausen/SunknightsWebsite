@@ -9,6 +9,7 @@
         <li class="nav-item active"><a href="#overview" class="nav-link" data-toggle="tab">Overview</a></li>
         <li class="nav-item"><a href="#submit-pts" class="nav-link" data-toggle="tab">Submit Score</a></li>
         <li class="nav-item"><a href="#submit-1vs1" class="nav-link" data-toggle="tab">Submit Fight Result</a></li>
+{#        <li class="nav-item"><a href="#submit-other" class="nav-link" data-toggle="tab">Submit Event/Quest</a></li>#}
         <li class="nav-item"><a href="#open-submissions" class="nav-link" data-toggle="tab">Open Submission</a></li>
         <li class="nav-item"><a href="#decided-submissions" class="nav-link" data-toggle="tab">Decided Submission</a>
         </li>
@@ -25,6 +26,9 @@
         <div class="tab-pane" id="submit-1vs1">
             {% include "sunknightsapp/snippets/fightssubmitform.html" %}
         </div>
+{#        <div class="tab-pane" id="submit-other">#}
+{#            {% include "sunknightsapp/snippets/eventquestsubmission.html" %}#}
+{#        </div>#}
         <div class="tab-pane" id="open-submissions">
             {% include "sunknightsapp/snippets/opensubmissions.html" %}
         </div>
