@@ -17,6 +17,7 @@ from .models.mastery import Mastery
 from .models.diep_gamemode import DiepGamemode
 from .models.daily_quest import DailyQuest
 from .models.discord_role_points import DiscordRolePoints
+from .models.discord_roles import SunKnightsBadgeRole
 
 
 # Register your models here.
@@ -120,3 +121,4 @@ admin.site.register(BasicUserPointSubmission)
 admin.site.register(DiepGamemode)
 admin.site.register(DailyQuest)
 admin.site.register(DiscordRolePoints)
+admin.site.register(SunKnightsBadgeRole)
