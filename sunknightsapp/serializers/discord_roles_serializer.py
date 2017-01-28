@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from rest_framework_bulk import BulkListSerializer,BulkSerializerMixin
-from ..models.discord_roles import SunKnightsGuild, DiscordRole,SunKnightsBadgeRole
+from ..models.discord_roles import SunKnightsRole, DiscordRole,SunKnightsBadgeRole
 from .discord_mee6_points_serializer import DiscordMee6PointsRoleSerializer
 from ..models.clan_user import ClanUser
 
@@ -41,7 +41,7 @@ class GuildRolesSerializer(DiscordRolesSerializer):
 
 
     class Meta:
-        model=SunKnightsGuild
+        model=SunKnightsRole
         fields=('id','name','discord_id','discord_color','discord_server')
 
 

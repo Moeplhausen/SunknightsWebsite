@@ -39,6 +39,29 @@
                     $(nRow).css('color','red')
                 }
             }})
+
+        $('#decided-events-quests-table').DataTable({
+            "columnDefs":[{
+                "targets": [ 4 ],
+                "visible": false,
+                "searchable": false}
+            ],
+            "fnDrawCallback": function (oSettings) {
+                revertSubmission()
+            },
+            "fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
+                // Bold the grade for all 'A' grade browsers
+                if ( aData[4] == "True" )
+                {
+                    $(nRow).css('color','green')
+                }
+                else{
+                    $(nRow).css('color','red')
+                }
+            }})
+
+
+
         $('#decided-submissions-custom-table').DataTable({
             "fnDrawCallback": function (oSettings) {
                 revertSubmission()

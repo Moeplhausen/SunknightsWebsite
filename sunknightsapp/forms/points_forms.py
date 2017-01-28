@@ -1,8 +1,8 @@
 from .base_form import BaseForm
 from ..enums.AjaxActions import AjaxAction
-from ..models.point_submission import BasicUserPointSubmission, BasicPointSubmission,OneOnOneFightSubmission,PointsManagerAction
+from ..models.point_submission import BasicUserPointSubmission, BasicPointSubmission,OneOnOneFightSubmission,PointsManagerAction,EventQuestSubmission
 from ..serializers.pointsubmissions_serializer import BasicUserPointSubmissionSerializer, \
-    BasicPointsSubmissionSerializer,OneOnOneFightSubmissionSerializer
+    BasicPointsSubmissionSerializer,OneOnOneFightSubmissionSerializer,BasicEventQuestsSubmissionSerializer
 from ..serializers.clan_user_serializer import PointsInfoSerializer,PointsInfoFastSerializer,ClanUserSerializerBasic
 from django import forms
 from ..models.utility.little_things import getPointsByScore,getPointsByFight,manageElo
@@ -31,6 +31,32 @@ class SubmitPointsForm(BaseForm):
     class Meta:
         model = BasicUserPointSubmission
         fields = ('proof', 'gamemode', 'tank', 'score', 'submitterText')
+
+
+class SubmitEventsQuestsForm(BaseForm):
+    def __init__(self, *args, **kwargs):
+        super(SubmitEventsQuestsForm, self).__init__(AjaxAction.SUBMITEVENTSQUESTS, *args, **kwargs)
+
+    def handle(self, request):
+
+        try:
+            import decimal
+            submission = self.save(commit=False)
+            submission.points=0
+            submission.pointsinfo = request.user.pointsinfo
+            submission.save()
+        except BaseException as e:
+            return self.response(False, 'Something went wrong: ' + str(e))
+        else:
+            serializer = BasicEventQuestsSubmissionSerializer(submission)
+            print(serializer.data)
+            return self.response(True, {'data': (serializer.data)})
+
+    class Meta:
+        model = EventQuestSubmission
+        fields = ('proof', 'submitterText')
+
+
 
 
 class SubmitFightsForm(BaseForm):
@@ -87,6 +113,28 @@ class RetriveUserSubmissionsPointsForm(BaseForm):
 
     class Meta:
         model = BasicUserPointSubmission
+        fields = ()
+
+
+class RetrieveEventQuestsSubmissionsForm(BaseForm):
+    def __init__(self, *args, **kwargs):
+        super(RetrieveEventQuestsSubmissionsForm, self).__init__(AjaxAction.RETRIEVEEVENTQUESTSSUBMISSIONS, *args, **kwargs)
+
+    def handle(self, request):
+        if not request.user.is_points_manager:
+            return self.noPermission()
+
+        try:
+            submissions = EventQuestSubmission.objects.filter(decided=False)
+            serializer = BasicEventQuestsSubmissionSerializer(submissions, many=True)
+        except BaseException as e:
+            return self.response(False, 'Something went wrong: ' + str(e))
+        else:
+
+            return self.response(True, {'data': (serializer.data)})
+
+    class Meta:
+        model = EventQuestSubmission
         fields = ()
 
 
@@ -254,12 +302,6 @@ class RevertSubmissionForm(BaseForm):
 
 
 
-
-
-
-
-
-
 class DecideUserPointSubmissionForm(BaseForm):
     pk_id = forms.IntegerField(min_value=0, widget=forms.HiddenInput(), required=True)
 
@@ -293,6 +335,54 @@ class DecideUserPointSubmissionForm(BaseForm):
     class Meta:
         model = BasicPointSubmission
         fields = ('pk_id', 'accepted', 'managerText', 'points')
+
+
+
+class DecideEventQuestsSubmissionForm(BaseForm):
+    pk_id = forms.IntegerField(min_value=0, widget=forms.HiddenInput(), required=True)
+
+
+    def __init__(self, *args, **kwargs):
+        super(DecideEventQuestsSubmissionForm, self).__init__(AjaxAction.DECIDEEVENTQUESTS, *args, **kwargs)
+
+
+    def handle(self, request):
+        if not request.user.is_points_manager:
+            return self.noPermission()
+        try:
+            submission = EventQuestSubmission.objects.get(pk=int(self.cleaned_data['pk_id']))
+
+        except BaseException as e:
+            return self.response(False, 'Something went wrong: ' + str(e))  # TODO better exception
+
+        else:
+            submission.accepted = self.cleaned_data['accepted']
+            submission.managerText = self.cleaned_data['managerText']
+            submission.points = self.cleaned_data['points']
+            submission.manager=request.user
+            submission.decided=True
+            submission.reverted=False
+            print('saved')
+            submission.save()
+            serializer = BasicEventQuestsSubmissionSerializer(submission)
+            return self.response(True, {'data': (serializer.data)})
+
+
+    class Meta:
+        model = EventQuestSubmission
+        fields = ('pk_id', 'accepted', 'managerText', 'points')
+
+
+
+
+
+
+
+
+
+
+
+
 
 class DecideFightsSubmissionForm(BaseForm):
     pk_id = forms.IntegerField(min_value=0, widget=forms.HiddenInput(), required=True)

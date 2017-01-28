@@ -24,6 +24,35 @@
     </tbody>
 </table>
 
+
+
+<h3>Event/Quest Submissions</h3>
+
+<table id="open-submissions-eventquest-table" class="display" cellspacing="0" width="100%">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Note</th>
+        <th>Proof</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for submission in user.last_open_score_submissions %}
+        <tr>
+
+            <td>{{ submission.id }}</td>
+            <td>{{ submission.submitterText }}</td>
+            <td><a href="{{ submission.proof }}">Prooflink</a></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+
+
+
+
+
 <h3>Fight Submissions</h3>
 
 <table id="open-submissions-fights-table" class="display" cellspacing="0" width="100%">

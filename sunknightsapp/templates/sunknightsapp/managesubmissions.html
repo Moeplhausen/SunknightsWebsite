@@ -23,6 +23,29 @@
         </table>
     </div>
 
+
+
+    <h3>Event/Quests Submissions</h3>
+    <div class="table-responsive">
+        <table id="event-quests-submissions-table" class="display" cellspacing="0" width="100%">
+            <thead>
+            <tr>
+                <th>User</th>
+                <th>Proof</th>
+                <th>Submitter Note</th>
+                <th>Manager Note</th>
+                <th>Points</th>
+                <th>action</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+
+
+
+
+
+
     <h3>Fight Submissions</h3>
     <div class="table-responsive">
         <table id="fights-submissions-table" class="display" cellspacing="0" width="100%">
@@ -143,6 +166,181 @@
 
                 ]
             });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            function decideEventQuestsSubmission() {
+                $('.decisioneventquestsbtnfucker').click(function () {
+                    var id = $(this).val();
+                    var element = $(this);
+                    var points = $("#points-manager-"+id).val()
+                    var managerText=$("#manager-note-"+id).val()
+                    if (managerText=="")
+                        managerText="None"
+
+
+                    var accepted=$(this).hasClass("approve-submission")
+
+                    element.closest("tr").find('input,button').attr('disabled','true');
+
+                    $.ajax({
+                        type: 'POST',
+                        url: "{% url 'ajaxhandler' %}",
+                        data: {csrfmiddlewaretoken: csrftoken,ajax_action_id:{{ decideeventquestssubmissionid }},pk_id:id,managerText:managerText, accepted: accepted, points: points},
+                        success: function (data, textStatus, xhr) {
+                            console.log(data);
+                            console.log(xhr);
+                            if (xhr.status == '200') {
+                                //table.row(element.closest("tr")).remove().draw(false)
+                                element.closest("tr").remove();
+                                $('#alertsContainer').append("<div class=\"alert alert-success alert-dismissible fade in\" role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>Approved Submission (" + data['message']['data']['id']+"): "+data['message']['data']['accepted'] + "<strong></div>")
+                            }
+                        }
+                    });
+                })
+            }
+
+        var tableeventsquests=$('#event-quests-submissions-table').DataTable({
+
+            "fnDrawCallback": function (oSettings) {
+                decideEventQuestsSubmission()
+            },
+            "ajax": {
+                "url": "{% url 'ajaxhandler' %}",
+                "dataSrc": function (json) {
+                    {#                        console.log(json)#}
+                    var data = json['message']['data']
+                    var return_data = new Array();
+                    for (var i = 0; i < data.length; i++) {
+                        var action = '<span style="white-space:nowrap"> \
+                                    <button class="btn btn-success btn-xs btn-detail decisioneventquestsbtnfucker approve-submission" \
+                                            value="' + data[i].id + '">Approve \
+                                    </button> \
+                                    <button class="btn btn-danger btn-xs btn-delete decisioneventquestsbtnfucker deny-submission" \
+                                            value="' + data[i].id + '">Deny \
+                                    </button></span>';
+
+                        var username = data[i].pointsinfo.user.discord_nickname
+                        var discorduserid = data[i].pointsinfo.user.discord_id
+                        var user = '<a href="/user/' + discorduserid + '">' + username + '</a>';
+
+                        var managertext = '<textarea class="form-control" maxlength="200" id="manager-note-' + data[i].id + '" rows="3"></textarea>'
+                        var points = '<input class="form-control" style = "width:75px;"  type="number" value="'+data[i].points+'" id="points-manager-' + data[i].id + '">'
+
+
+                        return_data.push({
+                            'user': user,
+                            'date': data[i].date,
+                            'points':points,
+                            'submitter-note': data[i].submitterText,
+                            'manager-note': managertext,
+                            'proof': '<a href="' + data[i].proof + '">Prooflink</a>',
+                            'action': action
+                        })
+                    }
+                    return return_data;
+                },
+                "type": "POST",
+                "data": function (d) {
+                    d.csrfmiddlewaretoken = csrftoken
+                    d.ajax_action_id ={{ retrieveeventsquestsssubmissionsid }}
+                }
+            },
+            "columns": [
+                {"data": "user"},
+                {"data": "proof"},
+                {"data": "submitter-note"},
+                {"data": "manager-note"},
+                {"data": "points"},
+                {"data": "action"}
+
+            ]
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

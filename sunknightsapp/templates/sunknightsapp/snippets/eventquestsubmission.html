@@ -1,6 +1,6 @@
-<form action="{% url 'ajaxhandler' %}" id="recordsubmit" method="POST">
+<form action="{% url 'ajaxhandler' %}" id="eventquestsubmit" method="POST">
     {% csrf_token %}
-    {{ submitpointsform.ajax_action_id }}
+    {{ submiteventsquestsform.ajax_action_id }}
     <div class="form-group">
         <label for="submitterspam">Note</label>
         <input type="text" class="form-control" name="submitterText" id="submitterspam"

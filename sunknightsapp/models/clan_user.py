@@ -129,6 +129,11 @@ class ClanUser(AbstractBaseUser):
                 return BasicUserPointSubmission.objects.filter(pointsinfo=self.pointsinfo,decided=True)
 
             @property
+            def last_decided_eventquests_submissions(self):
+                from .point_submission import EventQuestSubmission
+                return EventQuestSubmission.objects.filter(pointsinfo=self.pointsinfo,decided=True)
+
+            @property
             def last_decided_custom_submissions(self):
                 from .point_submission import PointsManagerAction
                 return PointsManagerAction.objects.filter(pointsinfo=self.pointsinfo,decided=True)

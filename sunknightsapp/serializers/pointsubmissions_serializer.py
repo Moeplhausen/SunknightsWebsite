@@ -40,6 +40,21 @@ class BasicUserPointSubmissionSerializer(BulkSerializerMixin, serializers.ModelS
         list_serializer_class = BulkListSerializer
 
 
+
+class BasicEventQuestsSubmissionSerializer(BulkSerializerMixin, serializers.ModelSerializer):
+    daily_quest = DailyQuestSerializer(many=False, read_only=True)
+    pointsinfo = PointsInfoBasicSerializer(many=False, read_only=True)
+
+    class Meta:
+        model = BasicUserPointSubmission
+        fields = (
+            'id', 'date', 'manager', 'managerText', 'points', 'submitterText',  'pointsinfo', 'accepted',
+            'decided', 'daily_quest', 'proof',)
+        list_serializer_class = BulkListSerializer
+
+
+
+
 class OneOnOneFightSubmissionSerializer(BulkSerializerMixin, serializers.ModelSerializer):
     pointsinfo = PointsInfoBasicSerializer(many=False, read_only=True)
     pointsinfoloser = PointsInfoBasicSerializer(many=False, read_only=True)

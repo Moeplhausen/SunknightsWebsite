@@ -5,19 +5,19 @@ from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.contrib.auth.models import Group
 
 from .models.clan_user import ClanUser, ClanUserRoles
-from .models.discord_roles import DiscordRole,SunKnightsGuild
+from .models.daily_quest import DailyQuest
+from .models.diep_gamemode import DiepGamemode
+from .models.diep_tank import DiepTank,DiepTankInheritance
+from .models.discord_role_points import DiscordRolePoints
+from .models.discord_roles import DiscordRole
+from .models.discord_roles import SunKnightsBadgeRole
 from .models.discord_server import DiscordServer
 from .models.guildfight import GuildFight
 from .models.guildfight import GuildFightParticipation
+from .models.mastery import Mastery
 from .models.point_submission import PointsManagerAction,OneOnOneFightSubmission,BasicUserPointSubmission
 from .models.points_info import PointsInfo
 from .models.tournament import Tournament,TournamentFightConnector
-from .models.diep_tank import DiepTank,DiepTankInheritance
-from .models.mastery import Mastery
-from .models.diep_gamemode import DiepGamemode
-from .models.daily_quest import DailyQuest
-from .models.discord_role_points import DiscordRolePoints
-from .models.discord_roles import SunKnightsBadgeRole
 
 
 # Register your models here.
@@ -105,7 +105,6 @@ admin.site.unregister(Group)
 
 admin.site.register(DiscordServer)
 admin.site.register(DiscordRole)
-admin.site.register(SunKnightsGuild)
 admin.site.register(GuildFight)
 admin.site.register(GuildFightParticipation)
 admin.site.register(PointsInfo)

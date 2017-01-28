@@ -115,6 +115,51 @@ def post_new_user_point_submission(submission, accepted, decided):
     post_to_discord(data)
 
 
+
+def post_new_event_quest_submission(submission, accepted, decided):
+    data = {}
+    if not decided:
+        data = {'embeds':
+            [
+                {
+                    'color': yellowcolor,
+                    'title': 'New Event/Quest Submission ({})'.format(submission.id),
+                    'fields':
+                        [
+                            {'name': 'From', 'value': '<@{}>'.format(submission.pointsinfo.user.discord_id), 'inline': True},
+                            {'name': 'Proof', 'value': submission.proof, 'inline': True},
+                            {'name': 'Note', 'value': submission.submitterText, 'inline': True},
+                        ]
+                }
+            ]
+        }
+    else:
+        data = {'embeds':
+            [
+                {
+                    'color': greencolor if accepted else redcolor,
+                    'title': 'Submission ({})'.format(submission.id),
+                    'fields':
+                        [
+                            {'name': 'From', 'value': '<@{}>'.format(submission.pointsinfo.user.discord_id), 'inline': True},
+                            {'name': 'Submitter Note', 'value': submission.submitterText, 'inline': True},
+                            {'name': 'Action', 'value': 'Approved' if accepted else 'Rejected', 'inline': True},
+                            {'name': 'Manager', 'value': '<@{}>'.format(submission.manager.discord_id), 'inline': True},
+                            {'name': 'Manager Note', 'value': submission.managerText, 'inline': True},
+                            {'name': 'Points', 'value': str(submission.points), 'inline': True},
+                        ]
+                }
+            ]
+        }
+    print(data)
+    post_to_discord(data)
+
+
+
+
+
+
+
 def post_new_submission(submission, accepted, decided):
     data = {}
     if not decided:

@@ -12,7 +12,7 @@ from django.dispatch import receiver
 from ..backgroundTask.webhook_spam import post_new_guild_fight, post_new_user_point_submission, \
     post_new_manager_submission, \
     post_new_guildfight_points, post_guild_fight_results, post_new_OneOnOne_submission, post_new_submission, \
-    post_submission_reverted
+    post_submission_reverted,post_new_event_quest_submission
 
 
 class BasicPointSubmission(models.Model):
@@ -50,6 +50,7 @@ class PointsManagerAction(BasicPointSubmission):
 
 class EventQuestSubmission(BasicPointSubmission):
     proof=models.CharField(max_length=200)
+    submitterText = models.TextField(max_length=200, default="")
 
 
 class OneOnOneFightSubmission(BasicPointSubmission):
@@ -85,8 +86,11 @@ def update_submission_points_on_save(sender, instance, created=False, **kwargs):
         post_new_manager_submission(instance, accepted)
     elif isinstance(instance, OneOnOneFightSubmission):
         post_new_OneOnOne_submission(instance, accepted, decided)
+    elif isinstance(instance,EventQuestSubmission):
+        post_new_event_quest_submission(instance,accepted,decided)
     elif isinstance(instance, BasicPointSubmission):
-        post_new_submission(instance, accepted)
+        post_new_submission(instance, accepted,decided)
+
 
 
         # https://web.archive.org/web/20120715042306/http://codeblogging.net/blogs/1/14

@@ -82,10 +82,10 @@ class DiscordRole(models.Model):
     def __str__(self):
         return self.name
 
-class SunKnightsGuild(DiscordRole):
+class SunKnightsRole(DiscordRole):
     pass
 
 
-class SunKnightsBadgeRole(SunKnightsGuild):
+class SunKnightsBadgeRole(DiscordRole):
     from .diep_tank import DiepTank
     tank = models.ForeignKey(DiepTank, on_delete=models.CASCADE)

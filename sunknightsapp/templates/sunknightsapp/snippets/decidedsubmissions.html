@@ -74,6 +74,41 @@
 </table>
 
 
+<h3>Event/Quests Submissions</h3>
+<table id="decided-events-quests-table" class="display" cellspacing="0" width="100%">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Points</th>
+        <th>Manager</th>
+        <th>Manager Note</th>
+        <th>Accepted</th>
+        <th>Proof</th>
+        <th>Date</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for submission in lookuser.last_decided_eventquests_submissions %}
+        <tr>
+            <td>
+                {% if user.is_points_manager%}
+                    <input class="button-x-corner" type="button" submission_id={{ submission.id }} value="X">
+                {% endif %}
+                {{ submission.id }}
+            </td>
+            <td>{{ submission.points|intcomma }}</td>
+            <td>{{ submission.manager.discord_nickname }}</td>
+            <td>{{ submission.managerText }}</td>
+            <td>{{ submission.accepted }}</td>
+            <td><a href="{{ submission.proof }}">Prooflink</a></td>
+            <td>{{ submission.date }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+
+
 <h3>Other</h3>
 <table id="decided-submissions-custom-table" class="display" cellspacing="0" width="100%">
     <thead>
