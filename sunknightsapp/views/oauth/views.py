@@ -77,7 +77,7 @@ class OAuthCallbackDiscord(OAuthCallback):
             "Redirect new users to homepage because every new User has to be on discord first"
             
             user=self.get_or_create_user(provider,access,info)
-            if user is None:
+            if user is None or not user.is_active:
                 return render_to_response('sunknightsapp/index.html',{'errors':['You are not in the SK Clan']})
             access.user = user
             AccountAccess.objects.filter(pk=access.pk).update(user=user)
