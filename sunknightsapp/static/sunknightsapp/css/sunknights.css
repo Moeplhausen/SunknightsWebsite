@@ -1,125 +1,121 @@
 /*html,body {*/
-    /*background: -webkit-linear-gradient(90deg, #FBC926 10%, #C3922E 90%); !* Chrome 10+, Saf5.1+ *!*/
-    /*background: -moz-linear-gradient(90deg, #FBC926 10%, #C3922E 90%); !* FF3.6+ *!*/
-    /*background: -ms-linear-gradient(90deg, #FBC926 10%, #C3922E 90%); !* IE10 *!*/
-    /*background: -o-linear-gradient(90deg, #FBC926 10%, #C3922E 90%); !* Opera 11.10+ *!*/
-    /*background: linear-gradient(90deg, #FBC926 10%, #C3922E 90%); !* W3C *!*/
+/*background: -webkit-linear-gradient(90deg, #FBC926 10%, #C3922E 90%); !* Chrome 10+, Saf5.1+ *!*/
+/*background: -moz-linear-gradient(90deg, #FBC926 10%, #C3922E 90%); !* FF3.6+ *!*/
+/*background: -ms-linear-gradient(90deg, #FBC926 10%, #C3922E 90%); !* IE10 *!*/
+/*background: -o-linear-gradient(90deg, #FBC926 10%, #C3922E 90%); !* Opera 11.10+ *!*/
+/*background: linear-gradient(90deg, #FBC926 10%, #C3922E 90%); !* W3C *!*/
 /*}*/
 
-body{
+body {
     background-image: url("../image/background.jpg");
-    text-color:black !important;
+    text-color: black !important;
     font-family: Ubuntu, sans-serif !important;
 
 }
 
-
-#userview-tab-content{
+#userview-tab-content {
     margin-top: 1em;
 }
 
-.card-group{
-    width:100%;
-    height:auto;
+.card-group {
+    width: 100%;
+    height: auto;
 }
 
-
-#sun-navbar{
-    background:
-            linear-gradient(
-                    rgba(0, 0, 0, 0.5),
-                    rgba(0, 0, 0, 0.5)
-            )
+#sun-navbar {
+    background: linear-gradient(
+            rgba(0, 0, 0, 0.5),
+            rgba(0, 0, 0, 0.5)
+    )
 }
 
-.card,.guild-card-group-item,#user-stats,.sk-btn{
-    background-color:transparent !important;
+.card, .guild-card-group-item, #user-stats, .sk-btn {
+    background-color: transparent !important;
     background: linear-gradient(
             rgba(0, 0, 0, 0.15),
             rgba(0, 0, 0, 0.15)
     );
     border-radius: 5px;
 }
-#user-stats,#navbar-header{
+
+#user-stats, #navbar-header {
     text-align: center;
 }
 
-#card-img-top,#useroverview-name{
+#card-img-top, #useroverview-name {
     margin: auto;
     padding-left: 1em;
     padding-right: 1em;
     max-width: 170px;
 }
-#useroverview-name{
+
+#useroverview-name {
     text-shadow: 3px -1px 1px rgba(170, 170, 115, 1);
 }
 
+.button-x-corner {
+    display: inline;
+    float: right;
+    top: 0;
+    right: 0;
 
-.button-x-corner{
-    display:inline;
-    float:right;
-    top:0;
-    right:0;
-
-    color:red;
+    color: red;
     background-color: transparent;
     border-color: transparent;
 }
 
-.list-group-item{
+.list-group-item {
     background-color: transparent !important;
-    background:
-            linear-gradient(
-                    rgba(0, 0, 0, 0.1),
-                    rgba(0, 0, 0, 0.1)
-            );
-    border-color:black !important;
+    background: linear-gradient(
+            rgba(0, 0, 0, 0.1),
+            rgba(0, 0, 0, 0.1)
+    );
+    border-color: black !important;
 }
 
-#sun-navbar a{
-    color:white;
-    padding:5px;
+#sun-navbar a {
+    color: white;
+    padding: 5px;
 }
 
-#user-nav-bar{
+#user-nav-bar {
     margin-bottom: 3em;
-    padding:0.5em;
+    padding: 0.5em;
 }
 
-
-#sk-logo{
-    width:37px;
-    height:37px;
+#sk-logo {
+    width: 37px;
+    height: 37px;
 }
 
-#masteries-user-row{
+#masteries-user-row {
     margin-top: 1em;
 }
 
-
-img.discord-img{
+img.discord-img {
     width: 200px;
 }
 
-.hidden{
+.hidden {
     visibility: hidden;
 }
-.img-circle,#sk-logo {
+
+.img-circle, #sk-logo {
     border-radius: 50%;
 }
 
-img.leaderpoint-avatar{
-  width:32px;
-  height:32px;
+img.leaderpoint-avatar {
+    width: 32px;
+    height: 32px;
+    margin-right: 0.25em;
 }
 
-#jumbotron-content{
-    background-color:transparent;
-    background:
-            linear-gradient(
-                    rgba(0, 0, 0, 0.1),
-                    rgba(0, 0, 0, 0.1)
-            )
+#jumbotron-content {
+    background-color: transparent;
+    background: linear-gradient(
+            rgba(0, 0, 0, 0.1),
+            rgba(0, 0, 0, 0.1)
+    )
 }
 
 .dropdown-toggle {
@@ -130,7 +126,7 @@ img.leaderpoint-avatar{
 
 }
 
-#submit-tank-picker{
+#submit-tank-picker {
     margin-bottom: 2em !important;
 }
 
@@ -146,6 +142,7 @@ img.leaderpoint-avatar{
     /*background: #f3f5fc;*/
     font-weight: 600;
 }
+
 mention {
     background-color: rgba(243, 245, 252, 0.4);
     color: #7289da;
@@ -158,16 +155,19 @@ mention {
 }
 
 /*dropdown of information*/
-.infodrop {}
+.infodrop {
+}
+
 .infodrop:hover {
     text-decoration: underline !important;
 }
+
 .infodrop:active {
     text-decoration: underline !important;
 }
 
 code {
-    background-color: rgba(245,245,245,1);
+    background-color: rgba(245, 245, 245, 1);
 }
 
 .squareul {

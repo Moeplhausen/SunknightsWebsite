@@ -12,6 +12,7 @@ class PointsInfo(models.Model):
     user = models.OneToOneField(ClanUser, on_delete=models.CASCADE, unique=True)
     oldpoints = models.DecimalField(decimal_places=2, max_digits=19, default=0)
     currentpoints = models.DecimalField(decimal_places=2, max_digits=19, default=0)
+    masterypointssubtract = models.DecimalField(decimal_places=2, max_digits=19, default=0, db_index=True)
     masterypoints = models.DecimalField(decimal_places=2, max_digits=19, default=0, db_index=True)
     totalpoints = models.DecimalField(decimal_places=2, max_digits=19, default=0, db_index=True)
 
@@ -37,7 +38,7 @@ def create_postinfo(sender, instance=None, created=False, **kwargs):
     pointsinfo = instance
 
     calcpoints = pointsinfo.oldpoints + decimal.Decimal(pointsinfo.currentpoints) + decimal.Decimal(
-        pointsinfo.masterypoints)
+        pointsinfo.masterypoints)-decimal.Decimal(pointsinfo.masterypointssubtract)
     if calcpoints != pointsinfo.totalpoints:
         pointsinfo.totalpoints = calcpoints
         pointsinfo.save()

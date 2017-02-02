@@ -99,6 +99,19 @@ class ClanUser(AbstractBaseUser):
             def masteries(self):
                 return self.pointsinfo.masteries
 
+
+            @property
+            def masteries_t1(self):
+                return self.pointsinfo.masteries.filter(tier=1)
+
+            @property
+            def masteries_t2(self):
+                return self.pointsinfo.masteries.filter(tier=2)
+
+            @property
+            def masteries_t3(self):
+                return self.pointsinfo.masteries.filter(tier=3)
+
             @property
             def badges(self):
                 from .discord_roles import SunKnightsBadgeRole
@@ -171,7 +184,7 @@ class ClanUser(AbstractBaseUser):
                 import datetime
                 from django.db.models import F,Sum
                 date = datetime.date.today()
-                date=date-datetime.timedelta(-7*week)
+                date=date-datetime.timedelta(7*week)
                 start_week = date - datetime.timedelta(date.weekday())
                 end_week = start_week + datetime.timedelta(7)
                 from .point_submission import BasicPointSubmission

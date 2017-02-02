@@ -102,7 +102,7 @@ def rules(request):
 
 
 def info(request):
-    context = {}
+    context = {'text':"this is a lot of information"}
     return render(request, 'sunknightsapp/info.html', context)
 
 
