@@ -17,10 +17,10 @@
 {% block scriptself %}
     <script>
         $(function () {
-            var md = "{{ helpcontent }}"
+            window.md = "{{ helpcontent }}";
             md = md.replace(/&/g, "&amp;");
-            console.log(md)
+            console.log(md);
             mdToHtml($("#contentinv")[0], md);
-        })
+        });
     </script>
 {% endblock %}
