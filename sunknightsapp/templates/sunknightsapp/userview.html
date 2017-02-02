@@ -45,116 +45,114 @@
 
     <script>
 
-        $(document).ready(function () {
-            var datatableopenscoresubmissions = $('#open-submissions-score-table').DataTable();
-            var datatableopenfightssubmissions = $('#open-submissions-fights-table').DataTable();
-            var datatableopeneventquestssubmissions = $('#open-submissions-eventquest-table').DataTable();
+      $(document).ready(function () {
+        var datatableopenscoresubmissions = $('#open-submissions-score-table').DataTable();
+        var datatableopenfightssubmissions = $('#open-submissions-fights-table').DataTable();
+        var datatableopeneventquestssubmissions = $('#open-submissions-eventquest-table').DataTable();
 
-            $('#recordsubmit').on('submit', function (event) {
-                event.preventDefault();
+        $('#recordsubmit').on('submit', function (event) {
+          event.preventDefault();
 
-                //set default note if nothing was set
+          //set default note if nothing was set
 
-                var note = $('#submitterspam').val()
-                if (note == "")
-                    $('#submitterspam').val('None')
-                var form = new FormData(this);
-                sunKnightsJsonRequest(form, function (result, data) {
-                    if (result) {
-                        submission = data['message']['data']
-                        $('#alertsContainer').append("<div class=\"alert alert-success alert-dismissible fade in\" role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>Submitted<strong></div>")
+          var note = $('#submitterspam').val()
+          if (note == "")
+            $('#submitterspam').val('None')
+          var form = new FormData(this);
+          sunKnightsJsonRequest(form, function (result, data) {
+            if (result) {
+              submission = data['message']['data']
+              $('#alertsContainer').append("<div class=\"alert alert-success alert-dismissible fade in\" role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>Submitted<strong></div>")
 
-                        datatableopenscoresubmissions.row.add([
-                            submission['id'],
-                            submission['tank']['name'],
-                            submission['submitterText'],
-                            submission['points'],
-                            "<a href=\"" + submission['proof'] + "\">Prooflink</a>"
-                        ]).draw(false)
-                    }
-                    else {
-                        console.log('fuck this shit')
-                        $('#alertsContainer').append("<div class=\"alert alert-danger alert-dismissible fade in\" role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>Something went wrong :O<strong></div>")
+              datatableopenscoresubmissions.row.add([
+                submission['id'],
+                submission['tank']['name'],
+                submission['submitterText'],
+                submission['points'],
+                "<a href=\"" + submission['proof'] + "\">Prooflink</a>"
+              ]).draw(false)
+            }
+            else {
+              console.log('fuck this shit')
+              $('#alertsContainer').append("<div class=\"alert alert-danger alert-dismissible fade in\" role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>Something went wrong :O<strong></div>")
 
-                    }
-                }, false, false);
-                this.reset();
-            });
-
-
-            $('#eventquestsubmit').on('submit', function (event) {
-                event.preventDefault();
-
-                //set default note if nothing was set
-
-                var note = $('#submitterspam').val()
-                if (note == "")
-                    $('#submitterspam').val('None')
-                var form = new FormData(this);
-                sunKnightsJsonRequest(form, function (result, data) {
-                    if (result) {
-                        submission = data['message']['data']
-                        $('#alertsContainer').append("<div class=\"alert alert-success alert-dismissible fade in\" role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>Submitted<strong></div>")
-
-                        datatableopeneventquestssubmissions.row.add([
-                            submission['id'],
-                            submission['submitterText'],
-                            "<a href=\"" + submission['proof'] + "\">Prooflink</a>"
-                        ]).draw(false)
-                    }
-                    else {
-                        console.log('fuck this shit')
-                        $('#alertsContainer').append("<div class=\"alert alert-danger alert-dismissible fade in\" role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>Something went wrong :O<strong></div>")
-
-                    }
-                }, false, false);
-                this.reset();
-            });
-
-
-
-
-            $('#fightsubmit').on('submit', function (event) {
-                event.preventDefault();
-
-                //set default note if nothing was set
-
-                var note = $('#submitterspam').val()
-                if (note == "")
-                    $('#submitterspam').val('None')
-
-                var form = new FormData(this);
-                sunKnightsJsonRequest(form, function (result, data) {
-                    if (result) {
-                        submission = data['message']['data']
-                        $('#alertsContainer').append("<div class=\"alert alert-success alert-dismissible fade in\" role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>Submitted<strong></div>")
-                        var points=submission['pointsinfo']['id']=={{ user.pointsinfo.id }}?submission['points']:submission['pointsloser']
-
-                        datatableopenfightssubmissions.row.add([
-                            submission['id'],
-                            points,
-                            "<a href=\"" + submission['proof'] + "\">Prooflink</a>"
-                        ]).draw(false)
-                    }
-                    else {
-                        console.log('fuck this shit')
-                        $('#alertsContainer').append("<div class=\"alert alert-danger alert-dismissible fade in\" role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>Something went wrong :O<strong></div>")
-                    }
-                }, false, false);
-                this.reset();
-            });
-
-
-
-            $('#select-users-one-on-one').selectpicker({
-                liveSearch: true,
-                create: false,
-                sortField: {
-                    field: 'text',
-                    direction: 'asc'
-                },
-            }).ajaxSelectPicker(ajaxusersearchoptions);
+            }
+          }, false, false);
+          this.reset();
+          $('#select-tank-submit').selectpicker('render');
         });
+
+
+        $('#eventquestsubmit').on('submit', function (event) {
+          event.preventDefault();
+
+          //set default note if nothing was set
+
+          var note = $('#submitterspam').val()
+          if (note == "")
+            $('#submitterspam').val('None')
+          var form = new FormData(this);
+          sunKnightsJsonRequest(form, function (result, data) {
+            if (result) {
+              submission = data['message']['data']
+              $('#alertsContainer').append("<div class=\"alert alert-success alert-dismissible fade in\" role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>Submitted<strong></div>")
+
+              datatableopeneventquestssubmissions.row.add([
+                submission['id'],
+                submission['submitterText'],
+                "<a href=\"" + submission['proof'] + "\">Prooflink</a>"
+              ]).draw(false)
+            }
+            else {
+              console.log('fuck this shit')
+              $('#alertsContainer').append("<div class=\"alert alert-danger alert-dismissible fade in\" role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>Something went wrong :O<strong></div>")
+
+            }
+          }, false, false);
+          this.reset();
+        });
+
+
+        $('#fightsubmit').on('submit', function (event) {
+          event.preventDefault();
+
+          //set default note if nothing was set
+
+          var note = $('#submitterspam').val()
+          if (note == "")
+            $('#submitterspam').val('None')
+
+          var form = new FormData(this);
+          sunKnightsJsonRequest(form, function (result, data) {
+            if (result) {
+              submission = data['message']['data']
+              $('#alertsContainer').append("<div class=\"alert alert-success alert-dismissible fade in\" role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>Submitted<strong></div>")
+              var points = submission['pointsinfo']['id'] =={{ user.pointsinfo.id }} ? submission['points'] : submission['pointsloser']
+
+              datatableopenfightssubmissions.row.add([
+                submission['id'],
+                points,
+                "<a href=\"" + submission['proof'] + "\">Prooflink</a>"
+              ]).draw(false)
+            }
+            else {
+              console.log('fuck this shit')
+              $('#alertsContainer').append("<div class=\"alert alert-danger alert-dismissible fade in\" role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>Something went wrong :O<strong></div>")
+            }
+          }, false, false);
+          this.reset();
+        });
+
+
+        $('#select-users-one-on-one').selectpicker({
+          liveSearch: true,
+          create: false,
+          sortField: {
+            field: 'text',
+            direction: 'asc'
+          },
+        }).ajaxSelectPicker(ajaxusersearchoptions);
+      });
     </script>
 {% endblock %}
 
