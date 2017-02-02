@@ -33,9 +33,9 @@ function editor(elementID, button, sbuttonID) {
   var cancelb = $(idselect(sbuttonID));
   button = $(button);
   var oldhtml = thing.html();
-  thing.html("<textarea rows='10' cols='30'>" + md + "</textarea>");
+  thing.html("<textarea id='newcontentz' rows='10' cols='30'>" + md + "</textarea>");
   button.html("Submit");
-  button.attr("onclick", "editsubmit(" + elementID + ", this, " + sbuttonID);
+  button.attr("onclick", "editsubmit('" + elementID + "', this, '" + sbuttonID + "')");
   cancelb[0].style.display = "block";
 }
 function editsubmit(elementID, button, sbuttonID) {
@@ -43,13 +43,27 @@ function editsubmit(elementID, button, sbuttonID) {
     return "#" + theid;
   };
   var thing = $(idselect(elementID));
-  var oldhtml = thing.html();
-  $.post(window.location.href, {
-    newmd: oldhtml
-  }, function (d, s) {
+  var oldhtml = $(idselect("newcontentz")).val();
+  $.ajax(window.location.href, {
+    type: "POST",
+    data: {
+      newcontent: oldhtml
+    },
+    headers: {
+      'X-CSRFToken': $.cookie('csrftoken')
+    },
+    error: function(res, s, err) {
+      console.error("Error while submitting (Status: " + s + "): " + err);
+      $("#thealert").clone().attr("id", "currentalert").css("display", "block").appendTo("#alertspot");
+    },
+    success: function(d, s, res) {
+      console.log(`Status: ${s} (Debug)`);
+      window.location = window.location.href;
+    }
+  }/*, function (d, s) {
     console.log(`Status: ${s} (Debug)`);
     window.location = window.location.href;
-  });
+  }*/);
 }
 function canceledit(elementID, buttonID, sbutton) {
   window.location = window.location.href;

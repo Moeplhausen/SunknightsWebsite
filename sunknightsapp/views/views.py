@@ -84,7 +84,7 @@ def about_us(request):
     context = {}
     return render(request, 'sunknightsapp/about_us.html', context)
 
-
+@require_http_methods(["GET", "POST"])
 def helppage(request,helpstr=""):
     try:
         help=HelpInfo.objects.get(name=helpstr)
@@ -97,7 +97,7 @@ def helppage(request,helpstr=""):
         #if it was a post request, we assume that the users wants to update the help content
         #so we check that 'newcontent' is in the request and that the user has permissions to modify the pagehel
         if request.method == 'POST' and request.user.can_edit_info and 'newcontent' in request.POST:
-            newcontent=request.POST('newcontent')
+            newcontent=request.POST['newcontent']
             help.helpinfo=newcontent
             help.last_modifier=request.user
             help.save()
