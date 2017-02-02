@@ -84,3 +84,6 @@ function showhide(button, id){
   button.innerHTML = button.innerHTML=="View"?"Hide":"View";
 }
 
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+})

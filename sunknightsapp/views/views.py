@@ -4,6 +4,7 @@ from django.http import JsonResponse
 from django.shortcuts import redirect
 from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
+import os
 
 from ..decorators.login_decorators import points_manager_required
 from ..enums.AjaxActions import AjaxAction
@@ -16,6 +17,8 @@ from ..models.diep_gamemode import DiepGamemode
 from ..models.diep_tank import DiepTankInheritance, DiepTank
 from ..models.discord_roles import DiscordRole
 from ..models.points_info import PointsInfo
+from ..models.help_info import HelpInfo
+import json
 
 
 def index(request):
@@ -81,43 +84,26 @@ def about_us(request):
     context = {}
     return render(request, 'sunknightsapp/about_us.html', context)
 
-
-def rules(request):
-    context = {}
-    return render(request, 'sunknightsapp/rules.html', context)
-
-
-def info(request):
-    context = {'text':"this is a lot of information"}
-    return render(request, 'sunknightsapp/info.html', context)
+@require_http_methods(["GET", "POST"])
+def helppage(request,helpstr=""):
+    try:
+        help=HelpInfo.objects.get(name=helpstr)
+    except HelpInfo.DoesNotExist:
 
 
-def newguide(request):
-    return render(request, 'sunknightsapp/newguide.html', {})
+        return render(request, 'sunknightsapp/info.html')
+    else:
 
+        #if it was a post request, we assume that the users wants to update the help content
+        #so we check that 'newcontent' is in the request and that the user has permissions to modify the pagehel
+        if request.method == 'POST' and request.user.can_edit_info and 'newcontent' in request.POST:
+            newcontent=request.POST['newcontent']
+            help.helpinfo=newcontent
+            help.last_modifier=request.user
+            help.save()
 
-def pointguide(request):
-    return render(request, 'sunknightsapp/pointguide.html', {})
-
-
-def ranks(request):
-    return render(request, 'sunknightsapp/ranks.html', {})
-
-
-def commands(request):
-    return render(request, 'sunknightsapp/commands.html', {})
-
-
-def faq(request):
-    return render(request, 'sunknightsapp/faq.html', {})
-
-
-def yt(request):
-    return render(request, 'sunknightsapp/yt.html', {})
-
-
-def invites(request):
-    return render(request, 'sunknightsapp/invites.html', {})
+        context = {'helpcontent': json.dumps(help.helpinfo)}
+        return render(request, 'sunknightsapp/helppage.html', context)
 
 
 @login_required

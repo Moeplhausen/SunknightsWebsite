@@ -1226,7 +1226,6 @@
       "name": "test",
       "discord_server": 1,
       "discord_id": 272136490895540224
-
     }
   },
   {
@@ -1235,118 +1234,216 @@
     "fields": {
       "tank": 18
     }
-  },  {
-  "model": "sunknightsapp.discordrole",
-  "pk": 20,
-  "fields": {
-    "name": "test",
-    "discord_server": 1,
-    "discord_id": 272136236116869120
-  }
-},
+  },
+  {
+    "model": "sunknightsapp.discordrole",
+    "pk": 20,
+    "fields": {
+      "name": "test",
+      "discord_server": 1,
+      "discord_id": 272136236116869120
+    }
+  },
   {
     "model": "sunknightsapp.sunknightsbadgerole",
     "pk": 20,
     "fields": {
       "tank": 1
     }
-  },  {
-  "model": "sunknightsapp.discordrole",
-  "pk": 21,
-  "fields": {
-    "name": "test",
-    "discord_server": 1,
-    "discord_id": 272136664200249344
-  }
-},
+  },
+  {
+    "model": "sunknightsapp.discordrole",
+    "pk": 21,
+    "fields": {
+      "name": "test",
+      "discord_server": 1,
+      "discord_id": 272136664200249344
+    }
+  },
   {
     "model": "sunknightsapp.sunknightsbadgerole",
     "pk": 21,
     "fields": {
       "tank": 16
     }
-  },  {
-  "model": "sunknightsapp.discordrole",
-  "pk": 22,
-  "fields": {
-    "name": "test",
-    "discord_server": 1,
-    "discord_id": 272136563490553857
-  }
-},
+  },
+  {
+    "model": "sunknightsapp.discordrole",
+    "pk": 22,
+    "fields": {
+      "name": "test",
+      "discord_server": 1,
+      "discord_id": 272136563490553857
+    }
+  },
   {
     "model": "sunknightsapp.sunknightsbadgerole",
     "pk": 22,
     "fields": {
       "tank": 6
     }
-  },  {
-  "model": "sunknightsapp.discordrole",
-  "pk": 23,
-  "fields": {
-    "name": "test",
-    "discord_server": 1,
-    "discord_id": 272136775546175488
-  }
-},
+  },
+  {
+    "model": "sunknightsapp.discordrole",
+    "pk": 23,
+    "fields": {
+      "name": "test",
+      "discord_server": 1,
+      "discord_id": 272136775546175488
+    }
+  },
   {
     "model": "sunknightsapp.sunknightsbadgerole",
     "pk": 23,
     "fields": {
       "tank": 29
     }
-  },  {
-  "model": "sunknightsapp.discordrole",
-  "pk": 24,
-  "fields": {
-    "name": "test",
-    "discord_server": 1,
-    "discord_id": 272136847906439168
-  }
-},
+  },
+  {
+    "model": "sunknightsapp.discordrole",
+    "pk": 24,
+    "fields": {
+      "name": "test",
+      "discord_server": 1,
+      "discord_id": 272136847906439168
+    }
+  },
   {
     "model": "sunknightsapp.sunknightsbadgerole",
     "pk": 24,
     "fields": {
       "tank": 34
     }
-  },  {
-  "model": "sunknightsapp.discordrole",
-  "pk": 25,
-  "fields": {
-    "name": "test",
-    "discord_server": 1,
-    "discord_id": 272136370699370496
-  }
-},
+  },
+  {
+    "model": "sunknightsapp.discordrole",
+    "pk": 25,
+    "fields": {
+      "name": "test",
+      "discord_server": 1,
+      "discord_id": 272136370699370496
+    }
+  },
   {
     "model": "sunknightsapp.sunknightsbadgerole",
     "pk": 25,
     "fields": {
       "tank": 13
     }
-  },  {
-  "model": "sunknightsapp.discordrole",
-  "pk": 26,
-  "fields": {
-    "name": "test",
-    "discord_server": 1,
-    "discord_id": 272136410272628737
-  }
-},
+  },
+  {
+    "model": "sunknightsapp.discordrole",
+    "pk": 26,
+    "fields": {
+      "name": "test",
+      "discord_server": 1,
+      "discord_id": 272136410272628737
+    }
+  },
   {
     "model": "sunknightsapp.sunknightsbadgerole",
     "pk": 26,
     "fields": {
       "tank": 25
     }
-  },{
-  "model": "sunknightsapp.discordrole",
-  "pk": 27,
-  "fields": {
-    "name": "ponts manager",
-    "discord_server": 1,
-    "discord_id": 253147777775828993
+  },
+  {
+    "model": "sunknightsapp.discordrole",
+    "pk": 27,
+    "fields": {
+      "name": "ponts manager",
+      "discord_server": 1,
+      "discord_id": 253147777775828993
+    }
+  },
+  {
+    "model": "sunknightsapp.discordrole",
+    "pk": 28,
+    "fields": {
+      "name": "admin",
+      "discord_server": 1,
+      "discord_id": 264362154721935360,
+      "is_admin": true
+    }
+  },
+  {
+    "model": "sunknightsapp.helpinfo",
+    "pk": 1,
+    "fields": {
+      "date": "2017-02-02T11:13:09.548Z",
+      "name": "commands",
+      "helpinfo": "_**Essential Commands** (use in #commands-music)_:\r\n*   `!help` - Lists all of Mee6's custom commands.\r\n*   `!rank` - Shows your current level.\r\n*   `!levels` - Shows Mee6's level leaderboards.\r\n*   `!points` - Shows how you can get points.\r\n*   `!pointsm` - Shows a list of all the points managers.\r\n*   `!ranks` - Lists all of our existing ranks.\r\n*   `!record` - Links you to a document which records all of our points and masteries.\r\n*   `!subreddit` - Links you to the [/r/diepio](https://www.reddit.com/r/diepio) subreddit.\r\n*   `!wra` - Links you to diep.io's world record archive. DM @Taco to submit a world record!\r\n*   `!WRAsite2` - Links you to diep.io's world record website.\r\n*   `!WRAserver` - Links you to @Taco's world record archive discord server.\r\n*   `+selfrole Organizers` - Makes channel organizers visible or invisible to you.\r\n*   `+selfrole Event notify` - Allows you to toggle whethere you are notified on servers or not.\r\n_**Misc. Commands:**_\r\n*   `!youtubers` - Shows all of our clan's youtubers' channels.\r\n_**Music Commands** (Join Gaming Music voice channel)_\r\n*   `/play {song keyword/link/playlist link}` - Play a song or playlist.\r\n*   `/list` - Lists all the songs in the queue.\r\n*   `/shuffle` - Shuffles the current queue. Please do not spam in order to get your song to the front.\r\n*   `/skip` - Vote to skip a currently playing song.",
+      "last_modifier": 4
+    }
+  },
+  {
+    "model": "sunknightsapp.helpinfo",
+    "pk": 2,
+    "fields": {
+      "date": "2017-02-02T11:13:23.081Z",
+      "name": "faq",
+      "helpinfo": "**_FAQ:_**\r\n1.  **Q: How do I master a class?**\r\n    A: Get 200K or more with it. If you get 350k or 500k, you will unlock a new tier for it to upgrade.\r\n2.  **Q: Where can I find the servers we are playing on?**\r\n    A: All servers are posted at #current-server-link.\r\n3.  **Q: How do you know I won in a 1v1 against a Sun Knight? How do you know we even played?**\r\n    A: It is required to either send a clip of your 1v1 or have a Moderator present in the arena.\r\n4.  **Q: To whom do I send my screenshots and clips to for points?**\r\n    A: DM them to points managers. Point Managers are listed in the `!pointsm` command.",
+      "last_modifier": 4
+    }
+  },
+  {
+    "model": "sunknightsapp.helpinfo",
+    "pk": 3,
+    "fields": {
+      "date": "2017-02-02T11:13:35.806Z",
+      "name": "invites",
+      "helpinfo": "**_Important Invites:_**\r\n*   Sun Knights: [Click here](https://discord.gg/38cZeWZ)\r\n*   Sun Knights (Minecraft): [Click here](https://discord.gg/ZaTUDuH)\r\n*   Sun Knights (Dungeons&Dragons): [Click here](https://discord.gg/62k3KEZ)",
+      "last_modifier": 4
+    }
+  },
+  {
+    "model": "sunknightsapp.helpinfo",
+    "pk": 4,
+    "fields": {
+      "date": "2017-02-02T11:13:47.447Z",
+      "name": "newguide",
+      "helpinfo": "_**New Members\u2019 guide into Sun Knights**_\r\n1.  Make sure you have the Sun Knights symbol in your name both in-game and in discord. _Copy and paste:_ \u2742\r\n2.  When you start chatting, you may notice that you got a 1+ level. That is our bot which adds EXP as you talk. Every time a minute passes, you get a random number of EXP. EXP is needed to get a higher level.\r\n3.  You may find that some people have colored names and roles, these are earned either by:\r\n    *   Getting to a certain level while chatting.\r\n    *   Getting enough points (explained [here]({% url 'pointguide' %})).\r\n4.  Finally, you may notice that for our announcements, events, current servers and daily quests, we tag **@Event Notify**. To be notified on events and other cool things, do `+selfrole Event Notify` to toggle whether you are mentioned for events or not!\r\n5.  You may also notice that we have a lot of channels. If they get confusing, do `+selfrole Organizers` in #commands-music to toggle organization channels.",
+      "last_modifier": 4
+    }
+  },
+  {
+    "model": "sunknightsapp.helpinfo",
+    "pk": 5,
+    "fields": {
+      "date": "2017-02-02T11:13:59.057Z",
+      "name": "pointguide",
+      "helpinfo": "**_You can get points in the following ways:_**\r\n*   **Participating in a current server** _(Must be top 5 on the leaderboard)_:\r\n    - 5 Points\r\n*   **Participating in a special event:**\r\n    - 10 Points\r\n*   **In-game scores:**\r\n    - Divided by 100k and rounded to the nearest tenth\r\n*   **Completion of a daily quest:**\r\n    - Tier 1 = 3 Points, Tier 2 = 6 Points, Tier 3 = 10 Points\r\n*   **Mastery of a class** _(Get 200k+ with a class to master tier 1, 350k+ for tier 2, and 500k+ for tier 3)_:\r\n    - Tier 1 = 5 Points, Tier 2 = 10 Points, Tier 3 = 15 Points\r\n*   **Old SK Score:**\r\n    - Divide by 4 Points\r\n*   **Winning a 1v1 against another Sun Knight** _(Best out of 5)_:\r\n    - 5 Points\r\n*   **Losing a 1v1:**\r\n    - 2 Points\r\n*   **Obtaining a World Record** _(`+wra`)_:\r\n    - 30 Points",
+      "last_modifier": 4
+    }
+  },
+  {
+    "model": "sunknightsapp.helpinfo",
+    "pk": 6,
+    "fields": {
+      "date": "2017-02-02T11:14:08.778Z",
+      "name": "ranks",
+      "helpinfo": "**_RANKS:_**\r\n*   **New** - 0 points or level 0\r\n    *   Tag as \u2742\r\n    *   Change Nickname\r\n    *   Read and Send Messages\r\n    *   Read message history\r\n    *   Connect and Speak in Voice Channels\r\n*   **In Training** - 1 point or level 1\r\n    *   Tag as (\u2742)\r\n    *   Can join classrooms\r\n    *   Can join guilds\r\n*   **Member** - 10 points or level 4\r\n    *   Tag as [\u2742]\r\n    *   Create Instant Invite\r\n    *   Embed Links\r\n*   **Professional** - 25 points or level 8\r\n    *   Tag as {\u2742}\r\n    *   Attach Files\r\n    *   Able to be listed in `!youtubers` and youtuber list\r\n*   **Elite** - 50 points or level 12\r\n    *   Tag as <\u2742>\r\n    *   Add Reactions\r\n    *   Participate in exclusive events\r\n    *   Access to speaking in #member-introduction\r\n*   **Warrior** - 75 points or level 16\r\n    *   Tag as <<\u2742>>\r\n*   **Sentinel** - 100 points or level 20\r\n    *   Tag as \u2aa1\u2742\u2aa2\r\n    *   Able to create and lead a Guild\r\n*   **Squire** - 150 points or level 24\r\n    *   Tag as \u21fb\u2742\u21fa\r\n*   **Knight** - 300 points or level 28\r\n    *   Tag as \u2993\u2742\u2994\r\n    *   Access to #current-server-link and #server-link-creators (A chat for link creators)\r\n    *   Access to speaking in #quest-draft (A chat for quest suggestions)\r\n*   **Paladin** - 500 points or level 32\r\n    *   Tag as \u2995\u2742\u2996\r\n*   **Marshal** - 750 points or level 35\r\n    *   Tag as \u2aa4\u2742\u2aa4\r\n    *   Access to #sandbox-link\r\n*   **Cavalier** - 1000 points or level 38\r\n    *   Tag as \u26b6\u2742\u26b6\r\n    *   Higher chance of becoming Mentor\r\n    *   Soon\u2122: Access to SK's youtube channel\r\n*   **Warden** - 1500 points or level 41\r\n    *   Tag as \u2629\u2742\u2629\r\n*   **Sorcerer** - 2000 points or level 44\r\n    *   Tag as \u22b1\u2742\u22b0\r\n    *   Use External Emojis\r\n*   **Warlock** - 3000 points or level 47\r\n    *   Tag as \u227e\u2742\u227f\r\n*   **Prestige** - 5000 points or level 50\r\n    *   Tag as \u0f3a\u2742\u0f3b\r\n    *   Able to run their own events (Must request an admin)\r\n    *   Access to #daily-quests\r\n    *   Able to choose their own color (must DM a staff a Hex code)",
+      "last_modifier": 4
+    }
+  },
+  {
+    "model": "sunknightsapp.helpinfo",
+    "pk": 7,
+    "fields": {
+      "date": "2017-02-02T11:14:17.954Z",
+      "name": "rules",
+      "helpinfo": "**Rules**\r\n1.  Do not be disrespectful towards other members, regardless of whether they are at a lower role than you or not.\r\n2.  Keep this server civil. This means no trolling, spamming, abusing bot commands, teasing, immature behaviour, insults, racism, sexism, homophobia, transphobia or xenophobia.\r\n3.  Anything which is considered as NSFW is not allowed. Keep this chat PG-13. Remember, our clan has a very wide age range.\r\n4.  Do not impersonate others in-game or in discord in order to get them in trouble.\r\n5.  Make sure you are easily taggable. This means having regular text in either your nickname or username.\r\n6.  Manipulating staff is not allowed in any way. This means messaging multiple record managers in order to get as many points as possible.\r\n7.  Swearing is allowed, but not to a high extent. Avoid it as much as possible.\r\n8.  Under no circumstances should a non-staff member use **@Event Notify**. If you want to have your link be in #current-server-link just tell a supervisor.\r\n_Please note: Evasion of punishments given by Staff members will result in a heavier punishment, which ultimately may lead to a permanent ban._",
+      "last_modifier": 4
+    }
+  },
+  {
+    "model": "sunknightsapp.helpinfo",
+    "pk": 8,
+    "fields": {
+      "date": "2017-02-02T11:14:25.575Z",
+      "name": "yt",
+      "helpinfo": "_**Diep.io youtubers within our clan!** (Must have 20+ subs and 3+ diep related vids)_\r\n*   @Anokuu - [Click here](https://www.youtube.com/channel/UCUbyfXa08QU6qoj_I5uIYuQ)\r\n*   @N{\u2742}ahTh3PandaTank - [Click here](https://www.youtube.com/user/hundredandoneducks)\r\n*   @Corrupt X - [Click here](https://www.youtube.com/channel/UC0UH2LfQvBSeH24bmtbmITw)\r\n*   @Sinbadx - [Click here](https://www.youtube.com/channel/UCHUQW6_dDHOTV8TtM_OfZsQ)\r\n*   @Adasba - [Click here](https://www.youtube.com/user/FuzzyCyclopsChickens)\r\n*   @Thorium - [Click here](https://www.youtube.com/channel/UCO7rnIYnt3hIZTGFGsszYQA)\r\n*   @Sterlon - [Click here](https://www.youtube.com/channel/UCwPJynqLqC6tJyvNHY60x0A)\r\n*   @Maxwell - [Click here](https://www.youtube.com/channel/UC-Gp8-iWL-uA-DxfvsxFHIQ)\r\n*   @Bela - [Click here](https://www.youtube.com/channel/UC606okhDOtKwsnEnT68f4Vw)\r\n*   @Bob XIII - [Click here](https://www.youtube.com/c/BobXIII)\r\n*   @Darkfire293 - [Click here](https://www.youtube.com/channel/UCIhKy1TFu0H0mROI8bhDHKA)\r\n*   @d2xy.0 - [Click here](https://www.youtube.com/channel/UCZyh1DWHjo8soZd0yndhqiQ)\r\n*   @[GHT]Person - [Click here](https://www.youtube.com/channel/UCLBSp_S27grf3SC-Nv7_QmA)\r\n*   @[BS] Bleach - [Click here](https://www.youtube.com/channel/UCDC46arv3U1jUFY6qJ8BbnQ)\r\n*   @ArX [Click here](https://www.youtube.com/channel/UC5jsIaQIrE-JOBUsoK85iEw)\r\n*   @Forge - [Click here](https://www.youtube.com/channel/UCqFdmExzo-xvvD1HNLJSTcg)",
+      "last_modifier": 4
+    }
   }
-}
 ]

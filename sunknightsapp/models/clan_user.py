@@ -21,7 +21,6 @@ class ClanUser(AbstractBaseUser):
 
             provider=models.CharField(max_length=20,default='Discord')
 
-
             is_active=models.BooleanField(default=True)
             is_superuser=models.BooleanField(default=False)
 
@@ -69,6 +68,13 @@ class ClanUser(AbstractBaseUser):
                 Checks if the user is a superuser or if they have a role that gives points_manager rights
                 """
                 clan_user_roles= ClanUserRoles.objects.filter(clan_user=self).filter(role__can_manage_points=True).filter(role__discord_isDeleted=False)
+                if clan_user_roles.exists() or self.is_staff:
+                    return True
+                return False
+
+            @property
+            def can_edit_info(self):
+                clan_user_roles= ClanUserRoles.objects.filter(clan_user=self).filter(role__is_admin=True).filter(role__discord_isDeleted=False)
                 if clan_user_roles.exists() or self.is_staff:
                     return True
                 return False
