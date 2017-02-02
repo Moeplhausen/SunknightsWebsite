@@ -49,12 +49,7 @@ def update_points_on_save(sender, instance, created=False, **kwargs):
     A better method would be to just add/subtract points on specific actions"""
 
     mastery = instance
-    tier = mastery.tier
-    points = getPointsByMasteryTier(tier)
-    if (mastery.points != points) or created:
-        mastery.points = points
-        mastery.save()
-        pointsupdater(mastery.pointsinfo)
+    pointsupdater(mastery.pointsinfo)
 
 
 
@@ -93,18 +88,21 @@ def update_submission_points_on_save(sender, instance, created=False, **kwargs):
         try:
             mastery = Mastery.objects.get(tank=tank, pointsinfo=pointsinfo)
         except Mastery.DoesNotExist:
-            mastery=Mastery.objects.create(tank=tank, pointsinfo=pointsinfo, tier=tier, manager=manager,fromSubmission=submission)
+            mastery=Mastery.objects.create(tank=tank, pointsinfo=pointsinfo,points=getPointsByMasteryTier(tier), tier=tier, manager=manager,fromSubmission=submission)
             mastery_unlock(mastery)
         else:
             if not mastery.fromSubmission:
                 mastery.fromSubmission = submission
+                print('yo')
                 #old masteries have their points in oldpoints. We have to subtract those points
-                mastery.pointsinfo.masterypointssubtract+=getPointsByMasteryTier(mastery.tier)#TODO add unit test
+                mastery.points=0
+                mastery.save()
                 mastery.pointsinfo.save()
 
-                mastery.save()
 
-            if mastery.tier < tier:
+        if mastery.tier < tier:
+                newpoints=getPointsByMasteryTier(tier)-getPointsByMasteryTier(mastery.tier)
+                mastery.points=newpoints
                 mastery.manager = manager
                 mastery.fromSubmission = submission
                 mastery.tier = tier

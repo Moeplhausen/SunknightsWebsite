@@ -72,7 +72,7 @@ class ClanUserFasterSerializer(BulkSerializerMixin,serializers.ModelSerializer):
         masteries=MasterySerializer(many=True,read_only=True)
         class Meta:
             model=PointsInfo
-            fields=('id','currentpoints','totalpoints','oldpoints','masterypoints','masteries')
+            fields=('id','currentpoints','totalpoints','masterypoints','oldpoints','masterypoints','masteries')
             list_serializer_class = BulkListSerializer
 
 
