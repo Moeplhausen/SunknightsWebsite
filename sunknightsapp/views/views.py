@@ -4,6 +4,7 @@ from django.http import JsonResponse
 from django.shortcuts import redirect
 from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
+import os
 
 from ..decorators.login_decorators import points_manager_required
 from ..enums.AjaxActions import AjaxAction
@@ -16,7 +17,13 @@ from ..models.diep_gamemode import DiepGamemode
 from ..models.diep_tank import DiepTankInheritance, DiepTank
 from ..models.discord_roles import DiscordRole
 from ..models.points_info import PointsInfo
-
+viewDir = os.getcwd()#path.dirname(os.path.realpath('__file__'))
+mdpath = os.path.join(viewDir, 'sunknightsapp/templates/sunknightsapp/mdinfo')
+mdfiles = [f for f in os.listdir(mdpath) if os.path.isfile(os.path.join(mdpath, f))]
+resultmdfiles = {}
+for mdfile in mdfiles:
+    with open(os.path.join(mdpath, mdfile)) as thefile:
+        resultmdfiles[os.path.basename(thefile.name)] = thefile.read();
 
 def index(request):
     if request.user.is_authenticated():
@@ -68,6 +75,10 @@ def leaderboard(request):
 
     return t
 
+def mdfile(name, content): #just some convenience function to not have to repeat everything
+    with open(mdpath+'/'+name+'.md', 'w') as f:
+        f.write(content);
+    return True;
 
 @login_required
 def guilds(request):
@@ -83,7 +94,10 @@ def about_us(request):
 
 
 def rules(request):
-    context = {}
+    if request.method == 'POST':
+        #check stuff goes here
+        mdfile('rules', request.POST.newmd)
+    context = {'text': resultmdfiles["rules.md"]}
     return render(request, 'sunknightsapp/rules.html', context)
 
 
@@ -93,32 +107,52 @@ def info(request):
 
 
 def newguide(request):
-    return render(request, 'sunknightsapp/newguide.html', {})
+    if request.method == 'POST':
+        #check stuff goes here
+        mdfile('newguide', request.POST.newmd)
+    return render(request, 'sunknightsapp/newguide.html', {'text': resultmdfiles["newguide.md"]})
 
 
 def pointguide(request):
-    return render(request, 'sunknightsapp/pointguide.html', {})
+    if request.method == 'POST':
+        #check stuff goes here
+        mdfile('pointguide', request.POST.newmd)
+    return render(request, 'sunknightsapp/pointguide.html', {'text': resultmdfiles["pointguide.md"]})
 
 
 def ranks(request):
-    return render(request, 'sunknightsapp/ranks.html', {})
+    if request.method == 'POST':
+        #check stuff goes here
+        mdfile('ranks', request.POST.newmd)
+    return render(request, 'sunknightsapp/ranks.html', {'text': resultmdfiles["ranks.md"]})
 
 
 def commands(request):
-    return render(request, 'sunknightsapp/commands.html', {})
+    if request.method == 'POST':
+        #check stuff goes here
+        mdfile('commands', request.POST.newmd)
+    return render(request, 'sunknightsapp/commands.html', {'text': resultmdfiles["commands.md"]})
 
 
 def faq(request):
-    return render(request, 'sunknightsapp/faq.html', {})
+    if request.method == 'POST':
+        #check stuff goes here
+        mdfile('faq', request.POST.newmd)
+    return render(request, 'sunknightsapp/faq.html', {'text': resultmdfiles["faq.md"]})
 
 
 def yt(request):
-    return render(request, 'sunknightsapp/yt.html', {})
+    if request.method == 'POST':
+        #check stuff goes here
+        mdfile('yt', request.POST.newmd)
+    return render(request, 'sunknightsapp/yt.html', {'text': resultmdfiles["yt.md"]})
 
 
 def invites(request):
-    return render(request, 'sunknightsapp/invites.html', {})
-
+    if request.method == 'POST':
+        #check stuff goes here
+        mdfile('invites', request.POST.newmd)
+    return render(request, 'sunknightsapp/invites.html', {'text': resultmdfiles["invites.md"]})
 
 @login_required
 def guild(request, id):

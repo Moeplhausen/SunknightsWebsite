@@ -1,22 +1,6 @@
 {% extends "sunknightsapp/base.html" %}
 {% block content %}
-<em><strong><u>New Members’ guide into Sun Knights</u></strong></em>
-
-<ol>
-  <li>Make sure you have the Sun Knights symbol in your name both in-game and in discord. 
-  <em>Copy and paste:</em> ❂</li>
-
-  <li>When you start chatting, you may notice that you got a 1+ level. That is our bot which adds EXP as you talk. Every time a minute passes, you get a random number of EXP. EXP is needed to get a higher level.</li>
-
-  <li>You may find that some people have colored names and roles, these are earned either by:
-    <ul style="list-style-type:square;">
-      <li>Getting to a certain level while chatting.</li>
-      <li>Getting enough points (explained <a href="{% url 'pointguide' %}">here</a>).</li>
-    </ul>
-  </li>
-
-  <li>Finally, you may notice that for our announcements, events, current servers and daily quests, we tag <strong>@Event Notify</strong>. To be notified on events and other cool things, do <code>+selfrole Event Notify</code> to toggle whether you are mentioned for events or not!</li>
-  
-  <li>You may also notice that we have a lot of channels. If they get confusing, do <code>+selfrole Organizers</code> in <mention>#commands-music</mention> to toggle organization channels.</li>
-</ol>
+<div id="contentinv"></div>
+<script>mdToHtml($("#contentinv")[0]);</script>
+<button id="editbutton" onclick="editor('contentinv', this, 'cancelbutton')">Edit</button><button id="cancelbutton" style="display: none;" onclick="canceledit('contentinv', 'editbutton', this)">Cancel</button>
 {% endblock %}
