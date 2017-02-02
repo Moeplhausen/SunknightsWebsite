@@ -44,7 +44,7 @@ class DiscordRole(models.Model):
 
         subsubs=BasicPointSubmission.objects.filter(accepted=True,decided=True,date__range=[start_week,end_week])
 
-        users=ClanUser.objects.filter(roles__role=self,pointsinfo__basicpointsubmission__in=subsubs)
+        users=ClanUser.objects.filter(roles__role=self,pointsinfo__basicpointsubmission__in=subsubs).distinct()
         return users
 
     def submitted_points(self,week=0):
