@@ -1,6 +1,0 @@
-{% extends "sunknightsapp/base.html" %}
-{% block content %}
-<div id="contentinv"></div>
-<script>mdToHtml($("#contentinv")[0]);</script>
-<button id="editbutton" onclick="editor('contentinv', this, 'cancelbutton')">Edit</button><button id="cancelbutton" style="display: none;" onclick="canceledit('contentinv', 'editbutton', this)">Cancel</button>
-{% endblock %}

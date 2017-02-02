@@ -16,6 +16,7 @@ from .models.guildfight import GuildFight
 from .models.guildfight import GuildFightParticipation
 from .models.mastery import Mastery
 from .models.point_submission import PointsManagerAction,OneOnOneFightSubmission,BasicUserPointSubmission
+from .models.help_info import HelpInfo
 from .models.points_info import PointsInfo
 from .models.tournament import Tournament,TournamentFightConnector
 
@@ -105,19 +106,20 @@ admin.site.unregister(Group)
 
 admin.site.register(DiscordServer)
 admin.site.register(DiscordRole)
-admin.site.register(GuildFight)
-admin.site.register(GuildFightParticipation)
+#admin.site.register(GuildFight)
+#admin.site.register(GuildFightParticipation)
 admin.site.register(PointsInfo)
-admin.site.register(PointsManagerAction)
-admin.site.register(OneOnOneFightSubmission)
-admin.site.register(ClanUserRoles)
+#admin.site.register(PointsManagerAction)
+#admin.site.register(OneOnOneFightSubmission)
+#admin.site.register(ClanUserRoles)
 admin.site.register(Tournament)
 admin.site.register(TournamentFightConnector)
 admin.site.register(DiepTank)
 admin.site.register(DiepTankInheritance)
-admin.site.register(Mastery)
-admin.site.register(BasicUserPointSubmission)
+#admin.site.register(Mastery)
+#admin.site.register(BasicUserPointSubmission)
 admin.site.register(DiepGamemode)
 admin.site.register(DailyQuest)
 admin.site.register(DiscordRolePoints)
 admin.site.register(SunKnightsBadgeRole)
+admin.site.register(HelpInfo)

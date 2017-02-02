@@ -17,13 +17,9 @@ from ..models.diep_gamemode import DiepGamemode
 from ..models.diep_tank import DiepTankInheritance, DiepTank
 from ..models.discord_roles import DiscordRole
 from ..models.points_info import PointsInfo
-viewDir = os.getcwd()#path.dirname(os.path.realpath('__file__'))
-mdpath = os.path.join(viewDir, 'sunknightsapp/templates/sunknightsapp/mdinfo')
-mdfiles = [f for f in os.listdir(mdpath) if os.path.isfile(os.path.join(mdpath, f))]
-resultmdfiles = {}
-for mdfile in mdfiles:
-    with open(os.path.join(mdpath, mdfile)) as thefile:
-        resultmdfiles[os.path.basename(thefile.name)] = thefile.read();
+from ..models.help_info import HelpInfo
+import json
+
 
 def index(request):
     if request.user.is_authenticated():
@@ -75,10 +71,6 @@ def leaderboard(request):
 
     return t
 
-def mdfile(name, content): #just some convenience function to not have to repeat everything
-    with open(mdpath+'/'+name+'.md', 'w') as f:
-        f.write(content);
-    return True;
 
 @login_required
 def guilds(request):
@@ -93,66 +85,26 @@ def about_us(request):
     return render(request, 'sunknightsapp/about_us.html', context)
 
 
-def rules(request):
-    if request.method == 'POST':
-        #check stuff goes here
-        mdfile('rules', request.POST.newmd)
-    context = {'text': resultmdfiles["rules.md"]}
-    return render(request, 'sunknightsapp/rules.html', context)
+def helppage(request,helpstr=""):
+    try:
+        help=HelpInfo.objects.get(name=helpstr)
+    except HelpInfo.DoesNotExist:
 
 
-def info(request):
-    context = {'text':"this is a lot of information"}
-    return render(request, 'sunknightsapp/info.html', context)
+        return render(request, 'sunknightsapp/info.html')
+    else:
 
+        #if it was a post request, we assume that the users wants to update the help content
+        #so we check that 'newcontent' is in the request and that the user has permissions to modify the pagehel
+        if request.method == 'POST' and request.user.can_edit_info and 'newcontent' in request.POST:
+            newcontent=request.POST('newcontent')
+            help.helpinfo=newcontent
+            help.last_modifier=request.user
+            help.save()
 
-def newguide(request):
-    if request.method == 'POST':
-        #check stuff goes here
-        mdfile('newguide', request.POST.newmd)
-    return render(request, 'sunknightsapp/newguide.html', {'text': resultmdfiles["newguide.md"]})
+        context = {'helpcontent': json.dumps(help.helpinfo)}
+        return render(request, 'sunknightsapp/helppage.html', context)
 
-
-def pointguide(request):
-    if request.method == 'POST':
-        #check stuff goes here
-        mdfile('pointguide', request.POST.newmd)
-    return render(request, 'sunknightsapp/pointguide.html', {'text': resultmdfiles["pointguide.md"]})
-
-
-def ranks(request):
-    if request.method == 'POST':
-        #check stuff goes here
-        mdfile('ranks', request.POST.newmd)
-    return render(request, 'sunknightsapp/ranks.html', {'text': resultmdfiles["ranks.md"]})
-
-
-def commands(request):
-    if request.method == 'POST':
-        #check stuff goes here
-        mdfile('commands', request.POST.newmd)
-    return render(request, 'sunknightsapp/commands.html', {'text': resultmdfiles["commands.md"]})
-
-
-def faq(request):
-    if request.method == 'POST':
-        #check stuff goes here
-        mdfile('faq', request.POST.newmd)
-    return render(request, 'sunknightsapp/faq.html', {'text': resultmdfiles["faq.md"]})
-
-
-def yt(request):
-    if request.method == 'POST':
-        #check stuff goes here
-        mdfile('yt', request.POST.newmd)
-    return render(request, 'sunknightsapp/yt.html', {'text': resultmdfiles["yt.md"]})
-
-
-def invites(request):
-    if request.method == 'POST':
-        #check stuff goes here
-        mdfile('invites', request.POST.newmd)
-    return render(request, 'sunknightsapp/invites.html', {'text': resultmdfiles["invites.md"]})
 
 @login_required
 def guild(request, id):

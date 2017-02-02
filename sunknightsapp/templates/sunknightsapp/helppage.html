@@ -1,0 +1,26 @@
+{% extends "sunknightsapp/base.html" %}
+{% block scriptload %}
+    {% load static %}
+
+    <script src="{% static 'sunknightsapp/js/loadmd.js' %}"></script>
+{% endblock %}
+{% block content %}
+
+
+    <div id="contentinv"></div>
+    {% if user.can_edit_info %}
+        <button id="editbutton" onclick="editor('contentinv', this, 'cancelbutton')">Edit</button>
+        <button id="cancelbutton" style="display: none;" onclick="canceledit('contentinv', 'editbutton', this)">Cancel
+        </button>
+    {% endif %}
+{% endblock %}
+{% block scriptself %}
+    <script>
+        $(function () {
+            var md = "{{ helpcontent }}"
+            md = md.replace(/&/g, "&amp;");
+            console.log(md)
+            mdToHtml($("#contentinv")[0], md);
+        })
+    </script>
+{% endblock %}

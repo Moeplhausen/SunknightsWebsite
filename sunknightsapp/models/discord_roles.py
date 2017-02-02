@@ -10,6 +10,7 @@ class DiscordRole(models.Model):
     discord_color = models.IntegerField(default=0)
     can_manage_points = models.BooleanField(default=False)
     can_manage_wars = models.BooleanField(default=False)
+    is_admin=models.BooleanField(default=False)
     discord_isDeleted = models.BooleanField(default=False)
     guild_leader_role = models.BooleanField(default=False)
     is_clan_guild=models.BooleanField(default=False)
