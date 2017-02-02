@@ -1,5 +1,5 @@
 //Helper for loading markdown in the info files
-
+var md;
 
 var sh = new showdown.Converter({
     simplifiedAutoLink: true,
@@ -15,7 +15,7 @@ function loadMd(markdown) {
 }
 function mdToHtml(element,helptext) {
     if (helptext) {
-        console.log('lo?')
+        console.log('lo?');
         $(element).html(sh.makeHtml(helptext));
     }
     return !!helptext;
