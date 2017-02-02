@@ -33,7 +33,7 @@ function editor(elementID, button, sbuttonID) {
   var cancelb = $(idselect(sbuttonID));
   button = $(button);
   var oldhtml = thing.html();
-  thing.html("<textarea id='newcontentz' rows='10' cols='30'>" + md + "</textarea>");
+  thing.html("<textarea class='form-control' id='newcontentz' rows='10' >" + md + "</textarea>");
   button.html("Submit");
   button.attr("onclick", "editsubmit('" + elementID + "', this, '" + sbuttonID + "')");
   cancelb[0].style.display = "block";
