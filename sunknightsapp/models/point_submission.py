@@ -75,6 +75,10 @@ def update_submission_points_on_save(sender, instance, created=False, **kwargs):
     decided = instance.decided
     accepted = instance.accepted
     updateCurrentPoints(instance)
+    try:
+        instance.points=round(instance.points,2)
+    except:
+        pass
 
     if reverted:
         post_submission_reverted(instance)
