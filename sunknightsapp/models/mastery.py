@@ -93,8 +93,6 @@ def update_submission_points_on_save(sender, instance, created=False, **kwargs):
         else:
             if not mastery.fromSubmission:
                 mastery.fromSubmission = submission
-                print('yo')
-                #old masteries have their points in oldpoints. We have to subtract those points
                 mastery.points=0
                 mastery.save()
                 mastery.pointsinfo.save()

@@ -26,6 +26,10 @@ class BasicPointsSubmissionSerializer(BulkSerializerMixin, serializers.ModelSeri
         list_serializer_class = BulkListSerializer
 
 
+
+
+
+
 class BasicUserPointSubmissionSerializer(BulkSerializerMixin, serializers.ModelSerializer):
     daily_quest = DailyQuestSerializer(many=False, read_only=True)
     tank = DiepTankSimpleSerializer(many=False, read_only=True)
@@ -38,6 +42,23 @@ class BasicUserPointSubmissionSerializer(BulkSerializerMixin, serializers.ModelS
         'id', 'date', 'manager', 'managerText', 'points', 'submitterText', 'gamemode', 'pointsinfo', 'accepted',
         'decided', 'daily_quest', 'proof', 'tank', 'score')
         list_serializer_class = BulkListSerializer
+
+
+class BasicUserPointSubmissionProofusedSerializer(BulkSerializerMixin, serializers.ModelSerializer):
+    daily_quest = DailyQuestSerializer(many=False, read_only=True)
+    tank = DiepTankSimpleSerializer(many=False, read_only=True)
+    gamemode = GamemodeSerializer(many=False, read_only=True)
+    pointsinfo = PointsInfoBasicSerializer(many=False, read_only=True)
+    proofused=BasicUserPointSubmissionSerializer(many=True,read_only=True)
+
+    class Meta:
+        model = BasicUserPointSubmission
+        fields = (
+            'id', 'date', 'manager', 'managerText', 'points', 'submitterText', 'gamemode', 'pointsinfo', 'accepted',
+            'decided', 'daily_quest', 'proof', 'tank', 'score','proofused')
+        list_serializer_class = BulkListSerializer
+
+
 
 
 

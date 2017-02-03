@@ -2,12 +2,13 @@ from .base_form import BaseForm
 from ..enums.AjaxActions import AjaxAction
 from ..models.point_submission import BasicUserPointSubmission, BasicPointSubmission,OneOnOneFightSubmission,PointsManagerAction,EventQuestSubmission
 from ..serializers.pointsubmissions_serializer import BasicUserPointSubmissionSerializer, \
-    BasicPointsSubmissionSerializer,OneOnOneFightSubmissionSerializer,BasicEventQuestsSubmissionSerializer
+    BasicPointsSubmissionSerializer,OneOnOneFightSubmissionSerializer,BasicEventQuestsSubmissionSerializer,BasicUserPointSubmissionProofusedSerializer
 from ..serializers.clan_user_serializer import PointsInfoSerializer,PointsInfoFastSerializer,ClanUserSerializerBasic
 from django import forms
 from ..models.utility.little_things import getPointsByScore,getPointsByFight,manageElo
 from ..models.points_info import PointsInfo,ClanUser
 from django.core.paginator import Paginator
+from django.db.models import Count
 
 class SubmitPointsForm(BaseForm):
     def __init__(self, *args, **kwargs):
@@ -102,10 +103,27 @@ class RetriveUserSubmissionsPointsForm(BaseForm):
         if not request.user.is_points_manager:
             return self.noPermission()
 
+
+        proofsbylink={}
+
         try:
+            proofused = BasicUserPointSubmission.objects.values('proof').filter(decided=False).distinct()
+
+            for p in proofused:
+                link=p['proof']
+                proofused = BasicUserPointSubmission.objects.filter(proof=link)
+                proofsbylink[link]=proofused
+
+
             submissions = BasicUserPointSubmission.objects.filter(decided=False)
-            serializer = BasicUserPointSubmissionSerializer(submissions, many=True)
+
+            for sub in submissions:
+                sub.proofused=proofsbylink[sub.proof]
+
+
+            serializer = BasicUserPointSubmissionProofusedSerializer(submissions, many=True)
         except BaseException as e:
+
             return self.response(False, 'Something went wrong: ' + str(e))
         else:
 
