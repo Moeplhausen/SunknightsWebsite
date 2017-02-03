@@ -37,7 +37,7 @@
 .triple-twin-tier3, .triple-twin, .triplet-tier1, .triplet-tier2, .triplet-tier3,
 .triplet, .twin-flank-tier1, .twin-flank-tier2, .twin-flank-tier3, .twin-flank,
 .twin-tier1, .twin-tier2, .twin-tier3, .twin
-{ display: inline-block; background: url('../image/tanks.png') no-repeat; overflow: hidden; text-indent: -9999px; text-align: left; }
+{ display: inline-block; background: url('../image/tanks.png?1') no-repeat; overflow: hidden; text-indent: -9999px; text-align: left; }
 
 .annihilator-tier1 { background-position: -0px -0px; width: 32px; height: 32px; }
 .annihilator-tier2 { background-position: -32px -0px; width: 32px; height: 32px; }
