@@ -25,10 +25,23 @@ body {
     border: 1px solid black !important;
 }
 
-#masteries-table td, th {
+#masteries-table td,#masteries-table th {
+    border: 1px solid black !important;
+}
+th{
+    height: 40px!important;
     border: 1px solid black !important;
 }
 
+table.dataTable thead .sorting,
+table.dataTable thead .sorting_asc,
+table.dataTable thead .sorting_desc,
+table.dataTable thead .sorting_asc_disabled,
+table.dataTable thead .sorting_desc_disabled
+{
+    background-position: left center;
+    padding-left: 20px;
+}​
 .card-group {
     width: 100%;
     height: auto;
