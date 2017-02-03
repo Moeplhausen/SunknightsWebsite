@@ -1,0 +1,68 @@
+
+
+{% extends "sunknightsapp/base.html" %}
+{% block content %}
+    <div class="card">
+        <div class="card-block guild-card-block">
+
+            <p class="card-text guild-card-text">
+
+            <table class="display datatables-table masteries-table table-bordered" cellspacing="0" width="100%"
+                   id="masteries-table">
+
+                <thead>
+                <tr>
+                    <th>Tank</th>
+                    <th>Tier 1</th>
+                    <th>Tier 2</th>
+                    <th>Tier 3</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                {% for tank in tanks.all %}
+                    <tr>
+                        <td><span class="{{ tank.name|slugify }}"></span>{{ tank.name }}</td>
+                        <td>
+                            {% for mastery in tank.mastery_set.all %}
+                                {% if mastery.tier >= 1 %}
+                                    <span class="mastery-member-span"><a href="/user/{{ mastery.pointsinfo.user.discord_id }}">{{ mastery.pointsinfo.user.discord_nickname }}</a></span>
+                                {% endif %}
+                            {% endfor %}
+                        </td>
+                        <td>
+                            {% for mastery in tank.mastery_set.all %}
+                                {% if mastery.tier >= 2 %}
+                                    <span class="mastery-member-span"><a href="/user/{{ mastery.pointsinfo.user.discord_id }}">{{ mastery.pointsinfo.user.discord_nickname }}</a></span>
+                                {% endif %}
+                            {% endfor %}
+                        </td>
+                        <td>
+                            {% for mastery in tank.mastery_set.all %}
+                                {% if mastery.tier >= 3 %}
+                                    <span class="mastery-member-span"><a href="/user/{{ mastery.pointsinfo.user.discord_id }}">{{ mastery.pointsinfo.user.discord_nickname }}</a></span>
+                                {% endif %}
+                            {% endfor %}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            </p>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+{% block scripts %}
+    $('.role-members-table').DataTable( {
+    "order": [[ 0, "asc" ]],
+    "paging": false,
+    "columnDefs": [
+    { "orderable": false, "targets": [1,2,3] }
+    ],
+    } );
+
+
+{% endblock %}

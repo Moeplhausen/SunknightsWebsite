@@ -17,6 +17,18 @@ body {
     margin-top: 1em;
 }
 
+.mastery-member-span{
+    margin-right: 1px;
+}
+
+#masteries-table {
+    border: 1px solid black !important;
+}
+
+#masteries-table td, th {
+    border: 1px solid black !important;
+}
+
 .card-group {
     width: 100%;
     height: auto;

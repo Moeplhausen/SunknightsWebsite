@@ -73,6 +73,15 @@ def leaderboard(request):
 
 
 @login_required
+def masteries(request):
+    tanks = DiepTank.objects.all().prefetch_related('mastery_set','mastery_set__fromSubmission','mastery_set__pointsinfo','mastery_set__pointsinfo__user')
+
+    t = render(request, 'sunknightsapp/masteriesboard.html', {'tanks':tanks})
+
+    return t
+
+
+@login_required
 def guilds(request):
     context = {}
     guilds = DiscordRole.objects.filter(is_clan_guild=True, discord_isDeleted=False).order_by('name')
