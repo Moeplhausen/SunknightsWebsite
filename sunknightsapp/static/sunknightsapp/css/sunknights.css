@@ -25,12 +25,11 @@ body {
     border: 1px solid black !important;
 }
 
-#masteries-table td,#masteries-table th {
+td, th {
     border: 1px solid black !important;
 }
 th{
     height: 40px!important;
-    border: 1px solid black !important;
 }
 
 table.dataTable thead .sorting,
