@@ -237,11 +237,8 @@ class RetrieveUsersToFightAgainstForm(BaseForm):
 
         try:
             searchstring=self.cleaned_data['searchusers']
-            print(searchstring)
-            users = ClanUser.objects.none()
-            if len(searchstring)>0:
-                users = ClanUser.objects.filter(is_active=True,discord_nickname__icontains=searchstring).exclude(id=request.user.id).order_by(
-                    '-discord_nickname')
+            users = ClanUser.objects.filter(is_active=True,discord_nickname__icontains=searchstring).exclude(id=request.user.id).order_by(
+                    '-discord_nickname')[:10]
 
             serializer = ClanUserSerializerBasic(users, many=True)
         except BaseException as e:

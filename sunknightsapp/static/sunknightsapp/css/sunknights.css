@@ -13,6 +13,31 @@ body {
 
 }
 
+#sk-title-bar{
+    position: relative;
+}
+
+#usersearch,.selectize-control{
+    position:absolute;
+    top:0;
+    right:0;
+    border: 0;
+    /** belows styles are working good */
+    padding: 2px 2px;
+    /* IE7-8 doesn't have border-radius, so don't indent the padding */
+    margin-bottom: 0;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.selectize-control{
+    width: 15em;
+}
+
+
+
+
 #userview-tab-content {
     margin-top: 1em;
 }
