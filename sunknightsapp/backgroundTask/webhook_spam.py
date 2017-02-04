@@ -47,6 +47,7 @@ def post_submission_reverted(submission):
                         {'name': 'From', 'value': '<@{}>'.format(submission.pointsinfo.user.discord_id), 'inline': True},
                         {'name': 'Manager', 'value': '<@'+str(submission.manager.discord_id)+'>', 'inline': True},
                         {'name': 'Points', 'value': str(submission.points), 'inline': True},
+
                     ]
             }
         ]
@@ -110,6 +111,7 @@ def post_new_user_point_submission(submission, accepted, decided):
                             {'name': 'Manager', 'value': '<@{}>'.format(submission.manager.discord_id), 'inline': True},
                             {'name': 'Manager Note', 'value': submission.managerText, 'inline': True},
                             {'name': 'Points', 'value': str(submission.points), 'inline': True},
+                            {'name': 'Proof', 'value': submission.proof, 'inline': True},
                         ]
                 }
             ]
@@ -152,6 +154,7 @@ def post_new_event_quest_submission(submission, accepted, decided):
                             {'name': 'Manager', 'value': '<@{}>'.format(submission.manager.discord_id), 'inline': True},
                             {'name': 'Manager Note', 'value': submission.managerText, 'inline': True},
                             {'name': 'Points', 'value': str(submission.points), 'inline': True},
+                            {'name': 'Proof', 'value': submission.proof, 'inline': True},
                         ]
                 }
             ]
@@ -233,6 +236,7 @@ def post_new_OneOnOne_submission(submission, accepted, decided):
                             {'name': 'Manager Note', 'value': submission.managerText, 'inline': True},
                             {'name': 'Action', 'value': 'Approved' if accepted else 'Rejected', 'inline': True},
                             {'name': 'Expected outcome', 'value': str(submission.expected_outcome), 'inline': True},
+                            {'name': 'Proof', 'value': submission.proof, 'inline': True},
                         ]
                 }
             ]
