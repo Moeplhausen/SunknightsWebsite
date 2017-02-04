@@ -41,6 +41,7 @@ def post_submission_reverted(submission):
             {
                 'color': yellowcolor,
                 'title': 'Submission Reverted ({})'.format(submission.id),
+                'thumbnail':{'url':submission.pointsinfo.user.avatar_url},
                 'fields':
                     [
                         {'name': 'From', 'value': '<@{}>'.format(submission.pointsinfo.user.discord_id), 'inline': True},
@@ -81,6 +82,7 @@ def post_new_user_point_submission(submission, accepted, decided):
                 {
                     'color': yellowcolor,
                     'title': 'New Point Submission ({})'.format(submission.id),
+                    'thumbnail':{'url':submission.pointsinfo.user.avatar_url},
                     'fields':
                         [
                             {'name': 'From', 'value': '<@{}>'.format(submission.pointsinfo.user.discord_id), 'inline': True},
@@ -99,6 +101,7 @@ def post_new_user_point_submission(submission, accepted, decided):
                 {
                     'color': greencolor if accepted else redcolor,
                     'title': 'Submission ({})'.format(submission.id),
+                    'thumbnail':{'url':submission.pointsinfo.user.avatar_url},
                     'fields':
                         [
                             {'name': 'From', 'value': '<@{}>'.format(submission.pointsinfo.user.discord_id), 'inline': True},
@@ -124,6 +127,7 @@ def post_new_event_quest_submission(submission, accepted, decided):
                 {
                     'color': yellowcolor,
                     'title': 'New Event/Quest Submission ({})'.format(submission.id),
+                    'thumbnail':{'url':submission.pointsinfo.user.avatar_url},
                     'fields':
                         [
                             {'name': 'From', 'value': '<@{}>'.format(submission.pointsinfo.user.discord_id), 'inline': True},
@@ -139,6 +143,7 @@ def post_new_event_quest_submission(submission, accepted, decided):
                 {
                     'color': greencolor if accepted else redcolor,
                     'title': 'Submission ({})'.format(submission.id),
+                    'thumbnail':{'url':submission.pointsinfo.user.avatar_url},
                     'fields':
                         [
                             {'name': 'From', 'value': '<@{}>'.format(submission.pointsinfo.user.discord_id), 'inline': True},
@@ -168,6 +173,7 @@ def post_new_submission(submission, accepted, decided):
                 {
                     'color': yellowcolor,
                     'title': 'New Submission ({})'.format(submission.id),
+                    'thumbnail':{'url':submission.pointsinfo.user.avatar_url},
                     'fields':
                         [
                             {'name': 'From', 'value': submission.pointsinfo.user.discord_nickname, 'inline': True},
@@ -181,6 +187,7 @@ def post_new_submission(submission, accepted, decided):
                 {
                     'color': greencolor if accepted else redcolor,
                     'title': 'Submission ({})'.format(submission.id),
+                    'thumbnail':{'url':submission.pointsinfo.user.avatar_url},
                     'fields':
                         [
                             {'name': 'From', 'value': submission.pointsinfo.user.discord_nickname, 'inline': True},
@@ -241,6 +248,7 @@ def post_new_manager_submission(submission, accepted):
                 {
                     'color': greencolor,
                     'title': 'Custom Points action ({})'.format(submission.id),
+                    'thumbnail':{'url':submission.pointsinfo.user.avatar_url},
                     'fields':
                         [
                             {'name': 'Member', 'value': '<@{}>'.format(submission.pointsinfo.user.discord_id), 'inline': True},
@@ -260,6 +268,7 @@ def post_new_manager_submission(submission, accepted):
                 {
                     'color': redcolor,
                     'title': 'Custom Points action ({})'.format(submission.id),
+                    'thumbnail':{'url':submission.pointsinfo.user.avatar_url},
                     'fields':
                         [
                             {'name': 'Member', 'value': '<@{}>'.format(submission.pointsinfo.user.discord_id), 'inline': True},
@@ -313,6 +322,7 @@ def mastery_unlock(mastery):
             {
                 'color': greencolor,
                 'title': 'Mastery Unlock',
+                'thumbnail':{'url':mastery.pointsinfo.user.avatar_url},
                 'fields':
                     [
                         {'name': 'Member', 'value': '<@{}>'.format(mastery.pointsinfo.user.discord_id), 'inline': True},
