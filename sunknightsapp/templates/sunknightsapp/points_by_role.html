@@ -12,7 +12,7 @@
 
                     Members: {{ role.submitted_users_cur_week.count }}<br>
                     Points: {{ role.submitted_points_cur_week }}
-                <table class="display datatables-table role-members-table">
+                <table class="display datatables-table role-members-table" width="100%">
 
                     <thead>
                     <tr>
@@ -25,7 +25,11 @@
                     <tbody>
                     {% for member in role.submitted_users_cur_week.all %}
                         <tr>
-                            <td><a href="/user/{{ member.discord_id }}">{{ member.discord_nickname }}</a>
+                            <td>
+                                <a href="/user/{{ member.discord_id }}">
+                                    <img class='leaderpoint-avatar img-circle' src='{{ member.avatar_url }}'>
+                                    {{ member.discord_nickname }}
+                                </a>
                             </td>
                             <td>{{ member.leaderboard_place }}</td>
                             <td>{{ member.points_cur_week }}</td>
@@ -45,7 +49,7 @@
 
                     Members: {{ role.submitted_users_week_1.count }}<br>
                     Points: {{ role.submitted_points_week_1 }}
-                <table class="display datatables-table role-members-table">
+                <table class="display datatables-table role-members-table" width="100%">
 
                     <thead>
                     <tr>
@@ -58,7 +62,11 @@
                     <tbody>
                     {% for member in role.submitted_users_week_1.all %}
                         <tr>
-                            <td><a href="/user/{{ member.discord_id }}">{{ member.discord_nickname }}</a>
+                            <td>
+                                <a href="/user/{{ member.discord_id }}">
+                                    <img class='leaderpoint-avatar img-circle' src='{{ member.avatar_url }}'>
+                                    {{ member.discord_nickname }}
+                                </a>
                             </td>
                             <td>{{ member.leaderboard_place }}</td>
                             <td>{{ member.points_week_1 }}</td>
