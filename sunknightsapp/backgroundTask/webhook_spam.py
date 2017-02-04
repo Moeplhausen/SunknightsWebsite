@@ -4,6 +4,7 @@ import requests
 redcolor = 16711680
 greencolor = 65280
 yellowcolor = 16776960
+orangecolor = 16753920
 
 
 def post_to_discord(dictdata):
@@ -39,7 +40,7 @@ def post_submission_reverted(submission):
     data = {'embeds':
         [
             {
-                'color': yellowcolor,
+                'color': orangecolor,
                 'title': 'Submission Reverted ({})'.format(submission.id),
                 'thumbnail':{'url':submission.pointsinfo.user.avatar_url},
                 'fields':
