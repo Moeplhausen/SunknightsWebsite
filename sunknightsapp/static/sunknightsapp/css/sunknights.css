@@ -23,7 +23,7 @@ body {
     right:0;
     border: 0;
     /** belows styles are working good */
-    padding: 2px 2px;
+    padding: 2px 5px;
     /* IE7-8 doesn't have border-radius, so don't indent the padding */
     margin-bottom: 0;
     -webkit-border-radius: 3px;
@@ -91,6 +91,10 @@ table.dataTable thead .sorting_desc_disabled
 
 #user-stats, #navbar-header {
     text-align: center;
+}
+
+#user-stats{
+    margin-right: 1em;
 }
 
 #card-img-top, #useroverview-name {

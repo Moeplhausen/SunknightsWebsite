@@ -1,13 +1,13 @@
 {% load static %}
 <div class="row">
-    <div id="user-stats">
+    <div class="col-sm-2 card" id="user-stats">
         <p id="useroverview-name"><strong>{{ lookuser.discord_nickname }}</strong></p>
         <img id="card-img-top" class="img-circle" src="{{ lookuser.avatar_url }}">
         <p>Rank: <strong>{{ lookuser.leaderboard_place }}</strong><br>
             Old Points: <strong>{{ lookuser.pointsinfo.oldpoints }}</strong><br>
             Total Points: <strong>{{ lookuser.total_points }}</strong></p>
     </div>
-    <div class="col-sm-5">
+    <div class="col-sm-4">
         <div class="card">
             <div class="card-block">
                 <h4 class="card-title">Masteries</h4>
@@ -26,7 +26,7 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-5">
+    <div class="col-sm-4">
         <div class="card">
             <div class="card-block">
                 <h4 class="card-title">Badges</h4>
