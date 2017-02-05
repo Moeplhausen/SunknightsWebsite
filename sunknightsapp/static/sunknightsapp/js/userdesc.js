@@ -52,7 +52,7 @@ function setDesc(selector) {
     type: "POST",
     data: {
       ajax_action_id: 17, //AjaxAction.CHANGEDESC
-      newdesc: oldhtml
+      newdesc: $(selector).val()
     },
     headers: {
       'X-CSRFToken': $.cookie('csrftoken')
