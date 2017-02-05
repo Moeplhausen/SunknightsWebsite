@@ -23,7 +23,6 @@ function loadMd(markdown) {
 }
 function mdToHtml(element,helptext) {
   if (helptext) {
-    console.log('lo?');
     $(element).html(sh.makeHtml(helptext));
   }
   return !!helptext;
