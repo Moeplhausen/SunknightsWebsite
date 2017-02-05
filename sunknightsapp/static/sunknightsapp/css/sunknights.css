@@ -90,7 +90,7 @@ table.dataTable thead .sorting_desc_disabled
 }
 
 #user-card-block-image{
-    min-width: 140px !important;
+    wdith: 140px !important;
 }
 
 .button-x-corner {
