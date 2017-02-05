@@ -68,10 +68,6 @@ table.dataTable thead .sorting_desc_disabled
 }​
 
 
-.card-group {
-    width: 100%;
-    height: auto;
-}
 
 #sun-navbar {
     background: linear-gradient(
@@ -93,28 +89,8 @@ table.dataTable thead .sorting_desc_disabled
     text-align: center;
 }
 
-#user-stats{
-    margin-left:15px !important;
-}
-
-#badges-column{
-    padding-left:0em !important;
-}
-@media (max-device-width: 580px){
-    #badges-column{
-        padding-left:1em !important;
-    }
-}
-
-#card-img-top, #useroverview-name {
-    margin: auto;
-    padding-left: 1em;
-    padding-right: 1em;
-    max-width: 170px;
-}
-
-#useroverview-name {
-    text-shadow: 3px -1px 1px rgba(170, 170, 115, 1);
+#user-card-block-image{
+    min-width: 140px !important;
 }
 
 .button-x-corner {

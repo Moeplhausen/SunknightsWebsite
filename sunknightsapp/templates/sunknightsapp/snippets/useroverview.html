@@ -1,72 +1,77 @@
 {% load static %}
-<div class="row">
-    <div class="card" id="user-stats">
-        <p id="useroverview-name"><strong>{{ lookuser.discord_nickname }}</strong></p>
-        <img id="card-img-top" class="img-circle" src="{{ lookuser.avatar_url }}"/>
-        <p>Rank: <strong>{{ lookuser.leaderboard_place }}</strong><br>
-            Old Points: <strong>{{ lookuser.pointsinfo.oldpoints }}</strong><br>
-            Total Points: <strong>{{ lookuser.total_points }}</strong></p>
-    </div>
-
-    <div class="col-sm-10">
-        <div class="card">
-            <div class="card-block">
-                <h4 class="card-title">Description</h4>
-                <p class="card-text">
-                <div id="userdesc">{{ lookuser.description|default:'None' }}</script></div>
-                {% if lookuser.id == user.id %}
-                    <br/>
-                    <button id="userdescbutton">Edit</button>
-                    <button id="userdesccancel" style="display: none;">Cancel</button>
-                {% endif %}
-                </p>
+<div id="user-box">
+    <div class="row">
+        <div class="col-sm-5 col-lg-3">
+            <div class="card" id="user-stats">
+                <div class="card-block" id="user-card-block-image">
+                    <p id="useroverview-name"><strong>{{ lookuser.discord_nickname }}</strong></p>
+                    <img id="card-img-top" class="img-circle" src="{{ lookuser.avatar_url }}"/>
+                    <p class="card-text">Rank: <strong>{{ lookuser.leaderboard_place }}</strong><br>
+                        Old Points: <strong>{{ lookuser.pointsinfo.oldpoints }}</strong><br>
+                        Total Points: <strong>{{ lookuser.total_points }}</strong></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-7 col-md-auto col-lg-9 col-lg-auto">
+            <div class="card">
+                <div class="card-block">
+                    <h4 class="card-title">Description</h4>
+                    <p class="card-text">
+                    <div id="userdesc">{{ lookuser.description|default:'None' }}</script></div>
+                    {% if lookuser.id == user.id %}
+                        <br/>
+                        <button id="userdescbutton">Edit</button>
+                        <button id="userdesccancel" style="display: none;">Cancel</button>
+                    {% endif %}
+                    </p>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<div class="row">
-    <div class="col-sm-7 masteries-badges-column">
-        <div class="card">
-            <div class="card-block">
-                <h4 class="card-title">Masteries</h4>
-                <p class="card-text">
-                    <strong>T1: {{ lookuser.masteries_t1.all.count }}</strong><br>
-                    <strong>T2: {{ lookuser.masteries_t2.all.count }}</strong><br>
-                    <strong>T3: {{ lookuser.masteries_t3.all.count }}</strong>
-                </p>
-                <p class="card-text">
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="card">
+                <div class="card-block">
+                    <h4 class="card-title">Masteries</h4>
+                    <p class="card-text">
+                        <strong>T1: {{ lookuser.masteries_t1.all.count }}</strong><br>
+                        <strong>T2: {{ lookuser.masteries_t2.all.count }}</strong><br>
+                        <strong>T3: {{ lookuser.masteries_t3.all.count }}</strong>
+                    </p>
+                    <p class="card-text">
 
-                    {% for mastery in lookuser.masteries.all|dictsort:"tier" %}
-                        <div class="{{ mastery.tank.name|slugify }}-tier{{ mastery.tier }}" data-toggle="tooltip"
-                             data-placement="top" title="{{ mastery.tank.name }} Tier {{ mastery.tier }}"></div>
-                    {% endfor %}
-                </p>
+                        {% for mastery in lookuser.masteries.all|dictsort:"tier" %}
+                            <div class="{{ mastery.tank.name|slugify }}-tier{{ mastery.tier }}" data-toggle="tooltip"
+                                 data-placement="top" title="{{ mastery.tank.name }} Tier {{ mastery.tier }}"></div>
+                        {% endfor %}
+                    </p>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="col-sm-5" id="badges-column">
-        <div class="card">
-            <div class="card-block">
-                <h4 class="card-title">Badges</h4>
-                <p class="card-text"><strong>{{ lookuser.badges.all.count }}</strong></p>
-                <p class="card-text">
-                    {% for badge in lookuser.badges.all %}
-                        <div class="{{ badge.tank.name|slugify }}" data-toggle="tooltip" data-placement="top"
-                             title="{{ badge.name }}"></div>
-                    {% endfor %}
-                </p>
+        <div class="col-sm-4" id="">
+            <div class="card">
+                <div class="card-block">
+                    <h4 class="card-title">Badges</h4>
+                    <p class="card-text"><strong>{{ lookuser.badges.all.count }}</strong></p>
+                    <p class="card-text">
+                        {% for badge in lookuser.badges.all %}
+                            <div class="{{ badge.tank.name|slugify }}" data-toggle="tooltip" data-placement="top"
+                                 title="{{ badge.name }}"></div>
+                        {% endfor %}
+                    </p>
+                </div>
             </div>
         </div>
-    </div>
-    <br/>
-
-    {% if lookuser.id == user.id %}
         <br/>
-        <div id="alertspot"></div>
-        <div class="alert alert-danger alert-dismissible" role="alert" style="display: none;" id="thealertze">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-                    aria-hidden="true">&times;</span></button>
-            <strong>Oh no!</strong> Sorry, but there was an error submitting!
-        </div>
-    {% endif %}
+
+        {% if lookuser.id == user.id %}
+            <br/>
+            <div id="alertspot"></div>
+            <div class="alert alert-danger alert-dismissible" role="alert" style="display: none;" id="thealertze">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <strong>Oh no!</strong> Sorry, but there was an error submitting!
+            </div>
+        {% endif %}
+    </div>
 </div>
