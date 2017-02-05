@@ -15,6 +15,9 @@ var sh = new showdown.Converter({
   tables: true,
   simpleLineBreaks: true
 });
+function link(){
+  return window.location.href.replace(new RegExp(window.location.hash + "$"), "");
+}
 function loadMd(markdown) {
   md = markdown.replace(/&/g, "&amp;");
 }
@@ -44,7 +47,7 @@ function editsubmit(elementID, button, sbuttonID) {
   };
   var thing = $(idselect(elementID));
   var oldhtml = $(idselect("newcontentz")).val();
-  $.ajax(window.location.href, {
+  $.ajax(link(), {
     type: "POST",
     data: {
       newcontent: oldhtml
@@ -58,15 +61,15 @@ function editsubmit(elementID, button, sbuttonID) {
     },
     success: function(d, s, res) {
       console.log(`Status: ${s} (Debug)`);
-      window.location = window.location.href;
+      window.location = link();
     }
   }/*, function (d, s) {
     console.log(`Status: ${s} (Debug)`);
-    window.location = window.location.href;
+    window.location = link();
   }*/);
 }
 function canceledit(elementID, buttonID, sbutton) {
-  window.location = window.location.href;
+  window.location = link();
   /*var idselect = function(theid){ return "#" + theid; };
   var thing = $(idselect(elementID));
   var button = $(idselect(buttonID));
