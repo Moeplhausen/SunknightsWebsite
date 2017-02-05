@@ -158,7 +158,7 @@
           getDesc("#userdesc", '{{ lookuser.description|default:"None" }}');
           {{ user.id }}
           if (({{ lookuser.id }})==({{ user.id }})) {
-            $("#userdescbutton").html("Edit").css("display", "block").attr("onclick", "setDesc(\"#userdesc\", \"#userdesc\")");
+            $("#userdescbutton").html("Edit").css("display", "block").attr("onclick", "editDesc(this, \"#userdesccancel\", \"#userdesc\")");
             $("#userdesccancel").attr("onclick", "cancelDesc(this, \"#userdescbutton\", \"#userdesc\")");
           }
         });
