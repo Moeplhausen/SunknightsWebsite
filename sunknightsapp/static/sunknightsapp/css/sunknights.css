@@ -5,6 +5,9 @@
 /*background: -o-linear-gradient(90deg, #FBC926 10%, #C3922E 90%); !* Opera 11.10+ *!*/
 /*background: linear-gradient(90deg, #FBC926 10%, #C3922E 90%); !* W3C *!*/
 /*}*/
+*:active {
+    outline: 0;
+}
 
 body {
     background-image: url("../image/background.jpg");

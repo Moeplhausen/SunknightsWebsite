@@ -17,7 +17,7 @@
                 <div class="card-block" id="description-block-card-child">
                     <h4 class="card-title">Description</h4>
                     <div id="userdesccard" class="mCustomScrollbar" data-mcs-theme="minimal-dark">
-                        <p class="">
+                        <p>
                         <div id="userdesc">{{ lookuser.description|default:'None' }}</script></div>
 
                         </p>
@@ -26,6 +26,7 @@
                         <br/>
                         <button id="userdescbutton">Edit</button>
                         <button id="userdesccancel" style="display: none;">Cancel</button>
+                        <span id="charcount" style="font-size: 0.8em;padding-left: 4px;"></span>
                     {% endif %}
                 </div>
             </div>
