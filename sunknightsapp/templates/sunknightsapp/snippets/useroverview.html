@@ -47,6 +47,10 @@
                 <h4 class="card-title">Description</h4>
                 <p class="card-text">
                     <div id="userdesc">None</div>
+                    <div id="input"></div>
+                    <br/>
+                    <button id="userdescbutton" style="display: none;"></button>
+                    <button id="userdesccancel" style="display: none;">Cancel</button>
                 </p>
             </div>
         </div>
@@ -54,6 +58,10 @@
     <script>
         $(function(){
             getDesc("#userdesc", '{{ lookuser.description|default:"None" }}');
+            if (({{ lookuser.id }})==({{ user.id }})) {
+                $("#userdescbutton").html("Edit").css("display", "block").attr("onclick", "setDesc(\"#userdesc\", \"#userdesc\")");
+                $("#userdesccancel").attr("onclick", "cancelDesc(this, \"#userdescbutton\", \"#userdesc\")");
+            }
         });
     </script>
 </div>
