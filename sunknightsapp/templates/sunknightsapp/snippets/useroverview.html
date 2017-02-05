@@ -60,13 +60,4 @@
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <strong>Oh no!</strong> Sorry, but there was an error submitting!
     </div>
-    <script>
-        $(function(){
-            getDesc("#userdesc", '{{ lookuser.description|default:"None" }}');
-            if (({{ lookuser.id }})==({{ user.id }})) {
-                $("#userdescbutton").html("Edit").css("display", "block").attr("onclick", "setDesc(\"#userdesc\", \"#userdesc\")");
-                $("#userdesccancel").attr("onclick", "cancelDesc(this, \"#userdescbutton\", \"#userdesc\")");
-            }
-        });
-    </script>
 </div>

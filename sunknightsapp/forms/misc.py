@@ -6,8 +6,6 @@ class ChangeDesc(BaseForm):
 
   def handle(self, request):
     try:
-      if not newdesc in request.POST:
-        return self.response(False, 'Missing newdesc data.')
       newdesc = request.POST['newdesc']
       # TODO register the stuff
     except BaseException as e:
@@ -16,4 +14,4 @@ class ChangeDesc(BaseForm):
       return self.response(True, {'newdesc': request.POST['newdesc']})
 
   class Meta:
-    fields = ('newdesc')
+    fields = ('newdesc',)

@@ -151,6 +151,21 @@
             direction: 'asc'
           },
         }).ajaxSelectPicker(ajaxusersearchoptions);
+
+
+
+        $(function(){
+          getDesc("#userdesc", '{{ lookuser.description|default:"None" }}');
+          {{ user.id }}
+          if (({{ lookuser.id }})==({{ user.id }})) {
+            $("#userdescbutton").html("Edit").css("display", "block").attr("onclick", "setDesc(\"#userdesc\", \"#userdesc\")");
+            $("#userdesccancel").attr("onclick", "cancelDesc(this, \"#userdescbutton\", \"#userdesc\")");
+          }
+        });
+
+
+
+
       });
     </script>
 {% endblock %}
