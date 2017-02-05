@@ -12,6 +12,7 @@ from ..forms.points_forms import SubmitPointsForm, RetriveUserSubmissionsPointsF
     SubmitFightsForm, RetrieveFightsSubmissionsForm, DecideFightsSubmissionForm, RevertSubmissionForm, \
     RetrieveUsersLeaderPointForm, RetrieveUsersToFightAgainstForm, SubmitEventsQuestsForm,DecideEventQuestsSubmissionForm,RetrieveEventQuestsSubmissionsForm
 from ..forms.tournaments_forms import CreateTournamentForm, DeleteTournamentForm, RequestTournamentsForm
+from ..forms.misc import ChangeDesc
 from ..models.clan_user import ClanUser
 from ..models.diep_gamemode import DiepGamemode
 from ..models.diep_tank import DiepTankInheritance, DiepTank
@@ -195,6 +196,8 @@ def ajaxhandler(request):
         form = RetrieveUsersToFightAgainstForm(request.POST)
     elif actionid is AjaxAction.RETRIEVEEVENTQUESTSSUBMISSIONS.value:
         form = RetrieveEventQuestsSubmissionsForm(request.POST)
+    elif actionid is AjaxAction.CHANGEDESC.value:
+        form = ChangeDesc(request.POST)
 
     if form is None:
         return sendFailure(request, "No handler for this action installed.")

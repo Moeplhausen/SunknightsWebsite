@@ -59,7 +59,7 @@ function editsubmit(elementID, button, sbuttonID) {
       $("#thealert").clone().attr("id", "currentalert").css("display", "block").appendTo("#alertspot");
     },
     success: function(d, s, res) {
-      console.log(`Status: ${s} (Debug)`);
+      console.log("Status: " + s + " (Debug)");
       window.location = link();
     }
   }/*, function (d, s) {

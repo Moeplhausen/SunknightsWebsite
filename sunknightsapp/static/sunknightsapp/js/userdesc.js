@@ -13,6 +13,14 @@ try {
     simpleLineBreaks: true
   });
 }
+try {
+  link;
+} catch(err) {
+  //just in case
+  window.link = function(){
+    return window.location.href.replace(new RegExp(window.location.hash + "$"), "");
+  };
+}
 function getDesc(selector, md) {
   md = md.replace(/&(?![^\s;];)/g, "&amp;");
   window.descmd = md;
@@ -40,5 +48,22 @@ function cancelDesc(cancelbutton, buttonsel, selector) {
 }
 
 function setDesc(selector) {
-  //WIP
+  $.ajax('/ajaxhandler/', {
+    type: "POST",
+    data: {
+      ajax_action_id: 17, //AjaxAction.CHANGEDESC
+      newdesc: oldhtml
+    },
+    headers: {
+      'X-CSRFToken': $.cookie('csrftoken')
+    },
+    error: function(res, s, err) {
+      console.error("Error while submitting (Status: " + s + "): " + err);
+      $("#thealertze").clone().attr("id", "currentalert").css("display", "block").appendTo("#alertspot");
+    },
+    success: function(d, s, res) {
+      console.log("Status: " + s + " (Debug)");
+      window.location = link();
+    }
+  });
 }
