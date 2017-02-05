@@ -37,15 +37,6 @@ body {
 
 
 
-
-#userview-tab-content {
-    margin-top: 1em;
-}
-
-.mastery-member-span{
-    margin-right: 1px;
-}
-
 #masteries-table {
     border: 1px solid black !important;
 }
@@ -66,6 +57,17 @@ table.dataTable thead .sorting_desc_disabled
     background-position: left center;
     padding-left: 20px;
 }​
+
+
+ .card-group {
+     width: 100%;
+     height: auto;
+ }
+
+ #userview-tab-content{
+     margin-top: 0.5em;
+ }
+
 
 
 
@@ -89,12 +91,20 @@ table.dataTable thead .sorting_desc_disabled
     text-align: center;
 }
 
+
+
 #user-card-block-image{
     min-width: 140px !important;
 }
 
 #card-img-top{
     max-width: 160px;
+}
+
+
+
+#useroverview-name {
+    text-shadow: 3px -1px 1px rgba(170, 170, 115, 1);
 }
 
 .button-x-corner {
@@ -132,9 +142,6 @@ table.dataTable thead .sorting_desc_disabled
     height: 37px;
 }
 
-#masteries-user-row {
-    margin-top: 1em;
-}
 
 img.discord-img {
     width: 200px;
