@@ -51,11 +51,12 @@ function editDesc(button, cancelsel, selector/*, inputselec*/) {
 }
 
 function cancelDesc(cancelbutton, buttonsel, selector) {
-  var descNode = $(selector);
-  var button = $(buttonsel);
-  cancelbutton.css("display", "none");
-  button.html("Edit").attr("editDesc(this, \"#" + cancelbutton.id + "\", \"" + selector + "\")");
-  getDesc(selector, descmd);
+  window.location = link();
+  //var descNode = $(selector);
+  //var button = $(buttonsel);
+  //cancelbutton.css("display", "none");
+  //button.html("Edit").attr("editDesc(this, \"#" + cancelbutton.id + "\", \"" + selector + "\")");
+  //getDesc(selector, descmd);
 }
 
 function setDesc(selector) {
