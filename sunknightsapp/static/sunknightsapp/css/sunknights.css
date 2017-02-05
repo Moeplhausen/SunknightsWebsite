@@ -94,8 +94,16 @@ table.dataTable thead .sorting_desc_disabled
 }
 
 #user-stats{
-    margin-right: 1em;
     margin-left:15px !important;
+}
+
+#badges-column{
+    padding-left:0em !important;
+}
+@media (max-device-width: 580px){
+    #badges-column{
+        padding-left:1em !important;
+    }
 }
 
 #card-img-top, #useroverview-name {

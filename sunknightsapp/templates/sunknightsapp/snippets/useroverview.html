@@ -7,7 +7,25 @@
             Old Points: <strong>{{ lookuser.pointsinfo.oldpoints }}</strong><br>
             Total Points: <strong>{{ lookuser.total_points }}</strong></p>
     </div>
-    <div class="col-sm-4">
+
+    <div class="col-sm-10">
+        <div class="card">
+            <div class="card-block">
+                <h4 class="card-title">Description</h4>
+                <p class="card-text">
+                <div id="userdesc">{{ lookuser.description|default:'None' }}</script></div>
+                {% if lookuser.id == user.id %}
+                    <br/>
+                    <button id="userdescbutton">Edit</button>
+                    <button id="userdesccancel" style="display: none;">Cancel</button>
+                {% endif %}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-7 masteries-badges-column">
         <div class="card">
             <div class="card-block">
                 <h4 class="card-title">Masteries</h4>
@@ -26,7 +44,7 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-4">
+    <div class="col-sm-5" id="badges-column">
         <div class="card">
             <div class="card-block">
                 <h4 class="card-title">Badges</h4>
@@ -41,27 +59,14 @@
         </div>
     </div>
     <br/>
-    <div class="col-sm-4">
-        <div class="card">
-            <div class="card-block">
-                <h4 class="card-title">Description</h4>
-                <p class="card-text">
-                    <div id="userdesc">{{ lookuser.description|default:'None' }}</script></div>
-                    {% if lookuser.id == user.id %}
-                    <br/>
-                    <button id="userdescbutton">Edit</button>
-                    <button id="userdesccancel" style="display: none;">Cancel</button>
-                    {% endif %}
-                </p>
-            </div>
-        </div>
-    </div>
+
     {% if lookuser.id == user.id %}
-    <br/>
-    <div id="alertspot"></div>
-    <div class="alert alert-danger alert-dismissible" role="alert" style="display: none;" id="thealertze">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <strong>Oh no!</strong> Sorry, but there was an error submitting!
-    </div>
+        <br/>
+        <div id="alertspot"></div>
+        <div class="alert alert-danger alert-dismissible" role="alert" style="display: none;" id="thealertze">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                    aria-hidden="true">&times;</span></button>
+            <strong>Oh no!</strong> Sorry, but there was an error submitting!
+        </div>
     {% endif %}
 </div>
