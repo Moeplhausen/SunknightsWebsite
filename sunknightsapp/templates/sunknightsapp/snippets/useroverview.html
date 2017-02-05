@@ -46,18 +46,22 @@
             <div class="card-block">
                 <h4 class="card-title">Description</h4>
                 <p class="card-text">
-                    <div id="userdesc"></div>
+                    <div id="userdesc">{{ lookuser.description|default:'None' }}</script></div>
+                    {% if lookuser.id == user.id %}
                     <br/>
-                    <button id="userdescbutton" style="display: none;"></button>
+                    <button id="userdescbutton">Edit</button>
                     <button id="userdesccancel" style="display: none;">Cancel</button>
+                    {% endif %}
                 </p>
             </div>
         </div>
     </div>
+    {% if lookuser.id == user.id %}
     <br/>
     <div id="alertspot"></div>
     <div class="alert alert-danger alert-dismissible" role="alert" style="display: none;" id="thealertze">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <strong>Oh no!</strong> Sorry, but there was an error submitting!
     </div>
+    {% endif %}
 </div>

@@ -22,7 +22,18 @@ try {
   };
 }
 function getDesc(selector, md) {
-  md = md.replace(/&(?![^\s;];)/g, "&amp;");
+  md = md.replace(/&/g, "&amp;").replace(/[><'"]/g, function(l){
+    switch(l) {
+      case "<":
+        return "&lt;";
+      case ">":
+        return "&gt;";
+      case "'":
+        return "&#39";
+      default:
+        return "&quot;";
+    }
+  });
   window.descmd = md;
   var descNode = $(selector);
   var newhtml = sh.makeHtml(md);
@@ -52,7 +63,7 @@ function setDesc(selector) {
     type: "POST",
     data: {
       ajax_action_id: window.ajaxactions.CHANGEDESC,
-      description: $(selector).val()
+      description: $(selector).val() || "None"
     },
     headers: {
       'X-CSRFToken': $.cookie('csrftoken')

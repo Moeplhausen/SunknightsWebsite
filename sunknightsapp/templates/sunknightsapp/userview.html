@@ -155,7 +155,7 @@
 
 
         $(function(){
-          getDesc("#userdesc", '{{ lookuser.description|default:"None" }}');
+          getDesc("#userdesc", '{{ lookuser.description|escapejs|default:"None" }}');
           {{ user.id }}
           if (({{ lookuser.id }})==({{ user.id }})) {
             $("#userdescbutton").html("Edit").css("display", "block").attr("onclick", "editDesc(this, \"#userdesccancel\", \"#userdesc\")");
