@@ -91,7 +91,30 @@ table.dataTable thead .sorting_desc_disabled
     text-align: center;
 }
 
+#descinput{
+    max-height: 120px;
+}
 
+#description-block-card{
+    max-height: 282px;
+}
+#description-block-card-child{
+    height:282px;
+}
+
+
+
+#userdesccard{
+    max-height:160px
+}
+
+#userdesccancel{
+    float:left;
+}
+
+#userdescbutton{
+    float:left;
+}
 
 #user-card-block-image{
     min-width: 140px !important;
