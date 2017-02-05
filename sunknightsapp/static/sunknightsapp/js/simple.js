@@ -43,7 +43,7 @@ function sunKnightsJsonRequest(param, handler, contentType, processData) {
 
 var ajaxusersearchoptions = {
     ajax          : {
-        url     : ajaxretrieveuserurl,
+        url     : window.ajaxhandlerurl,
 
         type    : 'POST',
         dataType: 'json',
@@ -54,7 +54,7 @@ var ajaxusersearchoptions = {
         // automatically replace it with the value of the search query.
         data    : {
             searchusers: '{{{q}}}',
-            ajax_action_id:ajaxretrieveuserstofightagainstid.RETRIEVEUSERSTOFIGHTAGAINST
+            ajax_action_id:ajaxactions.RETRIEVEUSERSTOFIGHTAGAINST
         }
     },
     locale        : {

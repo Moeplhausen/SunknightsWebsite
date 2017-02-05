@@ -12,7 +12,7 @@ from ..forms.points_forms import SubmitPointsForm, RetriveUserSubmissionsPointsF
     SubmitFightsForm, RetrieveFightsSubmissionsForm, DecideFightsSubmissionForm, RevertSubmissionForm, \
     RetrieveUsersLeaderPointForm, RetrieveUsersToFightAgainstForm, SubmitEventsQuestsForm,DecideEventQuestsSubmissionForm,RetrieveEventQuestsSubmissionsForm
 from ..forms.tournaments_forms import CreateTournamentForm, DeleteTournamentForm, RequestTournamentsForm
-from ..forms.misc import ChangeDesc
+from ..forms.misc_forms import ChangeDesc
 from ..models.clan_user import ClanUser
 from ..models.diep_gamemode import DiepGamemode
 from ..models.diep_tank import DiepTankInheritance, DiepTank

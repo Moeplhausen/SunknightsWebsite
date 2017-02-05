@@ -39,7 +39,7 @@ $(document).ready(function () {
       if (!query.length) return callback();
 
       $.ajax({
-        url     : ajaxretrieveuserurl,
+        url     : ajaxhandlerurl,
 
           type    : 'POST',
           dataType: 'json',
@@ -50,7 +50,7 @@ $(document).ready(function () {
         // automatically replace it with the value of the search query.
         data    : {
           searchusers: query,
-            ajax_action_id:ajaxretrieveuserstofightagainstid.RETRIEVEUSERSTOFIGHTAGAINST
+            ajax_action_id:ajaxactions.RETRIEVEUSERSTOFIGHTAGAINST
         },
         error: function() {
           callback();

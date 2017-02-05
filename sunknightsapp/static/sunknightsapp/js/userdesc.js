@@ -48,11 +48,11 @@ function cancelDesc(cancelbutton, buttonsel, selector) {
 }
 
 function setDesc(selector) {
-  $.ajax('/ajaxhandler/', {
+  $.ajax(window.ajaxhandlerurl, {
     type: "POST",
     data: {
-      ajax_action_id: 17, //AjaxAction.CHANGEDESC
-      newdesc: $(selector).val()
+      ajax_action_id: window.ajaxactions.CHANGEDESC,
+      description: $(selector).val()
     },
     headers: {
       'X-CSRFToken': $.cookie('csrftoken')
