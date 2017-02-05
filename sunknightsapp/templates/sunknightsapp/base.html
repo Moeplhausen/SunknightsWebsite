@@ -161,9 +161,9 @@
     var ajaxretrieveuserstofightagainstid =
     {{ ajaxactions|safe }}
 </script>
-<script src="{% static 'sunknightsapp/js/simple.js' %}"></script>
+<script src="{% static 'sunknightsapp/js/simple.js' %}?{% now "U" %}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.6.3/showdown.min.js"></script>
-<script src="{% static 'sunknightsapp/js/loadmd.js' %}"></script>
+<script src="{% static 'sunknightsapp/js/loadmd.js' %}?{% now "U" %}"></script>
 {% if text %}<script>loadMd("{{text}}")</script>{% endif %}
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js"
