@@ -40,4 +40,20 @@
             </div>
         </div>
     </div>
+    <br/>
+    <div class="col-sm-4">
+        <div class="card">
+            <div class="card-block">
+                <h4 class="card-title">Description</h4>
+                <p class="card-text">
+                    <div id="userdesc">None</div>
+                </p>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(function(){
+            getDesc("#userdesc", '{{ lookuser.desc|default:"None" }}');
+        });
+    </script>
 </div>
