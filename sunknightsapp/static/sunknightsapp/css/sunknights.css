@@ -95,12 +95,18 @@ table.dataTable thead .sorting_desc_disabled
 
 #user-card-block-image{
     min-width: 140px !important;
+
 }
 
 #card-img-top{
     max-width: 160px;
+    max-height: 128px;
 }
 
+#description-block{
+    max-height: 280px;
+    overflow: scroll;
+}
 
 
 #useroverview-name {
