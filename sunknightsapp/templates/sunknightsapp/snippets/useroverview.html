@@ -12,18 +12,20 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-6 col-md-auto col-lg-9 col-lg-auto" id="description-block">
-            <div class="card">
-                <div class="card-block">
+        <div class="col-sm-6 col-md-auto col-lg-9" id="description-block">
+            <div class="card" style="max-height: 282px;">
+                <div class="card-block" style="max-height: 282px;">
                     <h4 class="card-title">Description</h4>
-                    <p class="card-text">
-                    <div id="userdesc">{{ lookuser.description|default:'None' }}</script></div>
-                    {% if lookuser.id == user.id %}
-                        <br/>
-                        <button id="userdescbutton">Edit</button>
-                        <button id="userdesccancel" style="display: none;">Cancel</button>
-                    {% endif %}
-                    </p>
+                    <div id="userdesccard" class="mCustomScrollbar" data-mcs-theme="minimal-dark" style="overflow: scroll;max-height:220px">
+                        <p class="card-text">
+                        <div id="userdesc">{{ lookuser.description|default:'None' }}</script></div>
+                        {% if lookuser.id == user.id %}
+                            <br/>
+                            <button id="userdescbutton">Edit</button>
+                            <button id="userdesccancel" style="display: none;">Cancel</button>
+                        {% endif %}
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>

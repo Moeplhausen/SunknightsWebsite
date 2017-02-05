@@ -104,8 +104,9 @@ table.dataTable thead .sorting_desc_disabled
 }
 
 #description-block{
+    min-height: 280px;
     max-height: 280px;
-    overflow: scroll;
+    /*overflow: scroll;*/
 }
 
 
