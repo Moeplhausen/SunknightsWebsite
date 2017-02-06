@@ -40,16 +40,16 @@ class DiscordRole(models.Model):
         date=date-datetime.timedelta(7*week)
         start_week = date - datetime.timedelta(date.weekday())
         end_week = start_week + datetime.timedelta(7)
-        from .point_submission import BasicPointSubmission
+        from .point_submission import BasicUserPointSubmission
         from .clan_user import ClanUser
 
-        subsubs=BasicPointSubmission.objects.filter(accepted=True,decided=True,date__range=[start_week,end_week])
+        subsubs=BasicUserPointSubmission.objects.filter(accepted=True,decided=True,date__range=[start_week,end_week])
 
         users=ClanUser.objects.filter(roles__role=self,pointsinfo__basicpointsubmission__in=subsubs).distinct()
         return users
 
     def submitted_points(self,week=0):
-        from .point_submission import BasicPointSubmission
+        from .point_submission import BasicUserPointSubmission
         from .clan_user import ClanUser
         from django.db.models import Sum
         import datetime
@@ -59,7 +59,7 @@ class DiscordRole(models.Model):
         end_week = start_week + datetime.timedelta(7)
 
         users=ClanUser.objects.filter(roles__role=self)
-        sumpoints=BasicPointSubmission.objects.filter(pointsinfo__user__in=users,accepted=True,decided=True,date__range=[start_week,end_week]).aggregate(sum=Sum('points'))['sum'] or 0
+        sumpoints=BasicUserPointSubmission.objects.filter(pointsinfo__user__in=users,accepted=True,decided=True,date__range=[start_week,end_week]).aggregate(sum=Sum('points'))['sum'] or 0
 
 
         return sumpoints
