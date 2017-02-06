@@ -98,6 +98,10 @@ table.dataTable thead .sorting_desc_disabled
     max-height: 120px;
 }
 
+#masteries-badges-row{
+    margin-top: 0.75em;
+}
+
 #description-block-card{
     max-height: 282px;
 }
