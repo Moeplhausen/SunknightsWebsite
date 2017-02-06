@@ -27,7 +27,7 @@ class ClanUser(AbstractBaseUser):
             avatar=models.CharField(max_length=150,default='')
 
 
-            description=models.TextField(max_length=1500, blank="", default="")
+            description=models.CharField(max_length=1500, blank="", default="")
 
 
 

@@ -159,7 +159,7 @@
                   'tank': data[i].tank.name,
                   'gamemode': data[i].gamemode,
                   'score': data[i].score,
-                  'date': data[i].date,
+                  'date': moment(data[i].date).format("MMM D Y, hh:mm:ss A"),
                   'points': points,
                   'submitter-note': data[i].submitterText,
                   'manager-note': managertext,
@@ -260,7 +260,7 @@
 
                 return_data.push({
                   'user': user,
-                  'date': data[i].date,
+                  'date': moment(data[i].date).format("MMM D Y, hh:mm:ss A"),
                   'points': points,
                   'submitter-note': data[i].submitterText,
                   'manager-note': managertext,
