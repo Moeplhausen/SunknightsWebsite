@@ -193,9 +193,9 @@ class ClanUser(AbstractBaseUser):
                 date=date-datetime.timedelta(7*week)
                 start_week = date - datetime.timedelta(date.weekday())
                 end_week = start_week + datetime.timedelta(7)
-                from .point_submission import BasicPointSubmission
+                from .point_submission import BasicUserPointSubmission
 
-                return BasicPointSubmission.objects.filter(accepted=True,decided=True,date__range=[start_week,end_week],pointsinfo=self.pointsinfo).aggregate(sum=Sum('points'))['sum'] or 0
+                return BasicUserPointSubmission.objects.filter(accepted=True,decided=True,date__range=[start_week,end_week],pointsinfo=self.pointsinfo).aggregate(sum=Sum('points'))['sum'] or 0
 
 
 
