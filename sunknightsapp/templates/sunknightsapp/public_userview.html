@@ -20,19 +20,23 @@
 
     </div>
 
-    <script>
-        $(function(){
-            var desc = $("#userdesccard");
-            desc.mCustomScrollbar({
-                axis: "y"
-            });
-        });
-    </script>
+
 
 {% endblock %}
 
 {% block scriptself %}
     {% include "sunknightsapp/snippets/revertSubmissionScript.html" %}
+
+    <script>
+      $(function(){
+        getDesc("#userdesc", '{{ lookuser.description|escapejs|default:"None" }}');
+        var desc = $("#userdesccard");
+        desc.mCustomScrollbar({
+          axis: "y"
+        });
+      });
+    </script>
+
 {% endblock %}
 
 
