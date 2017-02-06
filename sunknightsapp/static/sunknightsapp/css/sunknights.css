@@ -94,25 +94,9 @@ table.dataTable thead .sorting_desc_disabled
     text-align: center;
 }
 
-#descinput{
-    max-height: 120px;
-}
 
 #masteries-badges-row{
     margin-top: 0.75em;
-}
-
-#description-block-card{
-    max-height: 282px;
-}
-#description-block-card-child{
-    height:282px;
-}
-
-
-
-#userdesccard{
-    max-height:160px
 }
 
 #userdesccancel{
@@ -133,10 +117,6 @@ table.dataTable thead .sorting_desc_disabled
     max-height: 128px;
 }
 
-#description-block{
-    min-height: 282px;
-    max-height: 282px;
-}
 
 
 #useroverview-name {
