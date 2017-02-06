@@ -31,7 +31,7 @@ function getDesc(selector, md) {
       case ">":
         return "&gt;";
       case "'":
-        return "&#39";
+        return "&apos;";
       default:
         return "&quot;";
     }
