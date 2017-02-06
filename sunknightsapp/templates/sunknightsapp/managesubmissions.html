@@ -13,10 +13,11 @@
                 {#                <th>Gamemode</th>#}
                 <th>Score</th>
                 <th>Proof</th>
-                {#                <th>Date</th>#}
+
                 <th>Submitter Note</th>
                 <th>Manager Note</th>
                 <th>Points</th>
+                                <th>Date</th>
                 <th>action</th>
             </tr>
             </thead>
@@ -182,10 +183,11 @@
             {#                    {"data": "gamemode.name"},#}
             {"data": "score"},
             {"data": "proof"},
-            {#                    {"data": "date"},#}
+
             {"data": "submitter-note"},
             {"data": "manager-note"},
             {"data": "points"},
+            {"data": "date"},
             {"data": "action"}
 
           ]
@@ -243,10 +245,10 @@
               var return_data = new Array();
               for (var i = 0; i < data.length; i++) {
                 var action = '<span style="white-space:nowrap"> \
-                                    <button class="btn btn-success btn-xs btn-detail decisionbtnfucker approve-submission" \
+                                    <button class="btn btn-success btn-xs btn-detail decisioneventquestsbtnfucker approve-submission" \
                                             value="' + data[i].id + '"><i class="fa fa-check" aria-hidden="true"></i> \
                                     </button> \
-                                    <button class="btn btn-danger btn-xs btn-delete decisionbtnfucker deny-submission" \
+                                    <button class="btn btn-danger btn-xs btn-delete decisioneventquestsbtnfucker deny-submission" \
                                             value="' + data[i].id + '"><i class="fa fa-times" aria-hidden="true"></i> \
                                     </button></span>';
 
@@ -340,10 +342,10 @@
               var return_data = new Array();
               for (var i = 0; i < data.length; i++) {
                 var action = '<span style="white-space:nowrap"> \
-                                    <button class="btn btn-success btn-xs btn-detail decisionbtnfucker approve-submission" \
+                                    <button class="btn btn-success btn-xs btn-detail decisionbtnfightfucker approve-submission" \
                                             value="' + data[i].id + '"><i class="fa fa-check" aria-hidden="true"></i> \
                                     </button> \
-                                    <button class="btn btn-danger btn-xs btn-delete decisionbtnfucker deny-submission" \
+                                    <button class="btn btn-danger btn-xs btn-delete decisionbtnfightfucker deny-submission" \
                                             value="' + data[i].id + '"><i class="fa fa-times" aria-hidden="true"></i> \
                                     </button></span>';
 
