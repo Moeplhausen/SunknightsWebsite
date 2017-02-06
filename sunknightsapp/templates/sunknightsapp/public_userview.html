@@ -34,6 +34,10 @@
         desc.mCustomScrollbar({
           axis: "y"
         });
+        if (({{ lookuser.id }})==({{ user.id }})) {
+            $("#userdescbutton").html("Edit").css("display", "block").attr("onclick", "editDesc(this, \"#userdesccancel\", \"#userdesc\")");
+            $("#userdesccancel").attr("onclick", "cancelDesc(this, \"#userdescbutton\", \"#userdesc\")");
+        }
       });
     </script>
 
