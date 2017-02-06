@@ -9,15 +9,12 @@
             <thead>
             <tr>
                 <th>User</th>
-                <th>Tank</th>
+                <th>Tank & Score</th>
                 {#                <th>Gamemode</th>#}
-                <th>Score</th>
-                <th>Proof</th>
-
-                <th>Submitter Note</th>
+                <th>Proof & Note</th>
                 <th>Manager Note</th>
                 <th>Points</th>
-{#                                <th>Date</th>#}
+                <th>Date</th>
                 <th>action</th>
             </tr>
             </thead>
@@ -32,8 +29,7 @@
             <thead>
             <tr>
                 <th>User</th>
-                <th>Proof</th>
-                <th>Submitter Note</th>
+                <th>Proof & Note</th>
                 <th>Manager Note</th>
                 <th>Points</th>
                 <th>Date</th>
@@ -119,6 +115,9 @@
             decideScoreSubmission()
             $('[data-toggle="tooltip"]').tooltip()
           },
+          "columnDefs": [
+            { "orderable": false, "targets": [1,2] }
+          ],
           "ajax": {
             "url": "{% url 'ajaxhandler' %}",
             "dataSrc": function (json) {
@@ -158,10 +157,12 @@
                 return_data.push({
                   'user': user,
                   'tank': data[i].tank.name,
+                  'tankscore':data[i].tank.name+"<br>"+numberWithCommas(data[i].score),
                   'gamemode': data[i].gamemode,
                   'score': data[i].score,
                   'date': moment(data[i].date).format("MMM D Y, hh:mm:ss A"),
                   'points': points,
+                  'note':prooftext+"<br>"+data[i].submitterText,
                   'submitter-note': data[i].submitterText,
                   'manager-note': managertext,
                   'proof': prooftext,
@@ -179,15 +180,13 @@
           },
           "columns": [
             {"data": "user"},
-            {"data": "tank"},
+            {"data": "tankscore"},
             {#                    {"data": "gamemode.name"},#}
-            {"data": "score"},
-            {"data": "proof"},
 
-            {"data": "submitter-note"},
+            {"data": "note"},
             {"data": "manager-note"},
             {"data": "points"},
-{#            {"data": "date"},#}
+            {"data": "date"},
             {"data": "action"}
 
           ]
@@ -264,6 +263,7 @@
                   'user': user,
                   'date': moment(data[i].date).format("MMM D Y, hh:mm:ss A"),
                   'points': points,
+                  'note':'<a href="' + data[i].proof + '">Prooflink</a>'+"<br>"+data[i].submitterText,
                   'submitter-note': data[i].submitterText,
                   'manager-note': managertext,
                   'proof': '<a href="' + data[i].proof + '">Prooflink</a>',
@@ -281,8 +281,7 @@
           },
           "columns": [
             {"data": "user"},
-            {"data": "proof"},
-            {"data": "submitter-note"},
+            {"data": "note"},
             {"data": "manager-note"},
             {"data": "points"},
             {"data": "date"},

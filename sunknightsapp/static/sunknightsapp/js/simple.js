@@ -84,6 +84,11 @@ function showhide(button, id){
   button.innerHTML = button.innerHTML=="View"?"Hide":"View";
 }
 
+function numberWithCommas(x) {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+
 $(function () {
     $('[data-toggle="tooltip"]').tooltip()
 })
