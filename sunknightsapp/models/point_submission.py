@@ -25,13 +25,6 @@ class BasicPointSubmission(models.Model):
     points = models.DecimalField(decimal_places=2, max_digits=6, default=0, db_index=True)
     reverted = models.BooleanField(default=False)
 
-    @property
-    def daily_quest(self):
-        from .daily_quest import DailyQuest
-        from datetime import timedelta
-        datesubtract = self.date - timedelta(days=1)
-        quests = DailyQuest.objects.filter(date__range=(datesubtract, self.date)).order_by('-date')
-        return quests.first()
 
     def __str__(self):
         return self.pointsinfo.user.discord_nickname + ": " + str(self.points)

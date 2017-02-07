@@ -48,6 +48,7 @@ urlpatterns = [
     url(r'^info/invites', views.helppage,{'helpstr': 'invites'}, name='invites'),
     url(r'^tankdraw', views.tankboard, name='tankboard'),
     url(r'^managesubmissions', views.manage_submissions, name='managesubmissions'),
+    url(r'^managequests', views.manage_quests, name='managequests'),
     url(r'^api/',include(router.urls)),
     url(r'^ajaxhandler/',views.ajaxhandler, name='ajaxhandler'),
     url(r'^logout/$', views.logoutview, name='logout'),

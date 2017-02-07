@@ -1,0 +1,38 @@
+{% extends "sunknightsapp/base.html" %}
+{% block content %}
+
+    <div class="row">
+        <div class='col-sm-6'>
+            <div class="form-group">
+                <div class='input-group date' id='datetimepicker5'>
+                    <input type='text' class="form-control" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+{{ time|first|date:"m/d/Y" }}
+
+
+{% endblock %}
+
+{% block scriptself %}
+    <script type="text/javascript">
+      $(function () {
+        $('#datetimepicker5').datetimepicker({
+          defaultDate: "{{ time|first|date:"m/d/Y" }}",
+          viewMode: 'days',
+          enabledHours:[0],
+          enabledDates: [
+            {% for d in  time%}
+              {% if forloop.counter0 > 0 %}
+                moment("{{ d|date:"m/d/Y" }}"),
+              {% endif %}
+            {% endfor %}
+          ]
+        });
+      });
+    </script>
+{% endblock %}

@@ -28,6 +28,9 @@
     <link rel="stylesheet" type="text/css"
           href="{% static 'sunknightsapp/css/sunknights.css' %}?{% now "U" %}"/>
     <link rel="stylesheet" type="text/css" href="{% static 'sunknightsapp/css/bootstrap.css' %}?{% now "U" %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'sunknightsapp/css/bootstrap-datetimepicker.min.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'sunknightsapp/css/bootstrap-datetimepicker-standalone.css' %}"/>
+
     <link rel="stylesheet" type="text/css" href="{% static 'sunknightsapp/css/tanks.css' %}?{% now "U" %}"/>
     <link rel="shortcut icon" type="image/png" href="https://cdn.discordapp.com/icons/252525368865456130/ae262cd29cc01ffeb863ae65b4e5b3fb.jpg"/>
     <!--[if lt IE 9]>
@@ -95,9 +98,21 @@
 
             {% endif %}
             {% if user.is_points_manager %}
-                <a href="{% url 'managesubmissions' %}" class="sk-navbar-link blackc">
-                    <span class="fa fa-gavel"></span> Manage Submissions
-                </a>
+                <div class="btn-group dropdown">
+                    <a class="btn btn-secondary dropdown-toggle infodrop" href="#" id="dropdownMenuLink"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                       style="background: none;border: none !important;">
+                        <span class="fa fa-gavel"></span> Manage Points
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <a class="dropdown-item blackc" href="{% url 'managesubmissions' %}">Manage Submissions</a>
+                        <a class="dropdown-item blackc" href="{% url 'managequests' %}">Manage Quests</a>
+                    </div>
+                </div>
+
+
+
+
 
             {% endif %}
 
@@ -186,6 +201,7 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/js/bootstrap-select.min.js"></script>
 <script src="{% static 'sunknightsapp/js/ajax-bootstrap-select.js' %}"></script>
+<script src="{% static 'sunknightsapp/js/bootstrap-datetimepicker.min.js' %}"></script>
 <script src="{% static 'sunknightsapp/js/usersearch.js' %}"></script>
 
 {% block scriptload %}{% endblock %}

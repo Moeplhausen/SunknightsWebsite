@@ -15,6 +15,8 @@ class PointsInfo(models.Model):
     masterypoints = models.DecimalField(decimal_places=2, max_digits=19, default=0, db_index=True)
     totalpoints = models.DecimalField(decimal_places=2, max_digits=19, default=0, db_index=True)
 
+    permquestcd=models.DateTimeField(auto_now_add=True,db_index=True)
+
     elo = models.PositiveIntegerField(default=ELO_DEFAULT)
 
     @property
@@ -30,6 +32,19 @@ class PointsInfo(models.Model):
     def create_postinfo(sender, instance=None, created=False, **kwargs):
         if created:
             PointsInfo.objects.create(id=instance.id,user=instance)
+
+
+    @property
+    def daily_quests(self):
+        from .daily_quest import DailyQuest
+        from datetime import timedelta
+        import django
+        now=django.utils.timezone.now()
+        datesubtract =  - timedelta(days=1)
+        quests = DailyQuest.objects.filter(permed=False,date__range=(datesubtract, now)).order_by('-date')
+        return quests
+
+
 
 
 @receiver(post_save, sender=PointsInfo)

@@ -13,6 +13,7 @@ from ..forms.points_forms import SubmitPointsForm, RetriveUserSubmissionsPointsF
     RetrieveUsersLeaderPointForm, RetrieveUsersToFightAgainstForm, SubmitEventsQuestsForm,DecideEventQuestsSubmissionForm,RetrieveEventQuestsSubmissionsForm
 from ..forms.tournaments_forms import CreateTournamentForm, DeleteTournamentForm, RequestTournamentsForm
 from ..forms.misc_forms import ChangeDesc
+from ..forms.daily_quests_forms import SubmitQuestForm
 from ..models.clan_user import ClanUser
 from ..models.diep_gamemode import DiepGamemode
 from ..models.diep_tank import DiepTankInheritance, DiepTank
@@ -141,6 +142,27 @@ def manage_submissions(request):
                'retrieveuserfightssubmissionsid': AjaxAction.RETRIEVEFIGHTSSUBMISSIONS.value,
                'retrieveeventsquestsssubmissionsid': AjaxAction.RETRIEVEEVENTQUESTSSUBMISSIONS.value}
     return render(request, 'sunknightsapp/managesubmissions.html', context)
+
+@points_manager_required
+def manage_quests(request):
+    import datetime
+
+
+
+    curdate=datetime.date.today()
+    time=[curdate]
+
+    for i in range(1,7):
+        date=curdate+datetime.timedelta(i)
+        time.append(date)
+
+
+    context = {'time': time,
+
+    }
+    return render(request, 'sunknightsapp/managequests.html', context)
+
+
 
 
 @login_required
