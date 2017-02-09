@@ -46,6 +46,7 @@ urlpatterns = [
     url(r'^info/faq', views.helppage,{'helpstr': 'faq'}, name='faq'),
     url(r'^info/yt', views.helppage,{'helpstr': 'yt'}, name='yt'),
     url(r'^info/invites', views.helppage,{'helpstr': 'invites'}, name='invites'),
+    url(r'^info/anokuuschool', views.helppage,{'helpstr': 'anokuuschool'}, name='anokuuschool'),
     url(r'^tankdraw', views.tankboard, name='tankboard'),
     url(r'^managesubmissions', views.manage_submissions, name='managesubmissions'),
     url(r'^api/',include(router.urls)),
