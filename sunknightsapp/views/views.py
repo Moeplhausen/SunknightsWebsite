@@ -1,32 +1,37 @@
+import json
+from datetime import timedelta
+
+import django
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import logout
 from django.http import JsonResponse
 from django.shortcuts import redirect
 from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
-import os
 
 from ..decorators.login_decorators import points_manager_required
 from ..enums.AjaxActions import AjaxAction
+from ..forms.misc_forms import ChangeDesc
+from ..forms.daily_quests_forms import SubmitQuestTaskForm,RequestQuestsForm
 from ..forms.points_forms import SubmitPointsForm, RetriveUserSubmissionsPointsForm, DecideUserPointSubmissionForm, \
     SubmitFightsForm, RetrieveFightsSubmissionsForm, DecideFightsSubmissionForm, RevertSubmissionForm, \
     RetrieveUsersLeaderPointForm, RetrieveUsersToFightAgainstForm, SubmitEventsQuestsForm,DecideEventQuestsSubmissionForm,RetrieveEventQuestsSubmissionsForm
 from ..forms.tournaments_forms import CreateTournamentForm, DeleteTournamentForm, RequestTournamentsForm
-from ..forms.misc_forms import ChangeDesc
-from ..forms.daily_quests_forms import SubmitQuestForm
 from ..models.clan_user import ClanUser
 from ..models.diep_gamemode import DiepGamemode
 from ..models.diep_tank import DiepTankInheritance, DiepTank
 from ..models.discord_roles import DiscordRole
-from ..models.points_info import PointsInfo
 from ..models.help_info import HelpInfo
-import json
+from ..models.points_info import PointsInfo
+from ..models.daily_quest import Quest
+import datetime
+
 
 
 def index(request):
     if request.user.is_authenticated():
-        tanks = DiepTank.objects.all()
-        gamemodes = DiepGamemode.objects.all()
+        tanks = DiepTank.objects.filter(diep_isDeleted=False)
+        gamemodes = DiepGamemode.objects.filter(diep_isDeleted=False)
 
         context = {'tanks': tanks, 'gamemodes': gamemodes, 'submitpointsform': SubmitPointsForm,
                    'submitfightsform': SubmitFightsForm,'submiteventsquestsform':SubmitEventsQuestsForm}
@@ -145,20 +150,34 @@ def manage_submissions(request):
 
 @points_manager_required
 def manage_quests(request):
-    import datetime
+
+    try:
+        permed=Quest.objects.filter(permed=True).get()
+    except Quest.DoesNotExist:
+        permed=Quest.objects.create(permed=True)
+    from ..models.utility.little_things import QUEST_TIER_OPTIONS
+
+    tiers=QUEST_TIER_OPTIONS
 
 
+    time=[]
+    for i in range(0,4):
+        now=(datetime.datetime.utcnow()+timedelta(days=i)).replace(hour=0,minute=0,second=0,microsecond=0)
+        try:
+            quest = Quest.objects.filter(date=now).get()
+        except Quest.DoesNotExist:
+            quest=Quest.objects.create()
+            quest.date=now
+            quest.save()
 
-    curdate=datetime.date.today()
-    time=[curdate]
-
-    for i in range(1,7):
-        date=curdate+datetime.timedelta(i)
-        time.append(date)
+        time.append(quest)
 
 
-    context = {'time': time,
-
+    context = {'dailies': time,
+               'permed':permed,
+               'tiers':tiers,
+               'submitquesttask':SubmitQuestTaskForm,
+               'requestquests':RequestQuestsForm,
     }
     return render(request, 'sunknightsapp/managequests.html', context)
 
@@ -178,7 +197,7 @@ def tankboard(request):
 @login_required
 @require_http_methods(["POST"])
 def ajaxhandler(request):
-    print(request.POST)
+    #print(request.POST)
 
     if "ajax_action_id" not in request.POST:
         return sendFailure(request, "No Ajax action specified.")
@@ -220,6 +239,10 @@ def ajaxhandler(request):
         form = RetrieveEventQuestsSubmissionsForm(request.POST)
     elif actionid is AjaxAction.CHANGEDESC.value:
         form = ChangeDesc(request.POST)
+    elif actionid is AjaxAction.SUBMITQUESTTASK.value:
+        form = SubmitQuestTaskForm(request.POST)
+    elif actionid is AjaxAction.RETRIEVEQUESTS.value:
+        form = RequestQuestsForm(request.POST)
 
     if form is None:
         return sendFailure(request, "No handler for this action installed.")

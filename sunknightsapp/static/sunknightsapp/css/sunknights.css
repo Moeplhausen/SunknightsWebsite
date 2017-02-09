@@ -34,10 +34,18 @@ body {
     border-radius: 3px;
 }
 
+.global-card{
+    padding:1em;
+}
+
+
 .selectize-control{
     width: 15em;
 }
 
+.actionquestbar{
+    float:right;
+}
 
 
 #masteries-table {
@@ -81,13 +89,40 @@ table.dataTable thead .sorting_desc_disabled
     )
 }
 
-.card, .guild-card-group-item, #user-stats, .sk-btn {
+.card, .guild-card-group-item, #user-stats, .sk-btn,.user-local-nav,.nav-item > a {
     background-color: transparent !important;
     background: linear-gradient(
             rgba(0, 0, 0, 0.15),
             rgba(0, 0, 0, 0.15)
     );
     border-radius: 5px;
+}
+
+.nav-item{
+    padding: 0.25em;
+}
+
+.inv-button{
+    background: transparent;
+    border: hidden;
+}
+
+.addquest{
+    margin-top: 1em;
+}
+.questtaskdiv{
+    margin-top:2em;
+}
+.pointsquest{
+    color:yellow;
+    margin-right: 0.5em;
+}
+
+.nav-item > a,.nav-item > a:hover,.nav-item >.active > a{
+    color:black !important;
+}
+.nav-link >a{
+    color:white;
 }
 
 #user-stats, #navbar-header {
@@ -152,6 +187,9 @@ table.dataTable thead .sorting_desc_disabled
     margin-bottom: 3em;
     padding: 0.5em;
 }
+
+
+
 
 #sk-logo {
     width: 37px;

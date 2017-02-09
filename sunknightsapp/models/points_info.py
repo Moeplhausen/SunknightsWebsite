@@ -36,12 +36,12 @@ class PointsInfo(models.Model):
 
     @property
     def daily_quests(self):
-        from .daily_quest import DailyQuest
+        from .daily_quest import Quest
         from datetime import timedelta
         import django
         now=django.utils.timezone.now()
-        datesubtract =  - timedelta(days=1)
-        quests = DailyQuest.objects.filter(permed=False,date__range=(datesubtract, now)).order_by('-date')
+        datesubtract =  now- timedelta(days=1)
+        quests = Quest.objects.filter(permed=False,date__range=(datesubtract, now)).order_by('-date')
         return quests
 
 

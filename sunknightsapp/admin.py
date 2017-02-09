@@ -5,7 +5,7 @@ from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.contrib.auth.models import Group
 
 from .models.clan_user import ClanUser, ClanUserRoles
-from .models.daily_quest import DailyQuest
+from .models.daily_quest import Quest
 from .models.diep_gamemode import DiepGamemode
 from .models.diep_tank import DiepTank,DiepTankInheritance
 from .models.discord_role_points import DiscordRolePoints
@@ -119,7 +119,7 @@ admin.site.register(DiepTankInheritance)
 admin.site.register(Mastery)
 #admin.site.register(BasicUserPointSubmission)
 admin.site.register(DiepGamemode)
-admin.site.register(DailyQuest)
+admin.site.register(Quest)
 admin.site.register(DiscordRolePoints)
 admin.site.register(SunKnightsBadgeRole)
 admin.site.register(HelpInfo)

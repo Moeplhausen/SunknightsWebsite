@@ -1,19 +1,79 @@
 {% extends "sunknightsapp/base.html" %}
 {% block content %}
+    {% for d in  dailies %}
 
-    <div class="row">
-        <div class='col-sm-6'>
-            <div class="form-group">
-                <div class='input-group date' id='datetimepicker5'>
-                    <input type='text' class="form-control" />
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
+        <div class="card">
+            <div class="card-block">
+                <h4 class="card-title">{{ d.date|date:"l m/d/Y" }}</h4>
+                <div class="card-text">
+                    {% for t in tiers %}
+                        <div class="card">
+                            <div class="card-block">
+                                <h4 class="card-title">{{ t|last }}</h4>
+                                <div class="card-text" id="{{ d.id }}-{{ t|first }}">
+                                </div>
+                                <div class="actionquestbar addquest">
+                                    <form class="addquesttask" method="post">
+                                        {% csrf_token %}
+                                        {{ submitquesttask.ajax_action_id }}
+                                        <input id="quest_id" name="quest" type="hidden" value="{{ d.id }}">
+                                        <input id="tier_nr" name="tier" type="hidden" value="{{ t|first }}">
+                                        <input id="quest_text" name="questtext" type="hidden" value="None">
+                                        <button class="fa fa-plus inv-button" type="submit"
+                                                aria-hidden="true"></button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                    <div class="card">
+                        <div class="card-block">
+                            <h4 class="card-title">Multipliers</h4>
+                            <div class="card-text" id="">
+                            </div>
+                            <div class="actionquestbar addquest">
+                                <form class="addquesttask" method="post">
+                                    {% csrf_token %}
+                                    {{ submitquesttask.ajax_action_id }}
+                                    <button class="fa fa-plus inv-button" type="submit"
+                                            aria-hidden="true"></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="card">
+                        <div class="card-block">
+                            <h4 class="card-title">Build</h4>
+                            <div class="card-text" id="">
+                            </div>
+                            <div class="actionquestbar addquest">
+                                <form class="addquesttask" method="post">
+                                    {% csrf_token %}
+                                    {{ submitquesttask.ajax_action_id }}
+
+                                    <button class="fa fa-plus inv-button" type="submit"
+                                            aria-hidden="true"></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+
+
                 </div>
             </div>
         </div>
-    </div>
-{{ time|first|date:"m/d/Y" }}
+
+    {% endfor %}
+
+
+    <form id="retrievequests" method="post">
+        {% csrf_token %}
+        {{ requestquests.ajax_action_id }}
+    </form>
 
 
 {% endblock %}
@@ -21,17 +81,71 @@
 {% block scriptself %}
     <script type="text/javascript">
       $(function () {
-        $('#datetimepicker5').datetimepicker({
-          defaultDate: "{{ time|first|date:"m/d/Y" }}",
-          viewMode: 'days',
-          enabledHours:[0],
-          enabledDates: [
-            {% for d in  time%}
-              {% if forloop.counter0 > 0 %}
-                moment("{{ d|date:"m/d/Y" }}"),
-              {% endif %}
-            {% endfor %}
-          ]
+
+        var data={'ajax_action_id':window.ajaxactions.RETRIEVEQUESTS}
+
+        sunKnightsJsonRequest(data, function (result, data) {
+          if (result) {
+            var quests=data.message.data;
+
+            for (var i=0;i<quests.length;i++){
+              var quest=quests[i]
+              var id=quest.id
+              var permed=quest.permed
+              var multipliers=quest.multipliers
+              var tasks=quest.tasks
+
+              if (!permed){
+                console.log(quest)
+
+                for (var k=0;k<tasks.length;k++) {
+                  var task=tasks[k]
+
+                  if (task.deleted)
+                    continue
+                  var taskid=task.id
+                  var points=task.points
+                  var tier=task.tier
+                  var questtext=task.questtext
+
+                  var cardtextdividname = id + "-" +tier;
+
+                  var edit='<button class="fa fa-pencil inv-button" type="submit" aria-hidden="true"></button>'
+                  var remove='<button class="fa fa-times inv-button" type="submit" aria-hidden="true"></button>'
+                  var actionsbuttonstext='<div class="actionquestbar">'+edit+remove+'</div>'
+
+
+                  var inserttext="<div class=\"questtaskdiv\"><span class=\"pointsquest\">"+points+" Points:</span>"+questtext+actionsbuttonstext+"</div>"
+
+
+
+                  var cardtextdiv = $('#'+cardtextdividname).append(inserttext)
+                }
+
+              }
+
+            }
+
+          }
+          else {
+            console.log('fuck this shit')
+          }
+        });
+
+
+        $('.addquesttask').on('submit', function (event) {
+          console.log()
+          event.preventDefault();
+          var form = new FormData(this);
+          sunKnightsJsonRequest(form, function (result, data) {
+            if (result) {
+              console.log('refresh view?')
+            }
+            else {
+              console.log('fuck this shit')
+            }
+          }, false, false);
+          this.reset();
         });
       });
     </script>

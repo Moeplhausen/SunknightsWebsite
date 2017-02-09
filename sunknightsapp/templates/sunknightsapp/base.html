@@ -28,11 +28,13 @@
     <link rel="stylesheet" type="text/css"
           href="{% static 'sunknightsapp/css/sunknights.css' %}?{% now "U" %}"/>
     <link rel="stylesheet" type="text/css" href="{% static 'sunknightsapp/css/bootstrap.css' %}?{% now "U" %}"/>
-<link rel="stylesheet" type="text/css" href="{% static 'sunknightsapp/css/bootstrap-datetimepicker.min.css' %}"/>
-    <link rel="stylesheet" type="text/css" href="{% static 'sunknightsapp/css/bootstrap-datetimepicker-standalone.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'sunknightsapp/css/bootstrap-datetimepicker.min.css' %}"/>
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'sunknightsapp/css/bootstrap-datetimepicker-standalone.css' %}"/>
 
     <link rel="stylesheet" type="text/css" href="{% static 'sunknightsapp/css/tanks.css' %}?{% now "U" %}"/>
-    <link rel="shortcut icon" type="image/png" href="https://cdn.discordapp.com/icons/252525368865456130/ae262cd29cc01ffeb863ae65b4e5b3fb.jpg"/>
+    <link rel="shortcut icon" type="image/png"
+          href="https://cdn.discordapp.com/icons/252525368865456130/ae262cd29cc01ffeb863ae65b4e5b3fb.jpg"/>
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <![endif]-->
@@ -160,8 +162,9 @@
         <div id="alertsContainer">
 
         </div>
-
-        {% block content %} {% endblock %}
+        <div class="card global-card">
+            {% block content %} {% endblock %}
+        </div>
     </div>
 
 </div> <!-- /container -->
@@ -177,12 +180,13 @@
 <script>
   ajaxhandlerurl = '{% url 'ajaxhandler' %}'
   ajaxactions =
-    {{ ajaxactions|safe }}
+  {{ ajaxactions|safe }}
 </script>
 <script src="{% static 'sunknightsapp/js/simple.js' %}?{% now "U" %}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.6.3/showdown.min.js"></script>
 <script src="{% static 'sunknightsapp/js/loadmd.js' %}?{% now "U" %}"></script>
-{% if text %}<script>loadMd("{{text}}")</script>{% endif %}
+{% if text %}
+    <script>loadMd("{{text}}")</script>{% endif %}
 <script src="{% static 'sunknightsapp/js/userdesc.js' %}?{% now "U" %}"></script>
 <script src="https://malihu.github.io/custom-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
 <script src="{% static 'sunknightsapp/js/moment.js' %}?{% now "U" %}"></script>
@@ -206,12 +210,12 @@
 
 {% block scriptload %}{% endblock %}
 <script>
-    var csrftoken = $.cookie('csrftoken');
+  var csrftoken = $.cookie('csrftoken');
 
-    $(document).ready(function () {
+  $(document).ready(function () {
 
-        {% block scripts %}{% endblock %}
-    });
+    {% block scripts %}{% endblock %}
+  });
 </script>
 {% block scriptself %}
 

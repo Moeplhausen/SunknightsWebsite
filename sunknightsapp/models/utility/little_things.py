@@ -8,6 +8,12 @@ MASTERY_TIER_POINTS = (
     (2, 'Tier 2', 350000, 15),
     (3, 'Tier 3', 500000, 30),
 )
+QUEST_TIER_OPTIONS=(
+    (1,'Tier 1'),
+    (2,'Tier 2'),
+    (3,'Tier 3'),
+    (4,'Bonus'),
+)
 
 ELO_K=40
 ELO_DEFAULT=1000

@@ -3,14 +3,14 @@ from ..models.point_submission import PointsManagerAction, BasicUserPointSubmiss
     OneOnOneFightSubmission
 from rest_framework_bulk import BulkListSerializer, BulkSerializerMixin
 from .clan_user_serializer import ClanUserSerializerDiscord_id
-from .daily_quest_serializer import DailyQuestSerializer
+from .daily_quest_serializer import QuestSerializer
 from .tank_serializer import DiepTankSimpleSerializer
 from .gamemode_serializer import GamemodeSerializer
 from .clan_user_serializer import PointsInfoBasicSerializer
 
 
 class PointsManagerActionSerializer(BulkSerializerMixin, serializers.ModelSerializer):
-    daily_quest = DailyQuestSerializer(many=False, read_only=True)
+    daily_quest = QuestSerializer(many=False, read_only=True)
 
     class Meta:
         model = PointsManagerAction
@@ -31,7 +31,7 @@ class BasicPointsSubmissionSerializer(BulkSerializerMixin, serializers.ModelSeri
 
 
 class BasicUserPointSubmissionSerializer(BulkSerializerMixin, serializers.ModelSerializer):
-    daily_quest = DailyQuestSerializer(many=False, read_only=True)
+    daily_quest = QuestSerializer(many=False, read_only=True)
     tank = DiepTankSimpleSerializer(many=False, read_only=True)
     gamemode = GamemodeSerializer(many=False, read_only=True)
     pointsinfo = PointsInfoBasicSerializer(many=False, read_only=True)
@@ -45,7 +45,7 @@ class BasicUserPointSubmissionSerializer(BulkSerializerMixin, serializers.ModelS
 
 
 class BasicUserPointSubmissionProofusedSerializer(BulkSerializerMixin, serializers.ModelSerializer):
-    daily_quest = DailyQuestSerializer(many=False, read_only=True)
+    daily_quest = QuestSerializer(many=False, read_only=True)
     tank = DiepTankSimpleSerializer(many=False, read_only=True)
     gamemode = GamemodeSerializer(many=False, read_only=True)
     pointsinfo = PointsInfoBasicSerializer(many=False, read_only=True)
@@ -63,7 +63,7 @@ class BasicUserPointSubmissionProofusedSerializer(BulkSerializerMixin, serialize
 
 
 class BasicEventQuestsSubmissionSerializer(BulkSerializerMixin, serializers.ModelSerializer):
-    daily_quest = DailyQuestSerializer(many=False, read_only=True)
+    daily_quest = QuestSerializer(many=False, read_only=True)
     pointsinfo = PointsInfoBasicSerializer(many=False, read_only=True)
 
     class Meta:
