@@ -98,6 +98,36 @@ class UserAdmin(BaseUserAdmin):
     filter_horizontal = ()
 
 
+class PointsInfoAdmin(admin.ModelAdmin):
+    list_display = ('id','user','oldpoints','currentpoints','masterypoints','totalpoints','elo')
+    ordering = ('id',)
+
+
+class DiscordRolePointsAdmin(admin.ModelAdmin):
+    list_display = ('discord_role','points')
+    ordering = ('-points',)
+
+class DiepTankAdmin(admin.ModelAdmin):
+    list_display = ('name','diep_isDeleted','opness','tier')
+    ordering = ('name',)
+
+class DiepTankInheritanceAdmin(admin.ModelAdmin):
+    list_display = ('me','parent')
+    ordering = ('me',)
+
+class DiscordRoleAdmin(admin.ModelAdmin):
+    list_display = ('name','can_manage_points','can_manage_wars','is_admin','discord_isDeleted','guild_leader_role','is_clan_guild')
+    ordering = ('name',)
+
+class SunKnightsBadgeRoleAdmin(admin.ModelAdmin):
+    list_display = ('name','tank')
+    ordering = ('name',)
+
+class HelpInfoAdmin(admin.ModelAdmin):
+    list_display = ('name','date','last_modifier','helpinfo')
+    ordering = ('name',)
+
+
 # Now register the new UserAdmin...
 admin.site.register(ClanUser, UserAdmin)
 # ... and, since we're not using Django's built-in permissions,
@@ -105,21 +135,22 @@ admin.site.register(ClanUser, UserAdmin)
 admin.site.unregister(Group)
 
 admin.site.register(DiscordServer)
-admin.site.register(DiscordRole)
+admin.site.register(DiscordRole,DiscordRoleAdmin)
 #admin.site.register(GuildFight)
 #admin.site.register(GuildFightParticipation)
-admin.site.register(PointsInfo)
+admin.site.register(PointsInfo,PointsInfoAdmin)
 #admin.site.register(PointsManagerAction)
 #admin.site.register(OneOnOneFightSubmission)
 admin.site.register(ClanUserRoles)
 admin.site.register(Tournament)
 admin.site.register(TournamentFightConnector)
+<<<<<<< HEAD
 admin.site.register(DiepTank)
 admin.site.register(DiepTankInheritance)
 admin.site.register(Mastery)
 #admin.site.register(BasicUserPointSubmission)
 admin.site.register(DiepGamemode)
 admin.site.register(Quest)
-admin.site.register(DiscordRolePoints)
-admin.site.register(SunKnightsBadgeRole)
-admin.site.register(HelpInfo)
+admin.site.register(DiscordRolePoints,DiscordRolePointsAdmin)
+admin.site.register(SunKnightsBadgeRole,SunKnightsBadgeRoleAdmin)
+admin.site.register(HelpInfo,HelpInfoAdmin)

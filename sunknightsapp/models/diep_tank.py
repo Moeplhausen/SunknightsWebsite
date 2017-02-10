@@ -8,10 +8,15 @@ class DiepTank(models.Model):
         (4,'Tier 4')
     )
 
+    OPNESS_OPTIONS=(
+        (1,'Tier 1'),
+        (2,'Tier 2'),
+        (3,'Tier 3')
+    )
 
     name=models.CharField(max_length=30,unique=True)
     diep_isDeleted=models.BooleanField(default=False)
-    multiplier=models.DecimalField(decimal_places=2, max_digits=3, default=1.0)
+    opness=models.PositiveSmallIntegerField(choices=OPNESS_OPTIONS,default=OPNESS_OPTIONS[0][0])
 
     tier=models.PositiveSmallIntegerField(choices=TIER_OPTIONS)
 
