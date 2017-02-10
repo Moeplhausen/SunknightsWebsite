@@ -2,11 +2,15 @@ MASTERY_TIER_OPTIONS = (
     (1, 'Tier 1'),
     (2, 'Tier 2'),
     (3, 'Tier 3'),
+    (4, 'Tier 4'),
+    (5, 'Tier 5'),
 )
 MASTERY_TIER_POINTS = (
     (1, 'Tier 1', 200000, 5),
     (2, 'Tier 2', 350000, 15),
     (3, 'Tier 3', 500000, 30),
+    (4, 'Tier 4', 750000, 50),
+    (5, 'Tier 5', 1000000, 75),
 )
 QUEST_TIER_OPTIONS=(
     (1,'Tier 1'),
@@ -61,7 +65,11 @@ def manageElo(submission):
 
 
 def getMasteryRankByPoints(points):
-    if (points >= MASTERY_TIER_POINTS[2][2]):
+    if (points >= MASTERY_TIER_POINTS[4][2]):
+        return 5
+    elif (points >= MASTERY_TIER_POINTS[3][2]):
+        return 4
+    elif (points >= MASTERY_TIER_POINTS[2][2]):
         return 3
     elif points >= MASTERY_TIER_POINTS[1][2]:
         return 2

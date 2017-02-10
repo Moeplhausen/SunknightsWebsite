@@ -32,14 +32,13 @@
                             <h4 class="card-title">Multipliers</h4>
                             <div class="card-text" id="">
                             </div>
-                            <div class="actionquestbar addquest">
                                 <form class="addquesttask" method="post">
                                     {% csrf_token %}
-                                    {{ submitquesttask.ajax_action_id }}
+                                    {{ submitmultiplier.ajax_action_id }}
+                                    <input id="quest_id" name="quest" type="hidden" value="{{ d.id }}">
                                     <button class="fa fa-plus inv-button" type="submit"
                                             aria-hidden="true"></button>
                                 </form>
-                            </div>
                         </div>
                     </div>
 
@@ -52,17 +51,15 @@
                             <div class="actionquestbar addquest">
                                 <form class="addquesttask" method="post">
                                     {% csrf_token %}
-                                    {{ submitquesttask.ajax_action_id }}
-
+                                    {{ submitbuild.ajax_action_id }}
+                                    <input id="quest_id" name="quest" type="hidden" value="{{ d.id }}">
+                                    <input id="build_text" name="build" type="text" value="None">
                                     <button class="fa fa-plus inv-button" type="submit"
                                             aria-hidden="true"></button>
                                 </form>
                             </div>
                         </div>
                     </div>
-
-
-
                 </div>
             </div>
         </div>
@@ -82,44 +79,162 @@
     <script type="text/javascript">
       $(function () {
 
-        var data={'ajax_action_id':window.ajaxactions.RETRIEVEQUESTS}
+        var data = {'ajax_action_id': window.ajaxactions.RETRIEVEQUESTS}
+
+
+        function addTaskToQuest(id, task) {
+          function buildNewContentText(taskid, points, questtext, actionbuttonstext) {
+
+            return "<div class=\"questtaskdiv\" id=\"task-" + taskid + "\"><ul><li><span class=\"pointsquest\">" + points + " Points:</span><ul><li>" + sh.makeHtml(questtext).replace(/^<p>|<\/p>$/g, '')+"</li></ul></li></ul>" + actionbuttonstext + "</div>"
+          }
+
+
+          var taskid = task.id
+          var points = task.points
+          var tier = task.tier
+          var questtext = task.questtext
+
+          var cardtextdividname = id + "-" + tier;
+
+          var edit = '<button class="fa fa-pencil inv-button" id="edittask-' + taskid + '" type="submit" aria-hidden="true"></button>'
+          var remove = '<button class="fa fa-times inv-button" id="removetask-' + taskid + '" type="submit" aria-hidden="true"></button>'
+          var actionsbuttonstext = '<div class="actionquestbar">' + edit + remove + '</div>'
+
+
+          var inserttext = buildNewContentText(taskid, points, questtext, actionsbuttonstext)
+
+
+          var cardtextdiv = $('#' + cardtextdividname).append(inserttext)
+
+
+          function addRemoveTaskEvent() {
+            $('#removetask-' + taskid).click(function (event) {
+              elem = $('#task-' + taskid);
+              var removedata = {'ajax_action_id': window.ajaxactions.DELETEQUESTTASK, 'pk_id': taskid}
+
+
+              sunKnightsJsonRequest(removedata, function (result, data) {
+                if (result) {
+                  var output = data.message.data;
+                  console.log(output)
+                  elem.remove()
+
+                }
+                else {
+                  console.log('fuck this shit')
+                }
+              });
+            })
+          }
+
+          addRemoveTaskEvent()
+
+
+          $('#removetask-' + taskid).click(function (event) {
+            elem = $('#task-' + taskid);
+            var removedata = {'ajax_action_id': window.ajaxactions.DELETEQUESTTASK, 'pk_id': taskid}
+
+
+            sunKnightsJsonRequest(removedata, function (result, data) {
+              if (result) {
+                var output = data.message.data;
+                console.log(output)
+                elem.remove()
+
+              }
+              else {
+                console.log('fuck this shit')
+              }
+            });
+          })
+
+
+          function addEditTaskEvent() {
+            $('#edittask-' + taskid).click(function (event) {
+              elem = $('#task-' + taskid);
+
+              var replacewithtext = `<form class="editquesttask" id="questtaskeditform-` + taskid + `">
+              {% csrf_token %}
+              {{ editquesttask.ajax_action_id }}
+              <input id="task-id" name="pk_id" type="hidden" value="` + taskid + `">
+              <div class="form-group">
+                  <label for="points">How many points is this quest worth?</label>
+                  <input name="points" type="number" class="form-control" value="` + points + `">
+              </div>
+              <div class="form-group">
+                  <label for="questtext">Quest Text</label>
+                  <textarea  name="questtext" rows="" class="form-control">` + questtext + `</textarea>
+              </div>
+              <button class="fa fa-floppy-o inv-button" id="savetask-` + taskid + `" type="submit" aria-hidden="true"></button>
+              <button class="fa fa-ban inv-button" id="aborttask-` + taskid + `" aria-hidden="true"></button>
+              </form>
+              `;
+
+
+              elem.html(replacewithtext)
+
+
+              $('#aborttask-' + taskid).click(function (event) {
+                event.preventDefault();
+                console.log('yolo')
+                elem.html(inserttext)
+                addRemoveTaskEvent()
+                addEditTaskEvent()
+
+              });
+              $('#questtaskeditform-' + taskid).on('submit', function (event) {
+                event.preventDefault();
+
+                var form = new FormData(this);
+                sunKnightsJsonRequest(form, function (result, data) {
+                  if (result) {
+                    var data = data.message.data
+                    questtext = data.questtext
+                    points = data.points
+                    inserttext = buildNewContentText(taskid, points, questtext, actionsbuttonstext)
+
+                    elem.html(inserttext)
+                    addRemoveTaskEvent()
+                    addEditTaskEvent()
+                  }
+                  else {
+                    console.log('fuck this shit')
+                  }
+                }, false, false);
+                this.reset();
+              });
+
+
+            });
+
+          }
+
+          addEditTaskEvent()
+
+
+        }
+
 
         sunKnightsJsonRequest(data, function (result, data) {
           if (result) {
-            var quests=data.message.data;
+            var quests = data.message.data;
 
-            for (var i=0;i<quests.length;i++){
-              var quest=quests[i]
-              var id=quest.id
-              var permed=quest.permed
-              var multipliers=quest.multipliers
-              var tasks=quest.tasks
+            for (var i = 0; i < quests.length; i++) {
+              var quest = quests[i]
+              var id = quest.id
+              var permed = quest.permed
+              var multipliers = quest.multipliers
+              var tasks = quest.tasks
 
-              if (!permed){
-                console.log(quest)
+              if (!permed) {
 
-                for (var k=0;k<tasks.length;k++) {
-                  var task=tasks[k]
+                for (var k = 0; k < tasks.length; k++) {
+                  var task = tasks[k]
 
                   if (task.deleted)
                     continue
-                  var taskid=task.id
-                  var points=task.points
-                  var tier=task.tier
-                  var questtext=task.questtext
+                  addTaskToQuest(id, task)
 
-                  var cardtextdividname = id + "-" +tier;
-
-                  var edit='<button class="fa fa-pencil inv-button" type="submit" aria-hidden="true"></button>'
-                  var remove='<button class="fa fa-times inv-button" type="submit" aria-hidden="true"></button>'
-                  var actionsbuttonstext='<div class="actionquestbar">'+edit+remove+'</div>'
-
-
-                  var inserttext="<div class=\"questtaskdiv\"><span class=\"pointsquest\">"+points+" Points:</span>"+questtext+actionsbuttonstext+"</div>"
-
-
-
-                  var cardtextdiv = $('#'+cardtextdividname).append(inserttext)
                 }
 
               }
@@ -134,12 +249,14 @@
 
 
         $('.addquesttask').on('submit', function (event) {
-          console.log()
           event.preventDefault();
+          var elem = this
           var form = new FormData(this);
           sunKnightsJsonRequest(form, function (result, data) {
             if (result) {
-              console.log('refresh view?')
+              var data = data.message.data
+              var questid = data.quest
+              addTaskToQuest(questid, data)
             }
             else {
               console.log('fuck this shit')

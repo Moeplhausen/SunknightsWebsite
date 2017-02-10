@@ -1,11 +1,11 @@
 from rest_framework import serializers
-from ..models.daily_quest import Quest,Questbuild,QuestTankMultiplier,QuestTask
+from ..models.daily_quest import Quest,QuestBuild,QuestTankMultiplier,QuestTask
 from rest_framework_bulk import BulkListSerializer,BulkSerializerMixin
 
 class QuestBuildSerializer(BulkSerializerMixin, serializers.ModelSerializer):
 
     class Meta:
-        model=Questbuild
+        model=QuestBuild
         fields=('__all__')
         list_serializer_class = BulkListSerializer
 

@@ -2,8 +2,6 @@ from django import forms
 from django.forms import ModelForm
 from django.http import JsonResponse
 
-from ..enums.AjaxActions import AjaxAction
-
 
 class BaseForm(ModelForm):
     ajax_action_id = forms.IntegerField(min_value=0, widget=forms.HiddenInput(), required=True)

@@ -12,10 +12,13 @@ from django.views.decorators.http import require_http_methods
 from ..decorators.login_decorators import points_manager_required
 from ..enums.AjaxActions import AjaxAction
 from ..forms.misc_forms import ChangeDesc
-from ..forms.daily_quests_forms import SubmitQuestTaskForm,RequestQuestsForm
+from ..forms.daily_quests_forms import SubmitQuestTaskForm, RequestQuestsForm, EditQuestTaskForm, DeleteQuestTaskForm, \
+    DeleteMultiplierForm, DeleteQuestBuildForm, EditMultiplierForm, EditQuestBuildForm, SubmitMultiplierForm, \
+    SubmitBuildForm
 from ..forms.points_forms import SubmitPointsForm, RetriveUserSubmissionsPointsForm, DecideUserPointSubmissionForm, \
     SubmitFightsForm, RetrieveFightsSubmissionsForm, DecideFightsSubmissionForm, RevertSubmissionForm, \
-    RetrieveUsersLeaderPointForm, RetrieveUsersToFightAgainstForm, SubmitEventsQuestsForm,DecideEventQuestsSubmissionForm,RetrieveEventQuestsSubmissionsForm
+    RetrieveUsersLeaderPointForm, RetrieveUsersToFightAgainstForm, SubmitEventsQuestsForm, \
+    DecideEventQuestsSubmissionForm, RetrieveEventQuestsSubmissionsForm
 from ..forms.tournaments_forms import CreateTournamentForm, DeleteTournamentForm, RequestTournamentsForm
 from ..models.clan_user import ClanUser
 from ..models.diep_gamemode import DiepGamemode
@@ -27,14 +30,13 @@ from ..models.daily_quest import Quest
 import datetime
 
 
-
 def index(request):
     if request.user.is_authenticated():
         tanks = DiepTank.objects.filter(diep_isDeleted=False)
         gamemodes = DiepGamemode.objects.filter(diep_isDeleted=False)
 
         context = {'tanks': tanks, 'gamemodes': gamemodes, 'submitpointsform': SubmitPointsForm,
-                   'submitfightsform': SubmitFightsForm,'submiteventsquestsform':SubmitEventsQuestsForm}
+                   'submitfightsform': SubmitFightsForm, 'submiteventsquestsform': SubmitEventsQuestsForm}
         context['revertsubmissionid'] = AjaxAction.REVERTSUBMISSION.value
         context['lookuser'] = ClanUser.objects.prefetch_related('pointsinfo', 'pointsinfo__masteries').get(
             id=request.user.id)
@@ -81,9 +83,10 @@ def leaderboard(request):
 
 @login_required
 def masteries(request):
-    tanks = DiepTank.objects.all().prefetch_related('mastery_set','mastery_set__fromSubmission','mastery_set__pointsinfo','mastery_set__pointsinfo__user')
+    tanks = DiepTank.objects.all().prefetch_related('mastery_set', 'mastery_set__fromSubmission',
+                                                    'mastery_set__pointsinfo', 'mastery_set__pointsinfo__user')
 
-    t = render(request, 'sunknightsapp/masteriesboard.html', {'tanks':tanks})
+    t = render(request, 'sunknightsapp/masteriesboard.html', {'tanks': tanks})
 
     return t
 
@@ -100,22 +103,22 @@ def about_us(request):
     context = {}
     return render(request, 'sunknightsapp/about_us.html', context)
 
-@require_http_methods(["GET", "POST"])
-def helppage(request,helpstr=""):
-    try:
-        help=HelpInfo.objects.get(name=helpstr)
-    except HelpInfo.DoesNotExist:
 
+@require_http_methods(["GET", "POST"])
+def helppage(request, helpstr=""):
+    try:
+        help = HelpInfo.objects.get(name=helpstr)
+    except HelpInfo.DoesNotExist:
 
         return render(request, 'sunknightsapp/info.html')
     else:
 
-        #if it was a post request, we assume that the users wants to update the help content
-        #so we check that 'newcontent' is in the request and that the user has permissions to modify the pagehel
+        # if it was a post request, we assume that the users wants to update the help content
+        # so we check that 'newcontent' is in the request and that the user has permissions to modify the pagehel
         if request.method == 'POST' and request.user.can_edit_info and 'newcontent' in request.POST:
-            newcontent=request.POST['newcontent']
-            help.helpinfo=newcontent
-            help.last_modifier=request.user
+            newcontent = request.POST['newcontent']
+            help.helpinfo = newcontent
+            help.last_modifier = request.user
             help.save()
 
         context = {'helpcontent': json.dumps(help.helpinfo)}
@@ -142,46 +145,45 @@ def pointrole(request, id):
 def manage_submissions(request):
     context = {'retrieveuserspointssubmissionsid': AjaxAction.RETRIEVEUSERSUBMISSIONS.value,
                'decideuserpointsubmissionid': AjaxAction.DECIDEUSERPOINTUSUBMISSION.value,
-               'decideeventquestssubmissionid':AjaxAction.DECIDEEVENTQUESTS.value,
+               'decideeventquestssubmissionid': AjaxAction.DECIDEEVENTQUESTS.value,
                'decidefightsubmissionid': AjaxAction.DECIDEFIGHTSSUBMISSION.value,
                'retrieveuserfightssubmissionsid': AjaxAction.RETRIEVEFIGHTSSUBMISSIONS.value,
                'retrieveeventsquestsssubmissionsid': AjaxAction.RETRIEVEEVENTQUESTSSUBMISSIONS.value}
     return render(request, 'sunknightsapp/managesubmissions.html', context)
 
+
 @points_manager_required
 def manage_quests(request):
-
     try:
-        permed=Quest.objects.filter(permed=True).get()
+        permed = Quest.objects.filter(permed=True).get()
     except Quest.DoesNotExist:
-        permed=Quest.objects.create(permed=True)
+        permed = Quest.objects.create(permed=True)
     from ..models.utility.little_things import QUEST_TIER_OPTIONS
 
-    tiers=QUEST_TIER_OPTIONS
+    tiers = QUEST_TIER_OPTIONS
 
-
-    time=[]
-    for i in range(0,4):
-        now=(datetime.datetime.utcnow()+timedelta(days=i)).replace(hour=0,minute=0,second=0,microsecond=0)
+    time = []
+    for i in range(0, 4):
+        now = (datetime.datetime.utcnow() + timedelta(days=i)).replace(hour=0, minute=0, second=0, microsecond=0)
         try:
             quest = Quest.objects.filter(date=now).get()
         except Quest.DoesNotExist:
-            quest=Quest.objects.create()
-            quest.date=now
+            quest = Quest.objects.create()
+            quest.date = now
             quest.save()
 
         time.append(quest)
 
-
     context = {'dailies': time,
-               'permed':permed,
-               'tiers':tiers,
-               'submitquesttask':SubmitQuestTaskForm,
-               'requestquests':RequestQuestsForm,
-    }
+               'permed': permed,
+               'tiers': tiers,
+               'submitquesttask': SubmitQuestTaskForm,
+               'requestquests': RequestQuestsForm,
+               'editquesttask': EditQuestTaskForm,
+               'submitmultiplier': SubmitMultiplierForm,
+               'submitbuild': SubmitBuildForm
+               }
     return render(request, 'sunknightsapp/managequests.html', context)
-
-
 
 
 @login_required
@@ -197,7 +199,7 @@ def tankboard(request):
 @login_required
 @require_http_methods(["POST"])
 def ajaxhandler(request):
-    #print(request.POST)
+    # print(request.POST)
 
     if "ajax_action_id" not in request.POST:
         return sendFailure(request, "No Ajax action specified.")
@@ -206,7 +208,7 @@ def ajaxhandler(request):
     actionid = request.POST['ajax_action_id']
     if actionid.isdigit():
         actionid = int(actionid)
-    print(AjaxAction.CREATETOURNAMENT.value)
+
     if actionid is AjaxAction.CREATETOURNAMENT.value:
         form = CreateTournamentForm(request.POST)
     elif actionid is AjaxAction.DELETETOURNAMENT.value:
@@ -243,6 +245,20 @@ def ajaxhandler(request):
         form = SubmitQuestTaskForm(request.POST)
     elif actionid is AjaxAction.RETRIEVEQUESTS.value:
         form = RequestQuestsForm(request.POST)
+    elif actionid is AjaxAction.DELETEQUESTTASK.value:
+        form = DeleteQuestTaskForm(request.POST)
+    elif actionid is AjaxAction.EDITQUESTTASK.value:
+        form = EditQuestTaskForm(request.POST)
+
+    elif actionid is AjaxAction.DELETEQUESTBUILD.value:
+        form = DeleteQuestBuildForm(request.POST)
+    elif actionid is AjaxAction.EDITQUESTBUILD.value:
+        form = EditQuestBuildForm(request.POST)
+
+    elif actionid is AjaxAction.REMOVEMULTIPLIER.value:
+        form = DeleteMultiplierForm(request.POST)
+    elif actionid is AjaxAction.EDITMULTIPLIER.value:
+        form = EditMultiplierForm(request.POST)
 
     if form is None:
         return sendFailure(request, "No handler for this action installed.")

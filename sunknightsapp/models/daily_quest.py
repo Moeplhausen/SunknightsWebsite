@@ -28,17 +28,19 @@ class QuestTask(models.Model):
 
 
 class QuestTankMultiplier(models.Model):
-    dailyquest=models.ForeignKey(Quest,related_name='multipliers',on_delete=models.CASCADE)
-    tank=models.ForeignKey(DiepTank)
+    quest=models.ForeignKey(Quest,related_name='multipliers',on_delete=models.CASCADE)
+    tank=models.ForeignKey(DiepTank,default=1)
     multiplier=models.DecimalField(decimal_places=2, max_digits=4, default=1)
+    manager=models.ForeignKey(ClanUser, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.tank.name
 
 
-class Questbuild(models.Model):
-    dailyquest=models.ForeignKey(Quest,related_name='builds',on_delete=models.CASCADE)
-    build=models.DecimalField(decimal_places=2, max_digits=4, default=1)
+class QuestBuild(models.Model):
+    quest=models.ForeignKey(Quest,related_name='builds',on_delete=models.CASCADE)
+    build=models.CharField(max_length=500)
+    manager=models.ForeignKey(ClanUser, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.build
