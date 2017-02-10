@@ -381,7 +381,7 @@
     "fields": {
       "name": "Basic Tank",
       "diep_isDeleted": false,
-      "multiplier": "2.00",
+      "opness":"2",
       "tier": 1
     }
   },
@@ -391,7 +391,7 @@
     "fields": {
       "name": "Annihilator",
       "diep_isDeleted": false,
-      "multiplier": "1.00",
+      "opness":"3",
       "tier": 4
     }
   },
@@ -401,7 +401,7 @@
     "fields": {
       "name": "Assassin",
       "diep_isDeleted": false,
-      "multiplier": "2.00",
+      "opness":"2",
       "tier": 3
     }
   },
@@ -411,7 +411,7 @@
     "fields": {
       "name": "Auto 3",
       "diep_isDeleted": false,
-      "multiplier": "3.00",
+      "opness":"1",
       "tier": 3
     }
   },
@@ -421,7 +421,7 @@
     "fields": {
       "name": "Auto 5",
       "diep_isDeleted": false,
-      "multiplier": "1.00",
+      "opness":"3",
       "tier": 4
     }
   },
@@ -431,7 +431,7 @@
     "fields": {
       "name": "Auto Gunner",
       "diep_isDeleted": false,
-      "multiplier": "1.00",
+      "opness":"3",
       "tier": 4
     }
   },
@@ -441,7 +441,7 @@
     "fields": {
       "name": "Auto Smasher",
       "diep_isDeleted": false,
-      "multiplier": "2.00",
+      "opness":"2",
       "tier": 4
     }
   },
@@ -451,7 +451,7 @@
     "fields": {
       "name": "Auto Trapper",
       "diep_isDeleted": false,
-      "multiplier": "2.00",
+      "opness":"2",
       "tier": 4
     }
   },
@@ -461,7 +461,7 @@
     "fields": {
       "name": "Battleship",
       "diep_isDeleted": false,
-      "multiplier": "3.00",
+      "opness":"1",
       "tier": 4
     }
   },
@@ -471,7 +471,7 @@
     "fields": {
       "name": "Booster",
       "diep_isDeleted": false,
-      "multiplier": "1.00",
+      "opness":"3",
       "tier": 4
     }
   },
@@ -481,7 +481,7 @@
     "fields": {
       "name": "Destroyer",
       "diep_isDeleted": false,
-      "multiplier": "1.00",
+      "opness":"3",
       "tier": 3
     }
   },
@@ -491,7 +491,7 @@
     "fields": {
       "name": "Factory",
       "diep_isDeleted": false,
-      "multiplier": "1.00",
+      "opness":"3",
       "tier": 4
     }
   },
@@ -501,7 +501,7 @@
     "fields": {
       "name": "Fighter",
       "diep_isDeleted": false,
-      "multiplier": "1.00",
+      "opness":"3",
       "tier": 4
     }
   },
@@ -511,7 +511,7 @@
     "fields": {
       "name": "Flank Guard",
       "diep_isDeleted": false,
-      "multiplier": "2.00",
+      "opness":"2",
       "tier": 2
     }
   },
@@ -521,7 +521,7 @@
     "fields": {
       "name": "Gunner",
       "diep_isDeleted": false,
-      "multiplier": "2.00",
+      "opness":"2",
       "tier": 3
     }
   },
@@ -531,7 +531,7 @@
     "fields": {
       "name": "Gunner Trapper",
       "diep_isDeleted": false,
-      "multiplier": "2.00",
+      "opness":"2",
       "tier": 4
     }
   },
@@ -541,7 +541,7 @@
     "fields": {
       "name": "Hunter",
       "diep_isDeleted": false,
-      "multiplier": "2.00",
+      "opness":"2",
       "tier": 3
     }
   },
@@ -551,7 +551,7 @@
     "fields": {
       "name": "Hybrid",
       "diep_isDeleted": false,
-      "multiplier": "1.00",
+      "opness":"3",
       "tier": 4
     }
   },
@@ -561,7 +561,7 @@
     "fields": {
       "name": "Landmine",
       "diep_isDeleted": false,
-      "multiplier": "2.00",
+      "opness":"2",
       "tier": 4
     }
   },
@@ -571,7 +571,7 @@
     "fields": {
       "name": "Machine Gun",
       "diep_isDeleted": false,
-      "multiplier": "2.00",
+      "opness":"2",
       "tier": 2
     }
   },
@@ -581,7 +581,7 @@
     "fields": {
       "name": "Manager",
       "diep_isDeleted": false,
-      "multiplier": "1.00",
+      "opness":"3",
       "tier": 4
     }
   },
@@ -591,7 +591,7 @@
     "fields": {
       "name": "Mega Trapper",
       "diep_isDeleted": false,
-      "multiplier": "3.00",
+      "opness":"1",
       "tier": 4
     }
   },
@@ -601,7 +601,7 @@
     "fields": {
       "name": "Necromancer",
       "diep_isDeleted": false,
-      "multiplier": "1.00",
+      "opness":"3",
       "tier": 4
     }
   },
@@ -611,7 +611,7 @@
     "fields": {
       "name": "Octo Tank",
       "diep_isDeleted": false,
-      "multiplier": "1.00",
+      "opness":"3",
       "tier": 4
     }
   },
@@ -621,7 +621,7 @@
     "fields": {
       "name": "Overlord",
       "diep_isDeleted": false,
-      "multiplier": "1.00",
+      "opness":"3",
       "tier": 4
     }
   },
@@ -631,7 +631,7 @@
     "fields": {
       "name": "Overseer",
       "diep_isDeleted": false,
-      "multiplier": "2.00",
+      "opness":"2",
       "tier": 3
     }
   },
@@ -641,7 +641,7 @@
     "fields": {
       "name": "Overtrapper",
       "diep_isDeleted": false,
-      "multiplier": "3.00",
+      "opness":"1",
       "tier": 4
     }
   },
@@ -651,7 +651,7 @@
     "fields": {
       "name": "Penta Shot",
       "diep_isDeleted": false,
-      "multiplier": "1.00",
+      "opness":"3",
       "tier": 4
     }
   },
@@ -661,7 +661,7 @@
     "fields": {
       "name": "Predator",
       "diep_isDeleted": false,
-      "multiplier": "1.00",
+      "opness":"3",
       "tier": 4
     }
   },
@@ -671,7 +671,7 @@
     "fields": {
       "name": "Quad Tank",
       "diep_isDeleted": false,
-      "multiplier": "2.00",
+      "opness":"2",
       "tier": 3
     }
   },
@@ -681,7 +681,7 @@
     "fields": {
       "name": "Ranger",
       "diep_isDeleted": false,
-      "multiplier": "1.00",
+      "opness":"3",
       "tier": 4
     }
   },
@@ -691,7 +691,7 @@
     "fields": {
       "name": "Smasher",
       "diep_isDeleted": false,
-      "multiplier": "2.00",
+      "opness":"2",
       "tier": 3
     }
   },
@@ -701,7 +701,7 @@
     "fields": {
       "name": "Sniper",
       "diep_isDeleted": false,
-      "multiplier": "2.00",
+      "opness":"2",
       "tier": 2
     }
   },
@@ -711,7 +711,7 @@
     "fields": {
       "name": "Sprayer",
       "diep_isDeleted": false,
-      "multiplier": "1.00",
+      "opness":"3",
       "tier": 4
     }
   },
@@ -721,7 +721,7 @@
     "fields": {
       "name": "Spread Shot",
       "diep_isDeleted": false,
-      "multiplier": "1.00",
+      "opness":"3",
       "tier": 4
     }
   },
@@ -731,7 +731,7 @@
     "fields": {
       "name": "Stalker",
       "diep_isDeleted": false,
-      "multiplier": "2.00",
+      "opness":"2",
       "tier": 4
     }
   },
@@ -741,7 +741,7 @@
     "fields": {
       "name": "Streamliner",
       "diep_isDeleted": false,
-      "multiplier": "2.00",
+      "opness":"2",
       "tier": 4
     }
   },
@@ -751,7 +751,7 @@
     "fields": {
       "name": "Trapper",
       "diep_isDeleted": false,
-      "multiplier": "3.00",
+      "opness":"1",
       "tier": 3
     }
   },
@@ -761,7 +761,7 @@
     "fields": {
       "name": "Tri-Angle",
       "diep_isDeleted": false,
-      "multiplier": "2.00",
+      "opness":"2",
       "tier": 3
     }
   },
@@ -771,7 +771,7 @@
     "fields": {
       "name": "Tri-Trapper",
       "diep_isDeleted": false,
-      "multiplier": "3.00",
+      "opness":"1",
       "tier": 4
     }
   },
@@ -781,7 +781,7 @@
     "fields": {
       "name": "Triple Shot",
       "diep_isDeleted": false,
-      "multiplier": "2.00",
+      "opness":"2",
       "tier": 3
     }
   },
@@ -791,7 +791,7 @@
     "fields": {
       "name": "Triple Twin",
       "diep_isDeleted": false,
-      "multiplier": "1.00",
+      "opness":"3",
       "tier": 4
     }
   },
@@ -801,7 +801,7 @@
     "fields": {
       "name": "Twin",
       "diep_isDeleted": false,
-      "multiplier": "1.00",
+      "opness":"3",
       "tier": 2
     }
   },
@@ -811,7 +811,7 @@
     "fields": {
       "name": "Twin Flank",
       "diep_isDeleted": false,
-      "multiplier": "2.00",
+      "opness":"2",
       "tier": 3
     }
   },
@@ -821,7 +821,7 @@
     "fields": {
       "name": "Spike",
       "diep_isDeleted": false,
-      "multiplier": "1.00",
+      "opness":"3",
       "tier": 4
     }
   },
@@ -831,7 +831,7 @@
     "fields": {
       "name": "Triplet",
       "diep_isDeleted": false,
-      "multiplier": "1.00",
+      "opness":"3",
       "tier": 4
     }
   },
