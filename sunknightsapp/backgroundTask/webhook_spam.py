@@ -136,6 +136,7 @@ def post_new_event_quest_submission(submission, accepted, decided):
                             {'name': 'From', 'value': '<@{}>'.format(submission.pointsinfo.user.discord_id), 'inline': True},
                             {'name': 'Proof', 'value': submission.proof, 'inline': True},
                             {'name': 'Note', 'value': submission.submitterText, 'inline': True},
+                            {'name':'Quest','value':("T"+str(submission.questtask.tier)+": "+submission.questtask.questtext) if submission.questtask else "None",'inline':True}
                         ]
                 }
             ]
