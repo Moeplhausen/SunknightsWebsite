@@ -48,9 +48,14 @@ def index(request):
             quest.date = now
             quest.save()
 
+        validtill=now+datetime.timedelta(days=1)-datetime.datetime.utcnow().replace(microsecond=0)
+
+        print(validtill)
+
         context = {
             'daily': quest,
             'permdaily': permed,
+            'validtill':validtill,
             'tanks': tanks,
             'gamemodes': gamemodes,
             'submitpointsform': SubmitPointsForm,
