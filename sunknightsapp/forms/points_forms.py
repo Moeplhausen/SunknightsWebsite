@@ -19,7 +19,7 @@ class SubmitPointsForm(BaseForm):
         try:
             import decimal
             submission = self.save(commit=False)
-            submission.points=decimal.Decimal(getPointsByScore(submission.score))#*decimal.Decimal(submission.tank.multiplier)
+            submission.points=decimal.Decimal(getPointsByScore(submission))#*decimal.Decimal(submission.tank.multiplier)
 
 
 

@@ -19,12 +19,43 @@ QUEST_TIER_OPTIONS=(
     (4,'Bonus'),
 )
 
+POINTS_TABLE=(
+    (5000000,1500,1000,750),
+    (4000000,1000,750,500),
+    (3500000,750,500,350),
+    (3000000,500,350,250),
+    (2500000,350,250,200),
+    (2000000,250,200,150),
+    (1750000,200,150,125),
+    (1500000,150,125,100),
+    (1250000,125,100,75),
+    (1000000,100,75,50),
+    (800000,75,50,35),
+    (650000,50,35,25),
+    (500000,35,25,15),
+    (400000,25,15,12),
+    (300000,15,12,10),
+    (250000,12,10,8),
+    (200000,10,8,5),
+    (150000,8,5,3),
+    (100000,5,3,2),
+    (50000,3,2,1),
+)
+
+
 ELO_K=40
 ELO_DEFAULT=1000
 
 
-def getPointsByScore(score:int):
-    return round(score/100000.0,1)
+def getPointsByScore(submission):
+    score=submission.score
+    opness=submission.tank.opness
+
+    for points in POINTS_TABLE:
+        if score>=points[0]:
+            return points[opness]
+
+    return 0
 
 
 def getPointsByFight(won:bool):
