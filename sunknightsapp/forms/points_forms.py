@@ -9,7 +9,7 @@ from ..models.utility.little_things import getPointsByScore,getPointsByFight,man
 from ..models.points_info import PointsInfo,ClanUser
 from django.core.paginator import Paginator
 from django.db.models import Count
-
+import datetime
 class SubmitPointsForm(BaseForm):
     def __init__(self, *args, **kwargs):
         super(SubmitPointsForm, self).__init__(AjaxAction.SUBMITPOINTS, *args, **kwargs)
@@ -20,8 +20,20 @@ class SubmitPointsForm(BaseForm):
             import decimal
             submission = self.save(commit=False)
             submission.points=decimal.Decimal(getPointsByScore(submission.score))#*decimal.Decimal(submission.tank.multiplier)
+
+
+
+
             submission.pointsinfo = request.user.pointsinfo
             submission.save()
+
+            for mult in submission.get_daily_multiplier:
+                if mult.tank.id==submission.tank.id:
+                    submission.points*=mult.multiplier
+                    break
+            submission.save()
+
+
         except BaseException as e:
             return self.response(False, 'Something went wrong: ' + str(e))
         else:
@@ -41,10 +53,24 @@ class SubmitEventsQuestsForm(BaseForm):
     def handle(self, request):
 
         try:
+            from ..models.daily_quest import QuestTask
             import decimal
             submission = self.save(commit=False)
             submission.points=0
             submission.pointsinfo = request.user.pointsinfo
+
+            questtask=submission.questtask
+            if questtask:
+                submission.points=questtask.points
+                if questtask.quest.permed:
+                    if questtask not in request.user.get_perm_tasks:
+                        return self.response(False,'Quest is still on cooldown. You can submit at this point again: '+request.user.pointsinfo.permquestcd)
+                    request.user.pointsinfo.permquestcd=datetime.datetime.now()+datetime.timedelta(hours=questtask.cooldown)
+                    request.user.pointsinfo.save()
+                else:
+                    if questtask not in request.user.get_daily_tasks:
+                        return self.response(False,'You may not do this task yet '+request.user.pointsinfo.permquestcd)
+
             submission.save()
         except BaseException as e:
             return self.response(False, 'Something went wrong: ' + str(e))
@@ -55,7 +81,7 @@ class SubmitEventsQuestsForm(BaseForm):
 
     class Meta:
         model = EventQuestSubmission
-        fields = ('proof', 'submitterText')
+        fields = ('proof', 'submitterText','questtask')
 
 
 

@@ -32,14 +32,33 @@ import datetime
 
 def index(request):
     if request.user.is_authenticated():
-        tanks = DiepTank.objects.filter(diep_isDeleted=False)
         gamemodes = DiepGamemode.objects.filter(diep_isDeleted=False)
 
-        context = {'tanks': tanks, 'gamemodes': gamemodes, 'submitpointsform': SubmitPointsForm,
-                   'submitfightsform': SubmitFightsForm, 'submiteventsquestsform': SubmitEventsQuestsForm}
-        context['revertsubmissionid'] = AjaxAction.REVERTSUBMISSION.value
-        context['lookuser'] = ClanUser.objects.prefetch_related('pointsinfo', 'pointsinfo__masteries').get(
-            id=request.user.id)
+        tanks = DiepTank.objects.filter(diep_isDeleted=False)
+        try:
+            permed = Quest.objects.filter(permed=True).get()
+        except Quest.DoesNotExist:
+            permed = Quest.objects.create(permed=True)
+
+        now = (datetime.datetime.utcnow()).replace(hour=0, minute=0, second=0, microsecond=0)
+        try:
+            quest = Quest.objects.filter(date=now).get()
+        except Quest.DoesNotExist:
+            quest = Quest.objects.create()
+            quest.date = now
+            quest.save()
+
+        context = {
+            'daily': quest,
+            'permdaily': permed,
+            'tanks': tanks,
+            'gamemodes': gamemodes,
+            'submitpointsform': SubmitPointsForm,
+            'submitfightsform': SubmitFightsForm,
+            'submiteventsquestsform': SubmitEventsQuestsForm,
+            'revertsubmissionid': AjaxAction.REVERTSUBMISSION.value,
+            'lookuser': ClanUser.objects.prefetch_related('pointsinfo', 'pointsinfo__masteries').get(
+                id=request.user.id)}
 
         return render(request, 'sunknightsapp/userview.html', context)
 
@@ -143,17 +162,19 @@ def pointrole(request, id):
 
 @points_manager_required
 def manage_submissions(request):
-    context = {'retrieveuserspointssubmissionsid': AjaxAction.RETRIEVEUSERSUBMISSIONS.value,
-               'decideuserpointsubmissionid': AjaxAction.DECIDEUSERPOINTUSUBMISSION.value,
-               'decideeventquestssubmissionid': AjaxAction.DECIDEEVENTQUESTS.value,
-               'decidefightsubmissionid': AjaxAction.DECIDEFIGHTSSUBMISSION.value,
-               'retrieveuserfightssubmissionsid': AjaxAction.RETRIEVEFIGHTSSUBMISSIONS.value,
-               'retrieveeventsquestsssubmissionsid': AjaxAction.RETRIEVEEVENTQUESTSSUBMISSIONS.value}
+    context = {
+        'retrieveuserspointssubmissionsid': AjaxAction.RETRIEVEUSERSUBMISSIONS.value,
+        'decideuserpointsubmissionid': AjaxAction.DECIDEUSERPOINTUSUBMISSION.value,
+        'decideeventquestssubmissionid': AjaxAction.DECIDEEVENTQUESTS.value,
+        'decidefightsubmissionid': AjaxAction.DECIDEFIGHTSSUBMISSION.value,
+        'retrieveuserfightssubmissionsid': AjaxAction.RETRIEVEFIGHTSSUBMISSIONS.value,
+        'retrieveeventsquestsssubmissionsid': AjaxAction.RETRIEVEEVENTQUESTSSUBMISSIONS.value}
     return render(request, 'sunknightsapp/managesubmissions.html', context)
 
 
 @points_manager_required
 def manage_quests(request):
+    tanks = DiepTank.objects.filter(diep_isDeleted=False)
     try:
         permed = Quest.objects.filter(permed=True).get()
     except Quest.DoesNotExist:
@@ -162,7 +183,7 @@ def manage_quests(request):
 
     tiers = QUEST_TIER_OPTIONS
 
-    time = []
+    time = [permed]
     for i in range(0, 4):
         now = (datetime.datetime.utcnow() + timedelta(days=i)).replace(hour=0, minute=0, second=0, microsecond=0)
         try:
@@ -174,15 +195,18 @@ def manage_quests(request):
 
         time.append(quest)
 
-    context = {'dailies': time,
-               'permed': permed,
-               'tiers': tiers,
-               'submitquesttask': SubmitQuestTaskForm,
-               'requestquests': RequestQuestsForm,
-               'editquesttask': EditQuestTaskForm,
-               'submitmultiplier': SubmitMultiplierForm,
-               'submitbuild': SubmitBuildForm
-               }
+    context = {
+        'tanks': tanks,
+        'dailies': time,
+        'tiers': tiers,
+        'submitquesttask': SubmitQuestTaskForm,
+        'requestquests': RequestQuestsForm,
+        'editquesttask': EditQuestTaskForm,
+        'submitmultiplier': SubmitMultiplierForm,
+        'editmultiplier': EditMultiplierForm,
+        'submitbuild': SubmitBuildForm,
+        'editbuild': EditQuestBuildForm
+    }
     return render(request, 'sunknightsapp/managequests.html', context)
 
 
@@ -249,12 +273,14 @@ def ajaxhandler(request):
         form = DeleteQuestTaskForm(request.POST)
     elif actionid is AjaxAction.EDITQUESTTASK.value:
         form = EditQuestTaskForm(request.POST)
-
+    elif actionid is AjaxAction.ADDMULTIPLIER.value:
+        form = SubmitMultiplierForm(request.POST)
     elif actionid is AjaxAction.DELETEQUESTBUILD.value:
         form = DeleteQuestBuildForm(request.POST)
     elif actionid is AjaxAction.EDITQUESTBUILD.value:
         form = EditQuestBuildForm(request.POST)
-
+    elif actionid is AjaxAction.ADDQUESTBUILD.value:
+        form = SubmitBuildForm(request.POST)
     elif actionid is AjaxAction.REMOVEMULTIPLIER.value:
         form = DeleteMultiplierForm(request.POST)
     elif actionid is AjaxAction.EDITMULTIPLIER.value:

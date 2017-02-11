@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from ..models.daily_quest import Quest,QuestBuild,QuestTankMultiplier,QuestTask
 from rest_framework_bulk import BulkListSerializer,BulkSerializerMixin
-
+from .tank_serializer import DiepTankSerializer
 class QuestBuildSerializer(BulkSerializerMixin, serializers.ModelSerializer):
 
     class Meta:
@@ -11,9 +11,11 @@ class QuestBuildSerializer(BulkSerializerMixin, serializers.ModelSerializer):
 
 class QuestTankMultiplierSerializer(BulkSerializerMixin, serializers.ModelSerializer):
 
+    tank=DiepTankSerializer(many=False,read_only=True)
+
     class Meta:
         model=QuestTankMultiplier
-        fields=('__all__')
+        fields=('id','quest','tank','multiplier','manager')
         list_serializer_class = BulkListSerializer
 
 

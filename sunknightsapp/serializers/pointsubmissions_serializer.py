@@ -3,7 +3,7 @@ from ..models.point_submission import PointsManagerAction, BasicUserPointSubmiss
     OneOnOneFightSubmission
 from rest_framework_bulk import BulkListSerializer, BulkSerializerMixin
 from .clan_user_serializer import ClanUserSerializerDiscord_id
-from .daily_quest_serializer import QuestSerializer
+from .daily_quest_serializer import QuestSerializer,QuestBuildSerializer,QuestTankMultiplierSerializer
 from .tank_serializer import DiepTankSimpleSerializer
 from .gamemode_serializer import GamemodeSerializer
 from .clan_user_serializer import PointsInfoBasicSerializer
@@ -50,12 +50,14 @@ class BasicUserPointSubmissionProofusedSerializer(BulkSerializerMixin, serialize
     gamemode = GamemodeSerializer(many=False, read_only=True)
     pointsinfo = PointsInfoBasicSerializer(many=False, read_only=True)
     proofused=BasicUserPointSubmissionSerializer(many=True,read_only=True)
+    get_daily_builds=QuestBuildSerializer(many=True,read_only=True)
+    get_daily_multiplier=QuestTankMultiplierSerializer(many=True,read_only=True)
 
     class Meta:
         model = BasicUserPointSubmission
         fields = (
             'id', 'date', 'manager', 'managerText', 'points', 'submitterText', 'gamemode', 'pointsinfo', 'accepted',
-            'decided', 'daily_quest', 'proof', 'tank', 'score','proofused')
+            'decided', 'daily_quest', 'proof', 'tank', 'score','proofused','get_daily_builds','get_daily_multiplier')
         list_serializer_class = BulkListSerializer
 
 
@@ -63,14 +65,16 @@ class BasicUserPointSubmissionProofusedSerializer(BulkSerializerMixin, serialize
 
 
 class BasicEventQuestsSubmissionSerializer(BulkSerializerMixin, serializers.ModelSerializer):
+    from .daily_quest_serializer import QuestTaskSerializer
     daily_quest = QuestSerializer(many=False, read_only=True)
     pointsinfo = PointsInfoBasicSerializer(many=False, read_only=True)
+    questtask=QuestTaskSerializer(many=False,read_only=True)
 
     class Meta:
         model = BasicUserPointSubmission
         fields = (
             'id', 'date', 'manager', 'managerText', 'points', 'submitterText',  'pointsinfo', 'accepted',
-            'decided', 'daily_quest', 'proof',)
+            'decided', 'daily_quest', 'proof','questtask')
         list_serializer_class = BulkListSerializer
 
 

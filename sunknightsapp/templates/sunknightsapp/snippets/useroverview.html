@@ -1,20 +1,46 @@
 {% load static %}
 <div id="user-box">
     <div class="row">
-        <div class="col-sm-6 col-lg-3">
-            <div class="card" id="user-stats">
-                <div class="card-block" id="user-card-block-image">
+        <div class="col-12 col-sm-12" id="user-stats">
+            <div class="card-block row" id="user-card-block-image">
+
+                <div id="usernamediv-id" class="col-sm-2 card mindwidthcard card-margin">
                     <p id="useroverview-name"><strong>{{ lookuser.discord_nickname }}</strong></p>
                     <img id="card-img-top" class="img-circle" src="{{ lookuser.avatar_url }}"/>
                     <p class="card-text">Rank: <strong>{{ lookuser.leaderboard_place }}</strong><br>
                         Old Points: <strong>{{ lookuser.pointsinfo.oldpoints }}</strong><br>
                         Total Points: <strong>{{ lookuser.total_points }}</strong></p>
                 </div>
+                <div id="masteries-badges-column" class="col-sm-9">
+                    <div class="card-deck">
+                        <div class="card mindwidthcard card-margin">
+                            <h4 class="card-title">Masteries</h4>
+                            <strong>T1: {{ lookuser.masteries_t1.all.count }}</strong><br>
+                            <strong>T2: {{ lookuser.masteries_t2.all.count }}</strong><br>
+                            <strong>T3: {{ lookuser.masteries_t3.all.count }}</strong>
+                            <p class="card-text">{% for mastery in lookuser.masteries.all|dictsort:"tier" %}
+                                <div class="{{ mastery.tank.name|slugify }}-tier{{ mastery.tier }}"
+                                     data-toggle="tooltip"
+                                     data-placement="top" title="{{ mastery.tank.name }} Tier {{ mastery.tier }}"></div>
+                            {% endfor %}</p>
+                        </div>
+
+                        <div class="card mindwidthcard card-margin">
+                            <h4 class="card-title">Badges</h4>
+                            <strong>{{ lookuser.badges.all.count }}</strong>
+                            <p class="card-text">{% for badge in lookuser.badges.all %}
+                                <div class="{{ badge.tank.name|slugify }}" data-toggle="tooltip" data-placement="top"
+                                     title="{{ badge.name }}"></div>
+                            {% endfor %}</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="col-sm-6 col-md-auto col-lg-9" id="description-block">
-            <div class="card" id="description-block-card">
-                <div class="card-block" id="description-block-card-child">
+    </div>
+    <div class="row">
+        <div class="card-block col-12 col-sm-12" id="description-block">
+                <div class="" id="description-block-card-child">
                     <h4 class="card-title">Description</h4>
                     <div id="userdesccard" class="mCustomScrollbar" data-mcs-theme="minimal-dark">
                         <p>
@@ -29,53 +55,17 @@
                         <span id="charcount" style="font-size: 0.8em;padding-left: 4px;"></span>
                     {% endif %}
                 </div>
-            </div>
         </div>
     </div>
-    <div class="row" id="masteries-badges-row">
-        <div class="col-sm-8">
-            <div class="card">
-                <div class="card-block">
-                    <h4 class="card-title">Masteries</h4>
-                    <p class="card-text">
-                        <strong>T1: {{ lookuser.masteries_t1.all.count }}</strong><br>
-                        <strong>T2: {{ lookuser.masteries_t2.all.count }}</strong><br>
-                        <strong>T3: {{ lookuser.masteries_t3.all.count }}</strong>
-                    </p>
-                    <p class="card-text">
+    <br/>
 
-                        {% for mastery in lookuser.masteries.all|dictsort:"tier" %}
-                            <div class="{{ mastery.tank.name|slugify }}-tier{{ mastery.tier }}" data-toggle="tooltip"
-                                 data-placement="top" title="{{ mastery.tank.name }} Tier {{ mastery.tier }}"></div>
-                        {% endfor %}
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-4" id="">
-            <div class="card">
-                <div class="card-block">
-                    <h4 class="card-title">Badges</h4>
-                    <p class="card-text"><strong>{{ lookuser.badges.all.count }}</strong></p>
-                    <p class="card-text">
-                        {% for badge in lookuser.badges.all %}
-                            <div class="{{ badge.tank.name|slugify }}" data-toggle="tooltip" data-placement="top"
-                                 title="{{ badge.name }}"></div>
-                        {% endfor %}
-                    </p>
-                </div>
-            </div>
-        </div>
+    {% if lookuser.id == user.id %}
         <br/>
-
-        {% if lookuser.id == user.id %}
-            <br/>
-            <div id="alertspot"></div>
-            <div class="alert alert-danger alert-dismissible" role="alert" style="display: none;" id="thealertze">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-                        aria-hidden="true">&times;</span></button>
-                <strong>Oh no!</strong> Sorry, but there was an error submitting!
-            </div>
-        {% endif %}
-    </div>
+        <div id="alertspot"></div>
+        <div class="alert alert-danger alert-dismissible" role="alert" style="display: none;" id="thealertze">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                    aria-hidden="true">&times;</span></button>
+            <strong>Oh no!</strong> Sorry, but there was an error submitting!
+        </div>
+    {% endif %}
 </div>

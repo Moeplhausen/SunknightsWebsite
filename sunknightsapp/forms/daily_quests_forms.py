@@ -17,12 +17,19 @@ class SubmitQuestTaskForm(BaseForm):
             task = self.save(commit=False)
             task.manager = request.user
             points=0
+
             if task.tier==1:
                 points=3
+                if task.quest.permed:
+                    task.cooldown=24
             elif task.tier==2:
                 points=6
+                if task.quest.permed:
+                    task.cooldown=24*2
             elif task.tier==3:
                 points=10
+                if task.quest.permed:
+                    task.cooldown=24*7
             elif task.tier==4:
                 points=24
             task.points=points
@@ -236,11 +243,12 @@ class EditMultiplierForm(BaseForm):
             return self.noPermission()
 
         try:
-            task = QuestBuild.objects.get(pk=int(self.cleaned_data['pk_id']))
+            task = QuestTankMultiplier.objects.get(pk=int(self.cleaned_data['pk_id']))
             task.manager=request.user
-            task.build=self.cleaned_data['build']
+            task.tank=self.cleaned_data['tank']
+            task.multiplier=self.cleaned_data['multiplier']
             task.save()
-        except QuestBuild.DoesNotExist:
+        except QuestTankMultiplier.DoesNotExist:
             return self.response(False, 'Something went wrong')  # TODO better exception
         else:
             serializer = QuestTankMultiplierSerializer(task)
@@ -262,10 +270,10 @@ class DeleteMultiplierForm(BaseForm):
             return self.noPermission()
 
         try:
-            task = QuestBuild.objects.get(pk=int(self.cleaned_data['pk_id']))
+            task = QuestTankMultiplier.objects.get(pk=int(self.cleaned_data['pk_id']))
 
 
-        except QuestTask.DoesNotExist:
+        except QuestTankMultiplier.DoesNotExist:
             return self.response(False, 'Something went wrong')  # TODO better exception
         else:
             serializer = QuestTankMultiplierSerializer(task)

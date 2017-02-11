@@ -29,6 +29,7 @@
             <thead>
             <tr>
                 <th>User</th>
+                <th>Quest</th>
                 <th>Proof & Note</th>
                 <th>Manager Note</th>
                 <th>Points</th>
@@ -134,9 +135,29 @@
                                     </button></span>';
                 console.log(data)
 
+                var dailybuilds=data[i].get_daily_builds
+                var multipliers=data[i].get_daily_multiplier
+
+                var tankname=data[i].tank.name
+
+                for (var k=0;k<multipliers.length;k++){
+                  if (multipliers[k].tank.id==data[i].tank.id)
+                    tankname+=" (x"+multipliers[k].multiplier+")"
+                }
+
+                var builds="Daily Build(s):<br>"
+                for (var k=0;k<dailybuilds.length;k++){
+                    builds+=dailybuilds[k].build+"<br>"
+                }
+
+
+
                 var username = data[i].pointsinfo.user.discord_nickname
                 var discorduserid = data[i].pointsinfo.user.discord_id
                 var user = '<a href="/user/' + discorduserid + '">' + username + '</a>';
+
+
+
 
                 var managertext = '<textarea class="form-control" maxlength="200" id="manager-note-' + data[i].id + '" rows="3"></textarea>'
                 var points = '<input class="form-control" style = "width:75px;"  type="number" value="' + data[i].points + '" id="points-manager-' + data[i].id + '">'
@@ -154,10 +175,13 @@
                 if (proofused.length>1)
                 var prooftext='<span data-toggle="tooltip" data-html="true" data-placement="top" title="'+proofusedtext+'"><a href="' + data[i].proof + '">Proof (' + proofusedcount + ')</a></span>'
 
+                var tankscoretext='<span data-toggle="tooltip" data-html="true" data-placement="top" title="'+builds+'">'+tankname+'<br>'+numberWithCommas(data[i].score)+'</span>'
+
+
                 return_data.push({
                   'user': user,
                   'tank': data[i].tank.name,
-                  'tankscore':data[i].tank.name+"<br>"+numberWithCommas(data[i].score),
+                  'tankscore':tankscoretext,
                   'gamemode': data[i].gamemode,
                   'score': data[i].score,
                   'date': moment(data[i].date).format("MMM D Y, hh:mm:ss A"),
@@ -235,6 +259,7 @@
 
           "fnDrawCallback": function (oSettings) {
             decideEventQuestsSubmission()
+            $('[data-toggle="tooltip"]').tooltip()
           },
           "ajax": {
             "url": "{% url 'ajaxhandler' %}",
@@ -251,6 +276,15 @@
                                             value="' + data[i].id + '"><i class="fa fa-times" aria-hidden="true"></i> \
                                     </button></span>';
 
+
+                var questtext=""
+
+                var quest=data[i].questtask
+
+                if (quest){
+                    questtext='<span data-toggle="tooltip" data-html="true" data-placement="top" title="'+sh.makeHtml(quest.questtext).replace(/^<p>|<\/p>$/g, '')+'">Tier' + quest.tier + '</span>'
+                }
+
                 var username = data[i].pointsinfo.user.discord_nickname
                 var discorduserid = data[i].pointsinfo.user.discord_id
                 var user = '<a href="/user/' + discorduserid + '">' + username + '</a>';
@@ -261,6 +295,7 @@
 
                 return_data.push({
                   'user': user,
+                  'quest':questtext,
                   'date': moment(data[i].date).format("MMM D Y, hh:mm:ss A"),
                   'points': points,
                   'note':'<a href="' + data[i].proof + '">Prooflink</a>'+"<br>"+data[i].submitterText,
@@ -281,6 +316,7 @@
           },
           "columns": [
             {"data": "user"},
+            {"data":"quest"},
             {"data": "note"},
             {"data": "manager-note"},
             {"data": "points"},

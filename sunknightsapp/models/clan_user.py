@@ -186,6 +186,31 @@ class ClanUser(AbstractBaseUser):
                 return self.submitted_points(1)
 
 
+            @property
+            def get_perm_tasks(self):
+                from ..models.daily_quest import Quest,QuestTask
+                import datetime
+                permed = Quest.objects.filter(permed=True).get()
+                if self.pointsinfo.permquestcd.timestamp() < datetime.datetime.now().timestamp():
+                    return QuestTask.objects.filter(quest=permed).order_by('tier')
+                return QuestTask.objects.none()
+
+            @property
+            def get_daily_tasks(self):
+                import datetime
+                from .utility.little_things import QUEST_TIER_OPTIONS
+                from ..models.daily_quest import Quest,QuestTask
+                from django.db.models import Q
+                now = (datetime.datetime.utcnow()).replace(hour=0, minute=0, second=0, microsecond=0)
+                quest = Quest.objects.filter(date=now,permed=False)
+                tasks=QuestTask.objects.filter(quest=quest).exclude(Q(eventquest__pointsinfo=self.pointsinfo) &(Q(eventquest__decided=False)|(Q(eventquest__accepted=True)&Q(eventquest__decided=True))))
+                if QuestTask.objects.filter(quest=quest).exclude(eventquest__pointsinfo=self.pointsinfo,eventquest__accepted=True).exclude(tier=QUEST_TIER_OPTIONS[3][0]):#as long as not all non bonus quests are accepted, no bonus quest will be displayed
+                    tasks=tasks.exclude(tier=QUEST_TIER_OPTIONS[3][0])
+                return tasks.order_by('tier')
+
+
+
+
             def submitted_points(self,week=0):
                 import datetime
                 from django.db.models import F,Sum

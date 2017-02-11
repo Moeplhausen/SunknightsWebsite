@@ -13,6 +13,7 @@ from ..backgroundTask.webhook_spam import post_new_guild_fight, post_new_user_po
     post_new_manager_submission, \
     post_new_guildfight_points, post_guild_fight_results, post_new_OneOnOne_submission, post_new_submission, \
     post_submission_reverted,post_new_event_quest_submission
+from .daily_quest import QuestTask
 
 
 class BasicPointSubmission(models.Model):
@@ -31,24 +32,45 @@ class BasicPointSubmission(models.Model):
 
 
 class BasicUserPointSubmission(BasicPointSubmission):
+    from .daily_quest import QuestBuild
     submitterText = models.TextField(max_length=200, default="")
-    proof = models.CharField(max_length=200)
+    proof = models.CharField(max_length=300)
     gamemode = models.ForeignKey(DiepGamemode)
     tank = models.ForeignKey(DiepTank)
     score = models.PositiveIntegerField(default=0)
+
+
+    @property
+    def get_daily_builds(self):
+        from ..models.daily_quest import Quest,QuestBuild
+        now = self.date.replace(hour=0, minute=0, second=0, microsecond=0)
+        quest = Quest.objects.filter(date=now,permed=False)
+        return QuestBuild.objects.filter(quest=quest)
+
+    @property
+    def get_daily_multiplier(self):
+        from ..models.daily_quest import Quest,QuestTankMultiplier
+        now = self.date.replace(hour=0, minute=0, second=0, microsecond=0)
+        quest = Quest.objects.filter(date=now,permed=False)
+        return QuestTankMultiplier.objects.filter(quest=quest)
+
+
+
+
 
 
 class PointsManagerAction(BasicPointSubmission):
     pass
 
 class EventQuestSubmission(BasicPointSubmission):
-    proof=models.CharField(max_length=200)
+    proof=models.CharField(max_length=300)
     submitterText = models.TextField(max_length=200, default="")
+    questtask=models.ForeignKey(QuestTask,null=True,blank=True,default=None,related_name='eventquest')
 
 
 class OneOnOneFightSubmission(BasicPointSubmission):
     pointsinfoloser = models.ForeignKey(PointsInfo, related_name="loser")
-    proof = models.CharField(max_length=200)
+    proof = models.CharField(max_length=300)
     pointsloser = models.DecimalField(decimal_places=2, max_digits=6, default=3, db_index=True)
     expected_outcome = models.DecimalField(decimal_places=2, max_digits=4, default=0.5, db_index=True)
 

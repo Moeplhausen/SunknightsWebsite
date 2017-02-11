@@ -29,7 +29,7 @@
             <td>{{ submission.accepted }}</td>
             <td>{{ submission.score|intcomma }}</td>
             <td>{{ submission.points|intcomma }}</td>
-            <td>{{ submission.manager.discord_nickname }}</td>
+            <td><a href="/user/{{ submission.manager.discord_id }}">{{ submission.manager.discord_nickname }}</a></td>
             <td>{{ submission.managerText }}</td>
 
             <td><a href="{{ submission.proof }}">Prooflink</a></td>
@@ -62,9 +62,9 @@
                 {% endif %}
                 {{ submission.id }}
             </td>
-            <td>{{ submission.pointsinfo.user.discord_nickname }}</td>
-            <td>{{ submission.pointsinfoloser.user.discord_nickname }}</td>
-            <td>{{ submission.manager.discord_nickname }}</td>
+            <td><a href="/user/{{ submission.pointsinfo.user.discord_id }}">{{ submission.pointsinfo.user.discord_nickname }}</a></td>
+            <td><a href="/user/{{ submission.pointsinfoloser.user.discord_id }}">{{ submission.pointsinfoloser.user.discord_nickname }}</a></td>
+            <td><a href="/user/{{ submission.manager.discord_id }}">{{ submission.manager.discord_nickname }}</a></td>
             <td>{{ submission.accepted }}</td>
             <td><a href="{{ submission.proof }}">Prooflink</a></td>
             <td>{{ submission.date }}</td>
@@ -97,7 +97,7 @@
                 {{ submission.id }}
             </td>
             <td>{{ submission.points|intcomma }}</td>
-            <td>{{ submission.manager.discord_nickname }}</td>
+            <td><a href="/user/{{ submission.manager.discord_id }}">{{ submission.manager.discord_nickname }}</a></td>
             <td>{{ submission.managerText }}</td>
             <td>{{ submission.accepted }}</td>
             <td><a href="{{ submission.proof }}">Prooflink</a></td>
@@ -133,7 +133,7 @@
                 {{ submission.id }}
             </td>
             <td>{{ submission.points }}</td>
-            <td>{{ submission.manager.discord_nickname }}</td>
+            <td><a href="/user/{{ submission.manager.discord_id }}">{{ submission.manager.discord_nickname }}</a></td>
             <td>{{ submission.managerText }}</td>
             <td>{{ submission.date }}</td>
         </tr>

@@ -16,6 +16,10 @@ body {
 
 }
 
+.days-contents{
+    margin-bottom: 2em;
+}
+
 #sk-title-bar{
     position: relative;
 }
@@ -38,6 +42,9 @@ body {
     padding:1em;
 }
 
+.quest-select{
+    height: 1.5em !important;
+}
 
 .selectize-control{
     width: 15em;
@@ -81,6 +88,15 @@ table.dataTable thead .sorting_desc_disabled
 
 
 
+ .mindwidthcard{
+     min-width:200px ;
+ }
+
+ .card-margin{
+     margin-bottom: 1em !important;
+     height: 254px;
+ }
+
 
 #sun-navbar {
     background: linear-gradient(
@@ -89,7 +105,7 @@ table.dataTable thead .sorting_desc_disabled
     )
 }
 
-.card, .guild-card-group-item, #user-stats, .sk-btn,.user-local-nav,.nav-item > a {
+.card, .guild-card-group-item, .sk-btn,.user-local-nav,.nav-item > a {
     background-color: transparent !important;
     background: linear-gradient(
             rgba(0, 0, 0, 0.15),
@@ -129,9 +145,11 @@ table.dataTable thead .sorting_desc_disabled
     text-align: center;
 }
 
-
-#masteries-badges-row{
-    margin-top: 0.75em;
+#masteries-badges-column{
+    padding-left: 0px;
+}
+#usernamediv-id{
+    margin-right: 1em;
 }
 
 #userdesccancel{
@@ -188,7 +206,10 @@ table.dataTable thead .sorting_desc_disabled
     padding: 0.5em;
 }
 
-
+#userdesc{
+    max-height: 25em;
+    overflow: auto;
+}
 
 
 #sk-logo {
@@ -231,7 +252,7 @@ img.leaderpoint-avatar {
 
 }
 
-#submit-tank-picker {
+#submit-tank-picker,#submit-quest-picker {
     margin-bottom: 2em !important;
 }
 
