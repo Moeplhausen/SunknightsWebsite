@@ -21,17 +21,18 @@ class SubmitPointsForm(BaseForm):
             submission = self.save(commit=False)
             submission.points=decimal.Decimal(getPointsByScore(submission))#*decimal.Decimal(submission.tank.multiplier)
 
+            submission.date=datetime.datetime.utcnow()
 
-
-
-            submission.pointsinfo = request.user.pointsinfo
-            submission.save()
 
             for mult in submission.get_daily_multiplier:
                 if mult.tank.id==submission.tank.id:
                     submission.points*=mult.multiplier
                     break
+
+            submission.pointsinfo = request.user.pointsinfo
             submission.save()
+
+
 
 
         except BaseException as e:

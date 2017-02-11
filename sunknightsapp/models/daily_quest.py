@@ -25,7 +25,6 @@ class QuestTask(models.Model):
     @property
     def questtext_html(self):
         import markdown_deux
-        print(markdown_deux.markdown(self.questtext))
         return markdown_deux.markdown(self.questtext)[3:-5]
 
 
