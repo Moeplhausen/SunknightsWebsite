@@ -197,7 +197,7 @@ class ClanUser(AbstractBaseUser):
                 import datetime
                 permed = Quest.objects.filter(permed=True).get()
                 if self.pointsinfo.permquestcd.timestamp() < datetime.datetime.now().timestamp():
-                    return QuestTask.objects.filter(quest=permed).order_by('tier')
+                    return QuestTask.objects.filter(quest=permed,deleted=False).order_by('tier')
                 return QuestTask.objects.none()
 
             @property
@@ -208,9 +208,14 @@ class ClanUser(AbstractBaseUser):
                 from django.db.models import Q
                 now = (datetime.datetime.utcnow()).replace(hour=0, minute=0, second=0, microsecond=0)
                 quest = Quest.objects.filter(date=now,permed=False)
+                # tasks=QuestTask.objects.filter(quest=quest).exclude(Q(eventquest__pointsinfo=self.pointsinfo) &(Q(eventquest__decided=False)|(Q(eventquest__accepted=True)&Q(eventquest__decided=True))))
+                # if QuestTask.objects.filter(quest=quest).exclude(eventquest__pointsinfo=self.pointsinfo,eventquest__accepted=True).exclude(tier=QUEST_TIER_OPTIONS[3][0]):#as long as not all non bonus quests are accepted, no bonus quest will be displayed
+                #     tasks=tasks.exclude(tier=QUEST_TIER_OPTIONS[3][0])
+
                 tasks=QuestTask.objects.filter(quest=quest).exclude(Q(eventquest__pointsinfo=self.pointsinfo) &(Q(eventquest__decided=False)|(Q(eventquest__accepted=True)&Q(eventquest__decided=True))))
-                if QuestTask.objects.filter(quest=quest).exclude(eventquest__pointsinfo=self.pointsinfo,eventquest__accepted=True).exclude(tier=QUEST_TIER_OPTIONS[3][0]):#as long as not all non bonus quests are accepted, no bonus quest will be displayed
+                if QuestTask.objects.filter(quest=quest,eventquest__pointsinfo=self.pointsinfo,eventquest__accepted=True).count()<3:#as long as not at least 3 tier1-tier3 quests are done, one cannot do a bonus quest
                     tasks=tasks.exclude(tier=QUEST_TIER_OPTIONS[3][0])
+
                 return tasks.order_by('tier')
 
 
