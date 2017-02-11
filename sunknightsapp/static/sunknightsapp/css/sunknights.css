@@ -46,6 +46,11 @@ body {
     height: 1.5em !important;
 }
 
+#quests-block{
+    max-height: 30em;
+    overflow: auto;
+}
+
 .selectize-control{
     width: 15em;
 }
