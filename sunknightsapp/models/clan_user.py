@@ -119,6 +119,14 @@ class ClanUser(AbstractBaseUser):
                 return self.pointsinfo.masteries.filter(tier=3)
 
             @property
+            def masteries_t4(self):
+                return self.pointsinfo.masteries.filter(tier=4)
+
+            @property
+            def masteries_t5(self):
+                return self.pointsinfo.masteries.filter(tier=5)
+
+            @property
             def badges(self):
                 from .discord_roles import SunKnightsBadgeRole
                 return SunKnightsBadgeRole.objects.filter(clanuserroles__clan_user=self)

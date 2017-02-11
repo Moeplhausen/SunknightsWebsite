@@ -15,9 +15,11 @@
                     <div class="card-deck">
                         <div class="card mindwidthcard card-margin">
                             <h4 class="card-title">Masteries</h4>
-                            <strong>T1: {{ lookuser.masteries_t1.all.count }}</strong><br>
-                            <strong>T2: {{ lookuser.masteries_t2.all.count }}</strong><br>
+                            <strong>T1: {{ lookuser.masteries_t1.all.count }}</strong>
+                            <strong>T2: {{ lookuser.masteries_t2.all.count }}</strong>
                             <strong>T3: {{ lookuser.masteries_t3.all.count }}</strong>
+                            <strong>T4: {{ lookuser.masteries_t4.all.count }}</strong>
+                            <strong>T5: {{ lookuser.masteries_t5.all.count }}</strong>
                             <p class="card-text">{% for mastery in lookuser.masteries.all|dictsort:"tier" %}
                                 <div class="{{ mastery.tank.name|slugify }}-tier{{ mastery.tier }}"
                                      data-toggle="tooltip"
