@@ -31,10 +31,10 @@ SECRET_KEY = '%(7&4wveamc9)$nd$@(07^ipwksd&1(k@ir#19yh+z#o9g8$0h'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['sunknights.moepl.eu','127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['sunknights.moepl.eu','127.0.0.1', 'localhost','sk.moepl.eu']
 
 
-POINTSWEBHOOK='https://discordapp.com/api/webhooks/262365691024244746/_dELR1aNqN-2wwgyW9N2vENjaDgLrvi7vx4TeK4yhyxmwuWdssMT8ruqrMHf94bafZiZ'
+POINTSWEBHOOK='https://discordapp.com/api/webhooks/256792789898100737/6iCllfaNO2cHJ3lqboHsW_z8r4Fvc5p7MeJWq_8y6LVXFMjI9gJ_NmM7tJTSn7HsFTVO'
 
 
 
