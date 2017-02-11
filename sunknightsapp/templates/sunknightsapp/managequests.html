@@ -109,55 +109,55 @@
     <script type="text/javascript">
       $(function () {
 
-        var data = {'ajax_action_id': window.ajaxactions.RETRIEVEQUESTS}
+        var data = {'ajax_action_id': window.ajaxactions.RETRIEVEQUESTS};
 
 
         function addTaskToQuest(id, task) {
           function buildNewContentText(taskid, points, questtext, actionbuttonstext) {
 
-            return "<div class=\"questtaskdiv\" id=\"task-" + taskid + "\"><ul><li><span class=\"pointsquest\">" + points + " Points:</span><ul><li>" + sh.makeHtml(questtext).replace(/^<p>|<\/p>$/g, '') + "</li></ul></li></ul>" + actionbuttonstext + "</div>"
+            return "<div class=\"questtaskdiv\" id=\"task-" + taskid + "\"><ul><li><span class=\"pointsquest\">" + points + " Points:</span><ul><li>" + sh.makeHtml(questtext).replace(/^<p>|<\/p>$/g, '') + "</li></ul></li></ul>" + actionbuttonstext + "</div>";
           }
 
 
-          var taskid = task.id
-          var points = task.points
-          var tier = task.tier
-          var questtext = task.questtext
+          var taskid = task.id;
+          var points = task.points;
+          var tier = task.tier;
+          var questtext = task.questtext;
 
           var cardtextdividname = "quest-" + id + "-" + tier;
 
-          var edit = '<button class="fa fa-pencil inv-button" id="edittask-' + taskid + '" type="submit" aria-hidden="true"></button>'
-          var remove = '<button class="fa fa-times inv-button" id="removetask-' + taskid + '" type="submit" aria-hidden="true"></button>'
-          var actionsbuttonstext = '<div class="actionquestbar">' + edit + remove + '</div>'
+          var edit = '<button class="fa fa-pencil inv-button" id="edittask-' + taskid + '" type="submit" aria-hidden="true"></button>';
+          var remove = '<button class="fa fa-times inv-button" id="removetask-' + taskid + '" type="submit" aria-hidden="true"></button>';
+          var actionsbuttonstext = '<div class="actionquestbar">' + edit + remove + '</div>';
 
 
-          var inserttext = buildNewContentText(taskid, points, questtext, actionsbuttonstext)
+          var inserttext = buildNewContentText(taskid, points, questtext, actionsbuttonstext);
 
 
-          var cardtextdiv = $('#' + cardtextdividname).append(inserttext)
+          var cardtextdiv = $('#' + cardtextdividname).append(inserttext);
 
 
           function addRemoveTaskEvent() {
             $('#removetask-' + taskid).click(function (event) {
               elem = $('#task-' + taskid);
-              var removedata = {'ajax_action_id': window.ajaxactions.DELETEQUESTTASK, 'pk_id': taskid}
+              var removedata = {'ajax_action_id': window.ajaxactions.DELETEQUESTTASK, 'pk_id': taskid};
 
 
               sunKnightsJsonRequest(removedata, function (result, data) {
                 if (result) {
                   var output = data.message.data;
-                  console.log(output)
-                  elem.remove()
+                  console.log(output);
+                  elem.remove();
 
                 }
                 else {
-                  console.log('fuck this shit')
+                  console.log('fuck this shit');
                 }
               });
-            })
+            });
           }
 
-          addRemoveTaskEvent()
+          addRemoveTaskEvent();
 
 
           function addEditTaskEvent() {
@@ -182,15 +182,15 @@
               `;
 
 
-              elem.html(replacewithtext)
+              elem.html(replacewithtext);
 
 
               $('#aborttask-' + taskid).click(function (event) {
                 event.preventDefault();
-                console.log('yolo')
-                elem.html(inserttext)
-                addRemoveTaskEvent()
-                addEditTaskEvent()
+                console.log('yolo');
+                elem.html(inserttext);
+                addRemoveTaskEvent();
+                addEditTaskEvent();
 
               });
               $('#questtaskeditform-' + taskid).on('submit', function (event) {
@@ -199,17 +199,17 @@
                 var form = new FormData(this);
                 sunKnightsJsonRequest(form, function (result, data) {
                   if (result) {
-                    var data = data.message.data
-                    questtext = data.questtext
-                    points = data.points
-                    inserttext = buildNewContentText(taskid, points, questtext, actionsbuttonstext)
+                    var data = data.message.data;
+                    questtext = data.questtext;
+                    points = data.points;
+                    inserttext = buildNewContentText(taskid, points, questtext, actionsbuttonstext);
 
-                    elem.html(inserttext)
-                    addRemoveTaskEvent()
-                    addEditTaskEvent()
+                    elem.html(inserttext);
+                    addRemoveTaskEvent();
+                    addEditTaskEvent();
                   }
                   else {
-                    console.log('fuck this shit')
+                    console.log('fuck this shit');
                   }
                 }, false, false);
                 this.reset();
@@ -220,7 +220,7 @@
 
           }
 
-          addEditTaskEvent()
+          addEditTaskEvent();
 
 
         }
@@ -229,49 +229,49 @@
         function addMultiplierToQuest(id, multiplierobj) {
           function buildNewContentText(multid, multiplier, tankname, actionbuttonstext) {
 
-            return "<div class=\"questtaskdiv\" id=\"multiplier-" + multid + "\"><ul><li><span class=\"pointsquest\">" + tankname + "</span><ul><li>" + multiplier + "</li></ul></li></ul>" + actionbuttonstext + "</div>"
+            return "<div class=\"questtaskdiv\" id=\"multiplier-" + multid + "\"><ul><li><span class=\"pointsquest\">" + tankname + "</span><ul><li>" + multiplier + "</li></ul></li></ul>" + actionbuttonstext + "</div>";
           }
 
 
-          var multiplierid = multiplierobj.id
-          var multiplier = multiplierobj.multiplier
-          var tankid = multiplierobj.tank.id
-          var tankname = multiplierobj.tank.name
+          var multiplierid = multiplierobj.id;
+          var multiplier = multiplierobj.multiplier;
+          var tankid = multiplierobj.tank.id;
+          var tankname = multiplierobj.tank.name;
 
           var cardtextdividname = "multiplier-" + id;
 
-          var edit = '<button class="fa fa-pencil inv-button" id="editmult-' + multiplierid + '" type="submit" aria-hidden="true"></button>'
-          var remove = '<button class="fa fa-times inv-button" id="removemult-' + multiplierid + '" type="submit" aria-hidden="true"></button>'
-          var actionsbuttonstext = '<div class="actionquestbar">' + edit + remove + '</div>'
+          var edit = '<button class="fa fa-pencil inv-button" id="editmult-' + multiplierid + '" type="submit" aria-hidden="true"></button>';
+          var remove = '<button class="fa fa-times inv-button" id="removemult-' + multiplierid + '" type="submit" aria-hidden="true"></button>';
+          var actionsbuttonstext = '<div class="actionquestbar">' + edit + remove + '</div>';
 
 
-          var inserttext = buildNewContentText(multiplierid, multiplier, tankname, actionsbuttonstext)
+          var inserttext = buildNewContentText(multiplierid, multiplier, tankname, actionsbuttonstext);
 
 
-          var cardtextdiv = $('#' + cardtextdividname).append(inserttext)
+          var cardtextdiv = $('#' + cardtextdividname).append(inserttext);
 
 
           function addRemoveMultiplierEvent() {
             $('#removemult-' + multiplierid).click(function (event) {
               elem = $('#multiplier-' + multiplierid);
-              var removedata = {'ajax_action_id': window.ajaxactions.REMOVEMULTIPLIER, 'pk_id': multiplierid}
+              var removedata = {'ajax_action_id': window.ajaxactions.REMOVEMULTIPLIER, 'pk_id': multiplierid};
 
 
               sunKnightsJsonRequest(removedata, function (result, data) {
                 if (result) {
                   var output = data.message.data;
-                  console.log(output)
-                  elem.remove()
+                  console.log(output);
+                  elem.remove();
 
                 }
                 else {
-                  console.log('fuck this shit')
+                  console.log('fuck this shit');
                 }
               });
-            })
+            });
           }
 
-          addRemoveMultiplierEvent()
+          addRemoveMultiplierEvent();
 
 
           function addEditMultiplierEvent() {
@@ -303,15 +303,15 @@
               `;
 
 
-              elem.html(replacewithtext)
+              elem.html(replacewithtext);
               $('.select-tank-picker').selectpicker();
 
               $('#abortmultiplier-' + multiplierid).click(function (event) {
                 event.preventDefault();
-                console.log('yolo')
-                elem.html(inserttext)
-                addRemoveMultiplierEvent()
-                addEditMultiplierEvent()
+                console.log('yolo');
+                elem.html(inserttext);
+                addRemoveMultiplierEvent();
+                addEditMultiplierEvent();
               });
 
               $('#questmultipliereditform-' + multiplierid).on('submit', function (event) {
@@ -320,19 +320,19 @@
                 var form = new FormData(this);
                 sunKnightsJsonRequest(form, function (result, data) {
                   if (result) {
-                    var data = data.message.data
-                    console.log(data)
-                    tankname = data.tank.name
-                    tankid = data.tank.id
-                    multiplier = data.multiplier
-                    inserttext = buildNewContentText(multiplierid, multiplier, tankname, actionsbuttonstext)
+                    var data = data.message.data;
+                    console.log(data);
+                    tankname = data.tank.name;
+                    tankid = data.tank.id;
+                    multiplier = data.multiplier;
+                    inserttext = buildNewContentText(multiplierid, multiplier, tankname, actionsbuttonstext);
 
-                    elem.html(inserttext)
-                    addRemoveMultiplierEvent()
-                    addEditMultiplierEvent()
+                    elem.html(inserttext);
+                    addRemoveMultiplierEvent();
+                    addEditMultiplierEvent();
                   }
                   else {
-                    console.log('fuck this shit')
+                    console.log('fuck this shit');
                   }
                 }, false, false);
                 this.reset();
@@ -343,7 +343,7 @@
 
           }
 
-          addEditMultiplierEvent()
+          addEditMultiplierEvent();
 
 
         }
@@ -351,48 +351,48 @@
 
         function addBuildToQuest(id, buildobj) {
           function buildNewContentText(buildid, build, actionbuttonstext) {
-            return "<div class=\"questtaskdiv\" id=\"builder-" + buildid + "\">" + sh.makeHtml(build).replace(/^<p>|<\/p>$/g, '') + actionbuttonstext + "</div>"
+            return "<div class=\"questtaskdiv\" id=\"builder-" + buildid + "\">" + sh.makeHtml(build).replace(/^<p>|<\/p>$/g, '') + actionbuttonstext + "</div>";
           }
 
 
-          var buildid = buildobj.id
-          var build = buildobj.build
+          var buildid = buildobj.id;
+          var build = buildobj.build;
 
 
           var cardtextdividname = "builder-" + id;
 
-          var edit = '<button class="fa fa-pencil inv-button" id="editbuild-' + buildid + '" type="submit" aria-hidden="true"></button>'
-          var remove = '<button class="fa fa-times inv-button" id="removebuild-' + buildid + '" type="submit" aria-hidden="true"></button>'
-          var actionsbuttonstext = '<div class="actionquestbar">' + edit + remove + '</div>'
+          var edit = '<button class="fa fa-pencil inv-button" id="editbuild-' + buildid + '" type="submit" aria-hidden="true"></button>';
+          var remove = '<button class="fa fa-times inv-button" id="removebuild-' + buildid + '" type="submit" aria-hidden="true"></button>';
+          var actionsbuttonstext = '<div class="actionquestbar">' + edit + remove + '</div>';
 
 
-          var inserttext = buildNewContentText(buildid, build, actionsbuttonstext)
+          var inserttext = buildNewContentText(buildid, build, actionsbuttonstext);
 
 
-          var cardtextdiv = $('#' + cardtextdividname).append(inserttext)
+          var cardtextdiv = $('#' + cardtextdividname).append(inserttext);
 
 
           function addRemoveBuildEvent() {
             $('#removebuild-' + buildid).click(function (event) {
               elem = $('#builder-' + buildid);
-              var removedata = {'ajax_action_id': window.ajaxactions.DELETEQUESTBUILD, 'pk_id': buildid}
+              var removedata = {'ajax_action_id': window.ajaxactions.DELETEQUESTBUILD, 'pk_id': buildid};
 
 
               sunKnightsJsonRequest(removedata, function (result, data) {
                 if (result) {
                   var output = data.message.data;
-                  console.log(output)
-                  elem.remove()
+                  console.log(output);
+                  elem.remove();
 
                 }
                 else {
-                  console.log('fuck this shit')
+                  console.log('fuck this shit');
                 }
               });
-            })
+            });
           }
 
-          addRemoveBuildEvent()
+          addRemoveBuildEvent();
 
 
           function addEditBuildEvent() {
@@ -415,13 +415,13 @@
               `;
 
 
-              elem.html(replacewithtext)
+              elem.html(replacewithtext);
 
               $('#abortbuild-' + buildid).click(function (event) {
                 event.preventDefault();
-                elem.html(inserttext)
-                addRemoveBuildEvent()
-                addEditBuildEvent()
+                elem.html(inserttext);
+                addRemoveBuildEvent();
+                addEditBuildEvent();
               });
 
               $('#questbuildeditform-' + buildid).on('submit', function (event) {
@@ -430,17 +430,17 @@
                 var form = new FormData(this);
                 sunKnightsJsonRequest(form, function (result, data) {
                   if (result) {
-                    var data = data.message.data
-                    console.log(data)
-                    build = data.build
-                    inserttext = buildNewContentText(buildid, build, actionsbuttonstext)
+                    var data = data.message.data;
+                    console.log(data);
+                    build = data.build;
+                    inserttext = buildNewContentText(buildid, build, actionsbuttonstext);
 
-                    elem.html(inserttext)
-                    addRemoveBuildEvent()
-                    addEditBuildEvent()
+                    elem.html(inserttext);
+                    addRemoveBuildEvent();
+                    addEditBuildEvent();
                   }
                   else {
-                    console.log('fuck this shit')
+                    console.log('fuck this shit');
                   }
                 }, false, false);
                 this.reset();
@@ -451,7 +451,7 @@
 
           }
 
-          addEditBuildEvent()
+          addEditBuildEvent();
 
 
         }
@@ -462,64 +462,64 @@
             var quests = data.message.data;
 
             for (var i = 0; i < quests.length; i++) {
-              var quest = quests[i]
-              console.log(quest)
-              var id = quest.id
-              var permed = quest.permed
-              var multipliers = quest.multipliers
-              var tasks = quest.tasks
-              var builds = quest.builds
+              var quest = quests[i];
+              console.log(quest);
+              var id = quest.id;
+              var permed = quest.permed;
+              var multipliers = quest.multipliers;
+              var tasks = quest.tasks;
+              var builds = quest.builds;
 
 
               for (var k = 0; k < multipliers.length; k++) {
-                var multiplier = multipliers[k]
-                addMultiplierToQuest(id, multiplier)
+                var multiplier = multipliers[k];
+                addMultiplierToQuest(id, multiplier);
               }
               for (var k = 0; k < builds.length; k++) {
-                var build = builds[k]
-                addBuildToQuest(id, build)
+                var build = builds[k];
+                addBuildToQuest(id, build);
               }
 
               for (var k = 0; k < tasks.length; k++) {
-                var task = tasks[k]
+                var task = tasks[k];
 
                 if (task.deleted)
-                  continue
-                addTaskToQuest(id, task)
+                  continue;
+                addTaskToQuest(id, task);
 
               }
             }
           }
           else {
-            console.log('fuck this shit')
+            console.log('fuck this shit');
           }
         });
 
 
         $('.addquesttask, .addquestmultiplier, .addquestbuild').on('submit', function (event) {
           event.preventDefault();
-          console.log('what')
-          var elem = this
+          console.log('what');
+          var elem = this;
           var form = new FormData(this);
           sunKnightsJsonRequest(form, function (result, data) {
             if (result) {
 
-              console.log($(event.target).attr('class'))
-              var data = data.message.data
-              console.log(data)
-              var questid = data.quest
+              console.log($(event.target).attr('class'));
+              var data = data.message.data;
+              console.log(data);
+              var questid = data.quest;
               if ($(event.target).attr('class') == 'addquesttask') {
-                addTaskToQuest(questid, data)
+                addTaskToQuest(questid, data);
               }
               else if ($(event.target).attr('class') == 'addquestmultiplier') {
-                addMultiplierToQuest(questid, data)
+                addMultiplierToQuest(questid, data);
               }
               else if ($(event.target).attr('class') == 'addquestbuild') {
-                addBuildToQuest(questid, data)
+                addBuildToQuest(questid, data);
               }
             }
             else {
-              console.log('fuck this shit')
+              console.log('fuck this shit');
             }
           }, false, false);
           this.reset();
