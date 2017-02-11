@@ -42,7 +42,7 @@
 
         $('#decided-events-quests-table').DataTable({
             "columnDefs":[{
-                "targets": [ 4 ],
+                "targets": [ 5 ],
                 "visible": false,
                 "searchable": false}
             ],
@@ -51,7 +51,7 @@
             },
             "fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
                 // Bold the grade for all 'A' grade browsers
-                if ( aData[4] == "True" )
+                if ( aData[5] == "True" )
                 {
                     $(nRow).css('color','green')
                 }

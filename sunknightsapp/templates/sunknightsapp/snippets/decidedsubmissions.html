@@ -79,6 +79,7 @@
     <thead>
     <tr>
         <th>Id</th>
+        <th>Quest</th>
         <th>Points</th>
         <th>Manager</th>
         <th>Manager Note</th>
@@ -96,6 +97,13 @@
                 {% endif %}
                 {{ submission.id }}
             </td>
+        <td>
+
+            {% if submission.questtask %}
+                <span data-toggle="tooltip" data-html="true" data-placement="top" title="{{ submission.questtask.questtext_html }}">Tier{{ submission.questtask.quest.tier}}</span>
+            {% endif %}
+
+        </td>
             <td>{{ submission.points|intcomma }}</td>
             <td><a href="/user/{{ submission.manager.discord_id }}">{{ submission.manager.discord_nickname }}</a></td>
             <td>{{ submission.managerText }}</td>
