@@ -8,6 +8,11 @@ class Quest(models.Model):
     permed=models.BooleanField(default=False)
 
 
+
+    @property
+    def validtasks(self):
+        self.tasks.filter(deleted=False)
+
     def __str__(self):
                     return str(self.date)
 
@@ -26,6 +31,8 @@ class QuestTask(models.Model):
     def questtext_html(self):
         import markdown_deux
         return markdown_deux.markdown(self.questtext)[3:-5]
+
+
 
 
     def __str__(self):

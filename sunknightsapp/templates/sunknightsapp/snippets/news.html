@@ -32,7 +32,9 @@
                 <div class="card-block">
                     <h4 class="card-title">Daily Quests</h4>
                     <p class="card-text">
+                    {% if daily.validtasks.all.count > 0 %}
                         Quests:
+                    {% endif %}
                         {% for task in daily.tasks.all %}
                             {% if not task.deleted %}
                                 <div class="questtaskuserdiv" id="task-{{ task.id }}">
@@ -46,7 +48,9 @@
                                 </div>
                             {% endif %}
                         {% endfor %}
-                    Builds:
+                    {% if daily.builds.all.count > 0 %}
+                        Builds:
+                    {% endif %}
                     {% for build in daily.builds.all %}
                         <div class="questtaskuserdiv" id="build-{{ build.id }}">
                             <ul>
@@ -58,7 +62,9 @@
                         </div>
                     {% endfor %}
 
-                    Multipliers:
+                    {% if daily.multipliers.all.count > 0 %}
+                        Multipliers:
+                    {% endif %}
                     {% for multiplier in daily.multipliers.all %}
                         <div class="questtaskuserdiv" id="multiplier-{{ multiplier.id }}">
                             <ul>
