@@ -220,8 +220,8 @@ class ClanUser(AbstractBaseUser):
                 # if QuestTask.objects.filter(quest=quest).exclude(eventquest__pointsinfo=self.pointsinfo,eventquest__accepted=True).exclude(tier=QUEST_TIER_OPTIONS[3][0]):#as long as not all non bonus quests are accepted, no bonus quest will be displayed
                 #     tasks=tasks.exclude(tier=QUEST_TIER_OPTIONS[3][0])
 
-                tasks=QuestTask.objects.filter(quest=quest).exclude(Q(eventquest__pointsinfo=self.pointsinfo) &(Q(eventquest__decided=False)|(Q(eventquest__accepted=True)&Q(eventquest__decided=True))))
-                if QuestTask.objects.filter(quest=quest,eventquest__pointsinfo=self.pointsinfo,eventquest__accepted=True).count()<3:#as long as not at least 3 tier1-tier3 quests are done, one cannot do a bonus quest
+                tasks=QuestTask.objects.filter(quest=quest,deleted=False).exclude(Q(eventquest__pointsinfo=self.pointsinfo) &(Q(eventquest__decided=False)|(Q(eventquest__accepted=True)&Q(eventquest__decided=True))))
+                if QuestTask.objects.filter(quest=quest,eventquest__pointsinfo=self.pointsinfo,eventquest__accepted=True,deleted=False).count()<3:#as long as not at least 3 tier1-tier3 quests are done, one cannot do a bonus quest
                     tasks=tasks.exclude(tier=QUEST_TIER_OPTIONS[3][0])
 
                 return tasks.order_by('tier')
