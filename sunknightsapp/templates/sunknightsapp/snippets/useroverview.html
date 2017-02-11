@@ -3,6 +3,7 @@
 
 
 
+
     <div class="row">
         <div class="col-12 col-sm-12" id="user-stats">
             <div class="card-block row" id="user-card-block-image">
@@ -27,16 +28,19 @@
                                 <div class="{{ mastery.tank.name|slugify }}-tier{{ mastery.tier }}"
                                      data-toggle="tooltip"
                                      data-placement="top" title="{{ mastery.tank.name }} Tier {{ mastery.tier }}"></div>
-                            {% endfor %}</p>
+                            {% endfor %}
+                            </p>
                         </div>
 
                         <div class="card mindwidthcard card-margin">
                             <h4 class="card-title">Badges</h4>
                             <strong>{{ lookuser.badges.all.count }}</strong>
-                            <p class="card-text">{% for badge in lookuser.badges.all %}
+                            <p class="card-text">
+                            {% for badge in lookuser.badges.all %}
                                 <div class="{{ badge.tank.name|slugify }}" data-toggle="tooltip" data-placement="top"
                                      title="{{ badge.name }}"></div>
-                            {% endfor %}</p>
+                            {% endfor %}
+                            </p>
                         </div>
                     </div>
                 </div>
