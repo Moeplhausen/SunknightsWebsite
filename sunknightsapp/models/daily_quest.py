@@ -31,14 +31,6 @@ class QuestTask(models.Model):
     def __str__(self):
         return self.questtext
 
-class QuestTaskUserConnector(models.Model):
-    task=models.ForeignKey(QuestTask,on_delete=models.CASCADE)
-    user=models.ForeignKey(ClanUser,on_delete=models.CASCADE)
-
-    class Meta:
-        unique_together=('task','user')
-
-
 
 class QuestTankMultiplier(models.Model):
     quest=models.ForeignKey(Quest,related_name='multipliers',on_delete=models.CASCADE)

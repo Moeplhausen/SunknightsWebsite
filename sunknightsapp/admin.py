@@ -5,7 +5,7 @@ from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.contrib.auth.models import Group
 
 from .models.clan_user import ClanUser, ClanUserRoles
-from .models.daily_quest import Quest,QuestTankMultiplier,QuestBuild,QuestTaskUserConnector
+from .models.daily_quest import Quest,QuestTankMultiplier,QuestBuild
 from .models.diep_gamemode import DiepGamemode
 from .models.diep_tank import DiepTank,DiepTankInheritance
 from .models.discord_role_points import DiscordRolePoints
@@ -127,8 +127,6 @@ class HelpInfoAdmin(admin.ModelAdmin):
     list_display = ('name','date','last_modifier','helpinfo')
     ordering = ('name',)
 
-class QuestTaskUserConnectorAdmin(admin.ModelAdmin):
-    list_display = ('task','user')
 
 
 # Now register the new UserAdmin...
@@ -158,5 +156,4 @@ admin.site.register(SunKnightsBadgeRole,SunKnightsBadgeRoleAdmin)
 admin.site.register(HelpInfo,HelpInfoAdmin)
 admin.site.register(QuestBuild)
 admin.site.register(QuestTankMultiplier)
-admin.site.register(QuestTaskUserConnector,QuestTaskUserConnectorAdmin)
 
