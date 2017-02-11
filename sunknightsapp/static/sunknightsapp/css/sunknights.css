@@ -95,6 +95,7 @@ table.dataTable thead .sorting_desc_disabled
 
  .mindwidthcard{
      min-width:200px ;
+     overflow: auto;
  }
 
  .card-margin{
