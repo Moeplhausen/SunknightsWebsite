@@ -147,7 +147,7 @@
                 if (result) {
                   var output = data.message.data;
                   console.log(output);
-                  elem.remove();
+                  $('#task-' + taskid).remove();
 
                 }
                 else {
@@ -182,13 +182,13 @@
               `;
 
 
-              elem.html(replacewithtext);
+              $('#task-' + taskid).html(replacewithtext);
 
 
               $('#aborttask-' + taskid).click(function (event) {
                 event.preventDefault();
                 console.log('yolo');
-                elem.html(inserttext);
+                $('#task-' + taskid).html(inserttext);
                 addRemoveTaskEvent();
                 addEditTaskEvent();
 
@@ -204,7 +204,7 @@
                     points = data.points;
                     inserttext = buildNewContentText(taskid, points, questtext, actionsbuttonstext);
 
-                    elem.html(inserttext);
+                    $('#task-' + taskid).html(inserttext);
                     addRemoveTaskEvent();
                     addEditTaskEvent();
                   }
@@ -261,7 +261,7 @@
                 if (result) {
                   var output = data.message.data;
                   console.log(output);
-                  elem.remove();
+                  $('#multiplier-' + multiplierid).remove();
 
                 }
                 else {
@@ -303,13 +303,13 @@
               `;
 
 
-              elem.html(replacewithtext);
+              $('#multiplier-' + multiplierid).html(replacewithtext);
               $('.select-tank-picker').selectpicker();
 
               $('#abortmultiplier-' + multiplierid).click(function (event) {
                 event.preventDefault();
                 console.log('yolo');
-                elem.html(inserttext);
+                $('#multiplier-' + multiplierid).html(inserttext);
                 addRemoveMultiplierEvent();
                 addEditMultiplierEvent();
               });
@@ -327,7 +327,7 @@
                     multiplier = data.multiplier;
                     inserttext = buildNewContentText(multiplierid, multiplier, tankname, actionsbuttonstext);
 
-                    elem.html(inserttext);
+                    $('#multiplier-' + multiplierid).html(inserttext);
                     addRemoveMultiplierEvent();
                     addEditMultiplierEvent();
                   }
@@ -382,7 +382,7 @@
                 if (result) {
                   var output = data.message.data;
                   console.log(output);
-                  elem.remove();
+                  $('#builder-' + buildid).remove();
 
                 }
                 else {
@@ -415,11 +415,11 @@
               `;
 
 
-              elem.html(replacewithtext);
+              $('#builder-' + buildid).html(replacewithtext);
 
               $('#abortbuild-' + buildid).click(function (event) {
                 event.preventDefault();
-                elem.html(inserttext);
+                $('#builder-' + buildid).html(inserttext);
                 addRemoveBuildEvent();
                 addEditBuildEvent();
               });
@@ -435,7 +435,7 @@
                     build = data.build;
                     inserttext = buildNewContentText(buildid, build, actionsbuttonstext);
 
-                    elem.html(inserttext);
+                    $('#builder-' + buildid).html(inserttext);
                     addRemoveBuildEvent();
                     addEditBuildEvent();
                   }
