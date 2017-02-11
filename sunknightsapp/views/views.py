@@ -50,7 +50,6 @@ def index(request):
 
         validtill=now+datetime.timedelta(days=1)-datetime.datetime.utcnow().replace(microsecond=0)
 
-        print(validtill)
 
         context = {
             'daily': quest,
