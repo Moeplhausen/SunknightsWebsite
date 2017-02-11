@@ -102,7 +102,7 @@ def leaderboard(request):
 
 @login_required
 def masteries(request):
-    tanks = DiepTank.objects.all().prefetch_related('mastery_set', 'mastery_set__fromSubmission',
+    tanks = DiepTank.objects.filter(diep_isDeleted=False).prefetch_related('mastery_set', 'mastery_set__fromSubmission',
                                                     'mastery_set__pointsinfo', 'mastery_set__pointsinfo__user')
 
     t = render(request, 'sunknightsapp/masteriesboard.html', {'tanks': tanks})
@@ -214,7 +214,7 @@ def manage_quests(request):
 def tankboard(request):
     context = {}
     inheritance = DiepTankInheritance.objects.all()
-    tanks = DiepTank.objects.all()
+    tanks = DiepTank.objects.filter(diep_isDeleted=False)
     context['inheritance'] = inheritance
     context['tanks'] = tanks
     return render(request, 'sunknightsapp/tankdraw.html', context)
