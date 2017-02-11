@@ -1,0 +1,81 @@
+<div class="row">
+    <div class="card-block col-12 col-sm-12" id="description-block">
+
+        <div class="card-deck">
+
+            <div class="card">
+                <div class="card-block">
+                    <h4 class="card-title">Permanent Quests</h4>
+                    <p class="card-text">
+
+                        {% for task in permdaily.tasks.all %}
+                            {% if not task.deleted %}
+                                <div class="questtaskuserdiv" id="task-{{ task.id }}">
+                                    <ul>
+                                        <li>
+                                            <span class="pointsquest">{{ task.points }} Points:</span>
+
+                                            {{ task.questtext_html }}
+                                        </li>
+                                    </ul>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+
+                    </p>
+
+                </div>
+            </div>
+
+
+            <div class="card">
+                <div class="card-block">
+                    <h4 class="card-title">Daily Quests</h4>
+                    <p class="card-text">
+                        Quests:
+                        {% for task in daily.tasks.all %}
+                            {% if not task.deleted %}
+                                <div class="questtaskuserdiv" id="task-{{ task.id }}">
+                                    <ul>
+                                        <li>
+                                            <span class="pointsquest">{{ task.points }} Points:</span>
+
+                                            {{ task.questtext_html }}
+                                        </li>
+                                    </ul>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    Builds:
+                    {% for build in daily.builds.all %}
+                        <div class="questtaskuserdiv" id="build-{{ build.id }}">
+                            <ul>
+                                <li>
+                                    <span class="build">Build:</span>
+                                    {{ build.build }}
+                                </li>
+                            </ul>
+                        </div>
+                    {% endfor %}
+
+                    Multipliers:
+                    {% for multiplier in daily.multipliers.all %}
+                        <div class="questtaskuserdiv" id="multiplier-{{ multiplier.id }}">
+                            <ul>
+                                <li>
+                                    <span class="pointsquest">{{ multiplier.tank.name }}:</span>
+                                    x{{ multiplier.multiplier }}
+                                </li>
+                            </ul>
+                        </div>
+                    {% endfor %}
+
+                    </p>
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
