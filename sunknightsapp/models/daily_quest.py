@@ -11,7 +11,7 @@ class Quest(models.Model):
 
     @property
     def validtasks(self):
-        self.tasks.filter(deleted=False)
+        self.tasks.filter(deleted=False).order_by('points')
 
     def __str__(self):
                     return str(self.date)

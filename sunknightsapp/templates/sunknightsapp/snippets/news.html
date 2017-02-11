@@ -8,8 +8,7 @@
                     <h4 class="card-title">Permanent Quests</h4>
                     <p class="card-text">
 
-                        {% for task in permdaily.tasks.all %}
-                            {% if not task.deleted %}
+                        {% for task in permdaily.validtasks.all %}
                                 <div class="questtaskuserdiv" id="task-{{ task.id }}">
                                     <ul>
                                         <li>
@@ -19,7 +18,6 @@
                                         </li>
                                     </ul>
                                 </div>
-                            {% endif %}
                         {% endfor %}
 
                     </p>
@@ -35,8 +33,7 @@
                     {% if daily.validtasks.all.count > 0 %}
                         Quests:
                     {% endif %}
-                        {% for task in daily.tasks.all %}
-                            {% if not task.deleted %}
+                        {% for task in daily.validtasks.all %}
                                 <div class="questtaskuserdiv" id="task-{{ task.id }}">
                                     <ul>
                                         <li>
@@ -46,7 +43,6 @@
                                         </li>
                                     </ul>
                                 </div>
-                            {% endif %}
                         {% endfor %}
                     {% if daily.builds.all.count > 0 %}
                         Builds:
