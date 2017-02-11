@@ -171,6 +171,11 @@ class ClanUser(AbstractBaseUser):
                 return BasicUserPointSubmission.objects.filter(pointsinfo=self.pointsinfo,decided=False)
 
             @property
+            def last_open_event_submissions(self):
+                from .point_submission import EventQuestSubmission
+                return EventQuestSubmission.objects.filter(pointsinfo=self.pointsinfo,decided=False)
+
+            @property
             def last_open_fights_submissions(self):
                 from .point_submission import OneOnOneFightSubmission
                 from django.db.models import Q
