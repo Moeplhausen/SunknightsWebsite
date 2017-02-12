@@ -90,10 +90,9 @@
           //set default note if nothing was set
 
           var note = $('#submitterquestspam').val()
-          if (note == "")
-            console.log('hmm')
+          if (note == "") {
             $('#submitterquestspam').val('None')
-
+          }
           var form = new FormData(this);
           sunKnightsJsonRequest(form, function (result, data) {
             if (result) {

@@ -67,6 +67,9 @@ class EventQuestSubmission(BasicPointSubmission):
     submitterText = models.TextField(max_length=200, default="")
     questtask=models.ForeignKey(QuestTask,null=True,blank=True,default=None,related_name='eventquest')
 
+    def __str__(self):
+        return self.submitterText
+
 
 class OneOnOneFightSubmission(BasicPointSubmission):
     pointsinfoloser = models.ForeignKey(PointsInfo, related_name="loser")
