@@ -96,6 +96,27 @@ table.dataTable thead .sorting_desc_disabled
      overflow: auto;
  }
 
+@media screen and (min-width: 1900px) {
+    #sidebar-vis {
+        width: 320px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 1em;
+    }
+}
+@media screen and (max-width: 1899px) {
+    #sidebar-vis {
+        display:None
+    }
+}
+
+
+
+#sidebar-vis .cheatsheet{
+    padding: 1em;
+}
+
  .card-margin{
      margin-bottom: 1em !important;
      height: 254px;
