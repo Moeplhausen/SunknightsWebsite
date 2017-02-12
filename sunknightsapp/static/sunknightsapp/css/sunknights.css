@@ -91,8 +91,6 @@ table.dataTable thead .sorting_desc_disabled
      margin-top: 0.5em;
  }
 
-
-
  .mindwidthcard{
      min-width:200px ;
      overflow: auto;
@@ -154,10 +152,6 @@ table.dataTable thead .sorting_desc_disabled
 #masteries-badges-column{
     padding-left: 0px;
 }
-#usernamediv-id{
-    margin-right: 1em;
-}
-
 #userdesccancel{
     float:left;
 }
