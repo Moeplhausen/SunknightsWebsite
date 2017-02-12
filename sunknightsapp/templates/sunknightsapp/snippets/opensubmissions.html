@@ -32,7 +32,9 @@
     <thead>
     <tr>
         <th>Id</th>
+        <th>Quest</th>
         <th>Note</th>
+        <th>Expected Points</th>
         <th>Proof</th>
     </tr>
     </thead>
@@ -41,7 +43,13 @@
         <tr>
 
             <td>{{ submission.id }}</td>
+            {% if submission.questtask %}
+                <td>T{{ submission.questtask.tier }}: {{ submission.questtask.questtext }}</td>
+            {% else %}
+            <td>None</td>
+            {% endif %}
             <td>{{ submission.submitterText }}</td>
+            <td>{{ submission.points }}</td>
             <td><a href="{{ submission.proof }}">Prooflink</a></td>
         </tr>
     {% endfor %}

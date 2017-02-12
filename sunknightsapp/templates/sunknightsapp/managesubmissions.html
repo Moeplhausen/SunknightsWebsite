@@ -282,7 +282,8 @@
                 var quest=data[i].questtask
 
                 if (quest){
-                    questtext='<span data-toggle="tooltip" data-html="true" data-placement="top" title="'+sh.makeHtml(quest.questtext).replace(/^<p>|<\/p>$/g, '')+'">Tier' + quest.tier + '</span>'
+                    //questtext='<span data-toggle="tooltip" data-html="true" data-placement="top" title="'+sh.makeHtml(quest.questtext).replace(/^<p>|<\/p>$/g, '')+'">Tier' + quest.tier + '</span>'
+                  questtext="T"+quest.tier+": "+sh.makeHtml(quest.questtext).replace(/^<p>|<\/p>$/g, '')
                 }
 
                 var username = data[i].pointsinfo.user.discord_nickname
