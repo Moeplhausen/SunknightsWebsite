@@ -32,7 +32,7 @@
                         <strong>{{ lookuser.badges.all.count }}</strong>
                         <p class="card-text">
                             {% for badge in lookuser.badges.all %}
-                                <div class="{{ badge.tank.name|slugify }}" data-toggle="tooltip" data-placement="top"
+                                <div class="{{ badge.tank.name|slugify }}-tier{{ badge.tier }}" data-toggle="tooltip" data-placement="top"
                                      title="{{ badge.name }}"></div>
                             {% endfor %}
                         </p>

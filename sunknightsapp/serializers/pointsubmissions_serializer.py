@@ -63,18 +63,43 @@ class BasicUserPointSubmissionProofusedSerializer(BulkSerializerMixin, serialize
 
 
 
+class SmallEventQuestsSubmissionSerializer(BulkSerializerMixin, serializers.ModelSerializer):
+    from .daily_quest_serializer import QuestTaskSerializer
+    pointsinfo = PointsInfoBasicSerializer(many=False, read_only=True)
+
+    class Meta:
+        model = BasicUserPointSubmission
+        fields = (
+            'id', 'date', 'manager', 'managerText', 'points', 'submitterText',  'pointsinfo', 'accepted',
+            'decided', 'proof',)
+        list_serializer_class = BulkListSerializer
+
+
 
 class BasicEventQuestsSubmissionSerializer(BulkSerializerMixin, serializers.ModelSerializer):
     from .daily_quest_serializer import QuestTaskSerializer
     daily_quest = QuestSerializer(many=False, read_only=True)
     pointsinfo = PointsInfoBasicSerializer(many=False, read_only=True)
     questtask=QuestTaskSerializer(many=False,read_only=True)
+    proofused=SmallEventQuestsSubmissionSerializer(many=True,read_only=True)
 
     class Meta:
         model = BasicUserPointSubmission
         fields = (
             'id', 'date', 'manager', 'managerText', 'points', 'submitterText',  'pointsinfo', 'accepted',
-            'decided', 'daily_quest', 'proof','questtask')
+            'decided', 'daily_quest', 'proof','questtask','proofused')
+        list_serializer_class = BulkListSerializer
+
+
+
+class SmallOneOnOneFightSubmissionSerializer(BulkSerializerMixin, serializers.ModelSerializer):
+    pointsinfo = PointsInfoBasicSerializer(many=False, read_only=True)
+    pointsinfoloser = PointsInfoBasicSerializer(many=False, read_only=True)
+
+    class Meta:
+        model = OneOnOneFightSubmission
+        fields = ('id', 'date', 'manager', 'managerText', 'points', 'pointsinfo', 'accepted', 'decided', 'proof',
+                  'pointsinfoloser', 'pointsloser')
         list_serializer_class = BulkListSerializer
 
 
@@ -83,9 +108,10 @@ class BasicEventQuestsSubmissionSerializer(BulkSerializerMixin, serializers.Mode
 class OneOnOneFightSubmissionSerializer(BulkSerializerMixin, serializers.ModelSerializer):
     pointsinfo = PointsInfoBasicSerializer(many=False, read_only=True)
     pointsinfoloser = PointsInfoBasicSerializer(many=False, read_only=True)
+    proofused=SmallOneOnOneFightSubmissionSerializer(many=True,read_only=True)
 
     class Meta:
         model = OneOnOneFightSubmission
         fields = ('id', 'date', 'manager', 'managerText', 'points', 'pointsinfo', 'accepted', 'decided', 'proof',
-                  'pointsinfoloser', 'pointsloser')
+                  'pointsinfoloser', 'pointsloser','proofused')
         list_serializer_class = BulkListSerializer

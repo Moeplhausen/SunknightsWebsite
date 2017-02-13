@@ -8,13 +8,13 @@
         <table id="points-submissions-table" class="display" cellspacing="0" width="100%">
             <thead>
             <tr>
+                <th>Id & Date</th>
                 <th>User</th>
                 <th>Tank & Score</th>
                 {#                <th>Gamemode</th>#}
                 <th>Proof & Note</th>
                 <th>Manager Note</th>
                 <th>Points</th>
-                <th>Date</th>
                 <th>action</th>
             </tr>
             </thead>
@@ -28,12 +28,12 @@
         <table id="event-quests-submissions-table" class="display" cellspacing="0" width="100%">
             <thead>
             <tr>
+                <th>Id & Date</th>
                 <th>User</th>
                 <th>Quest</th>
                 <th>Proof & Note</th>
                 <th>Manager Note</th>
                 <th>Points</th>
-                <th>Date</th>
                 <th>action</th>
             </tr>
             </thead>
@@ -50,6 +50,7 @@
         <table id="fights-submissions-table" class="display" cellspacing="0" width="100%">
             <thead>
             <tr>
+                <th>Id & Date</th>
                 <th>Winner</th>
                 <th>Loser</th>
                 <th>Proof</th>
@@ -117,7 +118,7 @@
             $('[data-toggle="tooltip"]').tooltip()
           },
           "columnDefs": [
-            { "orderable": false, "targets": [1,2] }
+            { "orderable": false, "targets": [2,3] }
           ],
           "ajax": {
             "url": "{% url 'ajaxhandler' %}",
@@ -179,6 +180,7 @@
 
 
                 return_data.push({
+                  'id':data[i].id+'<br>'+moment(data[i].date).format("MMM D Y, hh:mm:ss A"),
                   'user': user,
                   'tank': data[i].tank.name,
                   'tankscore':tankscoretext,
@@ -203,6 +205,7 @@
             }
           },
           "columns": [
+            {"data":"id"},
             {"data": "user"},
             {"data": "tankscore"},
             {#                    {"data": "gamemode.name"},#}
@@ -210,7 +213,6 @@
             {"data": "note"},
             {"data": "manager-note"},
             {"data": "points"},
-            {"data": "date"},
             {"data": "action"}
 
           ]
@@ -230,6 +232,8 @@
             var accepted = $(this).hasClass("approve-submission")
 
             element.closest("tr").find('input,button').attr('disabled', 'true');
+
+
 
             $.ajax({
               type: 'POST',
@@ -294,15 +298,31 @@
                 var points = '<input class="form-control" style = "width:75px;"  type="number" value="' + data[i].points + '" id="points-manager-' + data[i].id + '">'
 
 
+                var proofused = data[i].proofused
+                var proofusedcount = proofused.length
+                var proofusedtext = ""
+
+                for (var k = 0; k < proofused.length; k++) {
+                  if (k != 0)
+                    proofusedtext += "<br>"
+                  proofusedtext += proofused[k].id + ": " + proofused[k].pointsinfo.user.discord_nickname
+
+                }
+                var prooftext='<a href="' + data[i].proof + '">Proof</a>'
+                if (proofused.length>1)
+                  var prooftext='<span data-toggle="tooltip" data-html="true" data-placement="top" title="'+proofusedtext+'"><a href="' + data[i].proof + '">Proof (' + proofusedcount + ')</a></span>'
+
+
                 return_data.push({
+                  'id':data[i].id+'<br>'+moment(data[i].date).format("MMM D Y, hh:mm:ss A"),
                   'user': user,
                   'quest':questtext,
                   'date': moment(data[i].date).format("MMM D Y, hh:mm:ss A"),
                   'points': points,
-                  'note':'<a href="' + data[i].proof + '">Prooflink</a>'+"<br>"+data[i].submitterText,
+                  'note': prooftext+"<br>"+data[i].submitterText,
                   'submitter-note': data[i].submitterText,
                   'manager-note': managertext,
-                  'proof': '<a href="' + data[i].proof + '">Prooflink</a>',
+                  'proof': prooftext,
                   'action': action
                 })
               }
@@ -316,12 +336,12 @@
             }
           },
           "columns": [
+            {"data":"id"},
             {"data": "user"},
             {"data":"quest"},
             {"data": "note"},
             {"data": "manager-note"},
             {"data": "points"},
-            {"data": "date"},
             {"data": "action"}
 
           ]
@@ -369,6 +389,7 @@
         var tablefight = $('#fights-submissions-table').DataTable({
           "fnDrawCallback": function (oSettings) {
             decideFightSubmission()
+            $('[data-toggle="tooltip"]').tooltip()
           },
           "ajax": {
             "url": "{% url 'ajaxhandler' %}",
@@ -398,10 +419,25 @@
                 var pointswinner = '<input class="form-control" style = "width:60px;" type="number" value="' + data[i].points + '" id="points-manager-' + data[i].id + '">'
                 var pointsloser = '<input class="form-control" style = "width:60px;" type="number" value="' + data[i].pointsloser + '" id="points-manager-' + data[i].id + '">'
 
+                var proofused = data[i].proofused
+                var proofusedcount = proofused.length
+                var proofusedtext = ""
+
+                for (var k = 0; k < proofused.length; k++) {
+                  if (k != 0)
+                    proofusedtext += "<br>"
+                  proofusedtext += proofused[k].id + ": " + proofused[k].pointsinfo.user.discord_nickname
+
+                }
+                var prooftext='<a href="' + data[i].proof + '">Proof</a>'
+                if (proofused.length>1)
+                  var prooftext='<span data-toggle="tooltip" data-html="true" data-placement="top" title="'+proofusedtext+'"><a href="' + data[i].proof + '">Proof (' + proofusedcount + ')</a></span>'
+
                 return_data.push({
+                  'id':data[i].id+'<br>'+moment(data[i].date).format("MMM D Y, hh:mm:ss A"),
                   'winner': winner,
                   'loser': loser,
-                  'proof': '<a href="' + data[i].proof + '">Prooflink</a>',
+                  'proof': prooftext,
                   'pointswinner': pointswinner,
                   'pointsloser': pointsloser,
                   'manager-note': managertext,
@@ -418,6 +454,7 @@
             }
           },
           "columns": [
+            {"data":"id"},
             {"data": "winner"},
             {"data": "loser"},
             {"data": "proof"},

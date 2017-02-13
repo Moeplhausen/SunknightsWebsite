@@ -99,11 +99,12 @@
               submission = data['message']['data']
               $('#alertsContainer').append("<div class=\"alert alert-success alert-dismissible fade in\" role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>Submitted<strong></div>")
 
-              datatableopeneventquestssubmissions.row.add([
-                submission['id'],
-                submission['submitterText'],
-                "<a href=\"" + submission['proof'] + "\">Prooflink</a>"
-              ]).draw(false)
+{#              datatableopeneventquestssubmissions.row.add([#}
+{#                submission['id'],#}
+{#                submission['submitterText'],#}
+{#                submission['points'],#}
+{#                "<a href=\"" + submission['proof'] + "\">Prooflink</a>"#}
+{#              ]).draw(false)#}
               location.reload();
             }
             else {

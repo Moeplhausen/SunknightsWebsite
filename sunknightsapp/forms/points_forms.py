@@ -169,8 +169,23 @@ class RetrieveEventQuestsSubmissionsForm(BaseForm):
         if not request.user.is_points_manager:
             return self.noPermission()
 
+        proofsbylink={}
         try:
             submissions = EventQuestSubmission.objects.filter(decided=False)
+
+            proofused = EventQuestSubmission.objects.values('proof').filter(decided=False).distinct()
+
+            for p in proofused:
+                link=p['proof']
+                proofused = EventQuestSubmission.objects.filter(proof=link)
+                proofsbylink[link]=proofused
+
+
+
+            for sub in submissions:
+                sub.proofused=proofsbylink[sub.proof]
+
+
             serializer = BasicEventQuestsSubmissionSerializer(submissions, many=True)
         except BaseException as e:
             return self.response(False, 'Something went wrong: ' + str(e))
@@ -287,9 +302,27 @@ class RetrieveFightsSubmissionsForm(BaseForm):
     def handle(self, request):
         if not request.user.is_points_manager:
             return self.noPermission()
+        proofsbylink={}
 
         try:
             submissions = OneOnOneFightSubmission.objects.filter(decided=False)
+
+
+            proofused = OneOnOneFightSubmission.objects.values('proof').filter(decided=False).distinct()
+
+            for p in proofused:
+                link=p['proof']
+                proofused = OneOnOneFightSubmission.objects.filter(proof=link)
+                proofsbylink[link]=proofused
+
+
+
+            for sub in submissions:
+                sub.proofused=proofsbylink[sub.proof]
+
+
+
+
             serializer = OneOnOneFightSubmissionSerializer(submissions, many=True)
         except BaseException as e:
             return self.response(False, 'Something went wrong: ' + str(e))
@@ -298,7 +331,7 @@ class RetrieveFightsSubmissionsForm(BaseForm):
             return self.response(True, {'data': (serializer.data)})
 
     class Meta:
-        model = BasicUserPointSubmission
+        model = OneOnOneFightSubmission
         fields = ()
 
 
