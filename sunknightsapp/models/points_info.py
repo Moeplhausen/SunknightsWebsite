@@ -44,6 +44,11 @@ class PointsInfo(models.Model):
         quests = Quest.objects.filter(permed=False,date__range=(datesubtract, now)).order_by('-date')
         return quests
 
+    @property
+    def next_rank(self):
+        from .discord_role_points import DiscordRolePoints
+        t= DiscordRolePoints.objects.filter(points__gte=self.totalpoints).order_by('points').first()
+        return t
 
 
 

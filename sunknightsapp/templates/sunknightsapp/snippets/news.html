@@ -20,8 +20,8 @@
                                               data-placement="top"
                                               title="Gives a {{ task.cooldown }} hours cooldown of doing permanent quests.">{{ task.points }} Points:</span>
 
-                                        {{ task.questtext_html }}{% if permcooldown %}</del>{% endif %} <i class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Gives {{ task.cooldown }} hours cooldown"></i>
-
+                                        {{ task.questtext_html }}{% if permcooldown %}</del>{% endif %}
+                                        <i class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Gives {{ task.cooldown }} hours cooldown"></i>
                                     </li>
                                 </ul>
                             </div>
@@ -54,7 +54,7 @@
                             </div>
                         {% endfor %}
                     {% if daily.builds.all.count > 0 %}
-                        Builds:
+                        Builds <i class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Submit it as a SCORE submission with a note that you used a daily note, please."></i>:
                     {% endif %}
                     {% for build in daily.builds.all %}
                         <div class="questtaskuserdiv" id="build-{{ build.id }}">
@@ -68,7 +68,7 @@
                     {% endfor %}
 
                     {% if daily.multipliers.all.count > 0 %}
-                        Multipliers:
+                        Multipliers <i class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Multiplies the resulting points from SCORE Submissions"></i>:
                     {% endif %}
                     {% for multiplier in daily.multipliers.all %}
                         <div class="questtaskuserdiv" id="multiplier-{{ multiplier.id }}">
