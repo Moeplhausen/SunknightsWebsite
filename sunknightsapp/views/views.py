@@ -26,8 +26,9 @@ from ..models.diep_tank import DiepTankInheritance, DiepTank
 from ..models.discord_roles import DiscordRole
 from ..models.help_info import HelpInfo
 from ..models.points_info import PointsInfo
-from ..models.daily_quest import Quest
+from ..models.daily_quest import Quest, QuestTask
 import datetime
+from django.utils import timezone
 
 
 def index(request):
@@ -48,13 +49,18 @@ def index(request):
             quest.date = now
             quest.save()
 
-        validtill=now+datetime.timedelta(days=1)-datetime.datetime.utcnow().replace(microsecond=0)
+        validtill = now + datetime.timedelta(days=1) - datetime.datetime.utcnow().replace(microsecond=0)
 
+        permcooldown = None
+        if request.user.pointsinfo.permquestcd >= timezone.now():
+            permcooldown = (request.user.pointsinfo.permquestcd - timezone.now())
+            permcooldown = permcooldown - datetime.timedelta(microseconds=permcooldown.microseconds)
 
         context = {
+            'permcooldown': permcooldown,
             'daily': quest,
             'permdaily': permed,
-            'validtill':validtill,
+            'validtill': validtill,
             'tanks': tanks,
             'gamemodes': gamemodes,
             'submitpointsform': SubmitPointsForm,
@@ -107,7 +113,8 @@ def leaderboard(request):
 @login_required
 def masteries(request):
     tanks = DiepTank.objects.filter(diep_isDeleted=False).prefetch_related('mastery_set', 'mastery_set__fromSubmission',
-                                                    'mastery_set__pointsinfo', 'mastery_set__pointsinfo__user')
+                                                                           'mastery_set__pointsinfo',
+                                                                           'mastery_set__pointsinfo__user')
 
     t = render(request, 'sunknightsapp/masteriesboard.html', {'tanks': tanks})
 

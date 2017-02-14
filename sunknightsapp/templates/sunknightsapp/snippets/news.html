@@ -1,24 +1,33 @@
+{% load task_quests %}
 <div class="row">
-    <div class="card-block col-12 col-sm-12 mCustomScrollbar" data-mcs-theme="minimal-dark" id="quests-block" >
+    <div class="card-block col-12 col-sm-12 mCustomScrollbar" data-mcs-theme="minimal-dark" id="quests-block">
 
         <div class="card-deck">
 
             <div class="card">
                 <div class="card-block">
-                    <h4 class="card-title">Permanent Quests</h4>
+                    <h4 class="card-title">Permanent Quests {% if permcooldown %}
+                        <span class="datevalid h6">Cooldown {{ permcooldown }}</span>{% endif %}</h4>
                     <p class="card-text">
 
                         {% for task in permdaily.validtasks.all %}
-                                <div class="questtaskuserdiv" id="task-{{ task.id }}">
-                                    <ul>
-                                        <li>
-                                            <span class="pointsquest">{{ task.points }} Points:</span>
 
-                                            {{ task.questtext_html }}
-                                        </li>
-                                    </ul>
-                                </div>
+                            <div class="questtaskuserdiv" id="task-{{ task.id }}">
+                                <ul>
+                                    <li class="">
+                                        {% if permcooldown %}<del>{% endif %}
+                                        <span class="pointsquest" data-toggle="tooltip" data-html="true"
+                                              data-placement="top"
+                                              title="Gives a {{ task.cooldown }} hours cooldown of doing permanent quests.">{{ task.points }} Points:</span>
+
+                                        {{ task.questtext_html }}
+                                        {% if permcooldown %}</del>{% endif %}
+                                    </li>
+                                </ul>
+                            </div>
+
                         {% endfor %}
+
 
                     </p>
 
@@ -30,19 +39,18 @@
                 <div class="card-block">
                     <h4 class="card-title">Daily Quests <span class="datevalid h6">Valid for {{ validtill }}</span></h4>
                     <p class="card-text">
-                    {% if daily.validtasks.all.count > 0 %}
-                        Quests:
-                    {% endif %}
+                        {% if daily.validtasks.all.count > 0 %}
+                            Quests:
+                        {% endif %}
                         {% for task in daily.validtasks.all %}
-                                <div class="questtaskuserdiv" id="task-{{ task.id }}">
-                                    <ul>
-                                        <li>
-                                            <span class="pointsquest">{{ task.points }} Points:</span>
-
-                                            {{ task.questtext_html }}
-                                        </li>
-                                    </ul>
-                                </div>
+                            <div class="questtaskuserdiv" id="task-{{ task.id }}">
+                                <ul>
+                                    <li>
+                                        <span class="pointsquest">{{ task.points }} Points:</span>
+                                        {{ task.questtext_html }}{% autoescape off %}{% task_checked user task %}{% endautoescape %}
+                                    </li>
+                                </ul>
+                            </div>
                         {% endfor %}
                     {% if daily.builds.all.count > 0 %}
                         Builds:
