@@ -47,7 +47,8 @@
                                 <ul>
                                     <li>
                                         <span class="pointsquest">{{ task.points }} Points:</span>
-                                        {{ task.questtext_html }}{% autoescape off %} {% task_checked user task %}{% endautoescape %}
+                                        {{ task.questtext_html }}{% autoescape off %}
+                                            {% task_checked user task %}{% endautoescape %}
                                     </li>
                                 </ul>
                             </div>
