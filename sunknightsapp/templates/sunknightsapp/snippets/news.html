@@ -20,8 +20,8 @@
                                               data-placement="top"
                                               title="Gives a {{ task.cooldown }} hours cooldown of doing permanent quests.">{{ task.points }} Points:</span>
 
-                                        {{ task.questtext_html }}
-                                        {% if permcooldown %}</del>{% endif %}
+                                        {{ task.questtext_html }}{% if permcooldown %}</del>{% endif %} <i class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Gives {{ task.cooldown }} hours cooldown"></i>
+
                                     </li>
                                 </ul>
                             </div>
@@ -47,7 +47,7 @@
                                 <ul>
                                     <li>
                                         <span class="pointsquest">{{ task.points }} Points:</span>
-                                        {{ task.questtext_html }}{% autoescape off %}{% task_checked user task %}{% endautoescape %}
+                                        {{ task.questtext_html }}{% autoescape off %} {% task_checked user task %}{% endautoescape %}
                                     </li>
                                 </ul>
                             </div>
