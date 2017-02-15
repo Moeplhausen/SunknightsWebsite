@@ -194,7 +194,7 @@ def manage_quests(request):
 
     tiers = QUEST_TIER_OPTIONS
 
-    time = [permed]
+    time = []
     for i in range(0, 4):
         now = (datetime.datetime.utcnow() + timedelta(days=i)).replace(hour=0, minute=0, second=0, microsecond=0)
         try:
@@ -205,6 +205,7 @@ def manage_quests(request):
             quest.save()
 
         time.append(quest)
+    time.append(permed)
 
     context = {
         'tanks': tanks,
