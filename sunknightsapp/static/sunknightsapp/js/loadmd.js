@@ -13,7 +13,8 @@ var sh = new showdown.Converter({
   tasklists: true,
   requireSpaceBeforeHeadingText: true,
   tables: true,
-  simpleLineBreaks: true
+  simpleLineBreaks: true,
+  extensions: ["tank"]
 });
 function link(){
   return window.location.href.replace(new RegExp(window.location.hash + "$"), "");

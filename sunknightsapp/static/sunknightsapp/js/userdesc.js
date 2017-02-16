@@ -10,7 +10,8 @@ try {
     tasklists: true,
     requireSpaceBeforeHeadingText: true,
     tables: true,
-    simpleLineBreaks: true
+    simpleLineBreaks: true,
+    extensions: ["tank"]
   });
 }
 try {
