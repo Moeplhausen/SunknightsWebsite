@@ -187,6 +187,11 @@
   ajaxhandlerurl = '{% url 'ajaxhandler' %}'
   ajaxactions =
   {{ ajaxactions|safe }}
+
+    jsontanks={{ jsontanks|safe }}
+
+    console.log(jsontanks)
+
 </script>
 <script src="{% static 'sunknightsapp/js/simple.js' %}?{% now "U" %}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.6.3/showdown.min.js"></script>
