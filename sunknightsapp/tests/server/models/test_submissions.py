@@ -68,7 +68,7 @@ class SubmissionsTests(ModelTestCase):
         self.assertTrue(self.basic_user.masteries.exists())
 
         #1million points should have been enough to get a tier 3 mastery
-        self.assertEqual(self.basic_user.masteries.first().tier,3)
+        self.assertEqual(self.basic_user.masteries.first().tier,5)
 
 
     def test_one_to_one_submission(self):

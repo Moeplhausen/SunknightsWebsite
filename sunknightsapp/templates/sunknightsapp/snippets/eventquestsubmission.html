@@ -31,7 +31,7 @@
 
     <div class="form-group">
         <label for="proof">Proof of your score</label>
-        <input type="url" class="form-control" name="proof" id="proof" required
+        <input type="url" class="form-control" name="proof" pattern="[^\s]+" title="Do not put multiple proofs here please. Put them all into one link (e.g imgur album)." id="proof" required
                placeholder="http://imgur.com/a/euVO7"
                aria-describedby="urlHelpBlock">
         <p id="urlHelpBlock" class="form-text">
