@@ -66,9 +66,22 @@ var ajaxusersearchoptions = {
         var i, l = data.length, array = [];
         if (l) {
             for (i = 0; i < l; i++) {
+              var avatarurl=""
+              if (data[i].avatar==""){
+                avatarurl="https://discordapp.com/assets/322c936a8c8be1b803cd94861bdfa868.png"
+              }else{
+                avatarurl="https://cdn.discordapp.com/avatars/"+data[i].discord_id+"/"+data[i].avatar
+              }
+
+              var avatar="<img class='leaderpoint-avatar img-circle float-left' src='"+avatarurl+"'>"
+              console.log(data[i])
                 array.push($.extend(true, data[i], {
+
                     text : data[i].discord_nickname+"#"+data[i].discord_discriminator,
                     value: data[i].id,
+                  data:{
+                      subtext:avatar
+                  }
                 }));
             }
         }
