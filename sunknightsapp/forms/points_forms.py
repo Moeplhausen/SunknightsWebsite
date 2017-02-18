@@ -436,15 +436,17 @@ class DecideEventQuestsSubmissionForm(BaseForm):
             submission.points = self.cleaned_data['points']
             submission.manager=request.user
             submission.decided=True
+            submission.reverted=False
             if not submission.accepted and submission.questtask.quest.permed:
                 import datetime
+                submission.save()
                 submission.pointsinfo.permquestcd=datetime.datetime.utcnow()
                 submission.delete()
             else:
                 print('saved')
                 submission.save()
 
-            submission.reverted=False
+
 
             serializer = BasicEventQuestsSubmissionSerializer(submission)
             return self.response(True, {'data': (serializer.data)})
