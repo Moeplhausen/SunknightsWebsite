@@ -30,9 +30,29 @@ from ..models.daily_quest import Quest, QuestTask
 import datetime
 from django.utils import timezone
 
+def get_client_ip(request):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip
+
 
 def index(request):
     if request.user.is_authenticated():
+        from django.contrib.gis.geoip2 import GeoIP2
+        from slugify import slugify
+        g = GeoIP2()
+        try:
+
+            country_code=slugify(str(g.country_code('37.201.243.233')).lower())
+            if request.user.country_tag!=country_code:
+                request.user.country_tag=country_code
+                request.user.save()
+
+        except:
+            pass
         gamemodes = DiepGamemode.objects.filter(diep_isDeleted=False)
 
         tanks = DiepTank.objects.filter(diep_isDeleted=False)

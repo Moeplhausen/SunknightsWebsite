@@ -4,3 +4,5 @@ djangorestframework-bulk
 django-all-access
 django-widget-tweaks
 django-markdown-deux
+geoip2
+python-slugify

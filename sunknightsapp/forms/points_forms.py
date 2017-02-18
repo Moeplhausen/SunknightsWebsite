@@ -229,9 +229,9 @@ class RetrieveUsersLeaderPointForm(BaseForm):
             if ordercolumn==0:
                 orderstr="user__discord_nickname"
             elif ordercolumn==1:
-                orderstr="oldpoints"
+                orderstr="user__country_tag"
             elif ordercolumn==2:
-                orderstr="currentpoints"
+                orderstr="oldpoints"
             elif ordercolumn==3:
                 orderstr="totalpoints"
             elif ordercolumn==5:
@@ -436,17 +436,15 @@ class DecideEventQuestsSubmissionForm(BaseForm):
             submission.points = self.cleaned_data['points']
             submission.manager=request.user
             submission.decided=True
-            submission.reverted=False
-            if not submission.accepted and submission.questtask.quest.permed:
+            if not submission.accepted and submission.questtask.quest.permed and submission.reverted:
                 import datetime
-                submission.save()
                 submission.pointsinfo.permquestcd=datetime.datetime.utcnow()
                 submission.delete()
             else:
                 print('saved')
                 submission.save()
 
-
+            submission.reverted=False
 
             serializer = BasicEventQuestsSubmissionSerializer(submission)
             return self.response(True, {'data': (serializer.data)})

@@ -8,8 +8,8 @@
             <thead>
             <tr>
                 <th>Name</th>
+                <th>Country</th>
                 <th>Old Points</th>
-                <th>New Points</th>
                 <th>Total Points</th>
                 <th>Masteries</th>
                 <th>1vs1 Skill</th>
@@ -22,68 +22,71 @@
 
 {% block scriptself %}
     <script>
-        $(document).ready(function () {
-            $('#points_leaderboard').DataTable({
-                "order": [[3, "desc"]],
-                "serverSide": true,
-                "columnDefs": [
-                    { "orderable": false, "targets": [4] }
-                ],
-                "lengthMenu": [ 10, 15, 25, 50, 75, 100 ],
-                "pageLength": 15,
-                "ajax": {
-                    "url": "{% url 'ajaxhandler' %}",
-                    "dataSrc": function (json) {
+      $(document).ready(function () {
+        $('#points_leaderboard').DataTable({
+          "order": [[3, "desc"]],
+          "serverSide": true,
+          "columnDefs": [
+            {"orderable": false, "targets": [4]}
+          ],
+          "lengthMenu": [10, 15, 25, 50, 75, 100],
+          "pageLength": 15,
+          "ajax": {
+            "url": "{% url 'ajaxhandler' %}",
+            "dataSrc": function (json) {
 
-                        var data = json['data']
-                        var return_data = new Array();
-                        for (var i = 0; i < data.length; i++) {
+              var data = json['data']
+              var return_data = new Array();
+              for (var i = 0; i < data.length; i++) {
 
-                            var username=data[i].user.discord_nickname
-                            var userdiscordid=data[i].user.discord_id
-                            var avatarstr=data[i].user.avatar
-                            var avatarurl=""
-                            if (avatarstr==""){
-                                avatarurl="https://discordapp.com/assets/322c936a8c8be1b803cd94861bdfa868.png"
-                            }else{
-                                avatarurl="https://cdn.discordapp.com/avatars/"+userdiscordid+"/"+avatarstr
-                            }
+                var username = data[i].user.discord_nickname
+                var userdiscordid = data[i].user.discord_id
+                var avatarstr = data[i].user.avatar
+                var avatarurl = ""
+                if (avatarstr == "") {
+                  avatarurl = "https://discordapp.com/assets/322c936a8c8be1b803cd94861bdfa868.png"
+                } else {
+                  avatarurl = "https://cdn.discordapp.com/avatars/" + userdiscordid + "/" + avatarstr
+                }
 
-                            var usernametext="<img class='leaderpoint-avatar img-circle' src='"+avatarurl+"'><a href='/user/"+userdiscordid+"'>"+username+"</a>"
+                var usernametext = "<img class='leaderpoint-avatar img-circle' src='" + avatarurl + "'><a href='/user/" + userdiscordid + "'>" + username + "</a>"
 
-                            var oldpoints=data[i].oldpoints
-                            var currentpoints=data[i].currentpoints
-                            var totalpoints=data[i].totalpoints
-                            var masteriessize=data[i].masteries.length
-                            var elo=data[i].elo
+                var oldpoints = data[i].oldpoints
+                var currentpoints = data[i].currentpoints
+                var totalpoints = data[i].totalpoints
+                var masteriessize = data[i].masteries.length
+                var elo = data[i].elo
+                var country = '<span class="' + data[i].user.country_tag + '"/>'
 
-                            return_data.push({
-                                'user': usernametext,
-                                'oldpoints': oldpoints,
-                                'currentpoints': currentpoints,
-                                'totalpoints': totalpoints,
-                                'masteries':masteriessize,
-                                'elo': elo,
-                            })
-                        }
-                        return return_data;
-                    },
-                        "type": "POST",
-                    "data": function (d) {
-                        d.csrfmiddlewaretoken = csrftoken
-                        d.ajax_action_id ={{ retrieveusers }}
-                    }
-                },
-                "columns": [
-                    {"data": "user"},
-                    {"data": "oldpoints"},
-                    {"data": "currentpoints"},
-                    {"data": "totalpoints"},
-                    {"data": "masteries"},
-                    {"data": "elo"}
-                ],
-            });
+                return_data.push({
+                  'user': usernametext,
+                  'oldpoints': oldpoints,
+                  'country': country,
+                  'currentpoints': currentpoints,
+                  'totalpoints': totalpoints,
+                  'masteries': masteriessize,
+                  'elo': elo,
+                })
+              }
+              return return_data;
+            },
+            "type": "POST",
+            "data": function (d) {
+              d.csrfmiddlewaretoken = csrftoken
+              d.ajax_action_id =
+              {{ retrieveusers }}
+            }
+          },
+          "columns": [
+            {"data": "user"},
+            {"data": "country"},
+            {"data": "oldpoints"},
+            {"data": "totalpoints"},
+            {"data": "masteries"},
+            {"data": "elo"}
+          ],
         });
+      });
 
     </script>
 {% endblock %}

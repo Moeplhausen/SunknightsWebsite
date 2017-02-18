@@ -26,6 +26,8 @@ class ClanUser(AbstractBaseUser):
 
             avatar=models.CharField(max_length=150,default='')
 
+            country_tag=models.CharField(max_length=10,default='red-cross')
+
 
             description=models.CharField(max_length=1500, blank="", default="")
 
