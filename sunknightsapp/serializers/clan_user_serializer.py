@@ -33,7 +33,7 @@ class ClanUserSerializerBasic(BulkSerializerMixin,serializers.ModelSerializer):
 
 class ClanUserSerializer(BulkSerializerMixin,serializers.ModelSerializer):
 
-    roles=ClanUserRolesSerializer(many=True,read_only=True)
+    roles=ClanUserRolesDetailedSerializer(many=True,read_only=True)
     masteries=MasterySerializer(many=True,read_only=True)
 
     #open_fights=SmallGuildFightSerializer(many=True,read_only=True)
