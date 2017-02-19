@@ -91,6 +91,7 @@ class OAuthCallbackDiscord(OAuthCallback):
             id=info['id']
             try:
                 user= ClanUser.objects.get(discord_id=id)
+                return user
             except ClanUser.DoesNotExist:
                 return None
             
