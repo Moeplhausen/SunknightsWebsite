@@ -46,7 +46,7 @@ def index(request):
         g = GeoIP2()
         try:
 
-            country_code=slugify(str(g.country_code('37.201.243.233')).lower())
+            country_code=slugify(str(g.country_code(get_client_ip(request))).lower())
             if request.user.country_tag!=country_code:
                 request.user.country_tag=country_code
                 request.user.save()
