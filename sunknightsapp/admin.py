@@ -99,7 +99,7 @@ class UserAdmin(BaseUserAdmin):
 
 
 class PointsInfoAdmin(admin.ModelAdmin):
-    list_display = ('id','user','oldpoints','currentpoints','masterypoints','totalpoints','elo')
+    list_display = ('id','user','oldpoints','currentpoints','masterypoints','totalpoints','elo','permquestcd')
     ordering = ('id',)
 
 

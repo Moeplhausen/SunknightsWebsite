@@ -436,7 +436,7 @@ class DecideEventQuestsSubmissionForm(BaseForm):
             submission.points = self.cleaned_data['points']
             submission.manager=request.user
             submission.decided=True
-            if not submission.accepted and submission.questtask.quest.permed and submission.reverted:
+            if not submission.accepted and submission.questtask.quest.permed:
                 import datetime
                 submission.pointsinfo.permquestcd=datetime.datetime.utcnow()
                 submission.delete()
