@@ -157,6 +157,7 @@ def post_new_event_quest_submission(submission, accepted, decided):
                             {'name': 'Manager Note', 'value': submission.managerText, 'inline': True},
                             {'name': 'Points', 'value': str(submission.points), 'inline': True},
                             {'name': 'Proof', 'value': submission.proof, 'inline': True},
+                            {'name':'Quest','value':("T"+str(submission.questtask.tier)+": "+submission.questtask.questtext) if submission.questtask else "None",'inline':True}
                         ]
                 }
             ]
