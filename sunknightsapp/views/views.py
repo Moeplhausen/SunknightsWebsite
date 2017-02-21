@@ -2,6 +2,7 @@ import json
 from datetime import timedelta
 
 import django
+from ..models.discord_server import DiscordServer
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import logout
 from django.http import JsonResponse
@@ -92,7 +93,15 @@ def index(request):
 
         return render(request, 'sunknightsapp/userview.html', context)
 
+
     context = {}
+    try:
+        server=DiscordServer.objects.get(id=1)#should be main server
+    except DiscordServer.DoesNotExist:
+        pass
+    else:
+        context['server']=server
+
 
     return render(request, 'sunknightsapp/index.html', context)
 
