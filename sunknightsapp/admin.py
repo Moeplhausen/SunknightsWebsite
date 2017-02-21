@@ -127,7 +127,15 @@ class HelpInfoAdmin(admin.ModelAdmin):
     list_display = ('name','date','last_modifier','helpinfo')
     ordering = ('name',)
 
+class MasteryAdmin(admin.ModelAdmin):
+    list_display = ('tank','pointsinfo','tier','manager','fromSubmission','points')
+    list_filter = ('tier','manager','tank',)
+    ordering = ('tank',)
 
+class ClanUserRolesAdmin(admin.ModelAdmin):
+    list_display = ('clan_user','role')
+    list_filter = ('role',)
+    ordering = ('role',)
 
 # Now register the new UserAdmin...
 admin.site.register(ClanUser, UserAdmin)
@@ -142,12 +150,12 @@ admin.site.register(DiscordRole,DiscordRoleAdmin)
 admin.site.register(PointsInfo,PointsInfoAdmin)
 #admin.site.register(PointsManagerAction)
 #admin.site.register(OneOnOneFightSubmission)
-admin.site.register(ClanUserRoles)
+admin.site.register(ClanUserRoles,ClanUserRolesAdmin)
 admin.site.register(Tournament)
 admin.site.register(TournamentFightConnector)
 admin.site.register(DiepTank,DiepTankAdmin)
 admin.site.register(DiepTankInheritance,DiepTankInheritanceAdmin)
-admin.site.register(Mastery)
+admin.site.register(Mastery,MasteryAdmin)
 #admin.site.register(BasicUserPointSubmission)
 admin.site.register(DiepGamemode)
 admin.site.register(Quest)
