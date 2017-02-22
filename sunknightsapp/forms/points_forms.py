@@ -437,7 +437,7 @@ class DecideEventQuestsSubmissionForm(BaseForm):
             submission.manager=request.user
             submission.decided=True
             submission.reverted=False
-            if not submission.accepted and submission.questtask.quest.permed:
+            if submission.questtask and not submission.accepted and submission.questtask.quest.permed:
                 import datetime
                 submission.pointsinfo.permquestcd=datetime.datetime.utcnow()
             submission.save()
