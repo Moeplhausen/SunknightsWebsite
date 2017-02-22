@@ -18,7 +18,7 @@
                                         {% if permcooldown %}<del>{% endif %}
                                         <span class="pointsquest" data-toggle="tooltip" data-html="true"
                                               data-placement="top"
-                                              title="Gives a {{ task.cooldown }} hours cooldown of doing permanent quests.">{{ task.points }} Points:</span>
+                                              title="Gives a {{ task.cooldown }} hours cooldown of doing permanent quests. Created by {{ task.manager }}">{{ task.points }} Points:</span>
 
                                         {{ task.questtext_html }}{% if permcooldown %}</del>{% endif %}
                                         <i class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Gives {{ task.cooldown }} hours cooldown"></i>
@@ -46,7 +46,7 @@
                             <div class="questtaskuserdiv" id="task-{{ task.id }}">
                                 <ul>
                                     <li>
-                                        <span class="pointsquest">{{ task.points }} Points:</span>
+                                        <span class="pointsquest" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Created by {{ task.manager }}">{{ task.points }} Points:</span>
                                         {{ task.questtext_html }}{% autoescape off %}
                                             {% task_checked user task %}{% endautoescape %}
                                     </li>
