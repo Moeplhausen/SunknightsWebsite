@@ -6,3 +6,6 @@ django-widget-tweaks
 django-markdown-deux
 geoip2
 python-slugify
+django_compressor
+csscompressor
+html5lib

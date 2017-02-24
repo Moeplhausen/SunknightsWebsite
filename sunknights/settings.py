@@ -53,7 +53,8 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'allaccess',
     'widget_tweaks',
-    'markdown_deux'
+    'markdown_deux',
+    'compressor'
 ]
 
 AUTHENTICATION_BACKENDS = (
@@ -76,6 +77,13 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
     )
 }
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    # other finders..
+    'compressor.finders.CompressorFinder',
+)
 
 
 
@@ -191,6 +199,14 @@ USE_TZ = False
 STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, "static/")
+
+COMPRESS_PRECOMPILERS = (
+    ('text/x-scss', 'sass --scss {infile} {outfile}'),
+)
+
+COMPRESS_ENABLED=True
+
+COMPRESS_OFFLINE = False
 
 LOGIN_URL = '/accounts/login/Discord/'
 

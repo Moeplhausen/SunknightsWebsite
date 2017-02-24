@@ -1,39 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load compress %}
     <!-- Required meta tags always come first -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>Sun Knights</title>
     {% load static %}
-
-    <link rel="stylesheet" type="text/css"
-          href="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap4.min.css"/>
-    <link rel="stylesheet" type="text/css"
-          href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
-    <link rel="stylesheet" type="text/css"
-          href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.4/css/selectize.bootstrap3.min.css"/>
     <link rel="stylesheet" type="text/css"
           href="https://fonts.googleapis.com/css?family=Ubuntu:regular,bold&subset=Latin">
-    <link rel="stylesheet" type="text/css"
-          href="https://malihu.github.io/custom-scrollbar/jquery.mCustomScrollbar.min.css"/>
 
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/css/bootstrap-select.min.css">
+    {% compress css %}
+        <link rel="stylesheet" type="text/css"
+              href="{% static 'sunknightsapp/css/dataTables.bootstrap4.min.css' %}"/>
 
 
-    <link rel="stylesheet" type="text/css"
-          href="{% static 'sunknightsapp/css/ajax-bootstrap-select.css' %}?{% now "U" %}"/>
-    <link rel="stylesheet" type="text/css"
-          href="{% static 'sunknightsapp/css/sunknights.css' %}?{% now "U" %}"/>
-    <link rel="stylesheet" type="text/css" href="{% static 'sunknightsapp/css/bootstrap.css' %}?{% now "U" %}"/>
-    <link rel="stylesheet" type="text/css" href="{% static 'sunknightsapp/css/bootstrap-datetimepicker.min.css' %}"/>
-    <link rel="stylesheet" type="text/css"
-          href="{% static 'sunknightsapp/css/bootstrap-datetimepicker-standalone.css' %}"/>
+        <link rel="stylesheet" type="text/css"
+              href="{% static 'sunknightsapp/css/font-awesome.min.css' %}"/>
 
-    <link rel="stylesheet" type="text/css" href="{% static 'sunknightsapp/css/tanks.css' %}?{% now "U" %}"/>
-    <link rel="stylesheet" type="text/css" href="{% static 'sunknightsapp/css/flags.css' %}?3"/>
+
+        <link rel="stylesheet" type="text/css"
+              href="{% static 'sunknightsapp/css/selectize.bootstrap3.min.css' %}"/>
+
+        <link rel="stylesheet" type="text/css"
+              href="{% static 'sunknightsapp/css/jquery.mCustomScrollbar.min.css' %}"/>
+
+        <link rel="stylesheet" type="text/css"
+              href="{% static 'sunknightsapp/css/bootstrap-select.min.css' %}"/>
+
+        <link rel="stylesheet" type="text/css"
+              href="{% static 'sunknightsapp/css/ajax-bootstrap-select.css' %}"/>
+
+        <link rel="stylesheet" type="text/css"
+              href="{% static 'sunknightsapp/css/sunknights.css' %}"/>
+        <link rel="stylesheet" type="text/css" href="{% static 'sunknightsapp/css/bootstrap.css' %}"/>
+        <link rel="stylesheet" type="text/css"
+              href="{% static 'sunknightsapp/css/bootstrap-datetimepicker.min.css' %}"/>
+        <link rel="stylesheet" type="text/css"
+              href="{% static 'sunknightsapp/css/bootstrap-datetimepicker-standalone.css' %}"/>
+
+        <link rel="stylesheet" type="text/css" href="{% static 'sunknightsapp/css/tanks.css' %}"/>
+        <link rel="stylesheet" type="text/css" href="{% static 'sunknightsapp/css/flags.css' %}"/>
+    {% endcompress %}
     <link rel="shortcut icon" type="image/png"
           href="https://cdn.discordapp.com/icons/252525368865456130/ae262cd29cc01ffeb863ae65b4e5b3fb.jpg"/>
     <!--[if lt IE 9]>
@@ -174,49 +183,46 @@
     {% block sidebar %}
     {% endblock %}
 </div>
-
-
-
-<script
-        src="https://code.jquery.com/jquery-3.1.1.js"
-        integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
-        crossorigin="anonymous">
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.4/js/standalone/selectize.js"></script>
+{% compress js %}
+<script src="{% static 'sunknightsapp/js/jquery-3.1.1.js' %}"></script>
+<script src="{% static 'sunknightsapp/js/jquery.cookie.js' %}"></script>
+<script src="{% static 'sunknightsapp/js/selectize.js' %}"></script>
+{% endcompress %}
 <script>
-  ajaxhandlerurl = '{% url 'ajaxhandler' %}'
-  ajaxactions =
-  {{ ajaxactions|safe }}
+    ajaxhandlerurl = '{% url 'ajaxhandler' %}'
+    ajaxactions =
+        {{ ajaxactions|safe }}
 
-    jsontanks={{ jsontanks|safe }}
-    jsontanksarr = [];
-    (function(){
-        for(var test of jsontanks) {
+        jsontanks = {{ jsontanks|safe }}
+            jsontanksarr = [];
+    (function () {
+        for (var test of jsontanks) {
             jsontanksarr.push(test.name);
         }
     })()
- function slugify(text) {
-  return text.toString().toLowerCase()
-    .replace(/\s+/g, '-')           // Replace spaces with -
-    .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
-    .replace(/\-\-+/g, '-')         // Replace multiple - with single -
-    .replace(/^-+/, '')             // Trim - from start of text
-    .replace(/-+$/, '');            // Trim - from end of text
-}
+    function slugify(text) {
+        return text.toString().toLowerCase()
+            .replace(/\s+/g, '-')           // Replace spaces with -
+            .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+            .replace(/\-\-+/g, '-')         // Replace multiple - with single -
+            .replace(/^-+/, '')             // Trim - from start of text
+            .replace(/-+$/, '');            // Trim - from end of text
+    }
 
 </script>
-<script src="{% static 'sunknightsapp/js/simple.js' %}?{% now "U" %}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.6.3/showdown.min.js"></script>
+{% compress js %}
+<script src="{% static 'sunknightsapp/js/simple.js' %}"></script>
+{% endcompress %}
+<script src="{% static 'sunknightsapp/js/showdown.min.js' %}"></script>
 <script>
-    (function(){
-        var tank = function(){
+    (function () {
+        var tank = function () {
             return [{
                 type: 'lang',
                 regex: /=\([^\n)]+\)/g,
-                replace: function(text) {
+                replace: function (text) {
                     var aaatext = text;//.replace(/^=\(/, "").replace(/\)$/, "");
-                    var actualtext = aaatext.replace(/=\([^\n)]+\)/g, function(piece) {
+                    var actualtext = aaatext.replace(/=\([^\n)]+\)/g, function (piece) {
                         var mypiece = piece.replace(/^=\(/, "").replace(/\)$/, "");
                         var valid = [];
                         for (var thingy of jsontanksarr) {
@@ -238,7 +244,7 @@
                             }
                         }
                         if (isvalid.isit) {
-                            return "<div class=\""+isvalid.match+"\"/>";
+                            return "<div class=\"" + isvalid.match + "\"/>";
                         } else
                             return mypiece;
                     });
@@ -249,38 +255,35 @@
         showdown.extension("tank", tank);
     })();
 </script>
-<script src="{% static 'sunknightsapp/js/loadmd.js' %}?{% now "U" %}"></script>
+{% compress js %}
+<script src="{% static 'sunknightsapp/js/loadmd.js' %}"></script>
 {% if text %}
-    <script>loadMd("{{text}}");</script>{% endif %}
+    <script>loadMd("{{text}}");</script>
+{% endif %}
 <script src="{% static 'sunknightsapp/js/userdesc.js' %}?{% now "U" %}"></script>
-<script src="https://malihu.github.io/custom-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="{% static 'sunknightsapp/js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
 <script src="{% static 'sunknightsapp/js/moment.js' %}?{% now "U" %}"></script>
+<script src="{% static 'sunknightsapp/js/tether.min.js' %}"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js"
-        integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB"
-        crossorigin="anonymous"></script>
 {#<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js"#}
 {#        integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK"#}
 {#        crossorigin="anonymous"></script>#}
 <script src="{% static 'sunknightsapp/js/bootstrap.js' %}"></script>
-
-<script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap4.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.js"></script>
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/js/bootstrap-select.min.js"></script>
+<script src="{% static 'sunknightsapp/js/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'sunknightsapp/js/dataTables.bootstrap4.min.js' %}"></script>
+<script src="{% static 'sunknightsapp/js/bootstrap-select.min.js' %}"></script>
 <script src="{% static 'sunknightsapp/js/ajax-bootstrap-select.js' %}"></script>
 <script src="{% static 'sunknightsapp/js/bootstrap-datetimepicker.min.js' %}"></script>
 <script src="{% static 'sunknightsapp/js/usersearch.js' %}"></script>
-
+{% endcompress %}
 {% block scriptload %}{% endblock %}
 <script>
-  var csrftoken = $.cookie('csrftoken');
+    var csrftoken = $.cookie('csrftoken');
 
-  $(document).ready(function () {
+    $(document).ready(function () {
 
-    {% block scripts %}{% endblock %}
-  });
+        {% block scripts %}{% endblock %}
+    });
 </script>
 {% block scriptself %}
 
