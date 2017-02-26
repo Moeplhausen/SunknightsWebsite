@@ -39,6 +39,7 @@ urlpatterns = [
     url(r'^aboutus', views.about_us, name='about'),
     url(r'^info/$', views.helppage, name='info'),
     url(r'^info/rules', views.helppage,{'helpstr': 'rules'}, name='rules',),
+    url(r'^info/fantasydiep', views.helppage,{'helpstr': 'fantasydiep'}, name='fantasydiep',),
     url(r'^info/builds', views.helppage,{'helpstr': 'builds'}, name='builds',),
     url(r'^info/newguide', views.helppage,{'helpstr': 'newguide'}, name='newguide'),
     url(r'^info/pointguide', views.helppage,{'helpstr': 'pointguide'}, name='pointguide'),
