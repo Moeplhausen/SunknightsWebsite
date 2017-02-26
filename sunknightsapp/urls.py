@@ -26,7 +26,7 @@ router.register(r'discord_roles',discord_roles.DiscordRolesViewSet)
 router.register(r'dieptanks',diep_tanks.DiepTanksViewSet)
 router.register(r'dieptanksinheritance',diep_tanks.DiepTanksInheritanceViewSet)
 router.register(r'mastery',mastery.MasteriesViewSet)
-router.register(r'quests',quests.QuestsViewSet)
+router.register(r'quests',quests.QuestsViewSet,base_name="quests-api")
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
