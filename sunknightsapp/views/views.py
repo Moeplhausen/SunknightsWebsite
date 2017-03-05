@@ -2,6 +2,7 @@ import json
 from datetime import timedelta
 
 import django
+from django.views.decorators.csrf import ensure_csrf_cookie
 from ..models.discord_server import DiscordServer
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import logout
@@ -39,7 +40,7 @@ def get_client_ip(request):
         ip = request.META.get('REMOTE_ADDR')
     return ip
 
-
+@ensure_csrf_cookie
 def index(request):
     if request.user.is_authenticated():
         from django.contrib.gis.geoip2 import GeoIP2
@@ -127,6 +128,7 @@ def user(request, id):
 
 
 @login_required
+@ensure_csrf_cookie
 def leaderboard(request):
     context = {}
     userpoints = PointsInfo.objects.filter(user__is_active=True).prefetch_related('user', 'masteries').order_by(
@@ -164,6 +166,7 @@ def about_us(request):
 
 
 @require_http_methods(["GET", "POST"])
+@ensure_csrf_cookie
 def helppage(request, helpstr=""):
     try:
         help = HelpInfo.objects.get(name=helpstr)
@@ -201,6 +204,7 @@ def pointrole(request, id):
 
 
 @points_manager_required
+@ensure_csrf_cookie
 def manage_submissions(request):
     context = {
         'retrieveuserspointssubmissionsid': AjaxAction.RETRIEVEUSERSUBMISSIONS.value,
@@ -213,6 +217,7 @@ def manage_submissions(request):
 
 
 @points_manager_required
+@ensure_csrf_cookie
 def manage_quests(request):
     tanks = DiepTank.objects.filter(diep_isDeleted=False)
     try:
