@@ -12,6 +12,7 @@
         <li class="nav-item"><a href="#submit-other" class="nav-link" data-toggle="tab">Submit Event/Quest</a></li>
         <li class="nav-item"><a href="#open-submissions" class="nav-link" data-toggle="tab">Open Submission</a></li>
         <li class="nav-item"><a href="#decided-submissions" class="nav-link" data-toggle="tab">Decided Submission</a>
+        <li class="nav-item"><a href="#preferences" class="nav-link" data-toggle="tab">Preferences</a>
         </li>
     </ul>
 
@@ -36,6 +37,10 @@
         <div class="tab-pane" id="decided-submissions">
             {% include "sunknightsapp/snippets/decidedsubmissions.html" %}
         </div>
+        <div class="preferences" id="preferences">
+            {% include "sunknightsapp/snippets/preferences.html" %}
+        </div>
+
 
     </div>
 
@@ -174,5 +179,3 @@
       });
     </script>
 {% endblock %}
-
-
