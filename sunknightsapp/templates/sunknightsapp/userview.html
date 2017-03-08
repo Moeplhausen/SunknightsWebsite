@@ -53,6 +53,23 @@
         var datatableopenfightssubmissions = $('#open-submissions-fights-table').DataTable();
         var datatableopeneventquestssubmissions = $('#open-submissions-eventquest-table').DataTable();
 
+        $('#recordpreferences').on('submit', function (event) {
+          event.preventDefault();
+          var form = new FormData(this);
+          sunKnightsJsonRequest(form, function (result, data) {
+            if (result) {
+              submission = data['message']['data']
+              $('#alertsContainer').append("<div class=\"alert alert-success alert-dismissible fade in\" role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>Preferences Submitted<strong></div>")
+              console.log('preferences received')
+            }else{
+              console.log('error!')
+              console.log(data)
+                $('#alertsContainer').append("<div class=\"alert alert-danger alert-dismissible fade in\" role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>Something went wrong :O<strong></div>")
+            }
+          })
+
+        }
+
         $('#recordsubmit').on('submit', function (event) {
           event.preventDefault();
 
@@ -154,7 +171,6 @@
           liveSearch: true,
           create: false,
         }).ajaxSelectPicker(ajaxusersearchoptions);
-
 
         $(function () {
           getDesc("#userdesc", '{{ lookuser.description|escapejs|default:"None" }}');
