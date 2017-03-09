@@ -21,6 +21,7 @@ from ..forms.points_forms import SubmitPointsForm, RetriveUserSubmissionsPointsF
     SubmitFightsForm, RetrieveFightsSubmissionsForm, DecideFightsSubmissionForm, RevertSubmissionForm, \
     RetrieveUsersLeaderPointForm, RetrieveUsersToFightAgainstForm, SubmitEventsQuestsForm, \
     DecideEventQuestsSubmissionForm, RetrieveEventQuestsSubmissionsForm
+from ..forms.preferences_forms import SavePreferencesForm
 from ..forms.tournaments_forms import CreateTournamentForm, DeleteTournamentForm, RequestTournamentsForm
 from ..models.clan_user import ClanUser
 from ..models.diep_gamemode import DiepGamemode
@@ -89,6 +90,7 @@ def index(request):
             'submitfightsform': SubmitFightsForm,
             'submiteventsquestsform': SubmitEventsQuestsForm,
             'revertsubmissionid': AjaxAction.REVERTSUBMISSION.value,
+            'savepreferences':SavePreferencesForm,
             'lookuser': ClanUser.objects.prefetch_related('pointsinfo', 'pointsinfo__masteries').get(
                 id=request.user.id)}
 
@@ -251,7 +253,7 @@ def manage_quests(request):
         'submitmultiplier': SubmitMultiplierForm,
         'editmultiplier': EditMultiplierForm,
         'submitbuild': SubmitBuildForm,
-        'editbuild': EditQuestBuildForm
+        'editbuild': EditQuestBuildForm,
     }
     return render(request, 'sunknightsapp/managequests.html', context)
 
@@ -331,6 +333,8 @@ def ajaxhandler(request):
         form = DeleteMultiplierForm(request.POST)
     elif actionid is AjaxAction.EDITMULTIPLIER.value:
         form = EditMultiplierForm(request.POST)
+    elif actionid is AjaxAction.SAVEPREFERENCES.value:
+        form=SavePreferencesForm(request.POST)
 
     if form is None:
         return sendFailure(request, "No handler for this action installed.")

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from ..models.clan_user import ClanUser
+from ..models.clan_user import ClanUser,ClanUserPreferences
 from ..models.points_info import PointsInfo
 from rest_framework_bulk import BulkListSerializer
 from .clan_user_roles_serializer import ClanUserRolesSerializer,BulkSerializerMixin,ClanUserRolesDetailedSerializer
@@ -93,4 +93,13 @@ class PointsInfoBasicSerializer(BulkSerializerMixin,serializers.ModelSerializer)
     class Meta:
         model=PointsInfo
         fields=('id','user')
+        list_serializer_class = BulkListSerializer
+
+
+class ClanUserPreferencesSerializer(BulkSerializerMixin,serializers.ModelSerializer):
+    clan_user=ClanUserSerializerBasic(many=False,read_only=True)
+
+    class Meta:
+        model=ClanUserPreferences
+        fields=('id','clan_user','custom_background_enabled','custom_background_url')
         list_serializer_class = BulkListSerializer

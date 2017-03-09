@@ -251,6 +251,20 @@ class ClanUser(AbstractBaseUser):
 
 
 
+
+class ClanUserPreferences(models.Model):
+    clan_user=models.OneToOneField(ClanUser,related_name='preferences',on_delete=models.CASCADE,unique=True)
+
+    custom_background_enabled=models.BooleanField(default=False)
+    custom_background_url=models.CharField(max_length=300)
+
+
+
+
+    def __str__(self):
+        return self.clan_user.discord_nickname
+
+
 class ClanUserRoles(models.Model):
     clan_user=models.ForeignKey(ClanUser,related_name='roles',on_delete=models.CASCADE)
     role=models.ForeignKey(DiscordRole,on_delete=models.CASCADE)
