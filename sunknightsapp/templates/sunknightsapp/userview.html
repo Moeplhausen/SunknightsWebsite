@@ -11,8 +11,8 @@
         <li class="nav-item"><a href="#submit-1vs1" class="nav-link" data-toggle="tab">Submit Fight Result</a></li>
         <li class="nav-item"><a href="#submit-other" class="nav-link" data-toggle="tab">Submit Event/Quest</a></li>
         <li class="nav-item"><a href="#open-submissions" class="nav-link" data-toggle="tab">Open Submission</a></li>
-        <li class="nav-item"><a href="#decided-submissions" class="nav-link" data-toggle="tab">Decided Submission</a>
-        </li>
+        <li class="nav-item"><a href="#decided-submissions" class="nav-link" data-toggle="tab">Decided Submission</a></Li>
+        <li class="nav-item"><a href="#preferences" class="nav-link" data-toggle="tab">Preferences</a></li>
     </ul>
 
 
@@ -36,7 +36,9 @@
         <div class="tab-pane" id="decided-submissions">
             {% include "sunknightsapp/snippets/decidedsubmissions.html" %}
         </div>
-
+        <div class="tab-pane" id="preferences">
+            {% include "sunknightsapp/snippets/preferences.html" %}
+        </div>
     </div>
 
 {% endblock %}
@@ -50,6 +52,23 @@
         var datatableopenscoresubmissions = $('#open-submissions-score-table').DataTable();
         var datatableopenfightssubmissions = $('#open-submissions-fights-table').DataTable();
         var datatableopeneventquestssubmissions = $('#open-submissions-eventquest-table').DataTable();
+
+        $('#recordpreferences').on('submit', function (event) {
+          event.preventDefault();
+          var form = new FormData(this);
+          sunKnightsJsonRequest(form, function (result, data) {
+            if (result) {
+              submission = data['message']['data']
+              $('#alertsContainer').append("<div class=\"alert alert-success alert-dismissible fade in\" role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>Preferences Submitted<strong></div>")
+              console.log('preferences received')
+            }else{
+              console.log('error!')
+              console.log(data)
+                $('#alertsContainer').append("<div class=\"alert alert-danger alert-dismissible fade in\" role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>Something went wrong :O<strong></div>")
+            }
+          })
+
+        }
 
         $('#recordsubmit').on('submit', function (event) {
           event.preventDefault();
@@ -117,7 +136,6 @@
           this.reset();
         });
 
-
         $('#fightsubmit').on('submit', function (event) {
           event.preventDefault();
 
@@ -154,7 +172,6 @@
           create: false,
         }).ajaxSelectPicker(ajaxusersearchoptions);
 
-
         $(function () {
           getDesc("#userdesc", '{{ lookuser.description|escapejs|default:"None" }}');
           {{ user.id }}
@@ -174,5 +191,3 @@
       });
     </script>
 {% endblock %}
-
-
