@@ -5,7 +5,7 @@ from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.contrib.auth.models import Group
 
 from .models.clan_user import ClanUser, ClanUserRoles
-from .models.daily_quest import Quest,QuestTankMultiplier,QuestBuild
+from .models.daily_quest import Quest,QuestTankMultiplier,QuestBuild,QuestTask
 from .models.diep_gamemode import DiepGamemode
 from .models.diep_tank import DiepTank,DiepTankInheritance
 from .models.discord_role_points import DiscordRolePoints
@@ -137,6 +137,22 @@ class ClanUserRolesAdmin(admin.ModelAdmin):
     list_filter = ('role',)
     ordering = ('role',)
 
+
+class QuestTaskAdmin(admin.ModelAdmin):
+    list_display = ('quest','tier','questtext','deleted','manager','points','cooldown')
+    list_filter = ('tier','deleted','cooldown','quest')
+    ordering = ('quest',)
+
+class QuestBuildAdmin(admin.ModelAdmin):
+    list_display = ('quest','build','manager')
+    ordering = ('quest',)
+
+class QuestTankMultiplierAdmin(admin.ModelAdmin):
+    list_display = ('quest','tank','multiplier','manager')
+    list_filter=('tank',)
+    ordering = ('quest',)
+
+
 # Now register the new UserAdmin...
 admin.site.register(ClanUser, UserAdmin)
 # ... and, since we're not using Django's built-in permissions,
@@ -162,6 +178,7 @@ admin.site.register(Quest)
 admin.site.register(DiscordRolePoints,DiscordRolePointsAdmin)
 admin.site.register(SunKnightsBadgeRole,SunKnightsBadgeRoleAdmin)
 admin.site.register(HelpInfo,HelpInfoAdmin)
-admin.site.register(QuestBuild)
-admin.site.register(QuestTankMultiplier)
+admin.site.register(QuestBuild,QuestBuildAdmin)
+admin.site.register(QuestTask,QuestTaskAdmin)
+admin.site.register(QuestTankMultiplier,QuestTankMultiplierAdmin)
 
