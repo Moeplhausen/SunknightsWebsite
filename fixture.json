@@ -345,6 +345,17 @@
   },
   {
     "model": "sunknightsapp.clanuser",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$30000$55rmy6loRfAE$ATWmqtTqYkhK3k6s06T6xIkYcM3UBqDhvI09P+mYn28=",
+      "discord_id": 259209114268336129,
+      "discord_nickname": "WillyZ",
+      "provider": "Discord",
+      "is_superuser": true
+    }
+  },
+  {
+    "model": "sunknightsapp.clanuser",
     "pk": 2,
     "fields": {
       "last_login": null,
