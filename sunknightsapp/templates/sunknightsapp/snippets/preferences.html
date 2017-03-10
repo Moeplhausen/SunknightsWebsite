@@ -1,32 +1,129 @@
+<!--##=================================## preferences.html ##==================================##-->
+<!--##================================== Preferences Pane =====================================##-->
 <form action="{% url 'ajaxhandler' %}" id="recordpreferences" method="POST">
     {% csrf_token %}
     {{ savepreferences.ajax_action_id }}
-
+    <script>hideSubmit();</script>
+    <!--#================================= Preferences form ==================================#-->
     <div class="form-group">
-
+        <!--====================== Enable/Disable Custom Background =======================-->
         <div class="form-check">
             <label class="form-check-label">
-                <input type="checkbox" class="form-check-input" name="custom_background_enabled"
-                        {% if user.preferences and user.preferences.custom_background_enabled %}
-                       checked
-                        {% endif %}
+                <input type="checkbox"
+                  class="form-check-input"
+                  name="custom_background_enabled"
+                  {% if user.preferences and user.preferences.custom_background_enabled %}
+                     checked
+                  {% endif %}
                 >
                 Enable Custom Background
             </label>
         </div>
+        <!--==================== End Enable/Disable Custom Background =====================-->
 
-        <label for="bgimg">Background Image <i class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Background image"></i></label>
-        <input type="url" class="form-control" name="custom_background_url" pattern="[^\s]+" title="Do not put multiple links here please." id="bgimg" required aria-required="true"
-               placeholder="http://imgur.com/a/euVO7"
-               aria-describedby="urlHelpBlock"
-                {% if user.preferences%}
-               value="{{ user.preferences.custom_background_url }}"
-                {% endif %}
+        <!--========================== Background image URL info ==========================-->
+        <label for="bgimg">
+          Background Image
+          <i class="fa fa-question-circle"
+            aria-hidden="true"
+            data-toggle="tooltip"
+            data-placement="top"
+            title="Enter a link to your custom background image...">
+          </i>
+        </label>
+        <!--======================== End Background image URL info ========================-->
+
+        <!--========================= Background image URL input ==========================-->
+        <input
+          type="url"
+          class="form-control"
+          name="custom_background_url"
+          pattern="[^\s]+"
+          title="Do not put multiple links here please."
+          id="bgimg"
+          required
+          aria-required="true"
+          placeholder="http://imgur.com/a/euVO7"
+          aria-describedby="urlHelpBlock"
+          {% if user.preferences%}
+            value="{{ user.preferences.custom_background_url }}"
+          {% endif %}
         >
-        <p id="urlHelpBlock" class="form-text">
-            Your background image should be a <strong>direct
-            link</strong> to a <strong>working URL</strong> image (eg. an imgur-link).
+        <!--======================= End Background image URL input ========================-->
+
+        <p>
+          <input type="checkbox" id="checkimg" value="checkImg" onclick="showSubmit();">
+          <label for="CheckUrl">Click me to check URL</label>
         </p>
+
+        <script>function showSubmit() {
+          var btn = document.getElementById("recordsubmitbtn");
+          btn.disabled = false;
+          //alert('hi');
+          //readURL(document.getElementById("bgimg").value);
+
+          //btn.disabled = false;
+
+        } </script>
+
+        <script>function hideSubmit(){
+          var btn = document.getElementById("recordsubmitbtn");
+          btn.style.display = "display: none";
+        }</script>
+
+
+        <script>function readURL(input) {
+          if (window.FileReader && window.Blob) {
+            if (input.files && input.files[0]) {
+              var reader = new FileReader();
+              reader.onload = function (e) {
+                var img = new Image();
+                img.onload = function() {
+                  //<!--loadable-->
+                };
+                img.onerror = function() {
+                  alert('error');
+                  input.value = '';
+                };
+                img.src = e.target.result;
+              }
+              reader.readAsDataURL(input.files[0]);
+            }
+          }
+          else {
+            var ext = input.value.split('.');
+            ext = ext[ext.length-1].toLowerCase();
+            var arrayExtensions = ['jpg' , 'jpeg', 'png', 'bmp', 'gif'];
+            if (arrayExtensions.lastIndexOf(ext) == -1) {
+              alert('error');
+              input.value = '';
+            }
+            else {
+              //<!--success-->
+            }
+          }
+        }
+        </script>
+
+
+        <!--========================== Background image URL info ==========================-->
+        <p id="urlHelpBlock" class="form-text">
+            Your background image should be a <strong> working direct link (URL)</strong>
+            to an image <i>(eg. an imgur link)</i>.
+        </p>
+        <!--======================== End Background image URL info ========================-->
+
     </div>
-    <button type="submit" id="recordsubmitbtn" class="btn btn-primary">Submit</button>
+    <!--#=============================== End Preferences form ================================#-->
+
+    <!--#================================== Submit Button ====================================#-->
+    <button
+      type="submit"
+      disabled
+      id="recordsubmitbtn"
+      class="btn btn-primary">
+      Submit
+    </button>
+    <!--#================================ End Submit Button ==================================#-->
 </form>
+<!--##================================ End Preferences Pane ===================================##-->
