@@ -1,5 +1,6 @@
 <!--##=================================## preferences.html ##==================================##-->
 <!--##================================== Preferences Pane =====================================##-->
+<h3> User Settings </h3>
 <form action="{% url 'ajaxhandler' %}" id="recordpreferences" method="POST">
     {% csrf_token %}
     {{ savepreferences.ajax_action_id }}
@@ -59,12 +60,17 @@
         <script>function showSubmit() {
           var btn = document.getElementById("recordsubmitbtn");
           btn.disabled = false;
-          //alert('hi');
+          //alert('amIBeingCalled?');
           //readURL(document.getElementById("bgimg").value);
 
           //btn.disabled = false;
 
         } </script>
+
+        <div>
+          Something to cheer you up today
+        </div>
+        <img src= "https://i.imgflip.com/15gjla.gif" alt="HTML5 Icon" >
 
         <script>function hideSubmit(){
           var btn = document.getElementById("recordsubmitbtn");
@@ -119,9 +125,9 @@
     <!--#================================== Submit Button ====================================#-->
     <button
       type="submit"
-      disabled
       id="recordsubmitbtn"
-      class="btn btn-primary">
+      class="btn btn-primary"
+    >
       Submit
     </button>
     <!--#================================ End Submit Button ==================================#-->
