@@ -59,8 +59,10 @@
 .triple-twin-tier5, .triple-twin, .triplet-tier1, .triplet-tier2, .triplet-tier3,
 .triplet-tier4, .triplet-tier5, .triplet, .twin-flank-tier1, .twin-flank-tier2,
 .twin-flank-tier3, .twin-flank-tier4, .twin-flank-tier5, .twin-flank, .twin-tier1,
-.twin-tier2, .twin-tier3, .twin-tier4, .twin-tier5, .twin
-{ display: inline-block; background: url('../image/tanks.png?2') no-repeat; overflow: hidden; text-indent: -9999px; text-align: left; }
+.twin-tier2, .twin-tier3, .twin-tier4, .twin-tier5, .twin,
+.unnamed-tank-tier1, .unnamed-tank-tier2, .unnamed-tank-tier3, .unnamed-tank-tier4, .unnamed-tank-tier5,
+.unnamed-tank
+{ display: inline-block; background: url('../image/tanks.png?3') no-repeat; overflow: hidden; text-indent: -9999px; text-align: left; }
 
 .annihilator-tier1 { background-position: -1px -0px; width: 32px; height: 32px; }
 .annihilator-tier2 { background-position: -34px -0px; width: 32px; height: 32px; }
@@ -362,3 +364,9 @@
 .twin-tier4 { background-position: -34px -561px; width: 32px; height: 32px; }
 .twin-tier5 { background-position: -430px -561px; width: 32px; height: 32px; }
 .twin { background-position: -67px -561px; width: 32px; height: 32px; }
+.unnamed-tank-tier1 { background-position: -463px -561px; width: 32px; height: 30px; }
+.unnamed-tank-tier2 { background-position: -100px -561px; width: 32px; height: 30px; }
+.unnamed-tank-tier3 { background-position: -496px -561px; width: 32px; height: 30px; }
+.unnamed-tank-tier4 { background-position: -133px -561px; width: 32px; height: 30px; }
+.unnamed-tank-tier5 { background-position: -529px -561px; width: 32px; height: 30px; }
+.unnamed-tank { background-position: -166px -561px; width: 32px; height: 30px; }
