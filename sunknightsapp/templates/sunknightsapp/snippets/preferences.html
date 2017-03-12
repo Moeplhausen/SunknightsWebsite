@@ -60,7 +60,6 @@
         </p>
         <!--======================== End Background image URL info ========================-->
 
-<<<<<<< HEAD
         <!--#============================== Preview Button ===============================#-->
         <div class="previewbtn">
           <input id="previewbtn" type="button" value="preview" class="btn btn-primary" />
@@ -76,8 +75,6 @@
         >
         <!--=========================== End Preview Image ============================-->
       </div>
-=======
->>>>>>> origin/addingpreferences
     </div>
     <!--#=============================== End Preferences form ================================#-->
 
@@ -89,7 +86,7 @@
       class="btn btn-primary" />
     </div>
     <!--#================================ End Submit Button ==================================#-->
-<<<<<<< HEAD
+
     <div class="bgtogglebtn">
       <input id="bgtogglebtn" type="button" class="btn btn-secondary" style="display:none"
     </div>
@@ -112,7 +109,9 @@
 
       sbutton.addEventListener('click', function(event) {
           console.log('submitted!');
+          bgimgDiv.style.display = 'block';
           //document.getElementById("recordpreferences").submit();
+          location.reload();
       });
       /*
       tbutton.addEventListener('click',function(event) {
@@ -198,8 +197,5 @@
         return promise;
     }
   </script>
-
-=======
->>>>>>> origin/addingpreferences
 </form>
 <!--##================================ End Preferences Pane ===================================##-->
