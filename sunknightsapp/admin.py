@@ -152,6 +152,10 @@ class QuestTankMultiplierAdmin(admin.ModelAdmin):
     list_filter=('tank',)
     ordering = ('quest',)
 
+class BasicUserPointSubmissionAdmin(admin.ModelAdmin):
+    list_display = ('score','tank','pointsinfo','points','decided','submitterText','managerText','date')
+    list_filter=('tank',)
+    search_fields = ('score',)
 
 # Now register the new UserAdmin...
 admin.site.register(ClanUser, UserAdmin)
@@ -172,7 +176,7 @@ admin.site.register(TournamentFightConnector)
 admin.site.register(DiepTank,DiepTankAdmin)
 admin.site.register(DiepTankInheritance,DiepTankInheritanceAdmin)
 admin.site.register(Mastery,MasteryAdmin)
-#admin.site.register(BasicUserPointSubmission)
+admin.site.register(BasicUserPointSubmission,BasicUserPointSubmissionAdmin)
 admin.site.register(DiepGamemode)
 admin.site.register(Quest)
 admin.site.register(DiscordRolePoints,DiscordRolePointsAdmin)
