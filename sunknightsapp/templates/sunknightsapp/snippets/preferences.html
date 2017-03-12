@@ -92,41 +92,19 @@
     </div>
 
     <script>
-      var bgimgdiv=document.getElementById('bgimgDiv');
 
       var pbutton = document.getElementsByClassName('previewbtn')[0];
       var sbutton = document.getElementById("submitbutton");
-      //var tbutton = document.getElementById("bgtogglebtn");
       var cbox = document.getElementById("bgenabler")
-      //if({{user.preferences}})console.log("")
-
-      //tbutton.value="Click me to Enable Custom Background"
-      //sbutton.disabled = true;
 
       pbutton.addEventListener('click', function(event) {
           loadPreview();
       });
 
       sbutton.addEventListener('click', function(event) {
-          console.log('submitted!');
-          bgimgDiv.style.display = 'block';
-          //document.getElementById("recordpreferences").submit();
           location.reload();
       });
-      /*
-      tbutton.addEventListener('click',function(event) {
-        tbutton.disabled=false;
-      });
 
-    function eventFire(el, etype){
-      if (el.fireEvent) {
-        el.fireEvent('on' + etype);
-      } else {
-        var evObj = document.createEvent('Events');
-        evObj.initEvent(etype, true, false);
-        el.dispatchEvent(evObj);
-      }
-    }*/
 
     function bgenablerChecked() {
         if (cbox.checked){
