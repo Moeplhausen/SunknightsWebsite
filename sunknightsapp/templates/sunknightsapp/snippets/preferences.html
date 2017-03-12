@@ -39,8 +39,8 @@
           type="url"
           class="form-control"
           name="custom_background_url"
-          pattern="[^\s]+"
-          title="Do not put multiple links here please."
+          pattern="[^\s]+(\.jpg|\.png)+"
+          title="Please put a link that ends with .jpg or .png"
           id="bgimg"
           required
           aria-required="true"
@@ -59,22 +59,8 @@
         </p>
         <!--======================== End Background image URL info ========================-->
 
-        <!--============================= Preview Image ==============================-->
-        <img
-          id="preview"
-          src= ""
-          alt=""
-          width="300"
-        >
-        <!--=========================== End Preview Image ============================-->
     </div>
     <!--#=============================== End Preferences form ================================#-->
-
-    <!--#================================= Preview Button ====================================#-->
-    <div class="previewbtn">
-      <input id="previewbtn" type="button" value="preview" class="btn btn-primary" />
-    </div>
-    <!--#=============================== End Preview Button ==================================#-->
 
     <!--#================================== Submit Button ====================================#-->
     <div class="submitbtn">
@@ -85,86 +71,5 @@
       class="btn btn-primary" />
     </div>
     <!--#================================ End Submit Button ==================================#-->
-
-
-    <script>
-        var pbutton = document.getElementsByClassName('previewbtn')[0];
-        var sbutton = document.getElementById("submitbutton");
-
-        sbutton.disabled = true;
-
-        pbutton.addEventListener('click', function(event) {
-            loadPreview();
-        });
-
-        sbutton.addEventListener('click', function(event) {
-            console.log('Enabled!');
-            document.getElementById("recordpreferences").submit();
-        });
-
-      function loadPreview(){
-        var img = document.getElementById("preview");
-        var currenturl = document.getElementById("bgimg").value;
-        testBGImage(currenturl).then(
-          function fulfilled(image) {
-            $('#alertsContainer').append(""+
-              "<div class=\"alert alert-success alert-dismissible fade in\" role=\"alert\">"+
-                "<button type=\"button\" "+
-                  "class=\"close\" "+
-                  "data-dismiss=\"alert\" "+
-                  "aria-label=\"Close\""+
-                ">"+
-                "<span aria-hidden=\"true\">&times;</span>"+
-                "</button>"+
-                "<strong>Valid Background Image</strong>"+
-              "</div>")
-
-              console.log('Valid img', image);
-              img.src=image.src;
-              sbutton.disabled = false;
-          },
-
-          function rejected() {
-            $('#alertsContainer').append(""+
-              "<div class=\"alert alert-danger alert-dismissible fade in\" role=\"alert\">"+
-                "<button type=\"button\" "+
-                  "class=\"close\" "+
-                  "data-dismiss=\"alert\" "+
-                  "aria-label=\"Close\""+
-                ">"+
-                "<span aria-hidden=\"true\">&times;</span>"+
-                "</button>"+
-                "<strong>Invalid Image URL!</strong>"+
-              "</div>")
-
-              console.log('wtf is this sht');
-              img.src="http://new4.fjcdn.com/thumbnails/comments/Correct+me+if+i+m+wrong+but+is+this+movie+about+_523cb848ec075f5409e659d7914b7440.jpg";
-          }
-        );;
-      }
-
-      function testBGImage(url) {
-          const promise = new Promise(function(resolve, reject) {
-
-              const imgE = new Image();
-
-              imgE.addEventListener('load', function imgOnLoad()
-              {resolve(this);});
-
-              imgE.addEventListener('error', function imgOnError()
-              {reject();});
-
-              imgE.src = url;
-          });
-          return promise;
-      }
-
-      if(bgenabler.checked)
-      {
-        console.log("bg enabled");
-        sbutton.disabled = false;
-      }
-  </script>
-
 </form>
 <!--##================================ End Preferences Pane ===================================##-->
