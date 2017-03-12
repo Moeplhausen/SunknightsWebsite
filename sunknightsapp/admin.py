@@ -153,9 +153,13 @@ class QuestTankMultiplierAdmin(admin.ModelAdmin):
     ordering = ('quest',)
 
 class BasicUserPointSubmissionAdmin(admin.ModelAdmin):
-    list_display = ('score','tank','pointsinfo','points','decided','submitterText','managerText','date')
+    list_display = ('pk','score','tank','pointsinfo','points','decided','submitterText','managerText','date')
     list_filter=('tank',)
     search_fields = ('score',)
+
+class PointsManagerActionAdmin(admin.ModelAdmin):
+    list_display = ('pk','pointsinfo','points','managerText','date')
+    search_fields = ('pk',)
 
 # Now register the new UserAdmin...
 admin.site.register(ClanUser, UserAdmin)
@@ -168,7 +172,7 @@ admin.site.register(DiscordRole,DiscordRoleAdmin)
 #admin.site.register(GuildFight)
 #admin.site.register(GuildFightParticipation)
 admin.site.register(PointsInfo,PointsInfoAdmin)
-#admin.site.register(PointsManagerAction)
+admin.site.register(PointsManagerAction,PointsManagerActionAdmin)
 #admin.site.register(OneOnOneFightSubmission)
 admin.site.register(ClanUserRoles,ClanUserRolesAdmin)
 admin.site.register(Tournament)
