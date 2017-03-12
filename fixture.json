@@ -345,7 +345,7 @@
   },
   {
     "model": "sunknightsapp.clanuser",
-    "pk": 1,
+    "pk": 2,
     "fields": {
       "password": "pbkdf2_sha256$30000$55rmy6loRfAE$ATWmqtTqYkhK3k6s06T6xIkYcM3UBqDhvI09P+mYn28=",
       "discord_id": 259209114268336129,
@@ -356,7 +356,7 @@
   },
   {
     "model": "sunknightsapp.clanuser",
-    "pk": 2,
+    "pk": 3,
     "fields": {
       "last_login": null,
       "discord_id": 192060404501839872,
@@ -366,7 +366,7 @@
   },
   {
     "model": "sunknightsapp.clanuser",
-    "pk": 3,
+    "pk": 4,
     "fields": {
       "last_login": null,
       "discord_id": 239110748180054017,
@@ -376,7 +376,7 @@
   },
   {
     "model": "sunknightsapp.clanuser",
-    "pk": 4,
+    "pk": 5,
     "fields": {
       "last_login": null,
       "discord_id": 180813971853410305,

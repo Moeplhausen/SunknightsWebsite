@@ -9,15 +9,6 @@
 {% block content %}
     {% load widget_tweaks %}
 
-    {% if user.preferences and user.preferences.custom_background_enabled %}
-      <style style="text/css">
-        body {
-          background-image: url({{user.preferences.custom_background_url}});/* "http://i.imgur.com/dXTj3qq.jpg"); /** "http://i.imgur.com/asiql8E.png");**/
-          background-position: 50% 0%;
-          background-repeat: repeat;
-        }
-      </style>
-    {% endif %}
 
     <!--#=================================# Main-tab-bar #==================================#-->
     <ul class="nav nav-tabs user-local-nav">
