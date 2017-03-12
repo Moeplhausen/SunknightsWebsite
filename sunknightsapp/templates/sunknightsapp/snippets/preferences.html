@@ -15,6 +15,7 @@
                   {% if user.preferences and user.preferences.custom_background_enabled %}
                      checked
                   {% endif %}
+                  id=bgenabler
                 >
                 Enable Custom Background
             </label>
@@ -156,6 +157,12 @@
               imgE.src = url;
           });
           return promise;
+      }
+
+      if(bgenabler.checked)
+      {
+        console.log("bg enabled");
+        sbutton.disabled = false;
       }
   </script>
 
