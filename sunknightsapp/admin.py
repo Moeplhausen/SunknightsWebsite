@@ -15,7 +15,7 @@ from .models.discord_server import DiscordServer
 from .models.guildfight import GuildFight
 from .models.guildfight import GuildFightParticipation
 from .models.mastery import Mastery
-from .models.point_submission import PointsManagerAction,OneOnOneFightSubmission,BasicUserPointSubmission
+from .models.point_submission import PointsManagerAction,OneOnOneFightSubmission,BasicUserPointSubmission,EventQuestSubmission
 from .models.help_info import HelpInfo
 from .models.points_info import PointsInfo
 from .models.tournament import Tournament,TournamentFightConnector
@@ -152,6 +152,21 @@ class QuestTankMultiplierAdmin(admin.ModelAdmin):
     list_filter=('tank',)
     ordering = ('quest',)
 
+class BasicUserPointSubmissionAdmin(admin.ModelAdmin):
+    list_display = ('pk','score','tank','pointsinfo','points','decided','submitterText','managerText','date')
+    list_filter=('tank',)
+    search_fields = ('score',)
+
+class PointsManagerActionAdmin(admin.ModelAdmin):
+    list_display = ('pk','pointsinfo','points','managerText','date')
+    search_fields = ('pk',)
+
+
+class EventQuestSubmissionAdmin(admin.ModelAdmin):
+    list_display = ('pk','pointsinfo','points','accepted','decided','managerText','submitterText','questtask','proof','date')
+    list_filter=('decided','accepted','questtask',)
+
+
 
 # Now register the new UserAdmin...
 admin.site.register(ClanUser, UserAdmin)
@@ -164,7 +179,8 @@ admin.site.register(DiscordRole,DiscordRoleAdmin)
 #admin.site.register(GuildFight)
 #admin.site.register(GuildFightParticipation)
 admin.site.register(PointsInfo,PointsInfoAdmin)
-#admin.site.register(PointsManagerAction)
+admin.site.register(PointsManagerAction,PointsManagerActionAdmin)
+admin.site.register(EventQuestSubmission,EventQuestSubmissionAdmin)
 #admin.site.register(OneOnOneFightSubmission)
 admin.site.register(ClanUserRoles,ClanUserRolesAdmin)
 admin.site.register(Tournament)
@@ -172,7 +188,7 @@ admin.site.register(TournamentFightConnector)
 admin.site.register(DiepTank,DiepTankAdmin)
 admin.site.register(DiepTankInheritance,DiepTankInheritanceAdmin)
 admin.site.register(Mastery,MasteryAdmin)
-#admin.site.register(BasicUserPointSubmission)
+admin.site.register(BasicUserPointSubmission,BasicUserPointSubmissionAdmin)
 admin.site.register(DiepGamemode)
 admin.site.register(Quest)
 admin.site.register(DiscordRolePoints,DiscordRolePointsAdmin)
