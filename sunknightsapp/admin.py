@@ -15,7 +15,7 @@ from .models.discord_server import DiscordServer
 from .models.guildfight import GuildFight
 from .models.guildfight import GuildFightParticipation
 from .models.mastery import Mastery
-from .models.point_submission import PointsManagerAction,OneOnOneFightSubmission,BasicUserPointSubmission
+from .models.point_submission import PointsManagerAction,OneOnOneFightSubmission,BasicUserPointSubmission,EventQuestSubmission
 from .models.help_info import HelpInfo
 from .models.points_info import PointsInfo
 from .models.tournament import Tournament,TournamentFightConnector
@@ -161,6 +161,13 @@ class PointsManagerActionAdmin(admin.ModelAdmin):
     list_display = ('pk','pointsinfo','points','managerText','date')
     search_fields = ('pk',)
 
+
+class EventQuestSubmissionAdmin(admin.ModelAdmin):
+    list_display = ('pk','pointsinfo','points','accepted','decided','managerText','submitterText','questtask','proof','date')
+    list_filter=('decided','accepted','questtask',)
+
+
+
 # Now register the new UserAdmin...
 admin.site.register(ClanUser, UserAdmin)
 # ... and, since we're not using Django's built-in permissions,
@@ -173,6 +180,7 @@ admin.site.register(DiscordRole,DiscordRoleAdmin)
 #admin.site.register(GuildFightParticipation)
 admin.site.register(PointsInfo,PointsInfoAdmin)
 admin.site.register(PointsManagerAction,PointsManagerActionAdmin)
+admin.site.register(EventQuestSubmission,EventQuestSubmissionAdmin)
 #admin.site.register(OneOnOneFightSubmission)
 admin.site.register(ClanUserRoles,ClanUserRolesAdmin)
 admin.site.register(Tournament)
