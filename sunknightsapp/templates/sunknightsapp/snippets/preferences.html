@@ -4,7 +4,6 @@
 <form action="{% url 'ajaxhandler' %}" id="recordpreferences" method="POST">
     {% csrf_token %}
     {{ savepreferences.ajax_action_id }}
-    <script>hideSubmit();</script>
     <!--#================================= Preferences form ==================================#-->
     <div class="form-group">
         <!--====================== Enable/Disable Custom Background =======================-->
@@ -52,55 +51,6 @@
         >
         <!--======================= End Background image URL input ========================-->
 
-        <p>
-          <input type="checkbox" id="checkimg" value="checkImg" onclick="showSubmit();">
-          <label for="CheckUrl">Click me to check URL</label>
-        </p>
-
-        <script>function showSubmit() {
-          var btn = document.getElementById("recordsubmitbtn");
-          btn.disabled = false;
-          //alert('amIBeingCalled?');
-          //readURL(document.getElementById("bgimg").value);
-
-          //btn.disabled = false;
-
-        } </script>
-
-        <script>function readURL(input) {
-          if (window.FileReader && window.Blob) {
-            if (input.files && input.files[0]) {
-              var reader = new FileReader();
-              reader.onload = function (e) {
-                var img = new Image();
-                img.onload = function() {
-                  //<!--loadable-->
-                };
-                img.onerror = function() {
-                  alert('error');
-                  input.value = '';
-                };
-                img.src = e.target.result;
-              }
-              reader.readAsDataURL(input.files[0]);
-            }
-          }
-          else {
-            var ext = input.value.split('.');
-            ext = ext[ext.length-1].toLowerCase();
-            var arrayExtensions = ['jpg' , 'jpeg', 'png', 'bmp', 'gif'];
-            if (arrayExtensions.lastIndexOf(ext) == -1) {
-              alert('error');
-              input.value = '';
-            }
-            else {
-              //<!--success-->
-            }
-          }
-        }
-        </script>
-
-
         <!--========================== Background image URL info ==========================-->
         <p id="urlHelpBlock" class="form-text">
             Your background image should be a <strong> working direct link (URL)</strong>
@@ -108,33 +58,106 @@
         </p>
         <!--======================== End Background image URL info ========================-->
 
-        <!--============================= Photo of the Month ==============================-->
-        <div><b>
-          Photo/Animation of the month:
-          This <i>amazing</i> animation brought to you by Nightmare (@Lavahound)!
-        </b></div>
+        <!--============================= Preview Image ==============================-->
         <img
-          src= "https://cdn.discordapp.com/attachments/252525368865456130/289964275370426378/diep.gif"
-          alt="HTML5 Icon"
+          id="preview"
+          src= ""
+          alt=""
+          width="300"
         >
-        <!--=========================== End Photo of the Month ============================-->
-
-        <script>function hideSubmit(){
-          var btn = document.getElementById("recordsubmitbtn");
-          btn.style.display = "display: none";
-        }</script><!--Hide or disable submit button until url has been checked??-->
-
+        <!--=========================== End Preview Image ============================-->
     </div>
     <!--#=============================== End Preferences form ================================#-->
 
+    <!--#================================= Preview Button ====================================#-->
+    <div class="previewbtn">
+      <input id="previewbtn" type="button" value="preview" class="btn btn-primary" />
+    </div>
+    <!--#=============================== End Preview Button ==================================#-->
+
     <!--#================================== Submit Button ====================================#-->
-    <button
-      type="submit"
-      id="recordsubmitbtn"
-      class="btn btn-primary"
-    >
-      Submit
-    </button>
+    <div class="submitbtn">
+      <input id="submitbutton"
+      type="Submit"
+      value="submit"
+
+      class="btn btn-primary" />
+    </div>
     <!--#================================ End Submit Button ==================================#-->
+
+
+    <script>
+        var pbutton = document.getElementsByClassName('previewbtn')[0];
+        var sbutton = document.getElementById("submitbutton");
+
+        sbutton.disabled = true;
+
+        pbutton.addEventListener('click', function(event) {
+            loadPreview();
+        });
+
+        sbutton.addEventListener('click', function(event) {
+            console.log('Enabled!');
+            document.getElementById("recordpreferences").submit();
+        });
+
+      function loadPreview(){
+        var img = document.getElementById("preview");
+        var currenturl = document.getElementById("bgimg").value;
+        testBGImage(currenturl).then(
+          function fulfilled(image) {
+            $('#alertsContainer').append(""+
+              "<div class=\"alert alert-success alert-dismissible fade in\" role=\"alert\">"+
+                "<button type=\"button\" "+
+                  "class=\"close\" "+
+                  "data-dismiss=\"alert\" "+
+                  "aria-label=\"Close\""+
+                ">"+
+                "<span aria-hidden=\"true\">&times;</span>"+
+                "</button>"+
+                "<strong>Valid Background Image</strong>"+
+              "</div>")
+
+              console.log('Valid img', image);
+              img.src=image.src;
+              sbutton.disabled = false;
+          },
+
+          function rejected() {
+            $('#alertsContainer').append(""+
+              "<div class=\"alert alert-success alert-dismissible fade in\" role=\"alert\">"+
+                "<button type=\"button\" "+
+                  "class=\"close\" "+
+                  "data-dismiss=\"alert\" "+
+                  "aria-label=\"Close\""+
+                ">"+
+                "<span aria-hidden=\"true\">&times;</span>"+
+                "</button>"+
+                "<strong>Invalid Image URL!</strong>"+
+              "</div>")
+
+              console.log('wtf is this sht');
+              img.src="http://new4.fjcdn.com/thumbnails/comments/Correct+me+if+i+m+wrong+but+is+this+movie+about+_523cb848ec075f5409e659d7914b7440.jpg";
+          }
+        );;
+      }
+
+      function testBGImage(url) {
+          const promise = new Promise(function(resolve, reject) {
+
+              const imgE = new Image();
+
+              imgE.addEventListener('load', function imgOnLoad()
+              {resolve(this);});
+
+              imgE.addEventListener('error', function imgOnError()
+              {reject();});
+
+              imgE.src = url;
+          });
+          return promise;
+      }
+  </script>
+
 </form>
 <!--##================================ End Preferences Pane ===================================##-->
