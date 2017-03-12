@@ -6,22 +6,23 @@
     {{ savepreferences.ajax_action_id }}
     <!--#================================= Preferences form ==================================#-->
     <div class="form-group">
-        <!--====================== Enable/Disable Custom Background =======================-->
-        <div class="form-check">
-            <label class="form-check-label">
-                <input type="checkbox"
-                  class="form-check-input"
-                  name="custom_background_enabled"
-                  {% if user.preferences and user.preferences.custom_background_enabled %}
-                     checked
-                  {% endif %}
-                  id=bgenabler
-                >
-                Enable Custom Background
-            </label>
-        </div>
-        <!--==================== End Enable/Disable Custom Background =====================-->
-
+      <!--====================== Enable/Disable Custom Background =======================-->
+      <div class="form-check">
+          <label class="form-check-label">
+              <input type="checkbox"
+                class="form-check-input"
+                name="custom_background_enabled"
+                {% if user.preferences and user.preferences.custom_background_enabled %}
+                   checked
+                {% endif %}
+                id=bgenabler
+                onclick="bgenablerChecked();"
+              >
+              Enable Custom Background
+          </label>
+      </div>
+      <!--==================== End Enable/Disable Custom Background =====================-->
+      <div id=bgimgDiv>
         <!--========================== Background image URL info ==========================-->
         <label for="bgimg">
           Background Image
@@ -39,8 +40,8 @@
           type="url"
           class="form-control"
           name="custom_background_url"
-          pattern="[^\s]+"
-          title="Do not put multiple links here please."
+          pattern="[^\s]+(\.jpg|\.png|\.jpeg|\.tif|\.gif|\.svg)+"
+          title="Did you type your link in correctly? \nMake sure your link ends in .jpg, .png, .jpeg, .tif, .gif, or .svg. Do not put multiple links here please."
           id="bgimg"
           required
           aria-required="true"
@@ -59,6 +60,12 @@
         </p>
         <!--======================== End Background image URL info ========================-->
 
+        <!--#============================== Preview Button ===============================#-->
+        <div class="previewbtn">
+          <input id="previewbtn" type="button" value="preview" class="btn btn-primary" />
+        </div>
+        <!--#============================ End Preview Button ==============================#-->
+
         <!--============================= Preview Image ==============================-->
         <img
           id="preview"
@@ -67,103 +74,125 @@
           width="300"
         >
         <!--=========================== End Preview Image ============================-->
+      </div>
     </div>
     <!--#=============================== End Preferences form ================================#-->
-
-    <!--#================================= Preview Button ====================================#-->
-    <div class="previewbtn">
-      <input id="previewbtn" type="button" value="preview" class="btn btn-primary" />
-    </div>
-    <!--#=============================== End Preview Button ==================================#-->
 
     <!--#================================== Submit Button ====================================#-->
     <div class="submitbtn">
       <input id="submitbutton"
       type="Submit"
       value="submit"
-
       class="btn btn-primary" />
     </div>
     <!--#================================ End Submit Button ==================================#-->
-
+    <div class="bgtogglebtn">
+      <input id="bgtogglebtn" type="button" class="btn btn-secondary" style="display:none"
+    </div>
 
     <script>
-        var pbutton = document.getElementsByClassName('previewbtn')[0];
-        var sbutton = document.getElementById("submitbutton");
+      var bgimgdiv=document.getElementById('bgimgDiv');
 
-        sbutton.disabled = true;
+      var pbutton = document.getElementsByClassName('previewbtn')[0];
+      var sbutton = document.getElementById("submitbutton");
+      //var tbutton = document.getElementById("bgtogglebtn");
+      var cbox = document.getElementById("bgenabler")
+      //if({{user.preferences}})console.log("")
 
-        pbutton.addEventListener('click', function(event) {
-            loadPreview();
+      //tbutton.value="Click me to Enable Custom Background"
+      //sbutton.disabled = true;
+
+      pbutton.addEventListener('click', function(event) {
+          loadPreview();
+      });
+
+      sbutton.addEventListener('click', function(event) {
+          console.log('submitted!');
+          //document.getElementById("recordpreferences").submit();
+      });
+      /*
+      tbutton.addEventListener('click',function(event) {
+        tbutton.disabled=false;
+      });
+
+    function eventFire(el, etype){
+      if (el.fireEvent) {
+        el.fireEvent('on' + etype);
+      } else {
+        var evObj = document.createEvent('Events');
+        evObj.initEvent(etype, true, false);
+        el.dispatchEvent(evObj);
+      }
+    }*/
+
+    function bgenablerChecked() {
+        if (cbox.checked){
+            sbutton.disabled=true;
+            bgimgDiv.style.display = 'block';
+        }else{
+            sbutton.disabled=false;
+            bgimgDiv.style.display = 'none';
+        }
+    }
+
+    bgenablerChecked();
+
+    function loadPreview(){
+      var img = document.getElementById("preview");
+      var currenturl = document.getElementById("bgimg").value;
+      testBGImage(currenturl).then(
+        function fulfilled(image) {
+          $('#alertsContainer').append(""+
+            "<div class=\"alert alert-success alert-dismissible fade in\" role=\"alert\">"+
+              "<button type=\"button\" "+
+                "class=\"close\" "+
+                "data-dismiss=\"alert\" "+
+                "aria-label=\"Close\""+
+              ">"+
+              "<span aria-hidden=\"true\">&times;</span>"+
+              "</button>"+
+              "<strong>Valid Background Image</strong>"+
+            "</div>")
+
+            console.log('Valid img', image);
+            img.src=image.src;
+            sbutton.disabled = false;
+        },
+
+        function rejected() {
+          $('#alertsContainer').append(""+
+            "<div class=\"alert alert-danger alert-dismissible fade in\" role=\"alert\">"+
+              "<button type=\"button\" "+
+                "class=\"close\" "+
+                "data-dismiss=\"alert\" "+
+                "aria-label=\"Close\""+
+              ">"+
+              "<span aria-hidden=\"true\">&times;</span>"+
+              "</button>"+
+              "<strong>Invalid Image URL!</strong>"+
+            "</div>")
+
+            console.log('wtf is this sht');
+            img.src="http://new4.fjcdn.com/thumbnails/comments/Correct+me+if+i+m+wrong+but+is+this+movie+about+_523cb848ec075f5409e659d7914b7440.jpg";
+        }
+      );;
+    }
+
+    function testBGImage(url) {
+        const promise = new Promise(function(resolve, reject) {
+
+            const imgE = new Image();
+
+            imgE.addEventListener('load', function imgOnLoad()
+            {resolve(this);});
+
+            imgE.addEventListener('error', function imgOnError()
+            {reject();});
+
+            imgE.src = url;
         });
-
-        sbutton.addEventListener('click', function(event) {
-            console.log('Enabled!');
-            document.getElementById("recordpreferences").submit();
-        });
-
-      function loadPreview(){
-        var img = document.getElementById("preview");
-        var currenturl = document.getElementById("bgimg").value;
-        testBGImage(currenturl).then(
-          function fulfilled(image) {
-            $('#alertsContainer').append(""+
-              "<div class=\"alert alert-success alert-dismissible fade in\" role=\"alert\">"+
-                "<button type=\"button\" "+
-                  "class=\"close\" "+
-                  "data-dismiss=\"alert\" "+
-                  "aria-label=\"Close\""+
-                ">"+
-                "<span aria-hidden=\"true\">&times;</span>"+
-                "</button>"+
-                "<strong>Valid Background Image</strong>"+
-              "</div>")
-
-              console.log('Valid img', image);
-              img.src=image.src;
-              sbutton.disabled = false;
-          },
-
-          function rejected() {
-            $('#alertsContainer').append(""+
-              "<div class=\"alert alert-danger alert-dismissible fade in\" role=\"alert\">"+
-                "<button type=\"button\" "+
-                  "class=\"close\" "+
-                  "data-dismiss=\"alert\" "+
-                  "aria-label=\"Close\""+
-                ">"+
-                "<span aria-hidden=\"true\">&times;</span>"+
-                "</button>"+
-                "<strong>Invalid Image URL!</strong>"+
-              "</div>")
-
-              console.log('wtf is this sht');
-              img.src="http://new4.fjcdn.com/thumbnails/comments/Correct+me+if+i+m+wrong+but+is+this+movie+about+_523cb848ec075f5409e659d7914b7440.jpg";
-          }
-        );;
-      }
-
-      function testBGImage(url) {
-          const promise = new Promise(function(resolve, reject) {
-
-              const imgE = new Image();
-
-              imgE.addEventListener('load', function imgOnLoad()
-              {resolve(this);});
-
-              imgE.addEventListener('error', function imgOnError()
-              {reject();});
-
-              imgE.src = url;
-          });
-          return promise;
-      }
-
-      if(bgenabler.checked)
-      {
-        console.log("bg enabled");
-        sbutton.disabled = false;
-      }
+        return promise;
+    }
   </script>
 
 </form>
