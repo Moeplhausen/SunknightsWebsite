@@ -204,7 +204,7 @@ COMPRESS_PRECOMPILERS = (
     ('text/x-scss', 'sass --scss {infile} {outfile}'),
 )
 
-COMPRESS_ENABLED=False
+COMPRESS_ENABLED=True
 
 COMPRESS_OFFLINE = False
 
