@@ -98,9 +98,8 @@
                 {{ submission.id }}
             </td>
         <td>
-
             {% if submission.questtask %}
-                <span data-toggle="tooltip" data-html="true" data-placement="top" title="{{ submission.questtask.questtext_html }}">Tier{{ submission.questtask.quest.tier}}</span>
+                <span data-toggle="tooltip" data-html="true" data-placement="top" title="Tier{{ submission.questtask.quest.tier}}">{{ submission.questtask.questtext_html }}</span>
             {% endif %}
 
         </td>
@@ -148,5 +147,3 @@
     {% endfor %}
     </tbody>
 </table>
-
-
