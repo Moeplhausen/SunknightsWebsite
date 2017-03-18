@@ -10,7 +10,6 @@
         <th>Points</th>
         <th>Manager</th>
         <th>Manager Note</th>
-
         <th>Proof</th>
         <th>Date</th>
     </tr>
@@ -48,6 +47,7 @@
         <th>Winner</th>
         <th>Loser</th>
         <th>Manager</th>
+        <th>Manager Note</th>
         <th>Accepted</th>
         <th>Proof</th>
         <th>Date</th>
@@ -65,6 +65,7 @@
             <td><a href="/user/{{ submission.pointsinfo.user.discord_id }}">{{ submission.pointsinfo.user.discord_nickname }}</a></td>
             <td><a href="/user/{{ submission.pointsinfoloser.user.discord_id }}">{{ submission.pointsinfoloser.user.discord_nickname }}</a></td>
             <td><a href="/user/{{ submission.manager.discord_id }}">{{ submission.manager.discord_nickname }}</a></td>
+            <td>{{ submission.managerText }}</td>
             <td>{{ submission.accepted }}</td>
             <td><a href="{{ submission.proof }}">Prooflink</a></td>
             <td>{{ submission.date }}</td>
