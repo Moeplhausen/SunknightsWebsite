@@ -131,21 +131,20 @@ class RetriveUserSubmissionsPointsForm(BaseForm):
             return self.noPermission()
 
 
-        proofsbylink={}
+        similars={}
 
         try:
-            similarsubs = BasicUserPointSubmission.objects.values('proof').filter(decided=False).distinct()
+            similarsubs = BasicUserPointSubmission.objects.values('id','proof','score','tank').filter(decided=False).distinct()
 
             for p in similarsubs:
-                link=p['proof']
-                proofused = BasicUserPointSubmission.objects.filter(score=p.score,tank=p.tank)
-                proofsbylink[link]=proofused
+                proofused = BasicUserPointSubmission.objects.filter(score=p['score'],tank=p['tank'])
+                similars[p['id']]=proofused
 
 
             submissions = BasicUserPointSubmission.objects.filter(decided=False)
 
             for sub in submissions:
-                sub.proofused=proofsbylink[sub.proof]
+                sub.similarsubs=similars[sub.id].exclude(id=sub.id)
 
 
             serializer = BasicUserPointSubmissionWithSimilarSubsSerializer(submissions, many=True)

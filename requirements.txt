@@ -1,4 +1,4 @@
-django
+django==1.10
 djangorestframework
 djangorestframework-bulk
 django-all-access

@@ -115,6 +115,9 @@
           "fnDrawCallback": function (oSettings) {
             decideScoreSubmission()
             $('[data-toggle="tooltip"]').tooltip()
+            $(function () {
+              $('[data-toggle="popover"]').popover()
+            })
           },
           "columnDefs": [
             { "orderable": false, "targets": [2,3] }
@@ -161,19 +164,24 @@
 
                 var managertext = '<textarea class="form-control" maxlength="200" id="manager-note-' + data[i].id + '" rows="3"></textarea>'
                 var points = '<input class="form-control" style = "width:75px;"  type="number" value="' + data[i].points + '" id="points-manager-' + data[i].id + '">'
-                var proofused = data[i].proofused
-                var proofusedcount = proofused.length
-                var proofusedtext = ""
+                var similarsubs = data[i].similarsubs
+                var similarsubscount = similarsubs.length
+                var similarsubstext = ""
 
-                for (var k = 0; k < proofused.length; k++) {
+                for (var k = 0; k < similarsubs.length; k++) {
                   if (k != 0)
-                    proofusedtext += "<br>"
-                  proofusedtext += proofused[k].id + ": " + proofused[k].pointsinfo.user.discord_nickname
+                    similarsubstext += "<br>"
+                  similarsubstext += similarsubs[k].id + ": " + similarsubs[k].pointsinfo.user.discord_nickname+" <a href='"+similarsubs[k].proof+"'>Proof</a>"
 
                 }
                 var prooftext='<a href="' + data[i].proof + '">Proof</a>'
-                if (proofused.length>1)
-                var prooftext='<span data-toggle="tooltip" data-html="true" data-placement="top" title="'+proofusedtext+'"><a href="' + data[i].proof + '">Proof (' + proofusedcount + ')</a></span>'
+                if (similarsubs.length>0)
+                var prooftext=prooftext+
+                  '<button type="button" data-container="body" class="fa fa-plus inv-button" data-toggle="popover" ' +
+                  'data-html="true" ' +
+                  'data-placement="top" ' +
+                    'title="Similar Submissions"'+
+                  'data-content="'+similarsubstext+'"></button>'
 
                 var tankscoretext='<span data-toggle="tooltip" data-html="true" data-placement="top" title="'+builds+'">'+tankname+'<br>'+numberWithCommas(data[i].score)+'</span>'
 
