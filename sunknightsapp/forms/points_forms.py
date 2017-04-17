@@ -2,7 +2,7 @@ from .base_form import BaseForm
 from ..enums.AjaxActions import AjaxAction
 from ..models.point_submission import BasicUserPointSubmission, BasicPointSubmission,OneOnOneFightSubmission,PointsManagerAction,EventQuestSubmission
 from ..serializers.pointsubmissions_serializer import BasicUserPointSubmissionSerializer, \
-    BasicPointsSubmissionSerializer,OneOnOneFightSubmissionSerializer,BasicEventQuestsSubmissionSerializer,BasicUserPointSubmissionProofusedSerializer
+    BasicPointsSubmissionSerializer,OneOnOneFightSubmissionSerializer,BasicEventQuestsSubmissionSerializer,BasicUserPointSubmissionWithSimilarSubsSerializer
 from ..serializers.clan_user_serializer import PointsInfoSerializer,PointsInfoFastSerializer,ClanUserSerializerBasic
 from django import forms
 from ..models.utility.little_things import getPointsByScore,getPointsByFight,manageElo
@@ -134,11 +134,11 @@ class RetriveUserSubmissionsPointsForm(BaseForm):
         proofsbylink={}
 
         try:
-            proofused = BasicUserPointSubmission.objects.values('proof').filter(decided=False).distinct()
+            similarsubs = BasicUserPointSubmission.objects.values('proof').filter(decided=False).distinct()
 
-            for p in proofused:
+            for p in similarsubs:
                 link=p['proof']
-                proofused = BasicUserPointSubmission.objects.filter(proof=link)
+                proofused = BasicUserPointSubmission.objects.filter(score=p.score,tank=p.tank)
                 proofsbylink[link]=proofused
 
 
@@ -148,7 +148,7 @@ class RetriveUserSubmissionsPointsForm(BaseForm):
                 sub.proofused=proofsbylink[sub.proof]
 
 
-            serializer = BasicUserPointSubmissionProofusedSerializer(submissions, many=True)
+            serializer = BasicUserPointSubmissionWithSimilarSubsSerializer(submissions, many=True)
         except BaseException as e:
 
             return self.response(False, 'Something went wrong: ' + str(e))
