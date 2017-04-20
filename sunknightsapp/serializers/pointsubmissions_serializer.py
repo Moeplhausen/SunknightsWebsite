@@ -2,7 +2,7 @@ from rest_framework import serializers
 from ..models.point_submission import PointsManagerAction, BasicUserPointSubmission, BasicPointSubmission, \
     OneOnOneFightSubmission
 from rest_framework_bulk import BulkListSerializer, BulkSerializerMixin
-from .clan_user_serializer import ClanUserSerializerDiscord_id
+from .clan_user_serializer import ClanUserSerializerDiscord_id,ClanUserFasterSerializer
 from .daily_quest_serializer import QuestSerializer,QuestBuildSerializer,QuestTankMultiplierSerializer
 from .tank_serializer import DiepTankSimpleSerializer
 from .gamemode_serializer import GamemodeSerializer
@@ -35,6 +35,7 @@ class BasicUserPointSubmissionSerializer(BulkSerializerMixin, serializers.ModelS
     tank = DiepTankSimpleSerializer(many=False, read_only=True)
     gamemode = GamemodeSerializer(many=False, read_only=True)
     pointsinfo = PointsInfoBasicSerializer(many=False, read_only=True)
+    manager = ClanUserFasterSerializer(many=False, read_only=True)
 
     class Meta:
         model = BasicUserPointSubmission

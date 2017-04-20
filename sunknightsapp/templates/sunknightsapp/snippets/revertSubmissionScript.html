@@ -1,6 +1,15 @@
 <script>
+
+    var isManager=false
+
+      {% if user.is_points_manager %}
+       isManager=true
+      {% endif %}
+
+
     $(document).ready(function () {
         $('#decided-submissions-score-table').DataTable({
+          "searching":false,
             "columnDefs":[{
                 "targets": [ 2 ],
                 "visible": false,
@@ -11,14 +20,79 @@
             },
             "fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
                 // Bold the grade for all 'A' grade browsers
-                if ( aData[2] == "True" )
+                if ( aData.accepted == true )
                 {
                     $(nRow).css('color','green')
                 }
                 else{
                     $(nRow).css('color','red')
                 }
-            }})
+            },
+          "serverSide": true,
+          "ajax": {
+            "url": "{% url 'ajaxhandler' %}",
+            "dataSrc": function (json) {
+
+              var data = json['data']
+
+              var return_data = new Array();
+              for (var i = 0; i < data.length; i++) {
+
+                var submissionid=data[i].id
+
+                if (isManager) {
+                  submissionid = '<input class="button-x-corner" type="button" submission_id='+submissionid+' value="X">'+submissionid
+                }
+
+                var tankname=data[i].tank.name
+
+
+                var tankname='<div class="'+slugify(data[i].tank.name)+'"></div>'+data[i].tank.name
+
+                var accepted=data[i].accepted
+
+                var score=data[i].score
+
+                var points=data[i].points
+
+                var managername = '<a href="/user/'+data[i].manager.discord_id+'">'+data[i].manager.discord_nickname+'</a>'
+
+                var proof='<a href="'+data[i].proof+'">Prooflink</a>'
+
+                var date=data[i].date
+
+
+                return_data.push({
+                  'submissionid': submissionid,
+                  'tankname': tankname,
+                  'accepted': accepted,
+                  'score': score,
+                  'points': points,
+                  'managername': managername,
+                  'proof': proof,
+                  'date': date,
+                })
+              }
+              return return_data;
+            },
+            "type": "POST",
+            "data": function (d) {
+              d.csrfmiddlewaretoken = csrftoken
+              d.ajax_action_id =ajaxactions.RETRIEVEDECIDEDSCORE
+              d.pointsinfo={{ lookuser.pointsinfo.id }}
+            }
+          },
+          "columns": [
+            {"data": "submissionid"},
+            {"data": "tankname"},
+            {"data": "accepted"},
+            {"data": "score"},
+            {"data": "points"},
+            {"data": "managername"},
+            {"data": "proof"},
+            {"data": "date"},
+          ],
+        })
 
         $('#decided-submissions-fights-table').DataTable({
             "columnDefs":[{

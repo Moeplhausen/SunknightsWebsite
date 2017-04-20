@@ -253,9 +253,6 @@ class RetrieveUsersLeaderPointForm(BaseForm):
 
             page=p.page(start/lengthreq+1)
 
-
-
-
             serializer = PointsInfoSerializer(page.object_list, many=True)
         except BaseException as e:
             return self.response(False, 'Something went wrong: ' + str(e))
@@ -266,6 +263,81 @@ class RetrieveUsersLeaderPointForm(BaseForm):
     class Meta:
         model = PointsInfo
         fields = ('draw','start','length')
+
+
+class RetrieveDecidedScoreSubmissionsForm(BaseForm):
+    draw = forms.IntegerField(min_value=0, widget=forms.HiddenInput(), required=True)
+    start = forms.IntegerField(min_value=0, widget=forms.HiddenInput(), required=True)
+    length = forms.IntegerField(min_value=0, widget=forms.HiddenInput(), required=True)
+
+    def __init__(self, *args, **kwargs):
+        super(RetrieveDecidedScoreSubmissionsForm, self).__init__(AjaxAction.RETRIEVEDECIDEDSCORE, *args, **kwargs)
+
+    def handle(self, request):
+
+        try:
+            drawnr=self.cleaned_data['draw']
+            lengthreq=self.cleaned_data['length']
+            start=self.cleaned_data['start']
+            searchstr=""
+
+            orderstr="totalpoints"
+            dir='desc'
+
+            if 'search[value]' in request.POST:
+                searchstr=request.POST['search[value]']
+            if 'order[0][column]' in request.POST:
+                ordercolumn=int(request.POST['order[0][column]'])
+            if 'order[0][dir]' in request.POST:
+                dir=request.POST['order[0][dir]']
+
+
+
+            if ordercolumn==0:
+                orderstr="id"
+            elif ordercolumn==1:
+                orderstr="tank__name"
+            elif ordercolumn==2:
+                orderstr="accepted"
+            elif ordercolumn==3:
+                orderstr="score"
+            elif ordercolumn==4:
+                orderstr="points"
+            elif ordercolumn==5:
+                orderstr="manager__discord_nickname"
+            elif ordercolumn==6:
+                orderstr="proof"
+            elif ordercolumn==7:
+                orderstr="date"
+
+            if dir=='desc':
+                orderstr='-'+orderstr
+
+            submissions = BasicUserPointSubmission.objects.filter(pointsinfo=self.cleaned_data['pointsinfo']).prefetch_related('manager','gamemode','tank')
+            allsubs=submissions.count()
+            # if searchstr!="":
+            #     userpoints=userpoints.filter(user__discord_nickname__icontains=searchstr)
+            submissions=submissions.order_by(
+                orderstr)  # the '-' is for reversing the order (so the one who has most points will be on top
+            p = Paginator(submissions, lengthreq)
+
+            filtered=p.count
+
+
+            page=p.page(start/lengthreq+1)
+
+            serializer = BasicUserPointSubmissionSerializer(page.object_list, many=True)
+        except BaseException as e:
+            return self.response(False, 'Something went wrong: ' + str(e))
+        else:
+
+            return self.datatables_leaderboard_response({'draw':drawnr,'recordsTotal':allsubs,'recordsFiltered':filtered,'data': (serializer.data)})
+
+    class Meta:
+        model = BasicUserPointSubmission
+        fields = ('draw','start','length','pointsinfo')
+
+
 
 
 

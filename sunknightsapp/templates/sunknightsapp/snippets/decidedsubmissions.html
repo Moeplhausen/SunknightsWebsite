@@ -1,150 +1,165 @@
 {% load humanize %}
 <h3>Score Submissions</h3>
-<table id="decided-submissions-score-table" class="display" cellspacing="0" width="100%">
-    <thead>
-    <tr>
-        <th>Id</th>
-        <th>Tank</th>
-        <th>Accepted</th>
-        <th>Score</th>
-        <th>Points</th>
-        <th>Manager</th>
-        <th>Manager Note</th>
-        <th>Proof</th>
-        <th>Date</th>
-    </tr>
-    </thead>
-    <tbody>
-    {% for submission in lookuser.last_decided_userpoint_submissions %}
+<div class="table-responsive">
+    <table id="decided-submissions-score-table" class="display" cellspacing="0" width="100%">
+        <thead>
         <tr>
-
-            <td>
-                {% if user.is_points_manager%}
-                    <input class="button-x-corner" type="button" submission_id={{ submission.id }} value="X">
-                {% endif %}
-                {{ submission.id }}
-            </td>
-            <td><div class="{{ submission.tank.name|slugify }}"></div>{{ submission.tank.name }}</td>
-            <td>{{ submission.accepted }}</td>
-            <td>{{ submission.score|intcomma }}</td>
-            <td>{{ submission.points|intcomma }}</td>
-            <td><a href="/user/{{ submission.manager.discord_id }}">{{ submission.manager.discord_nickname }}</a></td>
-            <td>{{ submission.managerText }}</td>
-
-            <td><a href="{{ submission.proof }}">Prooflink</a></td>
-            <td>{{ submission.date }}</td>
-
+            <th>Id</th>
+            <th>Tank</th>
+            <th>Accepted</th>
+            <th>Score</th>
+            <th>Points</th>
+            <th>Manager</th>
+            <th>Proof</th>
+            <th>Date</th>
         </tr>
-    {% endfor %}
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+{% comment %}        {% for submission in lookuser.last_decided_userpoint_submissions %}
+            <tr>
 
+                <td>
+                    {% if user.is_points_manager %}
+                        <input class="button-x-corner" type="button" submission_id={{ submission.id }} value="X">
+                    {% endif %}
+                    {{ submission.id }}
+                </td>
+                <td>
+                    <div class="{{ submission.tank.name|slugify }}"></div>
+                    {{ submission.tank.name }}</td>
+                <td>{{ submission.accepted }}</td>
+                <td>{{ submission.score|intcomma }}</td>
+                <td>{{ submission.points|intcomma }}</td>
+                <td><a href="/user/{{ submission.manager.discord_id }}">{{ submission.manager.discord_nickname }}</a>
+                </td>
+                <td>{{ submission.managerText }}</td>
+
+                <td><a href="{{ submission.proof }}">Prooflink</a></td>
+                <td>{{ submission.date }}</td>
+
+            </tr>
+        {% endfor %}{% endcomment %}
+        </tbody>
+    </table>
+</div>
 <h3>Fight Submissions</h3>
-<table id="decided-submissions-fights-table" class="display" cellspacing="0" width="100%">
-    <thead>
-    <tr>
-        <th>Id</th>
-        <th>Winner</th>
-        <th>Loser</th>
-        <th>Manager</th>
-        <th>Manager Note</th>
-        <th>Accepted</th>
-        <th>Proof</th>
-        <th>Date</th>
-    </tr>
-    </thead>
-    <tbody>
-    {% for submission in lookuser.last_decided_fights_submissions %}
+<div class="table-responsive">
+    <table id="decided-submissions-fights-table" class="display" cellspacing="0" width="100%">
+        <thead>
         <tr>
-            <td>
-                {% if user.is_points_manager%}
-                    <input class="button-x-corner" type="button" submission_id={{ submission.id }} value="X">
-                {% endif %}
-                {{ submission.id }}
-            </td>
-            <td><a href="/user/{{ submission.pointsinfo.user.discord_id }}">{{ submission.pointsinfo.user.discord_nickname }}</a></td>
-            <td><a href="/user/{{ submission.pointsinfoloser.user.discord_id }}">{{ submission.pointsinfoloser.user.discord_nickname }}</a></td>
-            <td><a href="/user/{{ submission.manager.discord_id }}">{{ submission.manager.discord_nickname }}</a></td>
-            <td>{{ submission.managerText }}</td>
-            <td>{{ submission.accepted }}</td>
-            <td><a href="{{ submission.proof }}">Prooflink</a></td>
-            <td>{{ submission.date }}</td>
+            <th>Id</th>
+            <th>Winner</th>
+            <th>Loser</th>
+            <th>Manager</th>
+            <th>Manager Note</th>
+            <th>Accepted</th>
+            <th>Proof</th>
+            <th>Date</th>
         </tr>
-    {% endfor %}
-    </tbody>
-</table>
-
+        </thead>
+        <tbody>
+        {% for submission in lookuser.last_decided_fights_submissions %}
+            <tr>
+                <td>
+                    {% if user.is_points_manager %}
+                        <input class="button-x-corner" type="button" submission_id={{ submission.id }} value="X">
+                    {% endif %}
+                    {{ submission.id }}
+                </td>
+                <td>
+                    <a href="/user/{{ submission.pointsinfo.user.discord_id }}">{{ submission.pointsinfo.user.discord_nickname }}</a>
+                </td>
+                <td>
+                    <a href="/user/{{ submission.pointsinfoloser.user.discord_id }}">{{ submission.pointsinfoloser.user.discord_nickname }}</a>
+                </td>
+                <td><a href="/user/{{ submission.manager.discord_id }}">{{ submission.manager.discord_nickname }}</a>
+                </td>
+                <td>{{ submission.managerText }}</td>
+                <td>{{ submission.accepted }}</td>
+                <td><a href="{{ submission.proof }}">Prooflink</a></td>
+                <td>{{ submission.date }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
 
 <h3>Event/Quests Submissions</h3>
-<table id="decided-events-quests-table" class="display" cellspacing="0" width="100%">
-    <thead>
-    <tr>
-        <th>Id</th>
-        <th>Quest</th>
-        <th>Points</th>
-        <th>Manager</th>
-        <th>Manager Note</th>
-        <th>Accepted</th>
-        <th>Proof</th>
-        <th>Date</th>
-    </tr>
-    </thead>
-    <tbody>
-    {% for submission in lookuser.last_decided_eventquests_submissions %}
+<div class="table-responsive">
+    <table id="decided-events-quests-table" class="display" cellspacing="0" width="100%">
+        <thead>
         <tr>
-            <td>
-                {% if user.is_points_manager%}
-                    <input class="button-x-corner" type="button" submission_id={{ submission.id }} value="X">
-                {% endif %}
-                {{ submission.id }}
-            </td>
-        <td>
-            {% if submission.questtask %}
-                <span data-toggle="tooltip" data-html="true" data-placement="top" title="Tier{{ submission.questtask.quest.tier}}">{{ submission.questtask.questtext_html }}</span>
-            {% endif %}
-
-        </td>
-            <td>{{ submission.points|intcomma }}</td>
-            <td><a href="/user/{{ submission.manager.discord_id }}">{{ submission.manager.discord_nickname }}</a></td>
-            <td>{{ submission.managerText }}</td>
-            <td>{{ submission.accepted }}</td>
-            <td><a href="{{ submission.proof }}">Prooflink</a></td>
-            <td>{{ submission.date }}</td>
+            <th>Id</th>
+            <th>Quest</th>
+            <th>Points</th>
+            <th>Manager</th>
+            <th>Manager Note</th>
+            <th>Accepted</th>
+            <th>Proof</th>
+            <th>Date</th>
         </tr>
-    {% endfor %}
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+        {% for submission in lookuser.last_decided_eventquests_submissions %}
+            <tr>
+                <td>
+                    {% if user.is_points_manager %}
+                        <input class="button-x-corner" type="button" submission_id={{ submission.id }} value="X">
+                    {% endif %}
+                    {{ submission.id }}
+                </td>
+                <td>
+                    {% if submission.questtask %}
+                        <span data-toggle="tooltip" data-html="true" data-placement="top"
+                              title="Tier{{ submission.questtask.quest.tier }}">{{ submission.questtask.questtext_html }}</span>
+                    {% endif %}
 
+                </td>
+                <td>{{ submission.points|intcomma }}</td>
+                <td><a href="/user/{{ submission.manager.discord_id }}">{{ submission.manager.discord_nickname }}</a>
+                </td>
+                <td>{{ submission.managerText }}</td>
+                <td>{{ submission.accepted }}</td>
+                <td><a href="{{ submission.proof }}">Prooflink</a></td>
+                <td>{{ submission.date }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
 
 
 <h3>Other</h3>
-<table id="decided-submissions-custom-table" class="display" cellspacing="0" width="100%">
-    <thead>
-    <tr>
-        <th>Id</th>
-        <th>Points</th>
-        <th>Manager</th>
-        <th>Reason</th>
-        <th>Date</th>
-    </tr>
-    </thead>
-    <tbody>
-    {% for submission in lookuser.last_decided_custom_submissions %}
+<div class="table-responsive">
+    <table id="decided-submissions-custom-table" class="display" cellspacing="0" width="100%">
+        <thead>
         <tr>
-            <td>
-
-                {% if user.is_points_manager%}
-                    <input class="button-x-corner" type="button" submission_id={{ submission.id }} value="X">
-                {% endif %}
-
-
-                {{ submission.id }}
-            </td>
-            <td>{{ submission.points }}</td>
-            <td><a href="/user/{{ submission.manager.discord_id }}">{{ submission.manager.discord_nickname }}</a></td>
-            <td>{{ submission.managerText }}</td>
-            <td>{{ submission.date }}</td>
+            <th>Id</th>
+            <th>Points</th>
+            <th>Manager</th>
+            <th>Reason</th>
+            <th>Date</th>
         </tr>
-    {% endfor %}
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+        {% for submission in lookuser.last_decided_custom_submissions %}
+            <tr>
+                <td>
+
+                    {% if user.is_points_manager %}
+                        <input class="button-x-corner" type="button" submission_id={{ submission.id }} value="X">
+                    {% endif %}
+
+
+                    {{ submission.id }}
+                </td>
+                <td>{{ submission.points }}</td>
+                <td><a href="/user/{{ submission.manager.discord_id }}">{{ submission.manager.discord_nickname }}</a>
+                </td>
+                <td>{{ submission.managerText }}</td>
+                <td>{{ submission.date }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>

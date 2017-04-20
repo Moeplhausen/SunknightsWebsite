@@ -20,7 +20,7 @@ from ..forms.daily_quests_forms import SubmitQuestTaskForm, RequestQuestsForm, E
 from ..forms.points_forms import SubmitPointsForm, RetriveUserSubmissionsPointsForm, DecideUserPointSubmissionForm, \
     SubmitFightsForm, RetrieveFightsSubmissionsForm, DecideFightsSubmissionForm, RevertSubmissionForm, \
     RetrieveUsersLeaderPointForm, RetrieveUsersToFightAgainstForm, SubmitEventsQuestsForm, \
-    DecideEventQuestsSubmissionForm, RetrieveEventQuestsSubmissionsForm
+    DecideEventQuestsSubmissionForm, RetrieveEventQuestsSubmissionsForm,RetrieveDecidedScoreSubmissionsForm
 from ..forms.preferences_forms import SavePreferencesForm
 from ..forms.tournaments_forms import CreateTournamentForm, DeleteTournamentForm, RequestTournamentsForm
 from ..models.clan_user import ClanUser
@@ -335,6 +335,8 @@ def ajaxhandler(request):
         form = EditMultiplierForm(request.POST)
     elif actionid is AjaxAction.SAVEPREFERENCES.value:
         form=SavePreferencesForm(request.POST)
+    elif actionid is AjaxAction.RETRIEVEDECIDEDSCORE.value:
+        form=RetrieveDecidedScoreSubmissionsForm(request.POST)
 
     if form is None:
         return sendFailure(request, "No handler for this action installed.")
