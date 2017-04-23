@@ -327,7 +327,7 @@
                   'date': moment(data[i].date).format("MMM D Y, hh:mm:ss A"),
                   'points': points,
                   'note': prooftext+"<br>"+data[i].submitterText,
-                  'submitter-note': data[i].submitterText,
+                  'submitter-note': escapeHtml(data[i].submitterText),
                   'manager-note': managertext,
                   'proof': prooftext,
                   'action': action
