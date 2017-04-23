@@ -470,7 +470,7 @@ class DecideUserPointSubmissionForm(BaseForm):
 
         else:
             submission.accepted = self.cleaned_data['accepted']
-            submission.managerText = self.cleaned_data['managerText']
+            submission.managerText = strip_tags(self.cleaned_data['managerText'])
             submission.points = self.cleaned_data['points']
             submission.manager=request.user
             submission.decided=True
@@ -506,7 +506,7 @@ class DecideEventQuestsSubmissionForm(BaseForm):
 
         else:
             submission.accepted = self.cleaned_data['accepted']
-            submission.managerText = self.cleaned_data['managerText']
+            submission.managerText = strip_tags(self.cleaned_data['managerText'])
             submission.points = self.cleaned_data['points']
             submission.manager=request.user
             submission.decided=True
@@ -555,7 +555,7 @@ class DecideFightsSubmissionForm(BaseForm):
 
         else:
             submission.accepted = self.cleaned_data['accepted']
-            submission.managerText = self.cleaned_data['managerText']
+            submission.managerText = strip_tags(self.cleaned_data['managerText'])
             submission.manager=request.user
             submission.decided=True
             submission.reverted=False
