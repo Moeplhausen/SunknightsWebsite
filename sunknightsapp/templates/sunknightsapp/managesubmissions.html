@@ -195,7 +195,7 @@
                   'score': data[i].score,
                   'date': moment(data[i].date).format("MMM D Y, hh:mm:ss A"),
                   'points': points,
-                  'note':prooftext+"<br>"+data[i].submitterText,
+                  'note':prooftext+"<br>"+escapeHtml(data[i].submitterText),
                   'submitter-note': data[i].submitterText,
                   'manager-note': managertext,
                   'proof': prooftext,

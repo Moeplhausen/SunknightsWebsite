@@ -1,4 +1,5 @@
 from .base_form import BaseForm
+from django.utils.html import strip_tags
 from ..enums.AjaxActions import AjaxAction
 from ..models.point_submission import BasicUserPointSubmission, BasicPointSubmission,OneOnOneFightSubmission,PointsManagerAction,EventQuestSubmission
 from ..serializers.pointsubmissions_serializer import BasicUserPointSubmissionSerializer, \
@@ -22,6 +23,7 @@ class SubmitPointsForm(BaseForm):
             submission.points=decimal.Decimal(getPointsByScore(submission))#*decimal.Decimal(submission.tank.multiplier)
 
             submission.date=datetime.datetime.utcnow()
+            submission.submitterText=strip_tags(submission.submitterText)
 
 
             for mult in submission.get_daily_multiplier:
@@ -59,6 +61,7 @@ class SubmitEventsQuestsForm(BaseForm):
             submission = self.save(commit=False)
             submission.points=0
             submission.pointsinfo = request.user.pointsinfo
+            submission.submitterText=strip_tags(submission.submitterText)
 
             questtask=submission.questtask
             if questtask:
