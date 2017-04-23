@@ -196,8 +196,8 @@
                   'date': moment(data[i].date).format("MMM D Y, hh:mm:ss A"),
                   'points': points,
                   'note':prooftext+"<br>"+escapeHtml(data[i].submitterText),
-                  'submitter-note': data[i].submitterText,
-                  'manager-note': managertext,
+                  'submitter-note': escapeHtml(data[i].submitterText),
+                  'manager-note': escapeHtml(managertext),
                   'proof': prooftext,
                   'action': action
                 })
@@ -328,7 +328,7 @@
                   'points': points,
                   'note': prooftext+"<br>"+data[i].submitterText,
                   'submitter-note': escapeHtml(data[i].submitterText),
-                  'manager-note': managertext,
+                  'manager-note': escapeHtml(managertext),
                   'proof': prooftext,
                   'action': action
                 })
@@ -447,7 +447,7 @@
                   'proof': prooftext,
                   'pointswinner': pointswinner,
                   'pointsloser': pointsloser,
-                  'manager-note': managertext,
+                  'manager-note': escapeHtml(managertext),
                   'action': action
                 })
               }
