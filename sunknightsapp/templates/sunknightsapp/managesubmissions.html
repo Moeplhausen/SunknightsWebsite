@@ -76,6 +76,7 @@
           $('.decisionbtnfucker').click(function () {
             var id = $(this).val();
             var element = $(this);
+            var score=$("#score-"+id).val()
             var points = $("#points-manager-" + id).val()
             var managerText = $("#manager-note-" + id).val()
             if (managerText == "")
@@ -94,6 +95,7 @@
                 ajax_action_id:{{ decideuserpointsubmissionid }},
                 pk_id: id,
                 managerText: managerText,
+                score:score,
                 accepted: accepted,
                 points: points
               },
@@ -183,9 +185,9 @@
                     'title="Similar Submissions"'+
                   'data-content="'+similarsubstext+'"></button>'
 
-                var tankscoretext='<span data-toggle="tooltip" data-html="true" data-placement="top" title="'+builds+'">'+tankname+'<br>'+numberWithCommas(data[i].score)+'</span>'
 
 
+                var tankscoretext='<span data-toggle="tooltip" data-html="true" data-placement="top" title="'+builds+'">'+tankname+'<br><input type="number" class="form-control" name="score" id="score-'+data[i].id+'" min="0" max="99999999" value='+(data[i].score)+' required></span>'
                 return_data.push({
                   'id':data[i].id+'<br>'+moment(data[i].date).format("MMM D Y, hh:mm:ss A"),
                   'user': user,

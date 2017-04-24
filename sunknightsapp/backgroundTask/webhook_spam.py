@@ -111,6 +111,7 @@ def post_new_user_point_submission(submission, accepted, decided):
                             {'name': 'Action', 'value': 'Approved' if accepted else 'Rejected', 'inline': True},
                             {'name': 'Manager', 'value': '<@{}>'.format(submission.manager.discord_id), 'inline': True},
                             {'name': 'Manager Note', 'value': submission.managerText, 'inline': True},
+                            {'name': 'Score', 'value': str(submission.score), 'inline': True},
                             {'name': 'Points', 'value': str(submission.points), 'inline': True},
                             {'name': 'Proof', 'value': submission.proof, 'inline': True},
                         ]
