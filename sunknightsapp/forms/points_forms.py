@@ -312,7 +312,7 @@ class RetrieveDecidedScoreSubmissionsForm(BaseForm):
                 orderstr = '-' + orderstr
 
             submissions = BasicUserPointSubmission.objects.filter(
-                pointsinfo=self.cleaned_data['pointsinfo']).prefetch_related('manager', 'gamemode', 'tank')
+                pointsinfo=self.cleaned_data['pointsinfo'],decided=True)
             allsubs = submissions.count()
             # if searchstr!="":
             #     userpoints=userpoints.filter(user__discord_nickname__icontains=searchstr)
