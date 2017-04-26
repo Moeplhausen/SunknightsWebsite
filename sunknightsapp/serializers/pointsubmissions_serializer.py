@@ -2,7 +2,7 @@ from rest_framework import serializers
 from ..models.point_submission import PointsManagerAction, BasicUserPointSubmission, BasicPointSubmission, \
     OneOnOneFightSubmission
 from rest_framework_bulk import BulkListSerializer, BulkSerializerMixin
-from .clan_user_serializer import ClanUserSerializerDiscord_id,ClanUserFasterSerializer
+from .clan_user_serializer import ClanUserSerializerDiscord_id,ClanUserFasterSerializer,ClanUserSerializerBasic
 from .daily_quest_serializer import QuestSerializer,QuestBuildSerializer,QuestTankMultiplierSerializer
 from .tank_serializer import DiepTankSimpleSerializer
 from .gamemode_serializer import GamemodeSerializer
@@ -42,6 +42,19 @@ class BasicUserPointSubmissionSerializer(BulkSerializerMixin, serializers.ModelS
         fields = (
         'id', 'date', 'manager', 'managerText', 'points', 'submitterText', 'gamemode', 'pointsinfo', 'accepted',
         'decided', 'daily_quest', 'proof', 'tank', 'score')
+        list_serializer_class = BulkListSerializer
+
+
+class BasicUserPointSubmissionSerializerMinimal(BulkSerializerMixin, serializers.ModelSerializer):
+    tank = DiepTankSimpleSerializer(many=False, read_only=True)
+    pointsinfo = PointsInfoBasicSerializer(many=False, read_only=True)
+    manager = ClanUserSerializerBasic(many=False, read_only=True)
+
+    class Meta:
+        model = BasicUserPointSubmission
+        fields = (
+            'id', 'date', 'manager', 'managerText', 'points', 'submitterText', 'pointsinfo', 'accepted',
+            'decided', 'proof', 'tank', 'score')
         list_serializer_class = BulkListSerializer
 
 

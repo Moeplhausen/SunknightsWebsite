@@ -87,6 +87,9 @@ class ClanUserFasterSerializer(BulkSerializerMixin,serializers.ModelSerializer):
         list_serializer_class = BulkListSerializer
 
 
+
+
+
 class PointsInfoBasicSerializer(BulkSerializerMixin,serializers.ModelSerializer):
     user=ClanUserSerializerBasic(many=False,read_only=True)
 

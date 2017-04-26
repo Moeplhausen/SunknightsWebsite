@@ -5,7 +5,7 @@ from ..models.point_submission import BasicUserPointSubmission, BasicPointSubmis
     PointsManagerAction, EventQuestSubmission
 from ..serializers.pointsubmissions_serializer import BasicUserPointSubmissionSerializer, \
     BasicPointsSubmissionSerializer, OneOnOneFightSubmissionSerializer, BasicEventQuestsSubmissionSerializer, \
-    BasicUserPointSubmissionWithSimilarSubsSerializer
+    BasicUserPointSubmissionWithSimilarSubsSerializer,BasicUserPointSubmissionSerializerMinimal
 from ..serializers.clan_user_serializer import PointsInfoSerializer, PointsInfoFastSerializer, ClanUserSerializerBasic
 from django import forms
 from ..models.utility.little_things import getPointsByScore, getPointsByFight, manageElo
@@ -312,7 +312,7 @@ class RetrieveDecidedScoreSubmissionsForm(BaseForm):
                 orderstr = '-' + orderstr
 
             submissions = BasicUserPointSubmission.objects.filter(
-                pointsinfo=self.cleaned_data['pointsinfo'],decided=True)
+                pointsinfo=self.cleaned_data['pointsinfo'],decided=True).prefetch_related('tank','gamemode','pointsinfo','manager','pointsinfo__user')
             allsubs = submissions.count()
             # if searchstr!="":
             #     userpoints=userpoints.filter(user__discord_nickname__icontains=searchstr)
@@ -324,7 +324,7 @@ class RetrieveDecidedScoreSubmissionsForm(BaseForm):
 
             page = p.page(start / lengthreq + 1)
 
-            serializer = BasicUserPointSubmissionSerializer(page.object_list, many=True)
+            serializer = BasicUserPointSubmissionSerializerMinimal(page.object_list, many=True)
         except BaseException as e:
             return self.response(False, 'Something went wrong: ' + str(e))
         else:
