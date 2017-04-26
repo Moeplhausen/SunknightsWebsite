@@ -269,14 +269,15 @@
     showdown.extension("tank", tank);
   })();
 </script>
+<script src="{% static 'sunknightsapp/js/discord-widget.js' %}"></script>
 {% compress js %}
     <script src="{% static 'sunknightsapp/js/loadmd.js' %}"></script>
     {% if text %}
         <script>loadMd("{{text}}");</script>
     {% endif %}
-    <script src="{% static 'sunknightsapp/js/userdesc.js' %}?{% now "U" %}"></script>
+    <script src="{% static 'sunknightsapp/js/userdesc.js' %}"></script>
     <script src="{% static 'sunknightsapp/js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
-    <script src="{% static 'sunknightsapp/js/moment.js' %}?{% now "U" %}"></script>
+    <script src="{% static 'sunknightsapp/js/moment.js' %}"></script>
     <script src="{% static 'sunknightsapp/js/tether.min.js' %}"></script>
 
     {#<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js"#}
@@ -295,6 +296,21 @@
   var csrftoken = $.cookie('csrftoken');
 
   $(document).ready(function () {
+
+    {% if server != None %}
+
+    discordWidget.init({
+      serverId: {{ server.discord_id }},
+      join: true,
+      alphabetical: false,
+      theme: 'light',
+      hideChannels: true,
+      showAllUsers: false,
+      allUsersDefaultState: true,
+      showNick: false
+    });
+    discordWidget.render();
+    {% endif %}
 
     {% block scripts %}{% endblock %}
   });
