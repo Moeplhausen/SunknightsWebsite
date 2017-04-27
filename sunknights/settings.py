@@ -54,7 +54,8 @@ INSTALLED_APPS = [
     'allaccess',
     'widget_tweaks',
     'markdown_deux',
-    'compressor'
+    'compressor',
+    'cachalot',
 ]
 
 AUTHENTICATION_BACKENDS = (

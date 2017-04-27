@@ -333,7 +333,6 @@ class RetrieveDecidedScoreSubmissionsForm(BaseForm):
             if dir == 'desc':
                 orderstr = '-' + orderstr
 
-            print(orderstr)
 
             submissions = BasicUserPointSubmission.objects.filter(
                 pointsinfo=self.cleaned_data['pointsinfo'],decided=True).prefetch_related('tank','gamemode','pointsinfo','manager','pointsinfo__user')
