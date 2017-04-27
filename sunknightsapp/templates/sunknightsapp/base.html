@@ -269,8 +269,8 @@
     showdown.extension("tank", tank);
   })();
 </script>
-<script src="{% static 'sunknightsapp/js/discord-widget.js' %}"></script>
 {% compress js %}
+    <script src="{% static 'sunknightsapp/js/discord-widget.js' %}"></script>
     <script src="{% static 'sunknightsapp/js/loadmd.js' %}"></script>
     {% if text %}
         <script>loadMd("{{text}}");</script>

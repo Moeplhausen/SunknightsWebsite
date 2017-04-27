@@ -147,7 +147,7 @@ class RetriveUserSubmissionsPointsForm(BaseForm):
                 proofused = BasicUserPointSubmission.objects.filter(score=p['score'], tank=p['tank'])
                 similars[p['id']] = proofused
 
-            submissions = BasicUserPointSubmission.objects.filter(decided=False)
+            submissions = BasicUserPointSubmission.objects.filter(decided=False,pointsinfo__user__is_active=True)
 
             for sub in submissions:
                 sub.similarsubs = similars[sub.id].exclude(id=sub.id)
