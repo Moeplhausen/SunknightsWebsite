@@ -47,6 +47,13 @@ ELO_K=40
 ELO_DEFAULT=1000
 
 
+def float_or_0(value):
+    try:
+        return float(value)
+    except:
+        return 0
+
+
 def getPointsByScore(submission):
     score=submission.score
     opness=submission.tank.opness

@@ -9,7 +9,7 @@
 
     $(document).ready(function () {
         $('#decided-submissions-score-table').DataTable({
-          "searching":false,
+          "searching":true,
             "columnDefs":[{
                 "targets": [ 2 ],
                 "visible": false,
@@ -22,10 +22,10 @@
                 // Bold the grade for all 'A' grade browsers
                 if ( aData.accepted == true )
                 {
-                    $(nRow).css('color','green')
+                    $(nRow).css('color','LimeGreen')
                 }
                 else{
-                    $(nRow).css('color','red')
+                    $(nRow).css('color','Tomato')
                 }
             },
           "serverSide": true,
@@ -33,18 +33,25 @@
             "url": "{% url 'ajaxhandler' %}",
             "dataSrc": function (json) {
 
+              console.log(json)
+
               var data = json['data']
 
               var return_data = new Array();
+              console.log(data)
               for (var i = 0; i < data.length; i++) {
+
+
+                var submitterText=escapeHtml(data[i].submitterText)
+
+                var managerText=escapeHtml(data[i].managerText)
+
 
                 var submissionid=data[i].id
 
                 if (isManager) {
                   submissionid = '<input class="button-x-corner" type="button" submission_id='+submissionid+' value="X">'+submissionid
                 }
-
-                var tankname=data[i].tank.name
 
 
                 var tankname='<div class="'+slugify(data[i].tank.name)+'"></div>'+data[i].tank.name
@@ -59,7 +66,7 @@
 
                 var proof='<a href="'+data[i].proof+'">Prooflink</a>'
 
-                var date=data[i].date
+                var date=moment(data[i].date).format("MMM D Y, hh:mm:ss A")
 
 
                 return_data.push({
@@ -68,6 +75,8 @@
                   'accepted': accepted,
                   'score': score,
                   'points': points,
+                  'subtext':submitterText,
+                  'mantext':managerText,
                   'managername': managername,
                   'proof': proof,
                   'date': date,
@@ -88,6 +97,8 @@
             {"data": "accepted"},
             {"data": "score"},
             {"data": "points"},
+            {"data": "subtext"},
+            {"data": "mantext"},
             {"data": "managername"},
             {"data": "proof"},
             {"data": "date"},
@@ -107,10 +118,10 @@
                 // Bold the grade for all 'A' grade browsers
                 if ( aData[5] == "True" )
                 {
-                    $(nRow).css('color','green')
+                    $(nRow).css('color','LimeGreen')
                 }
                 else{
-                    $(nRow).css('color','red')
+                    $(nRow).css('color','Tomato')
                 }
             }})
 
@@ -127,10 +138,10 @@
                 // Bold the grade for all 'A' grade browsers
                 if ( aData[5] == "True" )
                 {
-                    $(nRow).css('color','green')
+                    $(nRow).css('color','LimeGreen')
                 }
                 else{
-                    $(nRow).css('color','red')
+                    $(nRow).css('color','Tomato')
                 }
             }})
 

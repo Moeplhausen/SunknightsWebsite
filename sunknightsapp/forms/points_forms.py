@@ -12,8 +12,9 @@ from ..models.utility.little_things import getPointsByScore, getPointsByFight, m
 from ..models.points_info import PointsInfo, ClanUser
 from django.core.paginator import Paginator
 from django.db.models import Count
+from ..models.utility.little_things import float_or_0
 import datetime
-
+from django.db.models import Q
 MAX_OPEN_SUBS=40
 
 def check_open_subs(user):
@@ -146,9 +147,9 @@ class SubmitFightsForm(BaseForm):
         fields = ('proof', 'pointsinfoloser', 'whowon')
 
 
-class RetriveUserSubmissionsPointsForm(BaseForm):
+class RetrieveUserSubmissionsPointsForm(BaseForm):
     def __init__(self, *args, **kwargs):
-        super(RetriveUserSubmissionsPointsForm, self).__init__(AjaxAction.RETRIEVEUSERSUBMISSIONS, *args, **kwargs)
+        super(RetrieveUserSubmissionsPointsForm, self).__init__(AjaxAction.RETRIEVEUSERSUBMISSIONS, *args, **kwargs)
 
     def handle(self, request):
         if not request.user.is_points_manager:
@@ -328,11 +329,14 @@ class RetrieveDecidedScoreSubmissionsForm(BaseForm):
             if dir == 'desc':
                 orderstr = '-' + orderstr
 
+            print(searchstr)
+
             submissions = BasicUserPointSubmission.objects.filter(
                 pointsinfo=self.cleaned_data['pointsinfo'],decided=True).prefetch_related('tank','gamemode','pointsinfo','manager','pointsinfo__user')
             allsubs = submissions.count()
-            # if searchstr!="":
-            #     userpoints=userpoints.filter(user__discord_nickname__icontains=searchstr)
+            if searchstr!="":
+                numbersearch=float_or_0(searchstr)
+                submissions=submissions.filter(Q(id=numbersearch)|Q(tank__name__icontains=searchstr)|Q(points=numbersearch)|Q(submitterText__icontains=searchstr)|Q(managerText__icontains=searchstr)|Q(manager__discord_nickname__icontains=searchstr)|Q(proof__icontains=searchstr))
             submissions = submissions.order_by(
                 orderstr)  # the '-' is for reversing the order (so the one who has most points will be on top
             p = Paginator(submissions, lengthreq)

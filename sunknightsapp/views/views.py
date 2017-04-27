@@ -17,7 +17,7 @@ from ..forms.misc_forms import ChangeDesc
 from ..forms.daily_quests_forms import SubmitQuestTaskForm, RequestQuestsForm, EditQuestTaskForm, DeleteQuestTaskForm, \
     DeleteMultiplierForm, DeleteQuestBuildForm, EditMultiplierForm, EditQuestBuildForm, SubmitMultiplierForm, \
     SubmitBuildForm
-from ..forms.points_forms import SubmitPointsForm, RetriveUserSubmissionsPointsForm, DecideUserPointSubmissionForm, \
+from ..forms.points_forms import SubmitPointsForm, RetrieveUserSubmissionsPointsForm, DecideUserPointSubmissionForm, \
     SubmitFightsForm, RetrieveFightsSubmissionsForm, DecideFightsSubmissionForm, RevertSubmissionForm, \
     RetrieveUsersLeaderPointForm, RetrieveUsersToFightAgainstForm, SubmitEventsQuestsForm, \
     DecideEventQuestsSubmissionForm, RetrieveEventQuestsSubmissionsForm,RetrieveDecidedScoreSubmissionsForm
@@ -292,7 +292,7 @@ def ajaxhandler(request):
     elif actionid is AjaxAction.SUBMITEVENTSQUESTS.value:
         form = SubmitEventsQuestsForm(request.POST)
     elif actionid is AjaxAction.RETRIEVEUSERSUBMISSIONS.value:
-        form = RetriveUserSubmissionsPointsForm(request.POST)
+        form = RetrieveUserSubmissionsPointsForm(request.POST)
     elif actionid is AjaxAction.DECIDEUSERPOINTUSUBMISSION.value:
         form = DecideUserPointSubmissionForm(request.POST)
     elif actionid is AjaxAction.DECIDEEVENTQUESTS.value:
