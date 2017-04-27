@@ -195,6 +195,8 @@
         $('#recordsubmit').on('submit', function (event) {
           event.preventDefault();
 
+          console.log('pressed')
+
           //set default note if nothing was set
 
           var note = $('#submitterspam').val()
@@ -203,7 +205,8 @@
 
           var form = new FormData(this);
           sunKnightsJsonRequest(form, function (result, data) {
-            if (result) {
+            console.log("got data")
+            if (data.status!=null&&data.status!="failure") {
               submission = data['message']['data']
 
               //Success message
@@ -233,7 +236,7 @@
               console.log(data)
               //Failure message
               $('#alertsContainer').append(""+
-                "<div class=\"alert alert-success alert-dismissible fade in\" role=\"alert\">"+
+                "<div class=\"alert alert-danger alert-dismissible fade in\" role=\"alert\">"+
                   "<button type=\"button\" "+
                     "class=\"close\" "+
                     "data-dismiss=\"alert\" "+
@@ -242,7 +245,7 @@
                   "<span aria-hidden=\"true\">&times;</span>"+
                   "</button>"+
                   "<strong>Something went wrong with your score submission.</strong> "+
-                  "Please try again."+
+                  data.message+
                 "</div>")
 
               //$('#alertsContainer').append("<div class=\"alert alert-danger alert-dismissible fade in\" role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>Something went wrong :O<strong></div>")
@@ -265,7 +268,7 @@
           }
           var form = new FormData(this);
           sunKnightsJsonRequest(form, function (result, data) {
-            if (result) {
+            if (data.status!=null&&data.status!="failure") {
               submission = data['message']['data']
 
               //Success message
@@ -295,16 +298,16 @@
               console.log('fuck this shit')
               //Failure message
               $('#alertsContainer').append(""+
-                "<div class=\"alert alert-success alert-dismissible fade in\" role=\"alert\">"+
-                  "<button type=\"button\" "+
-                    "class=\"close\" "+
-                    "data-dismiss=\"alert\" "+
-                    "aria-label=\"Close\""+
-                  ">"+
-                  "<span aria-hidden=\"true\">&times;</span>"+
-                  "</button>"+
-                  "<strong>Something went wrong with your quest/event submission.</strong> "
-                  +"Please try again"+
+                "<div class=\"alert alert-danger alert-dismissible fade in\" role=\"alert\">"+
+                "<button type=\"button\" "+
+                "class=\"close\" "+
+                "data-dismiss=\"alert\" "+
+                "aria-label=\"Close\""+
+                ">"+
+                "<span aria-hidden=\"true\">&times;</span>"+
+                "</button>"+
+                "<strong>Something went wrong with your quest/event submission.</strong> "+
+                data.message+
                 "</div>")
 
               //$('#alertsContainer').append("<div class=\"alert alert-danger alert-dismissible fade in\" role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>Something went wrong :O<strong></div>")
@@ -326,7 +329,7 @@
 
           var form = new FormData(this);
           sunKnightsJsonRequest(form, function (result, data) {
-            if (result) {
+            if (data.status!=null&&data.status!="failure") {
               submission = data['message']['data']
               //Success message
               $('#alertsContainer').append(""+
@@ -354,16 +357,16 @@
               console.log('fuck this shit')
               //Failure message
               $('#alertsContainer').append(""+
-                "<div class=\"alert alert-success alert-dismissible fade in\" role=\"alert\">"+
-                  "<button type=\"button\" "+
-                    "class=\"close\" "+
-                    "data-dismiss=\"alert\" "+
-                    "aria-label=\"Close\""+
-                  ">"+
-                  "<span aria-hidden=\"true\">&times;</span>"+
-                  "</button>"+
-                  "<strong>Something went wrong with your 1v1 submission.</strong> "+
-                  "Please try again."+
+                "<div class=\"alert alert-danger alert-dismissible fade in\" role=\"alert\">"+
+                "<button type=\"button\" "+
+                "class=\"close\" "+
+                "data-dismiss=\"alert\" "+
+                "aria-label=\"Close\""+
+                ">"+
+                "<span aria-hidden=\"true\">&times;</span>"+
+                "</button>"+
+                "<strong>Something went wrong with your 1vs1 submission.</strong> "+
+                data.message+
                 "</div>")
 
               //$('#alertsContainer').append("<div class=\"alert alert-danger alert-dismissible fade in\" role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>Something went wrong :O<strong></div>")

@@ -6,7 +6,6 @@
  * @param processData param
  */
 function sunKnightsJsonRequest(param, handler, contentType, processData) {
-	contentType = typeof contentType !== 'undefined' ?
 			contentType : 'application/x-www-form-urlencoded; charset=UTF-8';
 	processData = typeof processData !== 'undefined' ?
 			processData : true;
@@ -31,13 +30,14 @@ function sunKnightsJsonRequest(param, handler, contentType, processData) {
 		},
 		'success': function(data, textStatus, response) {
 			if (data.status != 'success') {
+			  console.log("server error")
 				// Server-seitiger Fehler
 				console.log(data);
 				handler(false, data);
-			} else
+			} else{
 			    console.log(data);
 				handler(true, data);
-		}
+		}}
 	});
 }
 

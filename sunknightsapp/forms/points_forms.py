@@ -14,6 +14,13 @@ from django.core.paginator import Paginator
 from django.db.models import Count
 import datetime
 
+MAX_OPEN_SUBS=40
+
+def check_open_subs(user):
+    subs=BasicPointSubmission.objects.filter(pointsinfo=user.pointsinfo,decided=False).count()
+    return subs
+
+
 
 class SubmitPointsForm(BaseForm):
     def __init__(self, *args, **kwargs):
@@ -21,7 +28,10 @@ class SubmitPointsForm(BaseForm):
 
     def handle(self, request):
 
+
         try:
+            if check_open_subs(request.user) >= MAX_OPEN_SUBS:
+                return self.response(False, 'Too many undecided submissions')
             import decimal
             submission = self.save(commit=False)
             submission.points = decimal.Decimal(
@@ -59,7 +69,10 @@ class SubmitEventsQuestsForm(BaseForm):
 
     def handle(self, request):
 
+
         try:
+            if check_open_subs(request.user) >= MAX_OPEN_SUBS:
+                return self.response(False, 'Too many undecided submissions')
             from ..models.daily_quest import QuestTask
             import decimal
             submission = self.save(commit=False)
@@ -104,6 +117,10 @@ class SubmitFightsForm(BaseForm):
     def handle(self, request):
 
         try:
+            if check_open_subs(request.user) >= MAX_OPEN_SUBS:
+                return self.response(False, 'Too many undecided submissions')
+
+
             submission = self.save(commit=False)
 
             if request.user.pointsinfo.id == submission.pointsinfoloser.id:  # something fishy is happenening...
