@@ -299,7 +299,7 @@ class RetrieveDecidedScoreSubmissionsForm(BaseForm):
             start = self.cleaned_data['start']
             searchstr = ""
 
-            orderstr = "totalpoints"
+            orderstr = "id"
             dir = 'desc'
 
             if 'search[value]' in request.POST:
@@ -320,16 +320,20 @@ class RetrieveDecidedScoreSubmissionsForm(BaseForm):
             elif ordercolumn == 4:
                 orderstr = "points"
             elif ordercolumn == 5:
-                orderstr = "manager__discord_nickname"
+                orderstr = "submitterText"
             elif ordercolumn == 6:
-                orderstr = "proof"
+                orderstr = "managerText"
             elif ordercolumn == 7:
+                orderstr = "manager__discord_nickname"
+            elif ordercolumn == 8:
+                orderstr = "proof"
+            elif ordercolumn == 9:
                 orderstr = "date"
 
             if dir == 'desc':
                 orderstr = '-' + orderstr
 
-            print(searchstr)
+            print(orderstr)
 
             submissions = BasicUserPointSubmission.objects.filter(
                 pointsinfo=self.cleaned_data['pointsinfo'],decided=True).prefetch_related('tank','gamemode','pointsinfo','manager','pointsinfo__user')
