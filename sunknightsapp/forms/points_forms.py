@@ -479,6 +479,8 @@ class DecideUserPointSubmissionForm(BaseForm):
             submission.score=self.cleaned_data['score']
             submission.managerText = strip_tags(self.cleaned_data['managerText'])
             submission.points = self.cleaned_data['points']
+            if submission.points<0:
+                submission.points=0
             submission.manager = request.user
             submission.decided = True
             submission.reverted = False
@@ -511,6 +513,8 @@ class DecideEventQuestsSubmissionForm(BaseForm):
             submission.accepted = self.cleaned_data['accepted']
             submission.managerText = strip_tags(self.cleaned_data['managerText'])
             submission.points = self.cleaned_data['points']
+            if submission.points<0:
+                submission.points=0
             submission.manager = request.user
             submission.decided = True
             submission.reverted = False

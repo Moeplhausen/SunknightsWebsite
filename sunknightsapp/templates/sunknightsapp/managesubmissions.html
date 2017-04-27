@@ -165,7 +165,7 @@
 
 
                 var managertext = '<textarea class="form-control" maxlength="200" id="manager-note-' + data[i].id + '" rows="3"></textarea>'
-                var points = '<input class="form-control" style = "width:75px;"  type="number" value="' + data[i].points + '" id="points-manager-' + data[i].id + '">'
+                var points = '<input class="form-control" style = "width:75px;"  type="number" value="' + data[i].points + '" min="0" required id="points-manager-' + data[i].id + '">'
                 var similarsubs = data[i].similarsubs
                 var similarsubscount = similarsubs.length
                 var similarsubstext = ""
