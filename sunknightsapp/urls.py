@@ -6,7 +6,7 @@ from .views import views
 from .views.api import roles,servers,users,user_roles,tournaments,fights,discord_roles,points_submissions,diep_tanks,mastery,quests
 from rest_framework_bulk.routes import BulkRouter
 from .views.oauth.views import OAuthCallbackDiscord,OAuthRedirectDiscord
-
+from django.views.decorators.cache import cache_page
 
 router = BulkRouter(trailing_slash=False)
 router.register(r'roles',roles.RolesViewSet)
@@ -35,7 +35,7 @@ urlpatterns = [
     url(r'^guilds/(?P<id>[0-9]+)',views.guild),
     url(r'^pointrole/(?P<id>[0-9]+)',views.pointrole),
     url(r'^leaderboard', views.leaderboard, name='leaderboard'),
-    url(r'^masteries', views.masteries, name='masteries'),
+    url(r'^masteries', cache_page(60*15)(views.masteries), name='masteries'),
     url(r'^aboutus', views.about_us, name='about'),
     url(r'^info/$', views.helppage, name='info'),
     url(r'^info/rules', views.helppage,{'helpstr': 'rules'}, name='rules',),
@@ -49,7 +49,7 @@ urlpatterns = [
     url(r'^info/yt', views.helppage,{'helpstr': 'yt'}, name='yt'),
     url(r'^info/invites', views.helppage,{'helpstr': 'invites'}, name='invites'),
     url(r'^info/anokuuschool', views.helppage,{'helpstr': 'anokuuschool'}, name='anokuuschool'),
-    url(r'^tankdraw', views.tankboard, name='tankboard'),
+    url(r'^tankdraw', cache_page(60*15)(views.tankboard), name='tankboard'),
     url(r'^managesubmissions', views.manage_submissions, name='managesubmissions'),
     url(r'^managequests', views.manage_quests, name='managequests'),
     url(r'^api/',include(router.urls)),
