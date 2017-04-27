@@ -66,7 +66,7 @@ def index(request):
 
         now = (datetime.datetime.utcnow()).replace(hour=0, minute=0, second=0, microsecond=0)
         try:
-            quest = Quest.objects.filter(date=now).get()
+            quest = Quest.objects.filter(date=now).prefetch_related('tasks','tasks__eventquest','tasks__manager','builds','multipliers__manager','multipliers').get()
         except Quest.DoesNotExist:
             quest = Quest.objects.create()
             quest.date = now
