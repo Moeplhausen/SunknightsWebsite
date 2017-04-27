@@ -160,36 +160,36 @@ class ClanUser(AbstractBaseUser):
             @property
             def last_decided_eventquests_submissions(self):
                 from .point_submission import EventQuestSubmission
-                return EventQuestSubmission.objects.filter(pointsinfo=self.pointsinfo,decided=True)
+                return EventQuestSubmission.objects.filter(pointsinfo=self.pointsinfo,decided=True).prefetch_related('questtask','questtask__manager','questtask__quest','pointsinfo','manager','pointsinfo__user')
 
             @property
             def last_decided_custom_submissions(self):
                 from .point_submission import PointsManagerAction
-                return PointsManagerAction.objects.filter(pointsinfo=self.pointsinfo,decided=True)
+                return PointsManagerAction.objects.filter(pointsinfo=self.pointsinfo,decided=True).prefetch_related('pointsinfo','pointsinfo__user','manager')
 
 
             @property
             def last_decided_fights_submissions(self):
                 from .point_submission import OneOnOneFightSubmission
                 from django.db.models import Q
-                return OneOnOneFightSubmission.objects.filter(Q(pointsinfo=self.pointsinfo)|Q(pointsinfoloser=self.pointsinfo)).filter(decided=True)
+                return OneOnOneFightSubmission.objects.filter(Q(pointsinfo=self.pointsinfo)|Q(pointsinfoloser=self.pointsinfo)).filter(decided=True).prefetch_related('pointsinfo','pointsinfo__user','manager','pointsinfoloser','pointsinfoloser__user')
 
 
             @property
             def last_open_score_submissions(self):
                 from .point_submission import BasicUserPointSubmission
-                return BasicUserPointSubmission.objects.filter(pointsinfo=self.pointsinfo,decided=False)
+                return BasicUserPointSubmission.objects.filter(pointsinfo=self.pointsinfo,decided=False).prefetch_related('pointsinfo','tank')
 
             @property
             def last_open_event_submissions(self):
                 from .point_submission import EventQuestSubmission
-                return EventQuestSubmission.objects.filter(pointsinfo=self.pointsinfo,decided=False)
+                return EventQuestSubmission.objects.filter(pointsinfo=self.pointsinfo,decided=False).prefetch_related('questtask','questtask__manager','questtask__quest','pointsinfo','pointsinfo__user')
 
             @property
             def last_open_fights_submissions(self):
                 from .point_submission import OneOnOneFightSubmission
                 from django.db.models import Q
-                return OneOnOneFightSubmission.objects.filter(Q(pointsinfo=self.pointsinfo)|Q(pointsinfoloser=self.pointsinfo)).filter(decided=False)
+                return OneOnOneFightSubmission.objects.filter(Q(pointsinfo=self.pointsinfo)|Q(pointsinfoloser=self.pointsinfo)).filter(decided=False).filter(decided=True).prefetch_related('pointsinfo','pointsinfo__user','pointsinfoloser','pointsinfoloser__user')
 
 
             @property
