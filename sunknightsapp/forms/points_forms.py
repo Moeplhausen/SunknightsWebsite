@@ -147,7 +147,7 @@ class RetriveUserSubmissionsPointsForm(BaseForm):
                 proofused = BasicUserPointSubmission.objects.filter(score=p['score'], tank=p['tank'])
                 similars[p['id']] = proofused
 
-            submissions = BasicUserPointSubmission.objects.filter(decided=False,pointsinfo__user__is_active=True)
+            submissions = BasicUserPointSubmission.objects.filter(decided=False,pointsinfo__user__is_active=True)[:30]
 
             for sub in submissions:
                 sub.similarsubs = similars[sub.id].exclude(id=sub.id)
@@ -176,7 +176,7 @@ class RetrieveEventQuestsSubmissionsForm(BaseForm):
 
         proofsbylink = {}
         try:
-            submissions = EventQuestSubmission.objects.filter(decided=False)
+            submissions = EventQuestSubmission.objects.filter(decided=False)[:30]
 
             proofused = EventQuestSubmission.objects.values('proof').filter(decided=False).distinct()
 
@@ -373,7 +373,7 @@ class RetrieveFightsSubmissionsForm(BaseForm):
         proofsbylink = {}
 
         try:
-            submissions = OneOnOneFightSubmission.objects.filter(decided=False)
+            submissions = OneOnOneFightSubmission.objects.filter(decided=False)[:30]
 
             proofused = OneOnOneFightSubmission.objects.values('proof').filter(decided=False).distinct()
 
