@@ -19,11 +19,12 @@
                         <strong>T3: {{ lookuser.masteries_t3.all.count }}</strong>
                         <strong>T4: {{ lookuser.masteries_t4.all.count }}</strong>
                         <strong>T5: {{ lookuser.masteries_t5.all.count }}</strong>
-                        <p class="card-text">{% for mastery in lookuser.masteries.all|dictsort:"tier" %}
+                        <p class="card-text">
+                            {% for mastery in lookuser.masteries.all|dictsort:"tier" %}
                             <div class="{{ mastery.tank.name|slugify }}-tier{{ mastery.tier }}"
                                  data-toggle="tooltip"
                                  data-placement="top" title="{{ mastery.tank.name }} Tier {{ mastery.tier }}"></div>
-                        {% endfor %}
+                            {% endfor %}
                         </p>
                     </div>
 

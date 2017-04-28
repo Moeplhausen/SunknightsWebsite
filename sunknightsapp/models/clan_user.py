@@ -105,7 +105,7 @@ class ClanUser(AbstractBaseUser):
 
             @property
             def masteries(self):
-                return self.pointsinfo.masteries
+                return self.pointsinfo.masteries.prefetch_related("tank")
 
 
             @property
