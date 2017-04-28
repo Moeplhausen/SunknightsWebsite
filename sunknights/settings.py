@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'markdown_deux',
     'compressor',
     'cachalot',
+    'debug_toolbar',
 ]
 
 AUTHENTICATION_BACKENDS = (
@@ -99,6 +100,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'sunknightsapp.middleware.StrictAuthentication.StrictAuthentication',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'sunknights.urls'

@@ -10,3 +10,4 @@ django_compressor
 csscompressor
 html5lib
 django-cachalot
+django-debug-toolbar

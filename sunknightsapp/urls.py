@@ -1,6 +1,6 @@
 from django.conf.urls import url,include
 from django.contrib.auth.views import logout_then_login
-
+from django.conf import settings
 
 from .views import views
 from .views.api import roles,servers,users,user_roles,tournaments,fights,discord_roles,points_submissions,diep_tanks,mastery,quests
@@ -60,6 +60,9 @@ urlpatterns = [
         OAuthRedirectDiscord.as_view(params={'scope': 'identify guilds'})),
     url(r'^accounts/login/(?P<provider>(\w|-)+)/$', OAuthRedirectDiscord.as_view(), name='allaccess-login'),
     url(r'^accounts/callback/(?P<provider>(\w|-)+)/$', OAuthCallbackDiscord.as_view(), name='allaccess-callback'),
-
-
 ]
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns = [
+                      url(r'^__debug__/', include(debug_toolbar.urls)),
+                  ] + urlpatterns
