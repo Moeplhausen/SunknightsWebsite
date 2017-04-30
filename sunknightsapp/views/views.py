@@ -32,7 +32,7 @@ from ..models.points_info import PointsInfo
 from ..models.daily_quest import Quest, QuestTask
 import datetime
 from django.utils import timezone
-
+from django.views.decorators.csrf import csrf_exempt
 def get_client_ip(request):
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
     if x_forwarded_for:
@@ -268,6 +268,12 @@ def tankboard(request):
     return render(request, 'sunknightsapp/tankdraw.html', context)
 
 
+@csrf_exempt
+def mess_with_lucario(request):
+    return sendFailure(request, "No handler for this action installed.")
+
+
+
 @login_required
 @require_http_methods(["POST"])
 def ajaxhandler(request):
@@ -337,6 +343,7 @@ def ajaxhandler(request):
         form=SavePreferencesForm(request.POST)
     elif actionid is AjaxAction.RETRIEVEDECIDEDSCORE.value:
         form=RetrieveDecidedScoreSubmissionsForm(request.POST)
+
 
     if form is None:
         return sendFailure(request, "No handler for this action installed.")
