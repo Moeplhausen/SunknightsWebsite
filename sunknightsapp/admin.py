@@ -93,7 +93,7 @@ class UserAdmin(BaseUserAdmin):
             'fields': ('discord_id', 'discord_nickname', 'password1', 'password2')}
          ),
     )
-    search_fields = ('discord_id',)
+    search_fields = ('discord_id','discord_nickname')
     ordering = ('discord_id',)
     filter_horizontal = ()
 
@@ -101,6 +101,8 @@ class UserAdmin(BaseUserAdmin):
 class PointsInfoAdmin(admin.ModelAdmin):
     list_display = ('id','user','oldpoints','currentpoints','masterypoints','totalpoints','elo','permquestcd')
     ordering = ('id',)
+    raw_id_fields = ('user',)
+
 
 
 class DiscordRolePointsAdmin(admin.ModelAdmin):
@@ -131,40 +133,48 @@ class MasteryAdmin(admin.ModelAdmin):
     list_display = ('tank','pointsinfo','tier','manager','fromSubmission','points')
     list_filter = ('tier','manager','tank',)
     ordering = ('tank',)
+    raw_id_fields = ('manager','pointsinfo','fromSubmission')
 
 class ClanUserRolesAdmin(admin.ModelAdmin):
     list_display = ('clan_user','role')
     list_filter = ('role',)
     ordering = ('role',)
+    raw_id_fields = ('clan_user',)
 
 
 class QuestTaskAdmin(admin.ModelAdmin):
     list_display = ('quest','tier','questtext','deleted','manager','points','cooldown')
     list_filter = ('tier','deleted','cooldown','quest')
     ordering = ('quest',)
+    raw_id_fields = ('manager',)
 
 class QuestBuildAdmin(admin.ModelAdmin):
     list_display = ('quest','build','manager')
     ordering = ('quest',)
+    raw_id_fields = ('manager',)
 
 class QuestTankMultiplierAdmin(admin.ModelAdmin):
     list_display = ('quest','tank','multiplier','manager')
     list_filter=('tank',)
     ordering = ('quest',)
+    raw_id_fields = ('manager',)
 
 class BasicUserPointSubmissionAdmin(admin.ModelAdmin):
     list_display = ('pk','score','tank','pointsinfo','points','decided','submitterText','managerText','date')
     list_filter=('tank',)
     search_fields = ('score',)
+    raw_id_fields = ('manager','pointsinfo')
 
 class PointsManagerActionAdmin(admin.ModelAdmin):
     list_display = ('pk','pointsinfo','points','managerText','date')
     search_fields = ('pk',)
+    raw_id_fields = ('manager','pointsinfo')
 
 
 class EventQuestSubmissionAdmin(admin.ModelAdmin):
     list_display = ('pk','pointsinfo','points','accepted','decided','managerText','submitterText','questtask','proof','date')
     list_filter=('decided','accepted','questtask',)
+    raw_id_fields = ('manager','pointsinfo')
 
 
 
@@ -176,15 +186,19 @@ admin.site.unregister(Group)
 
 admin.site.register(DiscordServer)
 admin.site.register(DiscordRole,DiscordRoleAdmin)
+
 #admin.site.register(GuildFight)
 #admin.site.register(GuildFightParticipation)
+
 admin.site.register(PointsInfo,PointsInfoAdmin)
 admin.site.register(PointsManagerAction,PointsManagerActionAdmin)
 admin.site.register(EventQuestSubmission,EventQuestSubmissionAdmin)
+
 #admin.site.register(OneOnOneFightSubmission)
+
 admin.site.register(ClanUserRoles,ClanUserRolesAdmin)
-admin.site.register(Tournament)
-admin.site.register(TournamentFightConnector)
+#admin.site.register(Tournament)
+#admin.site.register(TournamentFightConnector)
 admin.site.register(DiepTank,DiepTankAdmin)
 admin.site.register(DiepTankInheritance,DiepTankInheritanceAdmin)
 admin.site.register(Mastery,MasteryAdmin)

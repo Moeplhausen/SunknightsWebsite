@@ -66,7 +66,7 @@ def index(request):
 
         now = (datetime.datetime.utcnow()).replace(hour=0, minute=0, second=0, microsecond=0)
         try:
-            quest = Quest.objects.filter(date=now).prefetch_related('tasks','tasks__eventquest','tasks__manager','builds','multipliers__manager','multipliers').get()
+            quest = Quest.objects.filter(date=now).get()
         except Quest.DoesNotExist:
             quest = Quest.objects.create()
             quest.date = now
@@ -266,12 +266,6 @@ def tankboard(request):
     context['inheritance'] = inheritance
     context['tanks'] = tanks
     return render(request, 'sunknightsapp/tankdraw.html', context)
-
-
-@csrf_exempt
-def mess_with_lucario(request):
-    return sendFailure(request, "No handler for this action installed.")
-
 
 
 @login_required
