@@ -109,6 +109,11 @@ def index(request):
     return render(request, 'sunknightsapp/index.html', context)
 
 
+
+def goodbye(request):
+    return render(request,'sunknightsapp/goodbye.html')
+
+
 def logoutview(request):
     logout(request)
     return redirect('index')
