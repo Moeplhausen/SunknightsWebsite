@@ -13,7 +13,7 @@
         {% if user and user.preferences and user.preferences.custom_background_enabled %}
             background-image: url({{user.preferences.custom_background_url}});
         {% else %}
-            background-image: url("../../static/sunknightsapp/image/background.jpg");
+            background-image: url("/static/sunknightsapp/image/background.jpg");
         {% endif %}
             background-position: 50% 0%;
             background-repeat: repeat;
