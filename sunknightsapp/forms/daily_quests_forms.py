@@ -3,6 +3,9 @@ from ..models.daily_quest import Quest, QuestTask,QuestBuild,QuestTankMultiplier
 from ..enums.AjaxActions import AjaxAction
 from ..serializers.daily_quest_serializer import QuestSerializer, QuestTaskSerializer,QuestBuildSerializer,QuestTankMultiplierSerializer
 from django import forms
+import datetime
+from datetime import timedelta
+from django.db.models import Q
 
 class SubmitQuestTaskForm(BaseForm):
     def __init__(self, *args, **kwargs):
@@ -190,7 +193,8 @@ class RequestQuestsForm(BaseForm):
         if not request.user.is_points_manager:
             return self.noPermission()
         try:
-            quests = Quest.objects.all()
+            now = (datetime.datetime.utcnow() + timedelta(days=0)).replace(hour=0, minute=0, second=0, microsecond=0)
+            quests = Quest.objects.filter(Q(permed=True)|Q(date__gte=now))
             serializer = QuestSerializer(quests, many=True)
         except BaseException as e:
             return self.response(False, 'Something went wrong: ' + str(e))

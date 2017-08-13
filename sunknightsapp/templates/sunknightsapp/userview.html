@@ -1,134 +1,79 @@
-<!--##===================================## userview.html ##===================================##-->
-<!--##=================================## extends base.html ##=================================##-->
-
-<!--##=================================## start inheritance ##=================================##-->
 {% extends "sunknightsapp/base.html" %}
-<!--##==================================## end inheritance ##==================================##-->
-
-<!--##========================================## GUI ##========================================##-->
 {% block content %}
     {% load widget_tweaks %}
 
 
-    <!--#=================================# Main-tab-bar #==================================#-->
     <ul class="nav nav-tabs user-local-nav">
-        <!--============================ Overview Tab Button =============================-->
         <li class="nav-item active">
           <a href="#overview" class="nav-link" data-toggle="tab">
             Overview
           </a>
         </li>
-        <!--========================== End Overview Tab Button ===========================-->
-
-        <!--========================== Score Submit Tab Button ===========================-->
         <li class="nav-item">
           <a href="#submit-pts" class="nav-link" data-toggle="tab">
             Submit Score
           </a>
         </li>
-        <!--======================== End Score Submit Tab Button =========================-->
-
-        <!--========================== 1 v 1 Submit Tab Button ===========================-->
         <li class="nav-item">
           <a href="#submit-1vs1" class="nav-link" data-toggle="tab">
             Submit Fight Result
           </a>
         </li>
-        <!--======================== End 1 v 1 Submit Tab Button =========================-->
-
-        <!--========================== Quest Submit Tab Button ===========================-->
         <li class="nav-item">
           <a href="#submit-other" class="nav-link" data-toggle="tab">
             Submit Event/Quest
           </a>
         </li>
-        <!--======================== End Quest Submit Tab Button =========================-->
-
-        <!--======================== Open Submissions Tab Button =========================-->
         <li class="nav-item">
           <a href="#open-submissions" class="nav-link" data-toggle="tab">
             Open Submission
           </a>
         </li>
-        <!--====================== End Open Submissions Tab Button =======================-->
-
-        <!--======================= Decided Submission Tab Button ========================-->
         <li class="nav-item">
           <a href="#decided-submissions" class="nav-link" data-toggle="tab">
             Decided Submission
           </a>
         </Li>
-        <!--===================== End Decided Submission Tab Button ======================-->
-
-        <!--=========================== Preferences Tab Button ===========================-->
         <li class="nav-item">
           <a href="#preferences" class="nav-link" data-toggle="tab">
             Preferences
           </a>
         </li>
-        <!--========================= End Preferences Tab Button =========================-->
     </ul>
-    <!--#=================================# Main-tab-bar #==================================#-->
-
-    <!--#===============================# Tab-pane-content #================================#-->
     <div id="userview-tab-content" class="tab-content clearfix">
 
-        <!--=========================== User Overview Content ============================-->
         <div class="tab-pane active"
           id="overview">
             {% include "sunknightsapp/snippets/news.html" %}
             {% include "sunknightsapp/snippets/useroverview.html" %}
         </div>
-        <!--========================= End User Overview Content ==========================-->
-
-        <!--======================= User Score Submission Content ========================-->
         <div class="tab-pane"
           id="submit-pts">
             {% include "sunknightsapp/snippets/pointssubmitform.html" %}
         </div>
-        <!--======================= User Score Submission Content ========================-->
-
-        <!--======================= User 1 v 1 Submission Content ========================-->
         <div class="tab-pane"
           id="submit-1vs1">
             {% include "sunknightsapp/snippets/fightssubmitform.html" %}
         </div>
-        <!--===================== End User 1 v 1 Submission Content ======================-->
-
-        <!--======================= User Quest Submission Content ========================-->
         <div class="tab-pane"
           id="submit-other">
             {% include "sunknightsapp/snippets/eventquestsubmission.html" %}
         </div>
-        <!--======================= User Quest Submission Content ========================-->
-
-        <!--======================= User Open Submissions Content ========================-->
         <div class="tab-pane"
           id="open-submissions">
             {% include "sunknightsapp/snippets/opensubmissions.html" %}
         </div>
-        <!--===================== End User Open Submissions Content ======================-->
-
-        <!--===================== User Decided Submissions Content =======================-->
         <div class="tab-pane"
           id="decided-submissions">
             {% include "sunknightsapp/snippets/decidedsubmissions.html" %}
         </div>
-        <!--==================== End User Decided Submission Content =====================-->
-
-        <!--========================== User Preferences Content ==========================-->
         <div class="tab-pane"
           id="preferences">
             {% include "sunknightsapp/snippets/preferences.html" %}
         </div>
-        <!--======================== End User Preferences Content ========================-->
     </div>
-    <!--#=============================# End Tab-pane-content #==============================#-->
 
 {% endblock %}
-<!--##======================================## End GUI ##======================================##-->
-
-<!--##===================================## GUI Scripts ##=====================================##-->
 {% block scriptself %}
     {% include "sunknightsapp/snippets/revertSubmissionScript.html" %}
 

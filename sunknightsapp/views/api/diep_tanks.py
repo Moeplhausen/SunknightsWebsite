@@ -5,7 +5,7 @@ from ...models.diep_tank import DiepTank,DiepTankInheritance
 
 class DiepTanksViewSet(viewsets.ModelViewSet):
     serializer_class = DiepTankSerializer
-    queryset = DiepTank.objects.all()
+    queryset = DiepTank.objects.prefetch_related('inheritance','inheritance__parent').all()
 
 class DiepTanksInheritanceViewSet(viewsets.ModelViewSet):
     serializer_class = DiepTankInheritanceSerializer
