@@ -19,7 +19,8 @@ QUEST_TIER_OPTIONS=(
     (4,'Bonus'),
 )
 
-POINTS_TABLE=(
+OPNESS_MULTIPLIER = [0,2,1.5,1]
+"""POINTS_TABLE=(
     (5000000,1500,1000,750),
     (4000000,1000,750,500),
     (3500000,750,500,350),
@@ -40,7 +41,7 @@ POINTS_TABLE=(
     (150000,8,5,3),
     (100000,5,3,2),
     (50000,3,2,1),
-)
+)"""
 
 
 ELO_K=40
@@ -57,12 +58,8 @@ def float_or_0(value):
 def getPointsByScore(submission):
     score=submission.score
     opness=submission.tank.opness
-
-    for points in POINTS_TABLE:
-        if score>=points[0]:
-            return points[opness]
-
-    return 0
+    if score<50000: return 0
+    return round((score/50000)**1.3 * OPNESS_MULTIPLIER[opness])
 
 
 def getPointsByFight(won:bool):
