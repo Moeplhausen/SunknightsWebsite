@@ -194,7 +194,7 @@ admin.site.register(PointsInfo,PointsInfoAdmin)
 admin.site.register(PointsManagerAction,PointsManagerActionAdmin)
 admin.site.register(EventQuestSubmission,EventQuestSubmissionAdmin)
 
-#admin.site.register(OneOnOneFightSubmission)
+admin.site.register(OneOnOneFightSubmission)
 
 admin.site.register(ClanUserRoles,ClanUserRolesAdmin)
 #admin.site.register(Tournament)
