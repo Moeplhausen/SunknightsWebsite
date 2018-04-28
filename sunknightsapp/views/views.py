@@ -1,6 +1,5 @@
 import json
 from datetime import timedelta
-
 import django
 from django.views.decorators.csrf import ensure_csrf_cookie
 from ..models.discord_server import DiscordServer
