@@ -32,15 +32,15 @@ def getPointsByMasteryTier(tier:int):
     points = 0
 
     if tier is 1:
-        points = 5
+        points = 0
     elif tier is 2:
-        points = 15
+        points = 0
     elif tier is 3:
-        points = 30
+        points = 0
     elif tier is 4:
-        points = 50
+        points = 0
     elif tier is 5:
-        points = 75
+        points = 0
 
     return points
 
