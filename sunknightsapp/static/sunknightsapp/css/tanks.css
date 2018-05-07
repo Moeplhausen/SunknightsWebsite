@@ -40,29 +40,31 @@
 .penta-shot, .predator-tier1, .predator-tier2, .predator-tier3, .predator-tier4,
 .predator-tier5, .predator, .quad-tank-tier1, .quad-tank-tier2, .quad-tank-tier3,
 .quad-tank-tier4, .quad-tank-tier5, .quad-tank, .ranger-tier1, .ranger-tier2,
-.ranger-tier3, .ranger-tier4, .ranger-tier5, .ranger, .slave-tier1,
-.slave-tier2, .slave-tier3, .slave-tier4, .slave-tier5, .slave,
-.smasher-tier1, .smasher-tier2, .smasher-tier3, .smasher-tier4, .smasher-tier5,
-.smasher, .sniper-tier1, .sniper-tier2, .sniper-tier3, .sniper-tier4,
-.sniper-tier5, .sniper, .spike-tier1, .spike-tier2, .spike-tier3,
-.spike-tier4, .spike-tier5, .spike, .sprayer-tier1, .sprayer-tier2,
-.sprayer-tier3, .sprayer-tier4, .sprayer-tier5, .sprayer, .spread-shot-tier1,
-.spread-shot-tier2, .spread-shot-tier3, .spread-shot-tier4, .spread-shot-tier5, .spread-shot,
-.stalker-tier1, .stalker-tier2, .stalker-tier3, .stalker-tier4, .stalker-tier5,
-.stalker, .streamliner-tier1, .streamliner-tier2, .streamliner-tier3, .streamliner-tier4,
-.streamliner-tier5, .streamliner, .trapper-tier1, .trapper-tier2, .trapper-tier3,
-.trapper-tier4, .trapper-tier5, .trapper, .tri-angle-tier1, .tri-angle-tier2,
-.tri-angle-tier3, .tri-angle-tier4, .tri-angle-tier5, .tri-angle, .tri-trapper-tier1,
-.tri-trapper-tier2, .tri-trapper-tier3, .tri-trapper-tier4, .tri-trapper-tier5, .tri-trapper,
-.triple-shot-tier1, .triple-shot-tier2, .triple-shot-tier3, .triple-shot-tier4, .triple-shot-tier5,
-.triple-shot, .triple-twin-tier1, .triple-twin-tier2, .triple-twin-tier3, .triple-twin-tier4,
-.triple-twin-tier5, .triple-twin, .triplet-tier1, .triplet-tier2, .triplet-tier3,
-.triplet-tier4, .triplet-tier5, .triplet, .twin-flank-tier1, .twin-flank-tier2,
-.twin-flank-tier3, .twin-flank-tier4, .twin-flank-tier5, .twin-flank, .twin-tier1,
-.twin-tier2, .twin-tier3, .twin-tier4, .twin-tier5, .twin,
-.skimmer-tier1, .skimmer-tier2, .skimmer-tier3, .skimmer-tier4, .skimmer-tier5,
-.skimmer
-{ display: inline-block; background: url('../image/tanks.png?3') no-repeat; overflow: hidden; text-indent: -9999px; text-align: left; }
+.ranger-tier3, .ranger-tier4, .ranger-tier5, .ranger, .rocketeer-tier1,
+.rocketeer-tier2, .rocketeer-tier3, .rocketeer-tier4, .rocketeer-tier5, .rocketeer,
+.skimmer-v2-tier1, .skimmer-v2-tier2, .skimmer-v2-tier3, .skimmer-v2-tier4, .skimmer-v2-tier5,
+.skimmer-v2, .skimmer-tier1, .skimmer-tier2, .skimmer-tier3, .skimmer-tier4,
+.skimmer-tier5, .skimmer, .slave-tier1, .slave-tier2, .slave-tier3,
+.slave-tier4, .slave-tier5, .slave, .smasher-tier1, .smasher-tier2,
+.smasher-tier3, .smasher-tier4, .smasher-tier5, .smasher, .sniper-tier1,
+.sniper-tier2, .sniper-tier3, .sniper-tier4, .sniper-tier5, .sniper,
+.spike-tier1, .spike-tier2, .spike-tier3, .spike-tier4, .spike-tier5,
+.spike, .sprayer-tier1, .sprayer-tier2, .sprayer-tier3, .sprayer-tier4,
+.sprayer-tier5, .sprayer, .spread-shot-tier1, .spread-shot-tier2, .spread-shot-tier3,
+.spread-shot-tier4, .spread-shot-tier5, .spread-shot, .stalker-tier1, .stalker-tier2,
+.stalker-tier3, .stalker-tier4, .stalker-tier5, .stalker, .streamliner-tier1,
+.streamliner-tier2, .streamliner-tier3, .streamliner-tier4, .streamliner-tier5, .streamliner,
+.trapper-tier1, .trapper-tier2, .trapper-tier3, .trapper-tier4, .trapper-tier5,
+.trapper, .tri-angle-tier1, .tri-angle-tier2, .tri-angle-tier3, .tri-angle-tier4,
+.tri-angle-tier5, .tri-angle, .tri-trapper-tier1, .tri-trapper-tier2, .tri-trapper-tier3,
+.tri-trapper-tier4, .tri-trapper-tier5, .tri-trapper, .triple-shot-tier1, .triple-shot-tier2,
+.triple-shot-tier3, .triple-shot-tier4, .triple-shot-tier5, .triple-shot, .triple-twin-tier1,
+.triple-twin-tier2, .triple-twin-tier3, .triple-twin-tier4, .triple-twin-tier5, .triple-twin,
+.triplet-tier1, .triplet-tier2, .triplet-tier3, .triplet-tier4, .triplet-tier5,
+.triplet, .twin-flank-tier1, .twin-flank-tier2, .twin-flank-tier3, .twin-flank-tier4,
+.twin-flank-tier5, .twin-flank, .twin-tier1, .twin-tier2, .twin-tier3,
+.twin-tier4, .twin-tier5, .twin
+{ display: inline-block; background: url('../image/tanks.png?4') no-repeat; overflow: hidden; text-indent: -9999px; text-align: left; }
 
 .annihilator-tier1 { background-position: -1px -0px; width: 32px; height: 32px; }
 .annihilator-tier2 { background-position: -34px -0px; width: 32px; height: 32px; }
@@ -268,105 +270,117 @@
 .ranger-tier4 { background-position: -133px -363px; width: 32px; height: 32px; }
 .ranger-tier5 { background-position: -529px -363px; width: 32px; height: 32px; }
 .ranger { background-position: -166px -363px; width: 32px; height: 32px; }
-.slave-tier1 { background-position: -199px -390px; width: 32px; height: 25px; }
-.slave-tier2 { background-position: -232px -390px; width: 32px; height: 25px; }
-.slave-tier3 { background-position: -265px -390px; width: 32px; height: 25px; }
-.slave-tier4 { background-position: -298px -390px; width: 32px; height: 25px; }
-.slave-tier5 { background-position: -331px -390px; width: 32px; height: 25px; }
-.slave { background-position: -364px -390px; width: 32px; height: 25px; }
-.smasher-tier1 { background-position: -1px -396px; width: 32px; height: 32px; }
-.smasher-tier2 { background-position: -397px -396px; width: 32px; height: 32px; }
-.smasher-tier3 { background-position: -34px -396px; width: 32px; height: 32px; }
-.smasher-tier4 { background-position: -430px -396px; width: 32px; height: 32px; }
-.smasher-tier5 { background-position: -67px -396px; width: 32px; height: 32px; }
-.smasher { background-position: -463px -396px; width: 32px; height: 32px; }
-.sniper-tier1 { background-position: -100px -396px; width: 32px; height: 32px; }
-.sniper-tier2 { background-position: -496px -396px; width: 32px; height: 32px; }
-.sniper-tier3 { background-position: -133px -396px; width: 32px; height: 32px; }
-.sniper-tier4 { background-position: -529px -396px; width: 32px; height: 32px; }
-.sniper-tier5 { background-position: -166px -396px; width: 32px; height: 32px; }
-.sniper { background-position: -199px -416px; width: 32px; height: 32px; }
-.spike-tier1 { background-position: -232px -416px; width: 32px; height: 32px; }
-.spike-tier2 { background-position: -265px -416px; width: 32px; height: 32px; }
-.spike-tier3 { background-position: -298px -416px; width: 32px; height: 32px; }
-.spike-tier4 { background-position: -331px -416px; width: 32px; height: 32px; }
-.spike-tier5 { background-position: -364px -416px; width: 32px; height: 32px; }
-.spike { background-position: -1px -429px; width: 32px; height: 32px; }
-.sprayer-tier1 { background-position: -397px -429px; width: 32px; height: 32px; }
-.sprayer-tier2 { background-position: -34px -429px; width: 32px; height: 32px; }
-.sprayer-tier3 { background-position: -430px -429px; width: 32px; height: 32px; }
-.sprayer-tier4 { background-position: -67px -429px; width: 32px; height: 32px; }
-.sprayer-tier5 { background-position: -463px -429px; width: 32px; height: 32px; }
-.sprayer { background-position: -100px -429px; width: 32px; height: 32px; }
-.spread-shot-tier1 { background-position: -496px -429px; width: 32px; height: 32px; }
-.spread-shot-tier2 { background-position: -133px -429px; width: 32px; height: 32px; }
-.spread-shot-tier3 { background-position: -529px -429px; width: 32px; height: 32px; }
-.spread-shot-tier4 { background-position: -166px -429px; width: 32px; height: 32px; }
-.spread-shot-tier5 { background-position: -199px -449px; width: 32px; height: 32px; }
-.spread-shot { background-position: -232px -449px; width: 32px; height: 32px; }
-.stalker-tier1 { background-position: -265px -449px; width: 32px; height: 32px; }
-.stalker-tier2 { background-position: -298px -449px; width: 32px; height: 32px; }
-.stalker-tier3 { background-position: -331px -449px; width: 32px; height: 32px; }
-.stalker-tier4 { background-position: -364px -449px; width: 32px; height: 32px; }
-.stalker-tier5 { background-position: -1px -462px; width: 32px; height: 32px; }
-.stalker { background-position: -397px -462px; width: 32px; height: 32px; }
-.streamliner-tier1 { background-position: -34px -462px; width: 32px; height: 32px; }
-.streamliner-tier2 { background-position: -430px -462px; width: 32px; height: 32px; }
-.streamliner-tier3 { background-position: -67px -462px; width: 32px; height: 32px; }
-.streamliner-tier4 { background-position: -463px -462px; width: 32px; height: 32px; }
-.streamliner-tier5 { background-position: -100px -462px; width: 32px; height: 32px; }
-.streamliner { background-position: -496px -462px; width: 32px; height: 32px; }
-.trapper-tier1 { background-position: -133px -462px; width: 32px; height: 32px; }
-.trapper-tier2 { background-position: -529px -462px; width: 32px; height: 32px; }
-.trapper-tier3 { background-position: -166px -462px; width: 32px; height: 32px; }
-.trapper-tier4 { background-position: -199px -482px; width: 32px; height: 32px; }
-.trapper-tier5 { background-position: -232px -482px; width: 32px; height: 32px; }
-.trapper { background-position: -265px -482px; width: 32px; height: 32px; }
-.tri-angle-tier1 { background-position: -298px -482px; width: 32px; height: 32px; }
-.tri-angle-tier2 { background-position: -331px -482px; width: 32px; height: 32px; }
-.tri-angle-tier3 { background-position: -364px -482px; width: 32px; height: 32px; }
-.tri-angle-tier4 { background-position: -1px -495px; width: 32px; height: 32px; }
-.tri-angle-tier5 { background-position: -397px -495px; width: 32px; height: 32px; }
-.tri-angle { background-position: -34px -495px; width: 32px; height: 32px; }
-.tri-trapper-tier1 { background-position: -430px -495px; width: 32px; height: 32px; }
-.tri-trapper-tier2 { background-position: -67px -495px; width: 32px; height: 32px; }
-.tri-trapper-tier3 { background-position: -463px -495px; width: 32px; height: 32px; }
-.tri-trapper-tier4 { background-position: -100px -495px; width: 32px; height: 32px; }
-.tri-trapper-tier5 { background-position: -496px -495px; width: 32px; height: 32px; }
-.tri-trapper { background-position: -133px -495px; width: 32px; height: 32px; }
-.triple-shot-tier1 { background-position: -529px -495px; width: 32px; height: 32px; }
-.triple-shot-tier2 { background-position: -166px -495px; width: 32px; height: 32px; }
-.triple-shot-tier3 { background-position: -199px -515px; width: 32px; height: 32px; }
-.triple-shot-tier4 { background-position: -232px -515px; width: 32px; height: 32px; }
-.triple-shot-tier5 { background-position: -265px -515px; width: 32px; height: 32px; }
-.triple-shot { background-position: -298px -515px; width: 32px; height: 32px; }
-.triple-twin-tier1 { background-position: -331px -515px; width: 32px; height: 32px; }
-.triple-twin-tier2 { background-position: -364px -515px; width: 32px; height: 32px; }
-.triple-twin-tier3 { background-position: -1px -528px; width: 32px; height: 32px; }
-.triple-twin-tier4 { background-position: -397px -528px; width: 32px; height: 32px; }
-.triple-twin-tier5 { background-position: -34px -528px; width: 32px; height: 32px; }
-.triple-twin { background-position: -430px -528px; width: 32px; height: 32px; }
-.triplet-tier1 { background-position: -67px -528px; width: 32px; height: 32px; }
-.triplet-tier2 { background-position: -463px -528px; width: 32px; height: 32px; }
-.triplet-tier3 { background-position: -100px -528px; width: 32px; height: 32px; }
-.triplet-tier4 { background-position: -496px -528px; width: 32px; height: 32px; }
-.triplet-tier5 { background-position: -133px -528px; width: 32px; height: 32px; }
-.triplet { background-position: -529px -528px; width: 32px; height: 32px; }
-.twin-flank-tier1 { background-position: -166px -528px; width: 32px; height: 32px; }
-.twin-flank-tier2 { background-position: -199px -548px; width: 32px; height: 32px; }
-.twin-flank-tier3 { background-position: -232px -548px; width: 32px; height: 32px; }
-.twin-flank-tier4 { background-position: -265px -548px; width: 32px; height: 32px; }
-.twin-flank-tier5 { background-position: -298px -548px; width: 32px; height: 32px; }
-.twin-flank { background-position: -331px -548px; width: 32px; height: 32px; }
-.twin-tier1 { background-position: -364px -548px; width: 32px; height: 32px; }
-.twin-tier2 { background-position: -1px -561px; width: 32px; height: 32px; }
-.twin-tier3 { background-position: -397px -561px; width: 32px; height: 32px; }
-.twin-tier4 { background-position: -34px -561px; width: 32px; height: 32px; }
-.twin-tier5 { background-position: -430px -561px; width: 32px; height: 32px; }
-.twin { background-position: -67px -561px; width: 32px; height: 32px; }
-.skimmer-tier1 { background-position: -463px -561px; width: 32px; height: 30px; }
-.skimmer-tier2 { background-position: -100px -561px; width: 32px; height: 30px; }
-.skimmer-tier3 { background-position: -496px -561px; width: 32px; height: 30px; }
-.skimmer-tier4 { background-position: -133px -561px; width: 32px; height: 30px; }
-.skimmer-tier5 { background-position: -529px -561px; width: 32px; height: 30px; }
-.skimmer { background-position: -166px -561px; width: 32px; height: 30px; }
+.rocketeer-tier1 { background-position: -199px -390px; width: 32px; height: 32px; }
+.rocketeer-tier2 { background-position: -232px -390px; width: 32px; height: 32px; }
+.rocketeer-tier3 { background-position: -265px -390px; width: 32px; height: 32px; }
+.rocketeer-tier4 { background-position: -298px -390px; width: 32px; height: 32px; }
+.rocketeer-tier5 { background-position: -331px -390px; width: 32px; height: 32px; }
+.rocketeer { background-position: -364px -390px; width: 32px; height: 32px; }
+.skimmer-v2-tier1 { background-position: -1px -396px; width: 32px; height: 30px; }
+.skimmer-v2-tier2 { background-position: -397px -396px; width: 32px; height: 30px; }
+.skimmer-v2-tier3 { background-position: -34px -396px; width: 32px; height: 30px; }
+.skimmer-v2-tier4 { background-position: -430px -396px; width: 32px; height: 30px; }
+.skimmer-v2-tier5 { background-position: -67px -396px; width: 32px; height: 30px; }
+.skimmer-v2 { background-position: -463px -396px; width: 32px; height: 30px; }
+.skimmer-tier1 { background-position: -100px -396px; width: 32px; height: 30px; }
+.skimmer-tier2 { background-position: -496px -396px; width: 32px; height: 30px; }
+.skimmer-tier3 { background-position: -133px -396px; width: 32px; height: 30px; }
+.skimmer-tier4 { background-position: -529px -396px; width: 32px; height: 30px; }
+.skimmer-tier5 { background-position: -166px -396px; width: 32px; height: 30px; }
+.skimmer { background-position: -199px -423px; width: 32px; height: 30px; }
+.slave-tier1 { background-position: -232px -423px; width: 32px; height: 25px; }
+.slave-tier2 { background-position: -265px -423px; width: 32px; height: 25px; }
+.slave-tier3 { background-position: -298px -423px; width: 32px; height: 25px; }
+.slave-tier4 { background-position: -331px -423px; width: 32px; height: 25px; }
+.slave-tier5 { background-position: -364px -423px; width: 32px; height: 25px; }
+.slave { background-position: -1px -427px; width: 32px; height: 25px; }
+.smasher-tier1 { background-position: -397px -427px; width: 32px; height: 32px; }
+.smasher-tier2 { background-position: -34px -427px; width: 32px; height: 32px; }
+.smasher-tier3 { background-position: -430px -427px; width: 32px; height: 32px; }
+.smasher-tier4 { background-position: -67px -427px; width: 32px; height: 32px; }
+.smasher-tier5 { background-position: -463px -427px; width: 32px; height: 32px; }
+.smasher { background-position: -100px -427px; width: 32px; height: 32px; }
+.sniper-tier1 { background-position: -496px -427px; width: 32px; height: 32px; }
+.sniper-tier2 { background-position: -133px -427px; width: 32px; height: 32px; }
+.sniper-tier3 { background-position: -529px -427px; width: 32px; height: 32px; }
+.sniper-tier4 { background-position: -166px -427px; width: 32px; height: 32px; }
+.sniper-tier5 { background-position: -232px -449px; width: 32px; height: 32px; }
+.sniper { background-position: -265px -449px; width: 32px; height: 32px; }
+.spike-tier1 { background-position: -298px -449px; width: 32px; height: 32px; }
+.spike-tier2 { background-position: -331px -449px; width: 32px; height: 32px; }
+.spike-tier3 { background-position: -364px -449px; width: 32px; height: 32px; }
+.spike-tier4 { background-position: -1px -453px; width: 32px; height: 32px; }
+.spike-tier5 { background-position: -199px -454px; width: 32px; height: 32px; }
+.spike { background-position: -397px -460px; width: 32px; height: 32px; }
+.sprayer-tier1 { background-position: -34px -460px; width: 32px; height: 32px; }
+.sprayer-tier2 { background-position: -430px -460px; width: 32px; height: 32px; }
+.sprayer-tier3 { background-position: -67px -460px; width: 32px; height: 32px; }
+.sprayer-tier4 { background-position: -463px -460px; width: 32px; height: 32px; }
+.sprayer-tier5 { background-position: -100px -460px; width: 32px; height: 32px; }
+.sprayer { background-position: -496px -460px; width: 32px; height: 32px; }
+.spread-shot-tier1 { background-position: -133px -460px; width: 32px; height: 32px; }
+.spread-shot-tier2 { background-position: -529px -460px; width: 32px; height: 32px; }
+.spread-shot-tier3 { background-position: -166px -460px; width: 32px; height: 32px; }
+.spread-shot-tier4 { background-position: -232px -482px; width: 32px; height: 32px; }
+.spread-shot-tier5 { background-position: -265px -482px; width: 32px; height: 32px; }
+.spread-shot { background-position: -298px -482px; width: 32px; height: 32px; }
+.stalker-tier1 { background-position: -331px -482px; width: 32px; height: 32px; }
+.stalker-tier2 { background-position: -364px -482px; width: 32px; height: 32px; }
+.stalker-tier3 { background-position: -1px -486px; width: 32px; height: 32px; }
+.stalker-tier4 { background-position: -199px -487px; width: 32px; height: 32px; }
+.stalker-tier5 { background-position: -397px -493px; width: 32px; height: 32px; }
+.stalker { background-position: -34px -493px; width: 32px; height: 32px; }
+.streamliner-tier1 { background-position: -430px -493px; width: 32px; height: 32px; }
+.streamliner-tier2 { background-position: -67px -493px; width: 32px; height: 32px; }
+.streamliner-tier3 { background-position: -463px -493px; width: 32px; height: 32px; }
+.streamliner-tier4 { background-position: -100px -493px; width: 32px; height: 32px; }
+.streamliner-tier5 { background-position: -496px -493px; width: 32px; height: 32px; }
+.streamliner { background-position: -133px -493px; width: 32px; height: 32px; }
+.trapper-tier1 { background-position: -529px -493px; width: 32px; height: 32px; }
+.trapper-tier2 { background-position: -166px -493px; width: 32px; height: 32px; }
+.trapper-tier3 { background-position: -232px -515px; width: 32px; height: 32px; }
+.trapper-tier4 { background-position: -265px -515px; width: 32px; height: 32px; }
+.trapper-tier5 { background-position: -298px -515px; width: 32px; height: 32px; }
+.trapper { background-position: -331px -515px; width: 32px; height: 32px; }
+.tri-angle-tier1 { background-position: -364px -515px; width: 32px; height: 32px; }
+.tri-angle-tier2 { background-position: -1px -519px; width: 32px; height: 32px; }
+.tri-angle-tier3 { background-position: -199px -520px; width: 32px; height: 32px; }
+.tri-angle-tier4 { background-position: -397px -526px; width: 32px; height: 32px; }
+.tri-angle-tier5 { background-position: -34px -526px; width: 32px; height: 32px; }
+.tri-angle { background-position: -430px -526px; width: 32px; height: 32px; }
+.tri-trapper-tier1 { background-position: -67px -526px; width: 32px; height: 32px; }
+.tri-trapper-tier2 { background-position: -463px -526px; width: 32px; height: 32px; }
+.tri-trapper-tier3 { background-position: -100px -526px; width: 32px; height: 32px; }
+.tri-trapper-tier4 { background-position: -496px -526px; width: 32px; height: 32px; }
+.tri-trapper-tier5 { background-position: -133px -526px; width: 32px; height: 32px; }
+.tri-trapper { background-position: -529px -526px; width: 32px; height: 32px; }
+.triple-shot-tier1 { background-position: -166px -526px; width: 32px; height: 32px; }
+.triple-shot-tier2 { background-position: -232px -548px; width: 32px; height: 32px; }
+.triple-shot-tier3 { background-position: -265px -548px; width: 32px; height: 32px; }
+.triple-shot-tier4 { background-position: -298px -548px; width: 32px; height: 32px; }
+.triple-shot-tier5 { background-position: -331px -548px; width: 32px; height: 32px; }
+.triple-shot { background-position: -364px -548px; width: 32px; height: 32px; }
+.triple-twin-tier1 { background-position: -1px -552px; width: 32px; height: 32px; }
+.triple-twin-tier2 { background-position: -199px -553px; width: 32px; height: 32px; }
+.triple-twin-tier3 { background-position: -397px -559px; width: 32px; height: 32px; }
+.triple-twin-tier4 { background-position: -34px -559px; width: 32px; height: 32px; }
+.triple-twin-tier5 { background-position: -430px -559px; width: 32px; height: 32px; }
+.triple-twin { background-position: -67px -559px; width: 32px; height: 32px; }
+.triplet-tier1 { background-position: -463px -559px; width: 32px; height: 32px; }
+.triplet-tier2 { background-position: -100px -559px; width: 32px; height: 32px; }
+.triplet-tier3 { background-position: -496px -559px; width: 32px; height: 32px; }
+.triplet-tier4 { background-position: -133px -559px; width: 32px; height: 32px; }
+.triplet-tier5 { background-position: -529px -559px; width: 32px; height: 32px; }
+.triplet { background-position: -166px -559px; width: 32px; height: 32px; }
+.twin-flank-tier1 { background-position: -232px -581px; width: 32px; height: 32px; }
+.twin-flank-tier2 { background-position: -265px -581px; width: 32px; height: 32px; }
+.twin-flank-tier3 { background-position: -298px -581px; width: 32px; height: 32px; }
+.twin-flank-tier4 { background-position: -331px -581px; width: 32px; height: 32px; }
+.twin-flank-tier5 { background-position: -364px -581px; width: 32px; height: 32px; }
+.twin-flank { background-position: -1px -585px; width: 32px; height: 32px; }
+.twin-tier1 { background-position: -199px -586px; width: 32px; height: 32px; }
+.twin-tier2 { background-position: -397px -592px; width: 32px; height: 32px; }
+.twin-tier3 { background-position: -34px -592px; width: 32px; height: 32px; }
+.twin-tier4 { background-position: -430px -592px; width: 32px; height: 32px; }
+.twin-tier5 { background-position: -67px -592px; width: 32px; height: 32px; }
+.twin { background-position: -463px -592px; width: 32px; height: 32px; }
