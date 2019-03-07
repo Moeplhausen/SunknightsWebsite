@@ -22,15 +22,15 @@ class SubmitQuestTaskForm(BaseForm):
             points=0
 
             if task.tier==1:
-                points=3
+                points=10
                 if task.quest.permed:
                     task.cooldown=12
             elif task.tier==2:
-                points=6
+                points=20
                 if task.quest.permed:
                     task.cooldown=24
             elif task.tier==3:
-                points=10
+                points=50
                 if task.quest.permed:
                     task.cooldown=24*2
             elif task.tier==4:
