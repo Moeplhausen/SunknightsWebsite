@@ -20,7 +20,7 @@
                     <option value="{{ task.id }}" data-content="<span>Tier {{ task.tier }}: {{ task.questtext_html }}</span>"></option>
                 {% endfor %}
             </optgroup>
-            <optgroup label="Daily Quests">
+            <optgroup label="Weekly Quests">
                 {% for task in user.get_daily_tasks.all %}
                     <option value="{{ task.id }}" data-content="<span>Tier {{ task.tier }}: {{ task.questtext_html }}</span>"></option>
                 {% endfor %}
