@@ -18,7 +18,7 @@ MASTERY_TIER_POINTS = (
    # (3, 'Tier 3', 500000, 0),
    # (4, 'Tier 4', 750000, 0),
     #(5, 'Tier 5', 1000000, 0),
-)
+#)
 QUEST_TIER_OPTIONS=(
     (1,'Tier 1'),
     (2,'Tier 2'),
