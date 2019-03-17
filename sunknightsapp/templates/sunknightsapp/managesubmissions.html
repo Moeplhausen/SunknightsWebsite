@@ -159,7 +159,7 @@
 
                 var username = data[i].pointsinfo.user.discord_nickname
                 var discorduserid = data[i].pointsinfo.user.discord_id
-                var user = '<a href="/user/' + discorduserid + '">' + username + '</a>';
+                var user = '<a href="/user/' + discorduserid + '" target="_blank">' + username + '</a>';
 
 
 
@@ -173,10 +173,10 @@
                 for (var k = 0; k < similarsubs.length; k++) {
                   if (k != 0)
                     similarsubstext += "<br>"
-                  similarsubstext += similarsubs[k].id + ": " + similarsubs[k].pointsinfo.user.discord_nickname+" <a href='"+similarsubs[k].proof+"'>Proof</a>"
+                  similarsubstext += similarsubs[k].id + ": " + similarsubs[k].pointsinfo.user.discord_nickname+" <a href='"+similarsubs[k].proof+"' target="_blank">Proof</a>"
 
                 }
-                var prooftext='<a href="' + data[i].proof + '">Proof</a>'
+                var prooftext='<a href="' + data[i].proof + '" target="_blank">Proof</a>'
                 if (similarsubs.length>0)
                 var prooftext=prooftext+
                   '<button type="button" data-container="body" class="fa fa-plus inv-button" data-toggle="popover" ' +
@@ -301,7 +301,7 @@
 
                 var username = data[i].pointsinfo.user.discord_nickname
                 var discorduserid = data[i].pointsinfo.user.discord_id
-                var user = '<a href="/user/' + discorduserid + '">' + username + '</a>';
+                var user = '<a href="/user/' + discorduserid + '" target="_blank">' + username + '</a>';
 
                 var managertext = '<textarea class="form-control" maxlength="200" id="manager-note-' + data[i].id + '" rows="3"></textarea>'
                 var points = '<input class="form-control" style = "width:75px;"  type="number" value="' + data[i].points + '" id="points-manager-' + data[i].id + '">'
@@ -317,7 +317,7 @@
                   proofusedtext += proofused[k].id + ": " + proofused[k].pointsinfo.user.discord_nickname
 
                 }
-                var prooftext='<a href="' + data[i].proof + '">Proof</a>'
+                var prooftext='<a href="' + data[i].proof + '" target="_blank">Proof</a>'
                 if (proofused.length>1)
                   var prooftext='<span data-toggle="tooltip" data-html="true" data-placement="top" title="'+proofusedtext+'"><a href="' + data[i].proof + '">Proof (' + proofusedcount + ')</a></span>'
 
@@ -417,11 +417,11 @@
 
                 var username1 = data[i].pointsinfo.user.discord_nickname
                 var discorduserid1 = data[i].pointsinfo.user.discord_id
-                var winner = '<a href="/user/' + discorduserid1 + '">' + username1 + '</a>';
+                var winner = '<a href="/user/' + discorduserid1 + '" target="_blank">' + username1 + '</a>';
 
                 var username2 = data[i].pointsinfoloser.user.discord_nickname
                 var discorduserid2 = data[i].pointsinfoloser.user.discord_id
-                var loser = '<a href="/user/' + discorduserid2 + '">' + username2 + '</a>';
+                var loser = '<a href="/user/' + discorduserid2 + '" target="_blank">' + username2 + '</a>';
 
 
                 var managertext = '<textarea class="form-control" id="manager-note-' + data[i].id + '" rows="3" maxlength="200"></textarea>'
@@ -438,7 +438,7 @@
                   proofusedtext += proofused[k].id + ": " + proofused[k].pointsinfo.user.discord_nickname
 
                 }
-                var prooftext='<a href="' + data[i].proof + '">Proof</a>'
+                var prooftext='<a href="' + data[i].proof + '" target="_blank">Proof</a>'
                 if (proofused.length>1)
                   var prooftext='<span data-toggle="tooltip" data-html="true" data-placement="top" title="'+proofusedtext+'"><a href="' + data[i].proof + '">Proof (' + proofusedcount + ')</a></span>'
 
