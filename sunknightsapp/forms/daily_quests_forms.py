@@ -193,7 +193,7 @@ class RequestQuestsForm(BaseForm):
         if not request.user.is_points_manager:
             return self.noPermission()
         try:
-            now = (datetime.datetime.utcnow() + timedelta(days=0)).replace(hour=0, minute=0, second=0, microsecond=0)
+            now = ((datetime.datetime.utcnow()- timedelta(days=datetime.datetime.utcnow().weekday())) + timedelta(days=0)).replace(hour=0, minute=0, second=0, microsecond=0)
             quests = Quest.objects.filter(Q(permed=True)|Q(date__gte=now))
             serializer = QuestSerializer(quests, many=True)
         except BaseException as e:

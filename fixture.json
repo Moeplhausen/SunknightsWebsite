@@ -337,8 +337,8 @@
     "pk": 1,
     "fields": {
       "password": "pbkdf2_sha256$30000$55rmy6loRfAE$ATWmqtTqYkhK3k6s06T6xIkYcM3UBqDhvI09P+mYn28=",
-      "discord_id": 243345778922225665,
-      "discord_nickname": "Schatterhand",
+      "discord_id": 220951507070222337,
+      "discord_nickname": "Gotem",
       "provider": "Discord",
       "is_superuser": true
     }

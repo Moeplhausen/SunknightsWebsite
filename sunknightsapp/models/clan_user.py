@@ -4,6 +4,7 @@ from django.contrib.auth.models import PermissionsMixin
 from django.conf import settings
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from datetime import timedelta
 from rest_framework.authtoken.models import Token
 
 from django.utils import timezone
@@ -216,7 +217,7 @@ class ClanUser(AbstractBaseUser):
                 from .utility.little_things import QUEST_TIER_OPTIONS
                 from ..models.daily_quest import Quest,QuestTask
                 from django.db.models import Q
-                now = (datetime.datetime.utcnow()).replace(hour=0, minute=0, second=0, microsecond=0)
+                now = (datetime.datetime.utcnow()- timedelta(days=datetime.datetime.utcnow().weekday())).replace(hour=0, minute=0, second=0, microsecond=0)
                 quest = Quest.objects.filter(date=now,permed=False)
                 # tasks=QuestTask.objects.filter(quest=quest).exclude(Q(eventquest__pointsinfo=self.pointsinfo) &(Q(eventquest__decided=False)|(Q(eventquest__accepted=True)&Q(eventquest__decided=True))))
                 # if QuestTask.objects.filter(quest=quest).exclude(eventquest__pointsinfo=self.pointsinfo,eventquest__accepted=True).exclude(tier=QUEST_TIER_OPTIONS[3][0]):#as long as not all non bonus quests are accepted, no bonus quest will be displayed

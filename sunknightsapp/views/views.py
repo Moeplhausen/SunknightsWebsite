@@ -63,7 +63,7 @@ def index(request):
         except Quest.DoesNotExist:
             permed = Quest.objects.create(permed=True)
 
-        now = (datetime.datetime.utcnow()).replace(hour=0, minute=0, second=0, microsecond=0)
+        now = (datetime.datetime.utcnow()- timedelta(days=datetime.datetime.utcnow().weekday())).replace(hour=0, minute=0, second=0, microsecond=0)
         try:
             quest = Quest.objects.filter(date=now).get()
         except Quest.DoesNotExist:
@@ -71,7 +71,7 @@ def index(request):
             quest.date = now
             quest.save()
 
-        validtill = now + datetime.timedelta(days=1) - datetime.datetime.utcnow().replace(microsecond=0)
+        validtill = now + datetime.timedelta(days=7) - datetime.datetime.utcnow().replace(microsecond=0)
 
         permcooldown = None
         if request.user.pointsinfo.permquestcd >= timezone.now():
@@ -235,8 +235,8 @@ def manage_quests(request):
     tiers = QUEST_TIER_OPTIONS
 
     time = []
-    for i in range(0, 4):
-        now = (datetime.datetime.utcnow() + timedelta(days=i)).replace(hour=0, minute=0, second=0, microsecond=0)
+    for i in range(0, 2):
+        now = ((datetime.datetime.utcnow() - timedelta(days=datetime.datetime.utcnow().weekday())) + timedelta(days=i*7)).replace(hour=0, minute=0, second=0, microsecond=0)
         try:
             quest = Quest.objects.filter(date=now).get()
         except Quest.DoesNotExist:

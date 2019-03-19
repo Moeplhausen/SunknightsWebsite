@@ -25,7 +25,7 @@ class QuestTask(models.Model):
     deleted=models.BooleanField(default=False)
     manager=models.ForeignKey(ClanUser, on_delete=models.CASCADE)
     points=models.PositiveSmallIntegerField(default=0)
-    cooldown=models.PositiveIntegerField(default=24)#24 hours
+    cooldown=models.PositiveIntegerField(default=168)  # 7Days
 
     @property
     def questtext_html(self):

@@ -2,9 +2,10 @@
 {% block content %}
 
 
-    <h2>Days</h2>
+    <h2>Weeks</h2>
     <div class="days-contents">
-        {% for d in  dailies %}
+
+         {% for d in  dailies %}
             <a href="#anchor-{{ d.id }}">
                 {% if d.permed %}
                     Permanent Quests
