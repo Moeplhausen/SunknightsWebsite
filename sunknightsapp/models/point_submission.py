@@ -14,6 +14,8 @@ from ..backgroundTask.webhook_spam import post_new_guild_fight, post_new_user_po
     post_new_guildfight_points, post_guild_fight_results, post_new_OneOnOne_submission, post_new_submission, \
     post_submission_reverted,post_new_event_quest_submission
 from .daily_quest import QuestTask
+import datetime
+from datetime import timedelta
 
 
 class BasicPointSubmission(models.Model):
@@ -43,14 +45,14 @@ class BasicUserPointSubmission(BasicPointSubmission):
     @property
     def get_daily_builds(self):
         from ..models.daily_quest import Quest,QuestBuild
-        now = self.date.replace(hour=0, minute=0, second=0, microsecond=0)
+        now = ((self.date- timedelta(days=self.date.weekday())) + timedelta(days=0)).replace(hour=0, minute=0, second=0, microsecond=0)
         quest = Quest.objects.filter(date=now,permed=False)
         return QuestBuild.objects.filter(quest=quest)
 
     @property
     def get_daily_multiplier(self):
         from ..models.daily_quest import Quest,QuestTankMultiplier
-        now = self.date.replace(hour=0, minute=0, second=0, microsecond=0)
+        now = ((self.date- timedelta(days=self.date.weekday())) + timedelta(days=0)).replace(hour=0, minute=0, second=0, microsecond=0)
         quest = Quest.objects.filter(date=now,permed=False)
         return QuestTankMultiplier.objects.filter(quest=quest)
 
