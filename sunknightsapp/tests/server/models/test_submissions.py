@@ -32,7 +32,7 @@ class SubmissionsTests(ModelTestCase):
         self.basic_user=ClanUser.objects.get(id=self.basic_user.id)
         self.assertEqual(self.basic_user.total_points,currentpoints+submissions1.points)
 
-#test
+#test2
         #revert the submission
         submissions1.decided=False
         submissions1.save()
