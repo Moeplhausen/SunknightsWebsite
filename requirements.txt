@@ -1,4 +1,4 @@
-django==1.10
+django==1.11.28
 djangorestframework==3.8.2
 djangorestframework-bulk==0.2.1
 django-all-access==0.9.0
