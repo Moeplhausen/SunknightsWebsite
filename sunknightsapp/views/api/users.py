@@ -18,3 +18,8 @@ class ClanUsersShortSet(viewsets.ModelViewSet):
 class ClanUserPointsInfoViewSet(viewsets.ModelViewSet):
     serializer_class = PointsInfoSerializer
     queryset = PointsInfo.objects.prefetch_related('user','masteries').all()
+
+class ClanUserLeaderboardViewSet(viewsets.ModelViewSet):
+    serializer_class = PointsInfoSerializer
+    queryset = PointsInfo.objects.filter(totalpoints__gt=0).prefetch_related('user', 'masteries').order_by(
+        '-totalpoints')  # the '-' is for reversing the order (so the one who has most points will be on top
