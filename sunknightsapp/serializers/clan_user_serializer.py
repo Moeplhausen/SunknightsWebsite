@@ -65,6 +65,11 @@ class PointsInfoFastSerializer(BulkSerializerMixin,serializers.ModelSerializer):
         fields=('id','oldpoints','currentpoints','totalpoints','masterypoints','user','masteries','elo')
         list_serializer_class = BulkListSerializer
 
+class PointsInfoLBSerializer(BulkSerializerMixin,serializers.ModelSerializer):
+    class Meta:
+        model=PointsInfo
+        fields = ('user', 'totalpoints', 'leaderboard_place')
+        list_serializer_class = BulkListSerializer
 
 class ClanUserFasterSerializer(BulkSerializerMixin,serializers.ModelSerializer):
 

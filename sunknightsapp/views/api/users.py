@@ -1,5 +1,5 @@
 from rest_framework import viewsets
-from ...serializers.clan_user_serializer import ClanUserSerializer,PointsInfoSerializer,ClanUserFasterSerializer
+from ...serializers.clan_user_serializer import ClanUserSerializer,PointsInfoSerializer,ClanUserFasterSerializer, PointsInfoLBSerializer
 from ...models.clan_user import ClanUser
 from ...models.points_info import PointsInfo
 from rest_framework import viewsets
@@ -20,6 +20,6 @@ class ClanUserPointsInfoViewSet(viewsets.ModelViewSet):
     queryset = PointsInfo.objects.prefetch_related('user','masteries').all()
 
 class ClanUserLeaderboardViewSet(viewsets.ModelViewSet):
-    serializer_class = PointsInfoSerializer
-    queryset = PointsInfo.objects.filter(totalpoints__gt=0).filter(user__is_active=True).prefetch_related('user', 'masteries').order_by(
-        '-totalpoints')  # the '-' is for reversing the order (so the one who has most points will be on top
+    serializer_class = PointsInfoLBSerializer
+    queryset = PointsInfo.objects.filter(totalpoints__gt=0).filter(user__is_active=True).order_by('-totalpoints')  
+    # the '-' is for reversing the order (so the one who has most points will be on top
