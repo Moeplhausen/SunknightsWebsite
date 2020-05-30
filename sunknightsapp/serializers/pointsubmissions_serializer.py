@@ -35,7 +35,7 @@ class BasicUserPointSubmissionSerializer(BulkSerializerMixin, serializers.ModelS
     tank = DiepTankSimpleSerializer(many=False, read_only=True)
     gamemode = GamemodeSerializer(many=False, read_only=True)
     pointsinfo = PointsInfoBasicSerializer(many=False, read_only=True)
-    manager = ClanUserFasterSerializer(many=False, read_only=True)
+    #manager = ClanUserFasterSerializer(many=False, read_only=True)
 
     class Meta:
         model = BasicUserPointSubmission
