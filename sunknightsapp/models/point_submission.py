@@ -47,14 +47,14 @@ class BasicUserPointSubmission(BasicPointSubmission):
         from ..models.daily_quest import Quest,QuestBuild
         now = ((self.date- timedelta(days=self.date.weekday())) + timedelta(days=0)).replace(hour=0, minute=0, second=0, microsecond=0)
         quest = Quest.objects.filter(date=now,permed=False)
-        return QuestBuild.objects.filter(quest=quest)
+        return QuestBuild.objects.filter(quest__in=quest)
 
     @property
     def get_daily_multiplier(self):
         from ..models.daily_quest import Quest,QuestTankMultiplier
         now = ((self.date- timedelta(days=self.date.weekday())) + timedelta(days=0)).replace(hour=0, minute=0, second=0, microsecond=0)
         quest = Quest.objects.filter(date=now,permed=False)
-        return QuestTankMultiplier.objects.filter(quest=quest)
+        return QuestTankMultiplier.objects.filter(quest__in=quest)
 
 
 
