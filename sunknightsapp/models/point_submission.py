@@ -19,7 +19,7 @@ from datetime import timedelta
 
 
 class BasicPointSubmission(models.Model):
-    manager = models.ForeignKey(ClanUser, null=True, blank=True)
+    manager = models.ForeignKey(ClanUser,on_delete=models.CASCADE, null=True, blank=True)
     accepted = models.BooleanField(default=False)
     decided = models.BooleanField(default=False)
     managerText = models.TextField(max_length=200, blank="", default="")
@@ -37,8 +37,8 @@ class BasicUserPointSubmission(BasicPointSubmission):
     from .daily_quest import QuestBuild
     submitterText = models.TextField(max_length=200, default="")
     proof = models.CharField(max_length=300)
-    gamemode = models.ForeignKey(DiepGamemode)
-    tank = models.ForeignKey(DiepTank)
+    gamemode = models.ForeignKey(DiepGamemode,on_delete=models.CASCADE)
+    tank = models.ForeignKey(DiepTank,on_delete=models.CASCADE)
     score = models.PositiveIntegerField(default=0)
 
 
@@ -67,14 +67,14 @@ class PointsManagerAction(BasicPointSubmission):
 class EventQuestSubmission(BasicPointSubmission):
     proof=models.CharField(max_length=300)
     submitterText = models.TextField(max_length=200, default="")
-    questtask=models.ForeignKey(QuestTask,null=True,blank=True,default=None,related_name='eventquest')
+    questtask=models.ForeignKey(QuestTask,null=True,blank=True,default=None,related_name='eventquest',on_delete=models.CASCADE)
 
     def __str__(self):
         return self.submitterText
 
 
 class OneOnOneFightSubmission(BasicPointSubmission):
-    pointsinfoloser = models.ForeignKey(PointsInfo, related_name="loser")
+    pointsinfoloser = models.ForeignKey(PointsInfo, related_name="loser",on_delete=models.CASCADE)
     proof = models.CharField(max_length=300)
     pointsloser = models.DecimalField(decimal_places=2, max_digits=6, default=3, db_index=True)
     expected_outcome = models.DecimalField(decimal_places=2, max_digits=4, default=0.5, db_index=True)

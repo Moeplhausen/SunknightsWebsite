@@ -4,7 +4,7 @@ import django
 from django.views.decorators.csrf import ensure_csrf_cookie
 from ..models.discord_server import DiscordServer
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.views import logout
+from django.contrib.auth import logout
 from django.http import JsonResponse
 from django.shortcuts import redirect
 from django.shortcuts import render
@@ -42,7 +42,7 @@ def get_client_ip(request):
 
 @ensure_csrf_cookie
 def index(request):
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
         from django.contrib.gis.geoip2 import GeoIP2
         from slugify import slugify
         g = GeoIP2()

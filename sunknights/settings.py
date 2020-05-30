@@ -41,7 +41,8 @@ POINTSWEBHOOK='https://discordapp.com/api/webhooks/440236720286466088/jEPtRl3WGc
 # Application definition
 
 INSTALLED_APPS = [
-    'sunknightsapp.apps.SunknightsappConfig',
+    'sunknightsapp',
+    'django.contrib.sites',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -51,20 +52,34 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'rest_framework',
     'rest_framework.authtoken',
-    'allaccess',
+    'social_django',
     'widget_tweaks',
     'markdown_deux',
     'compressor',
     'cachalot',
     'debug_toolbar',
 ]
+SITE_ID = 1
 
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
+SOCIAL_AUTH_PIPELINE = (
+    'social_core.pipeline.social_auth.social_details',
+    'social_core.pipeline.social_auth.social_uid',
+    'social_core.pipeline.social_auth.load_extra_data',
+    'sunknightsapp.views.oauth.views.get_profile'
+)
+SOCIAL_AUTH_DISCORD_KEY = '260159143585906688'
+SOCIAL_AUTH_DISCORD_SECRET = 'iRi9SJeyC0n0f9jxjv4VrSoO0IGzDiOk'
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
+SOCIAL_AUTH_LOGIN_ERROR_URL = '/'
 AUTHENTICATION_BACKENDS = (
     # Default backend
+    'social_core.backends.discord.DiscordOAuth2',
     'django.contrib.auth.backends.ModelBackend',
     # Additional backend
-    'allaccess.backends.AuthorizedServiceBackend',
 )
+SOCIAL_AUTH_RAISE_EXCEPTIONS = False
+
 
 
 REST_FRAMEWORK = {
@@ -116,7 +131,6 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'allaccess.context_processors.available_providers',
                 'sunknightsapp.processors.context_processors.dieptanks',
                 'sunknightsapp.processors.context_processors.ajaxactions'
             ],
@@ -212,7 +226,5 @@ COMPRESS_PRECOMPILERS = (
 COMPRESS_ENABLED=True
 
 COMPRESS_OFFLINE = False
-
-LOGIN_URL = '/accounts/login/Discord/'
 
 LOGIN_REDIRECT_URL = '/'

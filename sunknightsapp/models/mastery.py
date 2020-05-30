@@ -13,8 +13,8 @@ class Mastery(models.Model):
     tank = models.ForeignKey(DiepTank, on_delete=models.CASCADE)
     pointsinfo = models.ForeignKey(PointsInfo, on_delete=models.CASCADE, related_name='masteries')
     tier = models.PositiveSmallIntegerField(choices=MASTERY_TIER_OPTIONS)
-    manager = models.ForeignKey(ClanUser)
-    fromSubmission = models.ForeignKey(BasicUserPointSubmission,default=None,null=True,blank=True)
+    manager = models.ForeignKey(ClanUser,on_delete=models.CASCADE)
+    fromSubmission = models.ForeignKey(BasicUserPointSubmission,on_delete=models.CASCADE,default=None,null=True,blank=True)
     points = models.PositiveSmallIntegerField(default=0)  # will be modified after save by receiver
 
     def __str__(self):
@@ -31,15 +31,15 @@ class Mastery(models.Model):
 def getPointsByMasteryTier(tier:int):
     points = 0
 
-    if tier is 1:
+    if tier == 1:
         points = 5
-    elif tier is 2:
+    elif tier == 2:
         points = 15
-    elif tier is 3:
+    elif tier == 3:
         points = 30
-    elif tier is 4:
+    elif tier == 4:
         points = 50
-    elif tier is 5:
+    elif tier == 5:
         points = 75
 
     return points

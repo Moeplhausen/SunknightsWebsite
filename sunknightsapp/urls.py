@@ -5,7 +5,6 @@ from django.conf import settings
 from .views import views
 from .views.api import roles,servers,users,user_roles,tournaments,fights,discord_roles,points_submissions,diep_tanks,mastery,quests
 from rest_framework_bulk.routes import BulkRouter
-from .views.oauth.views import OAuthCallbackDiscord,OAuthRedirectDiscord
 from django.views.decorators.cache import cache_page
 
 router = BulkRouter(trailing_slash=False)
@@ -27,7 +26,7 @@ router.register(r'discord_roles',discord_roles.DiscordRolesViewSet)
 router.register(r'dieptanks',diep_tanks.DiepTanksViewSet)
 router.register(r'dieptanksinheritance',diep_tanks.DiepTanksInheritanceViewSet)
 router.register(r'mastery',mastery.MasteriesViewSet)
-router.register(r'quests',quests.QuestsViewSet,base_name="quests-api")
+router.register(r'quests',quests.QuestsViewSet,basename="quests-api")
 
 urlpatterns = [
     #url(r'^$', views.goodbye, name='index'),
@@ -57,10 +56,7 @@ urlpatterns = [
     url(r'^api/',include(router.urls)),
     url(r'^ajaxhandler/',views.ajaxhandler, name='ajaxhandler'),
     url(r'^logout/$', views.logoutview, name='logout'),
-    url(r'^accounts/login/(?P<provider>Discord)/$',
-        OAuthRedirectDiscord.as_view(params={'scope': 'identify guilds'})),
-    url(r'^accounts/login/(?P<provider>(\w|-)+)/$', OAuthRedirectDiscord.as_view(), name='allaccess-login'),
-    url(r'^accounts/callback/(?P<provider>(\w|-)+)/$', OAuthCallbackDiscord.as_view(), name='allaccess-callback'),
+    url('', include('social_django.urls', namespace='social')),
 ]
 if settings.DEBUG:
     import debug_toolbar

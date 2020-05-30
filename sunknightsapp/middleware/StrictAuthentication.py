@@ -8,7 +8,7 @@ class StrictAuthentication(object):
     def __call__(self, request):
         # Code to be executed for each request before
         # the view (and later middleware) are called.
-        if request.user.is_authenticated() and not request.user.is_active:
+        if request.user.is_authenticated and not request.user.is_active:
             logout(request)
         response = self.get_response(request)
 

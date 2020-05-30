@@ -6,7 +6,7 @@ class HelpInfo(models.Model):
     date = models.DateTimeField(default=datetime.datetime.now)
     name=models.CharField(max_length=30,unique=True)
     helpinfo=models.TextField()
-    last_modifier=models.ForeignKey(ClanUser)
+    last_modifier=models.ForeignKey(ClanUser,on_delete=models.PROTECT)
 
 
 

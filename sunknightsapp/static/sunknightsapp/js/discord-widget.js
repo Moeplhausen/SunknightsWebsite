@@ -58,6 +58,7 @@ var discordWidget = discordWidget || (function(){
           xmlhttp.onreadystatechange = function() {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
               var data = JSON.parse(xmlhttp.responseText);
+              console.log(data)
               renderWidget(data, _params);
               if (!_params.allUsersDefaultState) {
                 $('.discord-allusers').toggle();
@@ -218,7 +219,7 @@ var discordWidget = discordWidget || (function(){
             var discordJoin = '';
             if (d.instant_invite != 'null') {
               //discordJoin = '<a href="' + d.instant_invite + '" target="_blank">Join Server</a>';
-              discordJoin='<a class="btn button sk-btn" href="'+d.instant_invite+'">Join</a>'+'<a class="btn button sk-btn" href="/accounts/login/Discord">Login as Member</a>'
+              discordJoin='<a class="btn button sk-btn" href="'+d.instant_invite+'">Join</a>'+'<a class="btn button sk-btn" href="/login/discord/">Login as Member</a>'
             }
 
             treeElement.innerHTML = formatted;

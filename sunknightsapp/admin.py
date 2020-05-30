@@ -1,10 +1,11 @@
 from django import forms
 from django.contrib import admin
+from .models.clan_user import ClanUser
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.contrib.auth.models import Group
 
-from .models.clan_user import ClanUser, ClanUserRoles
+from .models.clan_user import ClanUserRoles
 from .models.daily_quest import Quest,QuestTankMultiplier,QuestBuild,QuestTask
 from .models.diep_gamemode import DiepGamemode
 from .models.diep_tank import DiepTank,DiepTankInheritance

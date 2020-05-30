@@ -10,7 +10,7 @@ class Tournament(models.Model):
 
     date = models.DateTimeField(auto_now_add=True)
 
-    creator=models.ForeignKey(ClanUser)
+    creator=models.ForeignKey(ClanUser,on_delete=models.CASCADE)
 
 
     #TODO get winner guild, distribute points for winning tournament

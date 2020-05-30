@@ -33,7 +33,7 @@ class GuildFight(models.Model):
     rules=models.PositiveSmallIntegerField(choices=RULES_OPTIONS,default=RULES_OPTIONS[0][0])
     number_of_players=models.PositiveIntegerField(default=6)
 
-    manager=models.ForeignKey(ClanUser,related_name='manager')
+    manager=models.ForeignKey(ClanUser,on_delete=models.CASCADE,related_name='manager')
 
     pointswinner=models.PositiveSmallIntegerField(default=10)
     pointsloser=models.PositiveSmallIntegerField(default=5)
@@ -157,7 +157,7 @@ class GuildFight(models.Model):
 class GuildFightParticipation(models.Model):
     fight=models.ForeignKey(GuildFight,related_name="participant",on_delete=models.CASCADE)
     user=models.ForeignKey(ClanUser,related_name="guildfight",on_delete=models.CASCADE)
-    tank=models.ForeignKey(DiepTank,related_name='fightparticipationtank')
+    tank=models.ForeignKey(DiepTank,on_delete=models.CASCADE,related_name='fightparticipationtank')
     guild=models.ForeignKey(DiscordRole,related_name="guildfight_guild",on_delete=models.CASCADE)
 
     class Meta:

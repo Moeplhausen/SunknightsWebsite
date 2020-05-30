@@ -1,17 +1,5 @@
 [
   {
-    "model": "allaccess.provider",
-    "fields": {
-      "name": "Discord",
-      "request_token_url": "",
-      "authorization_url": "https://discordapp.com/api/oauth2/authorize",
-      "access_token_url": "https://discordapp.com/api/oauth2/token",
-      "profile_url": "https://discordapp.com/api/users/@me",
-      "consumer_key": "260159143585906688",
-      "consumer_secret": "iRi9SJeyC0n0f9jxjv4VrSoO0IGzDiOk"
-    }
-  },
-  {
     "model": "sunknightsapp.discordserver",
     "pk": 1,
     "fields": {
