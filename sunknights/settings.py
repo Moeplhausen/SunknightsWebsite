@@ -34,7 +34,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['sunknights.moepl.eu','127.0.0.1', 'localhost','sk.moepl.eu']
 
 
-POINTSWEBHOOK='https://discordapp.com/api/webhooks/440236720286466088/jEPtRl3WGcq93LccvsXLolKCMcqhPA0QvIwCHFbwFcKTPXehd-BrUnbkkcoUXMEENfqf'
+POINTSWEBHOOK='https://discord.com/api/webhooks/396505013947727874/NVDgDK8h-sXQu20zo4z2_Wy4r9c56-FbAWwYCMjqNpt4KVDg17_q7ztj0-ngNTziSqG2'
 
 
 
