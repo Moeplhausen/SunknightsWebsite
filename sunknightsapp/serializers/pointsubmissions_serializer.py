@@ -26,10 +26,6 @@ class BasicPointsSubmissionSerializer(BulkSerializerMixin, serializers.ModelSeri
         list_serializer_class = BulkListSerializer
 
 
-
-
-
-
 class BasicUserPointSubmissionSerializer(BulkSerializerMixin, serializers.ModelSerializer):
     daily_quest = QuestSerializer(many=False, read_only=True)
     tank = DiepTankSimpleSerializer(many=False, read_only=True)
@@ -41,7 +37,7 @@ class BasicUserPointSubmissionSerializer(BulkSerializerMixin, serializers.ModelS
         model = BasicUserPointSubmission
         fields = (
         'id', 'date', 'manager', 'managerText', 'points', 'submitterText', 'gamemode', 'pointsinfo', 'accepted',
-        'decided', 'daily_quest', 'proof', 'tank', 'score')
+        'decided', 'reverted', 'daily_quest', 'proof', 'tank', 'score')
         list_serializer_class = BulkListSerializer
 
 
@@ -101,7 +97,7 @@ class BasicEventQuestsSubmissionSerializer(BulkSerializerMixin, serializers.Mode
         model = BasicUserPointSubmission
         fields = (
             'id', 'date', 'manager', 'managerText', 'points', 'submitterText',  'pointsinfo', 'accepted',
-            'decided', 'daily_quest', 'proof','questtask','proofused')
+            'decided', 'reverted', 'daily_quest', 'proof', 'questtask', 'proofused')
         list_serializer_class = BulkListSerializer
 
 
@@ -126,6 +122,6 @@ class OneOnOneFightSubmissionSerializer(BulkSerializerMixin, serializers.ModelSe
 
     class Meta:
         model = OneOnOneFightSubmission
-        fields = ('id', 'date', 'manager', 'managerText', 'points', 'pointsinfo', 'accepted', 'decided', 'proof',
+        fields = ('id', 'date', 'manager', 'managerText', 'points', 'pointsinfo', 'accepted', 'decided', 'reverted', 'proof',
                   'pointsinfoloser', 'pointsloser','proofused')
         list_serializer_class = BulkListSerializer
