@@ -1,4 +1,4 @@
-django==3.0.6
+django==3.0.7
 djangorestframework
 djangorestframework-bulk
 django-widget-tweaks
