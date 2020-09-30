@@ -1,4 +1,4 @@
-
+You are amazing
 # Sun Knights Website
 A website for the Sun Knights Diep Clan.
 
