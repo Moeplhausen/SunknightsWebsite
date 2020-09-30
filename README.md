@@ -6,7 +6,7 @@ A website for the Sun Knights Diep Clan.
 ## License
 https://creativecommons.org/licenses/by-nc/3.0/
 
-## Install Instructions
+## Installation Instructions
 
 #### If you have bash
   1. bash install.sh
@@ -17,7 +17,7 @@ https://creativecommons.org/licenses/by-nc/3.0/
   3. python3 manage.py loaddata fixture.json
   
   
-## Run it (dev)
+## Run it using (dev)
   1. python3 manage.py runserver
   
 ####OR
