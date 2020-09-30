@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/Bin/Bash
 
 pip3 install -r requirements.txt --user
 python3 manage.py migrate
