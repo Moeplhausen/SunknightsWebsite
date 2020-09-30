@@ -11,6 +11,7 @@ except ImportError:
 if __name__ == "__main__":
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "sunknights.settings")
     try:
+       print(" ahgswdghks")
         from django.core.management import execute_from_command_line
     except ImportError:
         # The above import may fail for some other reason. Ensure that the
