@@ -1,5 +1,5 @@
 
-# Sun Knights Website
+# Sun Knights Website is a website 
 A website for the Sun Knights Diep Clan.
 
 
