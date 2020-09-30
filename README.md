@@ -1,6 +1,6 @@
 
-# Sun Knights Website
-A website for the Sun Knights Diep Clan.
+# sun sine Website
+A website for the Sun sine Diep Clan.
 
 
 ## License
