@@ -1,4 +1,4 @@
-
+logr an amazing project.
 # Sun Knights Website
 A website for the Sun Knights Diep Clan.
 
