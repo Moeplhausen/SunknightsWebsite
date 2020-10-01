@@ -10,16 +10,18 @@ https://creativecommons.org/licenses/by-nc/3.0/
 
 #### If you have bash:
    
-   bash https://github.com/manas1410/SunknightsWebsite/blob/master/install.sh
+   bash [install.sh](https://github.com/manas1410/SunknightsWebsite/blob/master/install.sh)
 
 #### If you don't have bash
-  1. pip3 install -r requirements.txt --user
-  2. python3 manage.py migrate
-  3. python3 manage.py loaddata fixture.json
+  ```1. pip3 install -r requirements.txt --user```
+  
+  2. python3 [manage.py](https://github.com/manas1410/SunknightsWebsite/blob/master/manage.py) migrate
+  
+  3. python3 [manage.py](https://github.com/manas1410/SunknightsWebsite/blob/master/manage.py) loaddata [fixture.json](https://github.com/manas1410/SunknightsWebsite/blob/master/fixture.json)
   
   
 ## Run it (dev)
-  1. python3 manage.py runserver
+  python3 [manage.py](https://github.com/manas1410/SunknightsWebsite/blob/master/manage.py) runserver
   
 #### OR
-  1. bash run.sh
+  bash [run.sh](https://github.com/manas1410/SunknightsWebsite/blob/master/run.sh)
