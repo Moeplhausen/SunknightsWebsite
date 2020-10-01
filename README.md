@@ -1,5 +1,5 @@
 
-# Sun Knights Website
+# Sun Knights - an Amazing Project
 A website for the Sun Knights Diep Clan.
 
 
