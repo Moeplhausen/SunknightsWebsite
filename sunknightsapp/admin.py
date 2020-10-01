@@ -52,7 +52,7 @@ class UserCreationForm(forms.ModelForm):
             user.save()
         return user
 
-
+# CHANGE FORM
 class UserChangeForm(forms.ModelForm):
     """A form for updating users. Includes all the fields on
     the user, but replaces the password field with admin's
@@ -63,14 +63,14 @@ class UserChangeForm(forms.ModelForm):
     class Meta:
         model = ClanUser
         fields = ('discord_id', 'password', 'discord_nickname', 'is_active', 'is_superuser')
-
+ #CHANGE FORM PASSWORD
     def clean_password(self):
         # Regardless of what the user provides, return the initial value.
         # This is done here, rather than on the field, because the
         # field does not have access to the initial value
         return self.initial["password"]
 
-
+#USER ADMIN
 class UserAdmin(BaseUserAdmin):
     # The forms to add and change user instances
     form = UserChangeForm
