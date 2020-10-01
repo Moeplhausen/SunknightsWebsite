@@ -10,7 +10,7 @@ https://creativecommons.org/licenses/by-nc/3.0/
 
 #### If you have bash:
    
-   bash install.sh
+   bash https://github.com/manas1410/SunknightsWebsite/blob/master/install.sh
 
 #### If you don't have bash
   1. pip3 install -r requirements.txt --user
