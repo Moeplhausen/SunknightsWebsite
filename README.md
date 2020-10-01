@@ -8,10 +8,10 @@ https://creativecommons.org/licenses/by-nc/3.0/
 
 ## Install Instructions
 
-#### If you have bash
+#### If you have bash try
   1. bash install.sh
 
-#### If you don't have bash
+#### If you don't have bash try
   1. pip3 install -r requirements.txt --user
   2. python3 manage.py migrate
   3. python3 manage.py loaddata fixture.json
