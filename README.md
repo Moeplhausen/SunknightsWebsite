@@ -2,6 +2,7 @@
 # Sun Knights Website
 A website for the Sun Knights Diep Clan.
 
+# use linux Like - kali linux, ubuntu
 
 ## License
 https://creativecommons.org/licenses/by-nc/3.0/
@@ -10,6 +11,9 @@ https://creativecommons.org/licenses/by-nc/3.0/
 
 #### If you have bash
   1. bash install.sh
+
+### Install python 3
+  1.  sudo apt-get install python3
 
 #### If you don't have bash
   1. pip3 install -r requirements.txt --user
