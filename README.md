@@ -26,6 +26,6 @@ https://creativecommons.org/licenses/by-nc/3.0/
 ## User instructions
  -If there is something wrong with the content on that web site,
 feel free to
-[file an issue with this repository](https://github.com/Moeplhausen/SunknightseWbsite/issues),
+[file an issue with this repository](https://github.com/Moeplhausen/SunknightsWbsite/issues),
 or formulate a pull request.
 Note that most pages will come with an edit link in the bottom right corner.
