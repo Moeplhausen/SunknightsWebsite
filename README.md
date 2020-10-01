@@ -1,5 +1,6 @@
 
 # Sun Knights Website
+Welcome! All the developers.
 A website for the Sun Knights Diep Clan.
 
 
