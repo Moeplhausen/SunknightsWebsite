@@ -7,6 +7,7 @@ A website for the Sun Knights Diep Clan.
 https://creativecommons.org/licenses/by-nc/3.0/
 
 ## Install Instructions
+Installing instructions will be helpful for future references.
 
 #### If you have bash
   1. bash install.sh
