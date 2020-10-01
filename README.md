@@ -16,6 +16,9 @@ https://creativecommons.org/licenses/by-nc/3.0/
   2. python3 manage.py migrate
   3. python3 manage.py loaddata fixture.json
   
+  OR
+  pip install bash
+  
   
 ## Run it (dev)
   1. python3 manage.py runserver
