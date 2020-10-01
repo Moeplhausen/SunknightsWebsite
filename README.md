@@ -1,6 +1,6 @@
 
 # Sun Knights Website
-A website for the Sun Knights Diep Clan.
+An amazing website for the Sun Knights Diep Clan.
 
 
 ## License
@@ -22,3 +22,5 @@ https://creativecommons.org/licenses/by-nc/3.0/
   
 ####OR
   1. bash run.sh
+
+Thank You!
