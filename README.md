@@ -12,7 +12,7 @@ https://creativecommons.org/licenses/by-nc/3.0/
   1. bash install.sh
 
 #### If you don't have bash
-  :: 1. pip3 install -r requirements.txt --user
+  1. pip3 install -r requirements.txt --user
   2. python3 manage.py migrate
   3. python3 manage.py loaddata fixture.json
   
