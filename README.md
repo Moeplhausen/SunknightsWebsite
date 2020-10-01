@@ -20,10 +20,11 @@ https://creativecommons.org/licenses/by-nc/3.0/
   ## Run it (dev)
     1. python3 manage.py runserver
 
-  #### OR
+ #### OR
     1. bash run.sh
-    
-    
-1.  **`Python 3`**: Python is an interpreted, object-oriented, high-level programming language with dynamic semantics
+***
+### About Python and Pip
+1. **`Python 3`**: Python is an interpreted, object-oriented, high-level programming language with dynamic semantics
 
-2.  **`Pip 3`**: pip is a de facto standard package-management system used to install and manage software packages written in Python
+2. **`Pip 3`**: pip is a de facto standard package-management system used to install and manage software packages written in Python
+***
