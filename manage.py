@@ -2,6 +2,7 @@
 import os
 import sys
 
+#Trying to handle errors
 try:
     import pymysql
     pymysql.install_as_MySQLdb()
