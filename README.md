@@ -22,3 +22,10 @@ https://creativecommons.org/licenses/by-nc/3.0/
   
 ####OR
   1. bash run.sh
+
+Contributing
+Steps
+
+1. Fork the current project
+2. Create a new branch, if needed
+3. Clone the project
