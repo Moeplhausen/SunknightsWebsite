@@ -7,8 +7,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
-import os
-import sys
+import os       #importing os module
+import sys      #importing sys module
 
 TESTING = sys.argv[1:2] == ['test']
 
