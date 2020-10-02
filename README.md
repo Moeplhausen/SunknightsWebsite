@@ -10,6 +10,9 @@ https://creativecommons.org/licenses/by-nc/3.0/
 
 #### If you have bash
   1. bash install.sh
+#### Bash Installation for linux
+  1  sudo apt update
+  2  sudo apt install bash-completion
 
 #### If you don't have bash
   1. pip3 install -r requirements.txt --user
