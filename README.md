@@ -19,5 +19,7 @@ https://creativecommons.org/licenses/by-nc/3.0/
   
 ## Run it (dev)
   python3 manage.py runserver
+  
         'OR'
+        
   bash run.sh
