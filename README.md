@@ -8,7 +8,7 @@ https://creativecommons.org/licenses/by-nc/3.0/
 
 ## Install Instructions
 
-#### If you have bash
+#### If you already have bash
   1. bash install.sh
 
 #### If you don't have bash
