@@ -1,5 +1,5 @@
 
-# Sun Knights Website
+# SunKnights Website
 A website for the Sun Knights Diep Clan.
 
 
@@ -19,6 +19,6 @@ https://creativecommons.org/licenses/by-nc/3.0/
   
 ## Run it (dev)
   1. python3 manage.py runserver
-  
-####OR
+      
+   #### OR
   1. bash run.sh
