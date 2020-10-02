@@ -1,4 +1,4 @@
-put maxmind binary city and country files here
+put maximum binary city and country files here
 like:
 GeoLite2-City.mmdb
 and
