@@ -1,6 +1,7 @@
 
 # Sun Knights Website
 A website for the Sun Knights Diep Clan.
+## which helps to improve ur skills...............
 
 
 ## License
